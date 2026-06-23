@@ -54,9 +54,12 @@ sgdisk --zap-all /dev/nvme0n1
 fdisk /dev/nvme0n1
 ```
 
-| Partición | Tamaño | Tipo | Código |
-|---|---|---|---|
-| `nvme0n1p1` | 2 GiB | EFI System | EF00 |
-| `nvme0n1p2` | resto | Linux filesystem | 8300 |
+| Comando | Acción |
+|---|---|
+| `g` | Crear tabla GPT |
+| `n` → Enter → Enter → `+2G` | Partición EFI (2 GiB) |
+| `t` → `1` | Tipo EFI System |
+| `n` → Enter → Enter → Enter | Partición sistema (resto) |
+| `w` | Escribir y salir |
 
 
