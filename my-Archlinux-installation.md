@@ -143,3 +143,11 @@ nvme0n1p2  → cifrado LUKS2
        ├── @log    → /mnt/var/log
        └── @pkg    → /mnt/var/cache/pacman/pkg
 ```
+
+---
+
+## 8. Actualizar mirrors
+
+```bash
+reflector --country Spain --latest 10 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
+```
