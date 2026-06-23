@@ -192,3 +192,11 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 ```bash
 pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd
 ```
+
+---
+
+## 10. Generar fstab
+
+```bash
+genfstab -U /mnt >> /mnt/etc/fstab
+```
