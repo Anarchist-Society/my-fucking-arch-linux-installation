@@ -131,19 +131,6 @@ mount --mkdir -o subvol=@log,compress=zstd /dev/mapper/cryptroot /mnt/var/log
 mount --mkdir -o subvol=@pkg,compress=zstd /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
 mount /dev/nvme0n1p1 /mnt/boot
 ```
-
-### Estructura final del disco
-
-```
-nvme0n1p1  → /mnt/boot              (FAT32, sin cifrar)
-nvme0n1p2  → cifrado LUKS2
-  └─ cryptroot  → btrfs "cryptroot"
-       ├── @       → /mnt
-       ├── @home   → /mnt/home
-       ├── @log    → /mnt/var/log
-       └── @pkg    → /mnt/var/cache/pacman/pkg
-```
-
 ---
 
 ## 8. Actualizar mirrors
