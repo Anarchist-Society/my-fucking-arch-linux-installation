@@ -1,12 +1,5 @@
 # Instalación de Arch Linux
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white" />
-  <img src="https://img.shields.io/badge/LUKS2-00457C?style=for-the-badge&logo=linux&logoColor=white" />
-  <img src="https://img.shields.io/badge/btrfs-352A1E?style=for-the-badge&logo=linux&logoColor=white" />
-  <img src="https://img.shields.io/badge/Samsung_990_PRO-1428A0?style=for-the-badge&logo=samsung&logoColor=white" />
-</p>
-
 ---
 
 ## Especificaciones del equipo
