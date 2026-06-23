@@ -18,8 +18,10 @@
 ## 1. Teclado y consola
 
 ```bash
-loadkeys es              # Teclado español
-setfont ter-132b         # Fuente más grande para alta densidad
+# Teclado español
+loadkeys es
+# Fuente más grande para alta densidad
+setfont ter-132b
 ```
 
 ---
@@ -28,14 +30,18 @@ setfont ter-132b         # Fuente más grande para alta densidad
 
 ```bash
 iwctl
-  device list                  # Listar interfaces de red
-  station wlan0 get-networks   # Escanear redes Wi-Fi
-  station wlan0 connect SSID   # Conectarse a la red
-  exit                         # Salir de iwctl
+# Listar interfaces de red
+  device list
+# Escanear redes Wi-Fi
+  station wlan0 get-networks
+# Conectarse a la red
+  station wlan0 connect SSID
+# Salir de iwctl
+  exit
 ```
 
 ```bash
-ping -c 3 archlinux.org        # Verificar conexión a internet
+ping -c 3 archlinux.org    # Verificar conexión a internet
 ```
 
 ---
@@ -43,8 +49,10 @@ ping -c 3 archlinux.org        # Verificar conexión a internet
 ## 3. Hora
 
 ```bash
-timedatectl set-ntp true    # Activar sincronización NTP
-timedatectl status          # Verificar hora y fecha
+# Activar sincronización NTP
+timedatectl set-ntp true
+# Verificar hora y fecha
+timedatectl status
 ```
 
 ---
@@ -54,8 +62,10 @@ timedatectl status          # Verificar hora y fecha
 Limpia todas las firmas y la tabla de particiones del disco.
 
 ```bash
-wipefs -a /dev/nvme0n1          # Borrar firmas de filesystem/LVM
-sgdisk --zap-all /dev/nvme0n1   # Limpiar tabla de particiones
+# Borrar firmas de filesystem/LVM
+wipefs -a /dev/nvme0n1
+# Limpiar tabla de particiones
+sgdisk --zap-all /dev/nvme0n1
 ```
 
 ---
@@ -112,31 +122,43 @@ mkfs.btrfs -L cryptroot /dev/mapper/cryptroot
 ### Crear subvolúmenes
 
 ```bash
-mount /dev/mapper/cryptroot /mnt   # Montar btrfs completo para crear subvols
+# Montar btrfs completo para crear subvols
+mount /dev/mapper/cryptroot /mnt
 
-btrfs subvolume create /mnt/@       # Subvolumen raíz
-btrfs subvolume create /mnt/@home   # Subvolumen /home
-btrfs subvolume create /mnt/@log    # Subvolumen /var/log
-btrfs subvolume create /mnt/@pkg    # Subvolumen /var/cache/pacman/pkg
+# Subvolumen raíz
+btrfs subvolume create /mnt/@
+# Subvolumen /home
+btrfs subvolume create /mnt/@home
+# Subvolumen /var/log
+btrfs subvolume create /mnt/@log
+# Subvolumen /var/cache/pacman/pkg
+btrfs subvolume create /mnt/@pkg
 
-umount /mnt                         # Desmontar para remontar con subvols
+# Desmontar para remontar con subvols
+umount /mnt
 ```
 
 ### Montar con compresión zstd
 
 ```bash
-mount -o subvol=@,compress=zstd /dev/mapper/cryptroot /mnt              # Raíz con compresión
-mount --mkdir -o subvol=@home,compress=zstd /dev/mapper/cryptroot /mnt/home  # /home
-mount --mkdir -o subvol=@log,compress=zstd /dev/mapper/cryptroot /mnt/var/log  # Logs
-mount --mkdir -o subvol=@pkg,compress=zstd /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg  # Caché pacman
-mount /dev/nvme0n1p1 /mnt/boot                                              # EFI sin cifrar
+# Raíz con compresión
+mount -o subvol=@,compress=zstd /dev/mapper/cryptroot /mnt
+# /home
+mount --mkdir -o subvol=@home,compress=zstd /dev/mapper/cryptroot /mnt/home
+# Logs
+mount --mkdir -o subvol=@log,compress=zstd /dev/mapper/cryptroot /mnt/var/log
+# Caché pacman
+mount --mkdir -o subvol=@pkg,compress=zstd /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
+# EFI sin cifrar
+mount /dev/nvme0n1p1 /mnt/boot
 ```
 ---
 
 ## 8. Actualizar mirrors
 
 ```bash
-reflector --country Spain --latest 10 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist   # Mirrors rápidos
+# Obtener mirrors más rápidos
+reflector --country Spain --latest 10 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 ```
 
 ---
