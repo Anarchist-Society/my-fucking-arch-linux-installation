@@ -8,11 +8,8 @@
 | CPU | AMD Ryzen 7 8845HS (16) @ 5.14 GHz |
 | GPU | AMD Radeon 780M Graphics |
 | RAM | 64 GB |
-| Almacenamiento | NVMe 4 TB |
-| Pantalla | 2560×1600 @ 120 Hz (integrada) · 1920×1080 @ 60 Hz (externa) |
-| Sist. operativo | Arch Linux x86_64 |
-| Kernel | Linux 7.0.12-arch1-1 |
-| WM | Hyprland 0.55.4 (Wayland) |
+| Almacenamiento | Samsung SSD 990 PRO 4TB (NVMe) |
+| Pantalla | 2560×1600 @ 120 Hz |
 
 ---
 
