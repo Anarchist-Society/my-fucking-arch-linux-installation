@@ -69,23 +69,26 @@ cryptsetup -v luksFormat --type luks2 /dev/nvme0n1p2
 cryptsetup open /dev/nvme0n1p2 cryptroot
 ```
 
-## 7. Formateo y subvolúmenes btrfs
+## 7. Formateo y subvolúmenes btrfs (estilo Omarchy)
 
 ```bash
 mkfs.fat -F32 /dev/nvme0n1p1
 mkfs.btrfs -L cryptroot /dev/mapper/cryptroot
+
 mount /dev/mapper/cryptroot /mnt
 
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@log
 btrfs subvolume create /mnt/@pkg
-btrfs subvolume create /mnt/@.snapshots
 
 umount /mnt
-mount -o subvol=@ /dev/mapper/cryptroot /mnt
-mount --mkdir -o subvol=@home /dev/mapper/cryptroot /mnt/home
-mount --mkdir /dev/nvme0n1p1 /mnt/boot
+
+mount -o subvol=@,compress=zstd /dev/mapper/cryptroot /mnt
+mount --mkdir -o subvol=@home,compress=zstd /dev/mapper/cryptroot /mnt/home
+mount --mkdir -o subvol=@log,compress=zstd /dev/mapper/cryptroot /mnt/var/log
+mount --mkdir -o subvol=@pkg,compress=zstd /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
+mount /dev/nvme0n1p1 /mnt/boot
 ```
 
 ## 8. Instalación base
