@@ -151,3 +151,20 @@ nvme0n1p2  → cifrado LUKS2
 ```bash
 reflector --country Spain --latest 10 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 ```
+
+---
+
+## 9. Instalación base
+
+```bash
+pacstrap -K /mnt \
+  base \
+  linux \
+  linux-firmware \
+  amd-ucode \
+  btrfs-progs \
+  cryptsetup \
+  vim \
+  limine \
+  iwd
+```
