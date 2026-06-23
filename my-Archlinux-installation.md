@@ -48,15 +48,15 @@ wipefs -a /dev/nvme0n1
 sgdisk --zap-all /dev/nvme0n1
 ```
 
-## 5. Particionado (estilo Omarchy)
+## 5. Particionado
 
 ```bash
-gdisk /dev/nvme0n1
+fdisk /dev/nvme0n1
 ```
 
-| Partición | Tamaño | Tipo | Código GPT |
+| Partición | Tamaño | Tipo | Código |
 |---|---|---|---|
-| `nvme0n1p1` | 1 GiB | EFI System | EF00 |
+| `nvme0n1p1` | 2 GiB | EFI System | EF00 |
 | `nvme0n1p2` | resto | Linux filesystem | 8300 |
 
 
