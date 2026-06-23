@@ -7,8 +7,8 @@
 | Modelo | Slimbook EVO (EVO15-A8) |
 | CPU | AMD Ryzen 7 8845HS (16) @ 5.14 GHz |
 | GPU | AMD Radeon 780M Graphics |
-| RAM | 60.61 GiB |
-| Almacenamiento | NVMe 3.6 TB |
+| RAM | 64 GB |
+| Almacenamiento | NVMe 4 TB |
 | Pantalla | 2560×1600 @ 120 Hz (integrada) · 1920×1080 @ 60 Hz (externa) |
 | Sist. operativo | Arch Linux x86_64 |
 | Kernel | Linux 7.0.12-arch1-1 |
