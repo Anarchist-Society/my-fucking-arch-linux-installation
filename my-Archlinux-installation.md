@@ -1,7 +1,5 @@
 # Instalación de Arch Linux
 
-Hardware: NVMe 3.6 TB · UEFI · LVM
-
 ## Especificaciones
 
 | Componente | Detalle |
