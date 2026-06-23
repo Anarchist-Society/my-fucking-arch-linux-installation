@@ -143,15 +143,18 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 
 ## 9. Instalación base
 
+| Paquete | Propósito |
+|---|---|
+| `base` | Sistema base mínimo de Arch Linux |
+| `linux` | Kernel Linux |
+| `linux-firmware` | Firmware para hardware |
+| `amd-ucode` | Microcode para CPU AMD Ryzen |
+| `btrfs-progs` | Herramientas para gestionar btrfs |
+| `cryptsetup` | Descifrar LUKS al arrancar |
+| `vim` | Editor de texto |
+| `limine` | Bootloader |
+| `iwd` | Conexión Wi-Fi (iwctl) |
+
 ```bash
-pacstrap -K /mnt \
-  base \
-  linux \
-  linux-firmware \
-  amd-ucode \
-  btrfs-progs \
-  cryptsetup \
-  vim \
-  limine \
-  iwd
+pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd
 ```
