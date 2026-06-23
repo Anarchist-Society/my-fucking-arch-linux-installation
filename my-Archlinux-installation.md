@@ -91,12 +91,4 @@ mount --mkdir -o subvol=@pkg,compress=zstd /dev/mapper/cryptroot /mnt/var/cache/
 mount /dev/nvme0n1p1 /mnt/boot
 ```
 
-## 8. Instalación base
-
-```bash
-pacstrap -K /mnt base base-devel linux linux-firmware sudo vim
-genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt
-```
-
 
