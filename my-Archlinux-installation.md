@@ -69,7 +69,7 @@ cryptsetup -v luksFormat /dev/nvme0n1p2
 cryptsetup open /dev/nvme0n1p2 cryptroot
 ```
 
-## 7. Formateo y subvolúmenes btrfs (estilo Omarchy)
+## 7. Formateo y subvolúmenes btrfs
 
 ```bash
 mkfs.fat -F32 /dev/nvme0n1p1
