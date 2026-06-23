@@ -62,4 +62,38 @@ fdisk /dev/nvme0n1
 | `n` → Enter → Enter → Enter | Partición sistema (resto) |
 | `w` | Escribir y salir |
 
+## 6. Cifrado LUKS
+
+```bash
+cryptsetup luksFormat --type luks2 /dev/nvme0n1p2
+cryptsetup open /dev/nvme0n1p2 cryptroot
+```
+
+## 7. Formateo y subvolúmenes btrfs
+
+```bash
+mkfs.fat -F32 /dev/nvme0n1p1
+mkfs.btrfs /dev/mapper/cryptroot
+mount /dev/mapper/cryptroot /mnt
+
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@log
+btrfs subvolume create /mnt/@pkg
+btrfs subvolume create /mnt/@.snapshots
+
+umount /mnt
+mount -o subvol=@ /dev/mapper/cryptroot /mnt
+mount --mkdir -o subvol=@home /dev/mapper/cryptroot /mnt/home
+mount --mkdir /dev/nvme0n1p1 /mnt/boot
+```
+
+## 8. Instalación base
+
+```bash
+pacstrap -K /mnt base base-devel linux linux-firmware sudo vim
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+```
+
 
