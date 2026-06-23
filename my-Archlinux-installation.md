@@ -73,7 +73,7 @@ cryptsetup open /dev/nvme0n1p2 cryptroot
 
 ```bash
 mkfs.fat -F32 /dev/nvme0n1p1
-mkfs.btrfs /dev/mapper/cryptroot
+mkfs.btrfs -L cryptroot /dev/mapper/cryptroot
 mount /dev/mapper/cryptroot /mnt
 
 btrfs subvolume create /mnt/@
