@@ -65,7 +65,7 @@ fdisk /dev/nvme0n1
 ## 6. Cifrado LUKS
 
 ```bash
-cryptsetup -v luksFormat --type luks2 /dev/nvme0n1p2
+cryptsetup -v luksFormat /dev/nvme0n1p2
 cryptsetup open /dev/nvme0n1p2 cryptroot
 ```
 
