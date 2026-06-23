@@ -152,6 +152,18 @@ mount --mkdir -o subvol=@pkg,compress=zstd /dev/mapper/cryptroot /mnt/var/cache/
 # EFI sin cifrar
 mount /dev/nvme0n1p1 /mnt/boot
 ```
+
+### Resumen de capas
+
+| Capa | Dispositivo | Filesystem | Punto de montaje |
+|---|---|---|---|
+| Partición | `/dev/nvme0n1p1` | FAT32 | `/boot` |
+| Partición | `/dev/nvme0n1p2` | LUKS2 | — |
+| Mapper | `/dev/mapper/cryptroot` | btrfs | — |
+| Subvolumen `@` | `/dev/mapper/cryptroot` | btrfs | `/` |
+| Subvolumen `@home` | `/dev/mapper/cryptroot` | btrfs | `/home` |
+| Subvolumen `@log` | `/dev/mapper/cryptroot` | btrfs | `/var/log` |
+| Subvolumen `@pkg` | `/dev/mapper/cryptroot` | btrfs | `/var/cache/pacman/pkg` |
 ---
 
 ## 8. Actualizar mirrors
