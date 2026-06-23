@@ -200,3 +200,11 @@ pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim 
 ```bash
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
+
+---
+
+## 11. Entrar al sistema (chroot)
+
+```bash
+arch-chroot /mnt
+```
