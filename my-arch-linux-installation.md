@@ -29,6 +29,7 @@ setfont ter-132b
 ## 2. Red (Wi-Fi)
 
 ```bash
+# Iniciar iwctl (Wi-Fi)
 iwctl
   # Listar interfaces de red
   device list
