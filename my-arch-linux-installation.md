@@ -30,13 +30,13 @@ setfont ter-132b
 
 ```bash
 iwctl
-# Listar interfaces de red
+  # Listar interfaces de red
   device list
-# Escanear redes Wi-Fi
+  # Escanear redes Wi-Fi
   station wlan0 get-networks
-# Conectarse a la red
+  # Conectarse a la red
   station wlan0 connect SSID
-# Salir de iwctl
+  # Salir de iwctl
   exit
 ```
 
