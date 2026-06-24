@@ -139,17 +139,17 @@ btrfs subvolume create /mnt/@pkg
 umount /mnt
 ```
 
-### Montar con compresión zstd
+### Montar con optimizaciones
 
 ```bash
-# Raíz con compresión
-mount -o subvol=@,compress=zstd /dev/mapper/cryptroot /mnt
+# Raíz
+mount -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt
 # /home
-mount --mkdir -o subvol=@home,compress=zstd /dev/mapper/cryptroot /mnt/home
+mount --mkdir -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home
 # Logs
-mount --mkdir -o subvol=@log,compress=zstd /dev/mapper/cryptroot /mnt/var/log
+mount --mkdir -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log
 # Caché pacman
-mount --mkdir -o subvol=@pkg,compress=zstd /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
+mount --mkdir -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@pkg /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
 # EFI sin cifrar
 mount /dev/nvme0n1p1 /mnt/boot
 ```
