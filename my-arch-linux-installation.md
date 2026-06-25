@@ -205,6 +205,7 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 | `iwd` | Conexión Wi-Fi (iwctl) |
 
 ```bash
+# Instalar sistema base
 pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd
 ```
 
