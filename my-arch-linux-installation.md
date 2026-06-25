@@ -311,7 +311,7 @@ cp /usr/share/limine/BOOTX64.EFI /boot/EFI/LIMINE/
 
 ```bash
 # Crear configuración de Limine
-vim /boot/EFI/LIMINE/limine.cfg
+vim /boot/EFI/LIMINE/limine.conf
 ```
 
 ```
