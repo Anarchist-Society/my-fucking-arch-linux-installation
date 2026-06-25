@@ -297,7 +297,7 @@ Instala y configura Limine como bootloader UEFI.
 
 ```bash
 # Obtener UUID de la partición LUKS
-blkid -s UUID -o value /dev/nvme0n1p2
+blkid -s PARTUUID -o value /dev/nvme0n1p2
 # ↑ Guarda este UUID, lo necesitas para la configuración
 ```
 
@@ -318,12 +318,12 @@ vim /boot/EFI/LIMINE/limine.conf
 /Arch Linux
     protocol: linux
     path: boot():/vmlinuz-linux
-    cmdline: cryptdevice=UUID=<UUID>:cryptroot root=/dev/mapper/cryptroot rw rootflags=subvol=@ rootfstype=btrfs
+    cmdline: cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot rw rootflags=subvol=@ rootfstype=btrfs
     module_path: boot():/amd-ucode.img
     module_path: boot():/initramfs-linux.img
 ```
 
-Reemplaza `<UUID>` por el UUID de tu partición LUKS (`/dev/nvme0n1p2`).
+Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 
 ```bash
 # Registrar Limine en el firmware UEFI
