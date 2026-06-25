@@ -52,6 +52,8 @@ ping -c 3 archlinux.org    # Verificar conexión a internet
 ```bash
 # Activar sincronización NTP
 timedatectl set-ntp true
+# Establecer zona horaria
+timedatectl set-timezone Europe/Madrid
 # Verificar hora y fecha
 timedatectl status
 ```
