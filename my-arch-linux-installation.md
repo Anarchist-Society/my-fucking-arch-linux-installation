@@ -261,5 +261,5 @@ echo "KEYMAP=es" > /etc/vconsole.conf
 
 ```bash
 # Establecer nombre del equipo
-echo "mi-equipo" > /etc/hostname
+echo "penguin" > /etc/hostname
 ```
