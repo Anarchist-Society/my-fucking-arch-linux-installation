@@ -226,3 +226,40 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Entrar al sistema instalado
 arch-chroot /mnt
 ```
+
+---
+
+## 12. Zona horaria
+
+```bash
+# Establecer zona horaria
+ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+
+# Sincronizar reloj hardware
+hwclock --systohc
+```
+
+---
+
+## 13. Localización
+
+```bash
+# Generar locale español
+echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+
+# Configurar idioma del sistema
+echo "LANG=es_ES.UTF-8" > /etc/locale.conf
+
+# Configurar teclado en consola
+echo "KEYMAP=es" > /etc/vconsole.conf
+```
+
+---
+
+## 14. Hostname
+
+```bash
+# Establecer nombre del equipo
+echo "mi-equipo" > /etc/hostname
+```
