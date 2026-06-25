@@ -315,6 +315,8 @@ vim /boot/EFI/LIMINE/limine.conf
 ```
 
 ```
+timeout: 5
+
 /Arch Linux
     protocol: linux
     path: boot():/vmlinuz-linux
