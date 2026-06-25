@@ -336,11 +336,11 @@ efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Arch Linux" --loader '
 # Contraseña de root
 passwd
 
-# Crear usuario (cambiar "usuario" por tu nombre)
-useradd -m -G wheel usuario
+# Crear usuario
+useradd --create-home --groups wheel anarchist-penguin
 
 # Contraseña del usuario
-passwd usuario
+passwd anarchist-penguin
 ```
 
 ### Servicios
