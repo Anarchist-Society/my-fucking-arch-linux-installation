@@ -76,9 +76,10 @@ sgdisk --zap-all /dev/nvme0n1
 
 ---
 
-## Disk partitioning
+## Particionado del disco
 
 ```bash
+# Particionar el disco con fdisk
 fdisk /dev/nvme0n1
 ```
 
