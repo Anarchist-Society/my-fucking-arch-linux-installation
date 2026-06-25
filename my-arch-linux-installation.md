@@ -19,8 +19,11 @@
 
 ```bash
 # Teclado español
+
 loadkeys es
+
 # Fuente más grande para alta densidad
+
 setfont ter-132b
 ```
 
@@ -42,7 +45,9 @@ iwctl
 ```
 
 ```bash
-ping -c 3 archlinux.org    # Verificar conexión a internet
+# Verificar conexión a internet
+
+ping -c 3 archlinux.org
 ```
 
 ---
@@ -51,10 +56,15 @@ ping -c 3 archlinux.org    # Verificar conexión a internet
 
 ```bash
 # Activar sincronización NTP
+
 timedatectl set-ntp true
+
 # Establecer zona horaria
+
 timedatectl set-timezone Europe/Madrid
+
 # Verificar hora y fecha
+
 timedatectl status
 ```
 
@@ -66,8 +76,11 @@ Limpia todas las firmas y la tabla de particiones del disco.
 
 ```bash
 # Borrar firmas de filesystem/LVM
+
 wipefs -a /dev/nvme0n1
+
 # Limpiar tabla de particiones
+
 sgdisk --zap-all /dev/nvme0n1
 ```
 
@@ -102,9 +115,11 @@ Cifra la partición del sistema y abre el volumen.
 
 ```bash
 # Crear volumen LUKS
+
 cryptsetup -v luksFormat /dev/nvme0n1p2
 
 # Abrir volumen como /dev/mapper/cryptroot
+
 cryptsetup open /dev/nvme0n1p2 cryptroot
 ```
 
@@ -116,9 +131,11 @@ Formatea la partición EFI y el volumen cifrado como btrfs con subvolúmenes.
 
 ```bash
 # Formatear partición EFI
+
 mkfs.fat -F32 /dev/nvme0n1p1
 
 # Formatear volumen cifrado como btrfs
+
 mkfs.btrfs -L cryptroot /dev/mapper/cryptroot
 ```
 
@@ -126,18 +143,27 @@ mkfs.btrfs -L cryptroot /dev/mapper/cryptroot
 
 ```bash
 # Montar btrfs completo para crear subvols
+
 mount /dev/mapper/cryptroot /mnt
 
 # Subvolumen raíz
+
 btrfs subvolume create /mnt/@
+
 # Subvolumen /home
+
 btrfs subvolume create /mnt/@home
+
 # Subvolumen /var/log
+
 btrfs subvolume create /mnt/@log
+
 # Subvolumen /var/cache/pacman/pkg
+
 btrfs subvolume create /mnt/@pkg
 
 # Desmontar para remontar con subvols
+
 umount /mnt
 ```
 
@@ -145,14 +171,23 @@ umount /mnt
 
 ```bash
 # Raíz
+
 mount -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt
+
 # /home
+
 mount --mkdir -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home
+
 # Logs
+
 mount --mkdir -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log
+
 # Caché pacman
+
 mount --mkdir -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@pkg /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
+
 # EFI sin cifrar
+
 mount /dev/nvme0n1p1 /mnt/boot
 ```
 
