@@ -117,7 +117,7 @@ Cifra la partición del sistema y abre el volumen.
 
 ```bash
 # Crear volumen LUKS
-cryptsetup -v luksFormat /dev/nvme0n1p2
+cryptsetup --verbose luksFormat /dev/nvme0n1p2
 
 # Abrir volumen como /dev/mapper/cryptroot
 cryptsetup open /dev/nvme0n1p2 cryptroot
