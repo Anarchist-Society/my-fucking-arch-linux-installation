@@ -297,7 +297,7 @@ blkid --match-tag PARTUUID --output value /dev/nvme0n1p2
 
 ```bash
 # Crear directorio para Limine en el ESP
-mkdir -p /boot/EFI/LIMINE
+mkdir --parents /boot/EFI/LIMINE
 
 # Copiar bootloader UEFI
 cp /usr/share/limine/BOOTX64.EFI /boot/EFI/LIMINE/
