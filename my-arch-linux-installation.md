@@ -129,7 +129,7 @@ Formatea el volumen cifrado como btrfs con subvolúmenes.
 
 ```bash
 # Formatear volumen cifrado como btrfs
-mkfs.btrfs -L cryptroot /dev/mapper/cryptroot
+mkfs.btrfs --label cryptroot /dev/mapper/cryptroot
 ```
 
 #### Crear subvolúmenes
