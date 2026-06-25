@@ -349,8 +349,9 @@ passwd anarchist-penguin
 # Habilitar Wi-Fi (iwd)
 systemctl enable iwd
 
-# Habilitar red dinámica (DHCP)
+# Habilitar red dinámica (DHCP) y resolución DNS
 systemctl enable systemd-networkd
+systemctl enable systemd-resolved
 ```
 
 ### Salir y reiniciar
