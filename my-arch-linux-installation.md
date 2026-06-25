@@ -68,7 +68,7 @@ Limpia todas las firmas y la tabla de particiones del disco.
 
 ```bash
 # Borrar firmas de filesystem/LVM
-wipefs -a /dev/nvme0n1
+wipefs --all /dev/nvme0n1
 
 # Limpiar tabla de particiones
 sgdisk --zap-all /dev/nvme0n1
