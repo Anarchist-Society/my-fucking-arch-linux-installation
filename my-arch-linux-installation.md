@@ -257,7 +257,7 @@ echo "KEYMAP=es" > /etc/vconsole.conf
 
 ```bash
 # Establecer nombre del equipo
-echo "penguin" > /etc/hostname
+echo "fucking-archlinux" > /etc/hostname
 ```
 
 ### Initramfs
