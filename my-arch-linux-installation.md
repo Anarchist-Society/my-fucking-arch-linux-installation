@@ -291,7 +291,7 @@ Instala y configura Limine como bootloader UEFI.
 
 ```bash
 # Obtener PARTUUID de la partición LUKS
-blkid -s PARTUUID -o value /dev/nvme0n1p2
+blkid --match-tag PARTUUID --output value /dev/nvme0n1p2
 # ↑ Guarda este PARTUUID, lo necesitas para la configuración
 ```
 
