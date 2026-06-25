@@ -263,3 +263,118 @@ echo "KEYMAP=es" > /etc/vconsole.conf
 # Establecer nombre del equipo
 echo "penguin" > /etc/hostname
 ```
+
+---
+
+## 15. Initramfs
+
+Configura el initramfs para que pueda descifrar el volumen LUKS al arrancar.
+
+```bash
+# Editar hooks del initramfs
+vim /etc/mkinitcpio.conf
+```
+
+Localiza la línea `HOOKS=(...` y cámbiala a:
+
+```bash
+HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
+```
+
+- `encrypt`: descifra el volumen LUKS usando `cryptdevice=` del kernel cmdline
+- `keyboard` + `keymap`: permiten escribir la contraseña con el teclado en español al arrancar
+
+```bash
+# Regenerar initramfs
+mkinitcpio -P
+```
+
+---
+
+## 16. Bootloader (Limine)
+
+Instala y configura Limine como bootloader UEFI.
+
+```bash
+# Obtener UUID de la partición LUKS
+blkid -s UUID -o value /dev/nvme0n1p2
+# ↑ Guarda este UUID, lo necesitas para la configuración
+```
+
+```bash
+# Crear directorio para Limine en el ESP
+mkdir -p /boot/EFI/LIMINE
+
+# Copiar bootloader UEFI
+cp /usr/share/limine/BOOTX64.EFI /boot/EFI/LIMINE/
+```
+
+```bash
+# Crear configuración de Limine
+vim /boot/EFI/LIMINE/limine.cfg
+```
+
+```
+/Arch Linux
+    protocol: linux
+    path: boot():/vmlinuz-linux
+    cmdline: cryptdevice=UUID=<UUID>:cryptroot root=/dev/mapper/cryptroot rw rootflags=subvol=@ rootfstype=btrfs
+    module_path: boot():/amd-ucode.img
+    module_path: boot():/initramfs-linux.img
+```
+
+Reemplaza `<UUID>` por el UUID de tu partición LUKS (`/dev/nvme0n1p2`).
+
+```bash
+# Registrar Limine en el firmware UEFI
+efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Arch Linux" --loader '\\EFI\\LIMINE\\BOOTX64.EFI'
+```
+
+---
+
+## 17. Contraseñas
+
+```bash
+# Contraseña de root
+passwd
+
+# Crear usuario (cambiar "usuario" por tu nombre)
+useradd -m -G wheel usuario
+
+# Contraseña del usuario
+passwd usuario
+```
+
+---
+
+## 18. Servicios
+
+```bash
+# Habilitar Wi-Fi (iwd)
+systemctl enable iwd
+
+# Habilitar red dinámica (DHCP)
+systemctl enable systemd-networkd
+```
+
+---
+
+## 19. Salir y reiniciar
+
+```bash
+# Salir del chroot
+exit
+
+# Desmontar todo
+umount -R /mnt
+
+# Cerrar volumen LUKS
+cryptsetup close cryptroot
+
+# Reiniciar
+reboot
+```
+
+---
+
+*Guía de instalación completada.*
