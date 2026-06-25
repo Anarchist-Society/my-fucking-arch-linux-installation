@@ -1,5 +1,7 @@
 # Instalación de Arch Linux
 
+> **Introducción** — Esta guía documenta mi instalación de Arch Linux con cifrado LUKS2 + btrfs con subvolúmenes y Limine como bootloader en un sistema UEFI. No sustituye [la guía oficial de instalación](https://wiki.archlinux.org/title/Installation_guide), sino que es una versión condensada adaptada a mi hardware. El ESP (FAT32) no está cifrado y se monta como `/boot`. La red se configura con iwd + systemd-networkd.
+
 ---
 
 ## Especificaciones del equipo
@@ -15,7 +17,9 @@
 
 ---
 
-## 1. Teclado y consola
+## Preparación
+
+### Teclado y consola
 
 ```bash
 # Teclado español
@@ -25,9 +29,7 @@ loadkeys es
 setfont ter-132b
 ```
 
----
-
-## 2. Red (Wi-Fi)
+### Red (Wi-Fi)
 
 ```bash
 # Iniciar iwctl (Wi-Fi)
@@ -47,9 +49,7 @@ iwctl
 ping -c 3 archlinux.org
 ```
 
----
-
-## 3. Hora
+### Hora
 
 ```bash
 # Activar sincronización NTP
@@ -62,9 +62,7 @@ timedatectl set-timezone Europe/Madrid
 timedatectl status
 ```
 
----
-
-## 4. Limpieza del disco
+### Limpieza del disco
 
 Limpia todas las firmas y la tabla de particiones del disco.
 
@@ -78,7 +76,7 @@ sgdisk --zap-all /dev/nvme0n1
 
 ---
 
-## 5. Particionado
+## Disk partitioning
 
 ```bash
 fdisk /dev/nvme0n1
@@ -101,7 +99,18 @@ fdisk /dev/nvme0n1
 
 ---
 
-## 6. Cifrado LUKS
+## Formatear la partición EFI
+
+```bash
+# Formatear partición EFI como FAT32
+mkfs.fat -F32 /dev/nvme0n1p1
+```
+
+---
+
+## Preparar la partición del sistema
+
+### Crear el volumen cifrado LUKS
 
 Cifra la partición del sistema y abre el volumen.
 
@@ -113,21 +122,16 @@ cryptsetup -v luksFormat /dev/nvme0n1p2
 cryptsetup open /dev/nvme0n1p2 cryptroot
 ```
 
----
+### Crear la estructura btrfs
 
-## 7. Formateo y subvolúmenes btrfs
-
-Formatea la partición EFI y el volumen cifrado como btrfs con subvolúmenes.
+Formatea el volumen cifrado como btrfs con subvolúmenes.
 
 ```bash
-# Formatear partición EFI
-mkfs.fat -F32 /dev/nvme0n1p1
-
 # Formatear volumen cifrado como btrfs
 mkfs.btrfs -L cryptroot /dev/mapper/cryptroot
 ```
 
-### Crear subvolúmenes
+#### Crear subvolúmenes
 
 ```bash
 # Montar btrfs completo para crear subvols
@@ -149,7 +153,7 @@ btrfs subvolume create /mnt/@pkg
 umount /mnt
 ```
 
-### Montar con optimizaciones
+#### Montar con optimizaciones
 
 ```bash
 # Raíz
@@ -168,7 +172,7 @@ mount --mkdir -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@
 mount /dev/nvme0n1p1 /mnt/boot
 ```
 
-### Resumen de capas
+#### Resumen de capas
 
 | Capa | Dispositivo | Filesystem | Punto de montaje |
 |---|---|---|---|
@@ -179,18 +183,19 @@ mount /dev/nvme0n1p1 /mnt/boot
 | Subvolumen `@home` | `/dev/mapper/cryptroot` | btrfs | `/home` |
 | Subvolumen `@log` | `/dev/mapper/cryptroot` | btrfs | `/var/log` |
 | Subvolumen `@pkg` | `/dev/mapper/cryptroot` | btrfs | `/var/cache/pacman/pkg` |
+
 ---
 
-## 8. Actualizar mirrors
+## Instalar Arch Linux
+
+### Actualizar mirrors
 
 ```bash
 # Obtener mirrors más rápidos
 reflector --country Spain --latest 10 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 ```
 
----
-
-## 9. Instalación base
+### Instalación base
 
 | Paquete | Propósito |
 |---|---|
@@ -209,27 +214,21 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd
 ```
 
----
-
-## 10. Generar fstab
+### Generar fstab
 
 ```bash
 # Generar fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
----
-
-## 11. Entrar al sistema (chroot)
+### Entrar al sistema (chroot)
 
 ```bash
 # Entrar al sistema instalado
 arch-chroot /mnt
 ```
 
----
-
-## 12. Zona horaria
+### Zona horaria
 
 ```bash
 # Establecer zona horaria
@@ -239,9 +238,7 @@ ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 hwclock --systohc
 ```
 
----
-
-## 13. Localización
+### Localización
 
 ```bash
 # Generar locale español
@@ -255,18 +252,14 @@ echo "LANG=es_ES.UTF-8" > /etc/locale.conf
 echo "KEYMAP=es" > /etc/vconsole.conf
 ```
 
----
-
-## 14. Hostname
+### Hostname
 
 ```bash
 # Establecer nombre del equipo
 echo "penguin" > /etc/hostname
 ```
 
----
-
-## 15. Initramfs
+### Initramfs
 
 Configura el initramfs para que pueda descifrar el volumen LUKS al arrancar.
 
@@ -291,14 +284,14 @@ mkinitcpio -P
 
 ---
 
-## 16. Bootloader (Limine)
+## Configurar el bootloader (Limine)
 
 Instala y configura Limine como bootloader UEFI.
 
 ```bash
-# Obtener UUID de la partición LUKS
+# Obtener PARTUUID de la partición LUKS
 blkid -s PARTUUID -o value /dev/nvme0n1p2
-# ↑ Guarda este UUID, lo necesitas para la configuración
+# ↑ Guarda este PARTUUID, lo necesitas para la configuración
 ```
 
 ```bash
@@ -334,7 +327,9 @@ efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Arch Linux" --loader '
 
 ---
 
-## 17. Contraseñas
+## Pasos finales
+
+### Contraseñas
 
 ```bash
 # Contraseña de root
@@ -347,9 +342,7 @@ useradd -m -G wheel usuario
 passwd usuario
 ```
 
----
-
-## 18. Servicios
+### Servicios
 
 ```bash
 # Habilitar Wi-Fi (iwd)
@@ -359,9 +352,7 @@ systemctl enable iwd
 systemctl enable systemd-networkd
 ```
 
----
-
-## 19. Salir y reiniciar
+### Salir y reiniciar
 
 ```bash
 # Salir del chroot
