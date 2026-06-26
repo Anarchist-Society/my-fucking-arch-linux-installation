@@ -275,10 +275,11 @@ Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 | `limine` | Bootloader |
 | `iwd` | Conexión Wi-Fi (iwctl) |
 | `sudo` | Elevación de privilegios |
+| `efibootmgr` | Gestor de entradas de arranque UEFI |
 
 ```bash
 # Instalar sistema base
-pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd sudo
+pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd sudo efibootmgr
 ```
 
 ### Generar fstab
