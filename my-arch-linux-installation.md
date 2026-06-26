@@ -50,7 +50,7 @@ iwctl
 
 ```bash
 # Verificar conexión a internet
-ping -c 3 archlinux.org
+ping -c 3 ping.archlinux.org
 ```
 
 ### Hora
