@@ -339,7 +339,7 @@ vim /etc/mkinitcpio.conf
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
 ```bash
-HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
 ```
 
 - `encrypt`: descifra el volumen LUKS usando `cryptdevice=` del kernel cmdline
@@ -384,7 +384,6 @@ timeout: 5
     protocol: linux
     path: boot():/vmlinuz-linux
     cmdline: cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot rw rootflags=subvol=@ rootfstype=btrfs
-    module_path: boot():/amd-ucode.img
     module_path: boot():/initramfs-linux.img
 ```
 
