@@ -1,9 +1,7 @@
 # Instalación de Arch Linux
 
 ## Tabla de contenidos
-
 - [Introducción](#introducción)
-
 - [Especificaciones del equipo](#especificaciones-del-equipo)
 - [Preparación](#preparación)
   - [Teclado y consola](#teclado-y-consola)
@@ -272,14 +270,13 @@ Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 | `cryptsetup` | Descifrar LUKS al arrancar |
 | `btrfs-progs` | Herramientas para gestionar btrfs |
 | `limine` | Bootloader |
-| `efibootmgr` | Gestor de entradas de arranque UEFI |
 | `iwd` | Conexión Wi-Fi (iwctl) |
 | `sudo` | Elevación de privilegios |
 | `vim` | Editor de texto |
 
 ```bash
 # Instalar sistema base
-pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine efibootmgr iwd sudo vim
+pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine iwd sudo vim
 ```
 
 ### Generar fstab
@@ -356,6 +353,8 @@ mkinitcpio -P
 
 [Limine](https://wiki.archlinux.org/title/Limine) es un bootloader moderno, minimalista y rápido. Soporta arranque desde btrfs sobre LUKS, configuración en texto plano y se integra con [snapper](https://wiki.archlinux.org/title/Snapper) para ofrecer snapshots arrancables. A diferencia de GRUB, no necesita regenerar configuración tras cada actualización de kernel (el `module_path` apunta directamente a los archivos).
 
+El binario `BOOTX64.EFI` se copia a `EFI/BOOT/`, la ruta de **fallback UEFI** estándar. El firmware la encuentra automáticamente sin necesidad de `efibootmgr`.
+
 ```bash
 # Obtener PARTUUID de la partición LUKS
 blkid --match-tag PARTUUID --output value /dev/nvme0n1p2
@@ -364,15 +363,15 @@ blkid --match-tag PARTUUID --output value /dev/nvme0n1p2
 
 ```bash
 # Crear directorio para Limine en el ESP
-mkdir --parents /boot/EFI/LIMINE
+mkdir --parents /boot/EFI/BOOT
 
-# Copiar bootloader UEFI
-cp /usr/share/limine/BOOTX64.EFI /boot/EFI/LIMINE/
+# Copiar bootloader UEFI a la ruta de fallback UEFI
+cp /usr/share/limine/BOOTX64.EFI /boot/EFI/BOOT/
 ```
 
 ```bash
 # Crear configuración de Limine
-vim /boot/EFI/LIMINE/limine.conf
+vim /boot/limine.conf
 ```
 
 ```
@@ -386,11 +385,6 @@ timeout: 5
 ```
 
 Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
-
-```bash
-# Registrar Limine en el firmware UEFI
-efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Arch Linux" --loader '\\EFI\\LIMINE\\BOOTX64.EFI'
-```
 
 ---
 
