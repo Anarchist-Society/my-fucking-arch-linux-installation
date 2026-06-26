@@ -213,10 +213,11 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 | `vim` | Editor de texto |
 | `limine` | Bootloader |
 | `iwd` | Conexión Wi-Fi (iwctl) |
+| `sudo` | Elevación de privilegios |
 
 ```bash
 # Instalar sistema base
-pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd
+pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd sudo
 ```
 
 ### Generar fstab
@@ -341,10 +342,14 @@ efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Arch Linux" --loader '
 passwd
 
 # Crear usuario
-useradd --create-home --groups wheel anarchist-penguin
+useradd --create-home anarchist-penguin
 
 # Contraseña del usuario
 passwd anarchist-penguin
+
+# Dar permisos sudo al usuario (estilo Omarchy)
+echo "anarchist-penguin ALL=(ALL) ALL" > /etc/sudoers.d/00-anarchist-penguin
+chmod 440 /etc/sudoers.d/00-anarchist-penguin
 ```
 
 ### Servicios
