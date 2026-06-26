@@ -261,7 +261,7 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 
 ### Instalación base
 
-Instalo solo los paquetes necesarios para que el sistema arranque y tenga red. Es más fácil añadir después lo que haga falta que quitar lo que sobra.
+Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 
 | Paquete | Propósito |
 |---|---|
