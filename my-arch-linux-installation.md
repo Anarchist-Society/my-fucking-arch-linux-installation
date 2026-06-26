@@ -317,10 +317,8 @@ locale-gen
 echo "LANG=es_ES.UTF-8" > /etc/locale.conf
 
 # Configurar teclado y fuente en consola
-cat > /etc/vconsole.conf << EOF
-KEYMAP=es
-FONT=ter-132b
-EOF
+echo "KEYMAP=es" > /etc/vconsole.conf
+echo "FONT=ter-132b" >> /etc/vconsole.conf
 ```
 
 ### Hostname
