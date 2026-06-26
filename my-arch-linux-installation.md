@@ -1,19 +1,8 @@
 # Instalación de Arch Linux
 
-> **Introducción** — Esta guía documenta mi instalación de Arch Linux con cifrado LUKS2 + btrfs con subvolúmenes y Limine como bootloader en un sistema UEFI. No sustituye [la guía oficial de instalación](https://wiki.archlinux.org/title/Installation_guide), sino que es una versión condensada adaptada a mi hardware (Slimbook EVO con AMD Ryzen 7 8845HS y Samsung SSD 990 PRO 4TB).
->
-> **Elecciones principales:**
-> - **fdisk** — minimalista, viene en el ISO, suficiente para 2 particiones.
-> - **LUKS2** — cifrado estándar, resistente, por defecto en cryptsetup. Sin LVM: btrfs gestiona volúmenes y snapshots por sí mismo.
-> - **btrfs** — snapshots, compresión ZSTD, sumas de verificación, subvolúmenes planos.
-> - **Limine** — ligero, soporta btrfs/LUKS, integración con snapper, archivo de configuración simple.
-> - **iwd + systemd-networkd** — nativos de systemd, ligeros, sin dependencias extra.
-> - **PARTUUID** — más estable que UUID: no cambia al reformatear la partición.
-> - **ESP en /boot** — estándar, el firmware UEFI necesita la partición FAT32 sin cifrar para arrancar.
+## Tabla de contenidos
 
----
-
-## Índice
+- [Introducción](#introducción)
 
 - [Especificaciones del equipo](#especificaciones-del-equipo)
 - [Preparación](#preparación)
@@ -40,6 +29,20 @@
   - [Contraseñas](#contraseñas)
   - [Servicios](#servicios)
   - [Salir y reiniciar](#salir-y-reiniciar)
+
+---
+
+## Introducción
+
+Esta guía documenta mi instalación de [Arch Linux](https://archlinux.org) con cifrado LUKS2 + btrfs con subvolúmenes y Limine como bootloader en un sistema UEFI (Slimbook EVO con AMD Ryzen 7 8845HS y Samsung SSD 990 PRO 4TB). No sustituye [la guía oficial de instalación](https://wiki.archlinux.org/title/Installation_guide), sino que es una versión condensada de los pasos esenciales adaptada a mi hardware.
+
+Características de esta instalación:
+
+- Partición del sistema cifrada con LUKS2 y formateada con btrfs usando subvolúmenes planos.
+- Partición EFI (FAT32) sin cifrar montada como `/boot`.
+- Bootloader Limine — ligero, soporta btrfs/LUKS.
+- Red con iwd + systemd-networkd (nativos de systemd, sin dependencias extra).
+- Sin LVM — btrfs gestiona volúmenes y snapshots por sí mismo.
 
 ---
 
