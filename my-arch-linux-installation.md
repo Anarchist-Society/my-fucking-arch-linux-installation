@@ -73,7 +73,7 @@ setfont ter-132b
 
 ### Red (Wi-Fi)
 
-Uso `iwctl` (de `iwd`) porque es más ligero que NetworkManager y funciona sin dependencias adicionales. La conexión se configura interactivamente; las credenciales se guardan automáticamente.
+Uso [`iwctl`](https://wiki.archlinux.org/title/Iwd) (de `iwd`) porque es más ligero que NetworkManager y funciona sin dependencias adicionales. La conexión se configura interactivamente; las credenciales se guardan automáticamente.
 
 ```bash
 # Iniciar iwctl (Wi-Fi)
@@ -122,11 +122,11 @@ sgdisk --zap-all /dev/nvme0n1
 
 ## Particionado del disco
 
-Creo dos particiones en tabla GPT:
-- Una **EFI** de 2 GiB para el bootloader y kernels — suficiente para varios kernels sin quedarse corto.
+Creo dos particiones en [tabla GPT](https://wiki.archlinux.org/title/GUID_Partition_Table):
+- Una [**EFI**](https://wiki.archlinux.org/title/EFI_system_partition) de 2 GiB para el bootloader y kernels — suficiente para varios kernels sin quedarse corto.
 - El **resto del disco** sin cifrar a nivel de partición; el cifrado se aplica dentro con LUKS.
 
-Uso `fdisk` porque es la herramienta estándar en el ISO de Arch, minimalista y hace exactamente lo que necesito sin dependencias.
+Uso [`fdisk`](https://wiki.archlinux.org/title/Fdisk) porque es la herramienta estándar en el ISO de Arch, minimalista y hace exactamente lo que necesito sin dependencias.
 
 ```bash
 # Particionar el disco con fdisk
@@ -152,7 +152,7 @@ fdisk /dev/nvme0n1
 
 ## Formatear la partición EFI
 
-La partición EFI debe ser FAT32 (lo exige el firmware UEFI). Se monta en `/boot` y no se cifra.
+La [partición EFI](https://wiki.archlinux.org/title/EFI_system_partition) debe ser FAT32 (lo exige el firmware UEFI). Se monta en `/boot` y no se cifra.
 
 ```bash
 # Formatear partición EFI como FAT32
@@ -165,7 +165,7 @@ mkfs.fat -F32 /dev/nvme0n1p1
 
 ### Crear el volumen cifrado LUKS
 
-Cifro la partición del sistema con LUKS2 para proteger los datos en caso de robo o pérdida del equipo. La contraseña se pide manualmente en cada arranque.
+Cifro la partición del sistema con [LUKS2](https://wiki.archlinux.org/title/Dm-crypt) para proteger los datos en caso de robo o pérdida del equipo. La contraseña se pide manualmente en cada arranque.
 
 ```bash
 # Crear volumen LUKS
@@ -177,7 +177,7 @@ cryptsetup open /dev/nvme0n1p2 cryptroot
 
 ### Crear la estructura btrfs
 
-btrfs permite snapshots, compresión transparente, sumas de verificación para integridad de datos, y subvolúmenes. Uso un layout plano (no anidado) porque es más flexible y evita problemas al restaurar snapshots.
+[btrfs](https://wiki.archlinux.org/title/Btrfs) permite snapshots, compresión transparente, sumas de verificación para integridad de datos, y subvolúmenes. Uso un layout plano (no anidado) porque es más flexible y evita problemas al restaurar snapshots.
 
 Las opciones de montaje:
 - `noatime` — evita escrituras innecesarias al leer archivos.
@@ -318,7 +318,6 @@ echo "LANG=es_ES.UTF-8" > /etc/locale.conf
 
 # Configurar teclado y fuente en consola
 echo "KEYMAP=es" > /etc/vconsole.conf
-echo "FONT=ter-132b" >> /etc/vconsole.conf
 ```
 
 ### Hostname
@@ -330,7 +329,7 @@ echo "fucking-archlinux" > /etc/hostname
 
 ### Initramfs
 
-El hook `encrypt` permite al initramfs descifrar LUKS usando el parámetro `cryptdevice=` del kernel.
+El hook [`encrypt`](https://wiki.archlinux.org/title/Mkinitcpio#Common_hooks) permite al initramfs descifrar LUKS usando el parámetro `cryptdevice=` del kernel.
 
 ```bash
 # Editar hooks del initramfs
@@ -340,7 +339,7 @@ vim /etc/mkinitcpio.conf
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
 ```bash
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
 ```
 
 - `encrypt`: descifra el volumen LUKS usando `cryptdevice=` del kernel cmdline
@@ -355,9 +354,7 @@ mkinitcpio -P
 
 ## Configurar el bootloader (Limine)
 
-Limine es un bootloader moderno, minimalista y rápido. Soporta arranque desde btrfs sobre LUKS, configuración en texto plano y se integra con snapper para ofrecer snapshots arrancables. A diferencia de GRUB, no necesita regenerar configuración tras cada actualización de kernel (el `module_path` apunta directamente a los archivos).
-
-El microcode AMD va como `module_path` en Limine, no en hooks del initramfs. Esto mantiene el initramfs más pequeño y la lógica de carga en el bootloader.
+[Limine](https://wiki.archlinux.org/title/Limine) es un bootloader moderno, minimalista y rápido. Soporta arranque desde btrfs sobre LUKS, configuración en texto plano y se integra con [snapper](https://wiki.archlinux.org/title/Snapper) para ofrecer snapshots arrancables. A diferencia de GRUB, no necesita regenerar configuración tras cada actualización de kernel (el `module_path` apunta directamente a los archivos).
 
 ```bash
 # Obtener PARTUUID de la partición LUKS
@@ -401,7 +398,7 @@ efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Arch Linux" --loader '
 
 ### Contraseñas
 
-El usuario `anarchist-penguin` se crea sin grupo `wheel`. Los permisos sudo se conceden mediante un archivo dedicado en `/etc/sudoers.d/`, siguiendo el principio de mínimos privilegios: solo este usuario puede elevar privilegios, no todo el grupo wheel.
+El usuario `anarchist-penguin` se crea sin grupo `wheel`. Los permisos [sudo](https://wiki.archlinux.org/title/Sudo) se conceden mediante un archivo dedicado en `/etc/sudoers.d/`, siguiendo el principio de mínimos privilegios: solo este usuario puede elevar privilegios, no todo el grupo wheel.
 
 ```bash
 # Contraseña de root
@@ -420,9 +417,9 @@ chmod 440 /etc/sudoers.d/00-anarchist-penguin
 
 ### Servicios
 
-- `iwd` — servicio de Wi-Fi, permite usar `iwctl` para conectarse.
-- `systemd-networkd` — gestor de red nativo de systemd, asigna IP por DHCP.
-- `systemd-resolved` — resolución DNS automática (recibe los DNS del router por DHCP).
+- [`iwd`](https://wiki.archlinux.org/title/Iwd) — servicio de Wi-Fi, permite usar `iwctl` para conectarse.
+- [`systemd-networkd`](https://wiki.archlinux.org/title/Systemd-networkd) — gestor de red nativo de systemd, asigna IP por DHCP.
+- [`systemd-resolved`](https://wiki.archlinux.org/title/Systemd-resolved) — resolución DNS automática (recibe los DNS del router por DHCP).
 
 ```bash
 # Habilitar Wi-Fi (iwd)
