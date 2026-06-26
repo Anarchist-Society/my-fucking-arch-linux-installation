@@ -231,7 +231,7 @@ mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,s
 mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@pkg /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
 
 # EFI sin cifrar
-mount /dev/nvme0n1p1 /mnt/boot
+mount --mkdir /dev/nvme0n1p1 /mnt/boot
 ```
 
 #### Resumen de capas
