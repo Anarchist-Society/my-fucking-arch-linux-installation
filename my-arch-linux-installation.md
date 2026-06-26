@@ -1,6 +1,45 @@
 # Instalación de Arch Linux
 
-> **Introducción** — Esta guía documenta mi instalación de Arch Linux con cifrado LUKS2 + btrfs con subvolúmenes y Limine como bootloader en un sistema UEFI. No sustituye [la guía oficial de instalación](https://wiki.archlinux.org/title/Installation_guide), sino que es una versión condensada adaptada a mi hardware. El ESP (FAT32) no está cifrado y se monta como `/boot`. La red se configura con iwd + systemd-networkd.
+> **Introducción** — Esta guía documenta mi instalación de Arch Linux con cifrado LUKS2 + btrfs con subvolúmenes y Limine como bootloader en un sistema UEFI. No sustituye [la guía oficial de instalación](https://wiki.archlinux.org/title/Installation_guide), sino que es una versión condensada adaptada a mi hardware (Slimbook EVO con AMD Ryzen 7 8845HS y Samsung SSD 990 PRO 4TB).
+>
+> **Elecciones principales:**
+> - **fdisk** — minimalista, viene en el ISO, suficiente para 2 particiones.
+> - **LUKS2** — cifrado estándar, resistente, por defecto en cryptsetup. Sin LVM: btrfs gestiona volúmenes y snapshots por sí mismo.
+> - **btrfs** — snapshots, compresión ZSTD, sumas de verificación, subvolúmenes planos.
+> - **Limine** — ligero, soporta btrfs/LUKS, integración con snapper, archivo de configuración simple.
+> - **iwd + systemd-networkd** — nativos de systemd, ligeros, sin dependencias extra.
+> - **PARTUUID** — más estable que UUID: no cambia al reformatear la partición.
+> - **ESP en /boot** — estándar, el firmware UEFI necesita la partición FAT32 sin cifrar para arrancar.
+
+---
+
+## Índice
+
+- [Especificaciones del equipo](#especificaciones-del-equipo)
+- [Preparación](#preparación)
+  - [Teclado y consola](#teclado-y-consola)
+  - [Red (Wi-Fi)](#red-wi-fi)
+  - [Hora](#hora)
+  - [Limpieza del disco](#limpieza-del-disco)
+- [Particionado del disco](#particionado-del-disco)
+- [Formatear la partición EFI](#formatear-la-partición-efi)
+- [Preparar la partición del sistema](#preparar-la-partición-del-sistema)
+  - [Crear el volumen cifrado LUKS](#crear-el-volumen-cifrado-luks)
+  - [Crear la estructura btrfs](#crear-la-estructura-btrfs)
+- [Instalar Arch Linux](#instalar-arch-linux)
+  - [Actualizar mirrors](#actualizar-mirrors)
+  - [Instalación base](#instalación-base)
+  - [Generar fstab](#generar-fstab)
+  - [Entrar al sistema (chroot)](#entrar-al-sistema-chroot)
+  - [Zona horaria](#zona-horaria)
+  - [Localización](#localización)
+  - [Hostname](#hostname)
+  - [Initramfs](#initramfs)
+- [Configurar el bootloader (Limine)](#configurar-el-bootloader-limine)
+- [Pasos finales](#pasos-finales)
+  - [Contraseñas](#contraseñas)
+  - [Servicios](#servicios)
+  - [Salir y reiniciar](#salir-y-reiniciar)
 
 ---
 
@@ -31,19 +70,17 @@ setfont ter-132b
 
 ### Red (Wi-Fi)
 
+Uso `iwctl` (de `iwd`) porque es más ligero que NetworkManager y funciona sin dependencias adicionales. La conexión se configura interactivamente; las credenciales se guardan automáticamente.
+
 ```bash
 # Iniciar iwctl (Wi-Fi)
 iwctl
-
   # Listar interfaces de red
   device list
-
   # Escanear redes Wi-Fi
   station wlan0 get-networks
-
   # Conectarse a la red
   station wlan0 connect SSID
-
   # Salir de iwctl
   exit
 ```
@@ -82,6 +119,12 @@ sgdisk --zap-all /dev/nvme0n1
 
 ## Particionado del disco
 
+Creo dos particiones en tabla GPT:
+- Una **EFI** de 2 GiB para el bootloader y kernels — suficiente para varios kernels sin quedarse corto.
+- El **resto del disco** sin cifrar a nivel de partición; el cifrado se aplica dentro con LUKS.
+
+Uso `fdisk` porque es la herramienta estándar en el ISO de Arch, minimalista y hace exactamente lo que necesito sin dependencias.
+
 ```bash
 # Particionar el disco con fdisk
 fdisk /dev/nvme0n1
@@ -106,6 +149,8 @@ fdisk /dev/nvme0n1
 
 ## Formatear la partición EFI
 
+La partición EFI debe ser FAT32 (lo exige el firmware UEFI). Se monta en `/boot` y no se cifra.
+
 ```bash
 # Formatear partición EFI como FAT32
 mkfs.fat -F32 /dev/nvme0n1p1
@@ -117,7 +162,7 @@ mkfs.fat -F32 /dev/nvme0n1p1
 
 ### Crear el volumen cifrado LUKS
 
-Cifra la partición del sistema y abre el volumen.
+Cifro la partición del sistema con LUKS2 para proteger los datos en caso de robo o pérdida del equipo. La contraseña se pide manualmente en cada arranque (sin keyfile) por seguridad.
 
 ```bash
 # Crear volumen LUKS
@@ -129,7 +174,16 @@ cryptsetup open /dev/nvme0n1p2 cryptroot
 
 ### Crear la estructura btrfs
 
-Formatea el volumen cifrado como btrfs con subvolúmenes.
+btrfs permite snapshots, compresión transparente, sumas de verificación para integridad de datos, y subvolúmenes. Uso un layout plano (no anidado) porque es más flexible y evita problemas al restaurar snapshots.
+
+Las opciones de montaje:
+- `noatime` — evita escrituras innecesarias al leer archivos.
+- `ssd` — optimiza para NVMe/SSD (agrupa escrituras).
+- `compress=zstd` — comprime datos en vuelo, reduce espacio sin pérdida de rendimiento en CPUs modernas.
+- `space_cache=v2` — mejor gestión del espacio libre.
+- `discard=async` — TRIM paralelo sin bloquear operaciones.
+
+Subvolúmenes separados para `/home`, `/var/log` y `/var/cache/pacman/pkg` evitan que esas rutas se incluyan al hacer snapshots de la raíz.
 
 ```bash
 # Formatear volumen cifrado como btrfs
@@ -195,12 +249,16 @@ mount /dev/nvme0n1p1 /mnt/boot
 
 ### Actualizar mirrors
 
+`reflector` obtiene los mirrors más rápidos cercanos a España, acelerando las descargas de pacman.
+
 ```bash
 # Obtener mirrors más rápidos
 reflector --country Spain --latest 10 --protocol http,https --sort rate --save /etc/pacman.d/mirrorlist
 ```
 
 ### Instalación base
+
+Instalo solo los paquetes necesarios para que el sistema arranque y tenga red. Sin `base-devel`, sin NetworkManager, sin `man-db`. Es más fácil añadir después lo que haga falta que quitar lo que sobra.
 
 | Paquete | Propósito |
 |---|---|
@@ -267,7 +325,7 @@ echo "fucking-archlinux" > /etc/hostname
 
 ### Initramfs
 
-Configura el initramfs para que pueda descifrar el volumen LUKS al arrancar.
+El hook `encrypt` permite al initramfs descifrar LUKS usando el parámetro `cryptdevice=` del kernel. No incluyo `microcode` en hooks porque va cargado por Limine como `module_path`. No incluyo `consolefont` porque no es necesario en sistemas modernos.
 
 ```bash
 # Editar hooks del initramfs
@@ -292,7 +350,9 @@ mkinitcpio -P
 
 ## Configurar el bootloader (Limine)
 
-Instala y configura Limine como bootloader UEFI.
+Limine es un bootloader moderno, minimalista y rápido. Soporta arranque desde btrfs sobre LUKS, configuración en texto plano y se integra con snapper para ofrecer snapshots arrancables. A diferencia de GRUB, no necesita regenerar configuración tras cada actualización de kernel (el `module_path` apunta directamente a los archivos).
+
+El microcode AMD va como `module_path` en Limine, no en hooks del initramfs. Esto mantiene el initramfs más pequeño y la lógica de carga en el bootloader.
 
 ```bash
 # Obtener PARTUUID de la partición LUKS
@@ -337,6 +397,8 @@ efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Arch Linux" --loader '
 
 ### Contraseñas
 
+El usuario `anarchist-penguin` se crea sin grupo `wheel`. Los permisos sudo se conceden mediante un archivo dedicado en `/etc/sudoers.d/`, siguiendo el principio de mínimos privilegios: solo este usuario puede elevar privilegios, no todo el grupo wheel.
+
 ```bash
 # Contraseña de root
 passwd
@@ -353,6 +415,10 @@ chmod 440 /etc/sudoers.d/00-anarchist-penguin
 ```
 
 ### Servicios
+
+- `iwd` — servicio de Wi-Fi, permite usar `iwctl` para conectarse.
+- `systemd-networkd` — gestor de red nativo de systemd, asigna IP por DHCP.
+- `systemd-resolved` — resolución DNS automática (recibe los DNS del router por DHCP).
 
 ```bash
 # Habilitar Wi-Fi (iwd)
