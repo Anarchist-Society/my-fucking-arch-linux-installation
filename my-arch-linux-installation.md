@@ -329,7 +329,7 @@ echo "fucking-archlinux" > /etc/hostname
 
 ### Initramfs
 
-El hook `encrypt` permite al initramfs descifrar LUKS usando el parámetro `cryptdevice=` del kernel. No incluyo `microcode` en hooks porque va cargado por Limine como `module_path`. No incluyo `consolefont` porque no es necesario en sistemas modernos.
+El hook `encrypt` permite al initramfs descifrar LUKS usando el parámetro `cryptdevice=` del kernel.
 
 ```bash
 # Editar hooks del initramfs
