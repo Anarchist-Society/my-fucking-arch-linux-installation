@@ -264,22 +264,22 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 
 | Paquete | Propósito |
-|---|---|
+|---|---|---|
 | `base` | Sistema base mínimo de Arch Linux |
 | `linux` | Kernel Linux |
 | `linux-firmware` | Firmware para hardware |
 | `amd-ucode` | Microcode para CPU AMD Ryzen |
-| `btrfs-progs` | Herramientas para gestionar btrfs |
 | `cryptsetup` | Descifrar LUKS al arrancar |
-| `vim` | Editor de texto |
+| `btrfs-progs` | Herramientas para gestionar btrfs |
 | `limine` | Bootloader |
+| `efibootmgr` | Gestor de entradas de arranque UEFI |
 | `iwd` | Conexión Wi-Fi (iwctl) |
 | `sudo` | Elevación de privilegios |
-| `efibootmgr` | Gestor de entradas de arranque UEFI |
+| `vim` | Editor de texto |
 
 ```bash
 # Instalar sistema base
-pacstrap -K /mnt base linux linux-firmware amd-ucode btrfs-progs cryptsetup vim limine iwd sudo efibootmgr
+pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine efibootmgr iwd sudo vim
 ```
 
 ### Generar fstab
