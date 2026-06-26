@@ -264,7 +264,7 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 
 | Paquete | Propósito |
-|---|---|---|
+|---|---|
 | `base` | Sistema base mínimo de Arch Linux |
 | `linux` | Kernel Linux |
 | `linux-firmware` | Firmware para hardware |
