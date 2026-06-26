@@ -165,7 +165,7 @@ mkfs.fat -F32 /dev/nvme0n1p1
 
 ### Crear el volumen cifrado LUKS
 
-Cifro la partición del sistema con LUKS2 para proteger los datos en caso de robo o pérdida del equipo. La contraseña se pide manualmente en cada arranque (sin keyfile) por seguridad.
+Cifro la partición del sistema con LUKS2 para proteger los datos en caso de robo o pérdida del equipo. La contraseña se pide manualmente en cada arranque.
 
 ```bash
 # Crear volumen LUKS
