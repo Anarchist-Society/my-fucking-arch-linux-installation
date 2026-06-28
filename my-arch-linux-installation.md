@@ -24,7 +24,6 @@
   - [Initramfs](#initramfs)
 - [Configurar el bootloader (Limine)](#configurar-el-bootloader-limine)
 - [Pasos finales](#pasos-finales)
-  - [Contraseñas](#contraseñas)
   - [Servicios](#servicios)
   - [Salir y reiniciar](#salir-y-reiniciar)
 
@@ -407,25 +406,6 @@ Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 ---
 
 ## Pasos finales
-
-### Contraseñas
-
-El usuario `anarchist-penguin` se crea sin grupo `wheel`. Los permisos [sudo](https://wiki.archlinux.org/title/Sudo) se conceden mediante un archivo dedicado en `/etc/sudoers.d/`, siguiendo el principio de mínimos privilegios: solo este usuario puede elevar privilegios, no todo el grupo wheel.
-
-```bash
-# Contraseña de root
-passwd
-
-# Crear usuario
-useradd --create-home anarchist-penguin
-
-# Contraseña del usuario
-passwd anarchist-penguin
-
-# Dar permisos sudo al usuario
-echo "anarchist-penguin ALL=(ALL) ALL" > /etc/sudoers.d/00-anarchist-penguin
-chmod 440 /etc/sudoers.d/00-anarchist-penguin
-```
 
 ### Servicios
 
