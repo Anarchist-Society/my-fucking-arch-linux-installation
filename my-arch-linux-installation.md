@@ -342,6 +342,8 @@ echo "KEYMAP=es" > /etc/vconsole.conf
 
 ### Hostname
 
+[Hostname (Arch Wiki)](https://wiki.archlinux.org/title/Hostname). `/etc/hostname` contiene el nombre del equipo. Se usa para identificar la máquina en la red local y aparece en el prompt de la terminal.
+
 ```bash
 # Establecer nombre del equipo
 echo "fucking-archlinux" > /etc/hostname
