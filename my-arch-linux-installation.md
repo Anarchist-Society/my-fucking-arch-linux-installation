@@ -111,7 +111,7 @@ timedatectl status
 
 ### Limpieza del disco
 
-Limpia todas las firmas y la tabla de particiones del disco.
+[Securely wipe disk (Arch Wiki)](https://wiki.archlinux.org/title/Securely_wipe_disk). Elimina firmas de sistemas de archivo anteriores (`wipefs --all`) y la tabla de particiones GPT (`sgdisk --zap-all`) para empezar con un disco limpio y evitar conflictos al particionar y montar.
 
 ```bash
 # Borrar firmas de filesystem/LVM
