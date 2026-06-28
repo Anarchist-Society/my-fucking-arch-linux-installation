@@ -302,6 +302,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 ### Entrar al sistema (chroot)
 
+[Chroot (Arch Wiki)](https://wiki.archlinux.org/title/Chroot). `arch-chroot /mnt` cambia el directorio raíz del sistema en vivo a la nueva instalación en `/mnt`. A partir de aquí los comandos se ejecutan como si estuviésemos dentro del sistema recién instalado, permitiendo configurarlo (zona horaria, idioma, hostname, initramfs, bootloader) antes del primer reinicio.
+
 ```bash
 # Entrar al sistema instalado
 arch-chroot /mnt
