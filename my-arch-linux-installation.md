@@ -284,12 +284,11 @@ Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 | `btrfs-progs` | Herramientas para gestionar btrfs |
 | `limine` | Bootloader |
 | `iwd` | Conexión Wi-Fi (iwctl) |
-| `sudo` | Elevación de privilegios |
 | `vim` | Editor de texto |
 
 ```bash
 # Instalar sistema base
-pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine iwd sudo vim
+pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine iwd vim
 ```
 
 ### Generar fstab
