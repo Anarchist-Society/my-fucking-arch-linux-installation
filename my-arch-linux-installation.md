@@ -377,7 +377,7 @@ mkinitcpio -P
 
 ## Configurar el bootloader (Limine)
 
-[Limine](https://wiki.archlinux.org/title/Limine) es un bootloader moderno, minimalista y rápido. Soporta arranque desde btrfs sobre LUKS, configuración en texto plano y se integra con [snapper](https://wiki.archlinux.org/title/Snapper) para ofrecer snapshots arrancables. A diferencia de GRUB, no necesita regenerar configuración tras cada actualización de kernel (el `module_path` apunta directamente a los archivos).
+[Limine](https://wiki.archlinux.org/title/Limine) es un bootloader moderno, minimalista y rápido. Soporta arranque desde btrfs sobre LUKS y configuración en texto plano. A diferencia de GRUB, no necesita regenerar configuración tras cada actualización de kernel (el `module_path` apunta directamente a los archivos).
 
 El binario `BOOTX64.EFI` se copia a `EFI/BOOT/`, la ruta de **fallback UEFI** estándar. El firmware la encuentra automáticamente sin necesidad de `efibootmgr`.
 
