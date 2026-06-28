@@ -3,6 +3,9 @@
 [Sudo (Arch Wiki)](https://wiki.archlinux.org/title/Sudo). Creación de usuario y configuración de sudo mediante `sudoers.d` sin grupo `wheel`, siguiendo el principio de mínimos privilegios.
 
 ```bash
+# Instalar sudo
+pacman -S sudo
+
 # Contraseña de root
 passwd
 
