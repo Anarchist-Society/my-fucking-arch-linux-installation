@@ -323,17 +323,20 @@ hwclock --systohc
 
 ### Localización
 
-[Locale (Arch Wiki)](https://wiki.archlinux.org/title/Locale). `echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen` añade el locale español a la lista de locales disponibles; `locale-gen` los genera. `LANG=es_ES.UTF-8` en `/etc/locale.conf` establece el idioma del sistema. `KEYMAP=es` en `/etc/vconsole.conf` fija el teclado español en la consola virtual.
+[Locale (Arch Wiki)](https://wiki.archlinux.org/title/Locale). Edita `/etc/locale.gen` y descomenta el locale español (`es_ES.UTF-8 UTF-8`). `locale-gen` genera los locales. `LANG=es_ES.UTF-8` en `/etc/locale.conf` establece el idioma del sistema. `KEYMAP=es` en `/etc/vconsole.conf` fija el teclado español en la consola virtual.
 
 ```bash
-# Generar locale español
-echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen
+# Editar locale.gen y descomentar es_ES.UTF-8 UTF-8
+vim /etc/locale.gen
+   # Descomenta: es_ES.UTF-8 UTF-8
+
+# Generar locales
 locale-gen
 
 # Configurar idioma del sistema
 echo "LANG=es_ES.UTF-8" > /etc/locale.conf
 
-# Configurar teclado y fuente en consola
+# Configurar teclado en consola
 echo "KEYMAP=es" > /etc/vconsole.conf
 ```
 
