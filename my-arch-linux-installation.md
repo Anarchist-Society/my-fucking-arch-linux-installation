@@ -373,6 +373,13 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt 
 mkinitcpio -P
 ```
 
+### Contraseña de root
+
+```bash
+# Establecer contraseña de root
+passwd
+```
+
 ---
 
 ## Configurar el bootloader (Limine)
