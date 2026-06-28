@@ -402,7 +402,7 @@ cp /usr/share/limine/BOOTX64.EFI /boot/EFI/BOOT/
 echo $PARTUUID > /boot/limine.conf && vim /boot/limine.conf
 ```
 
-```
+```bash
 timeout: 5
 
 /Arch Linux
