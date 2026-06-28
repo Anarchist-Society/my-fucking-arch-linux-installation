@@ -250,7 +250,7 @@ mount --mkdir /dev/nvme0n1p1 /mnt/boot
 
 ### Actualizar mirrors
 
-`reflector` obtiene los mirrors más rápidos cercanos a España, acelerando las descargas de pacman.
+[`reflector`](https://wiki.archlinux.org/title/Reflector) obtiene los mirrors más rápidos cercanos a España, acelerando las descargas de pacman.
 
 ```bash
 # Obtener mirrors más rápidos
