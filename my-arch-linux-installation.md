@@ -190,7 +190,7 @@ Las opciones de montaje:
 - `space_cache=v2` — mejor gestión del espacio libre.
 - `discard=async` — TRIM paralelo sin bloquear operaciones.
 
-La separación en subvolúmenes independientes sigue [el layout por defecto de archinstall](https://bbs.archlinux.org/viewtopic.php?id=290006) (`@`, `@home`, `@log`, `@pkg`). Cada subvolumen se monta, snapshotea y restaura por separado:
+La separación en subvolúmenes independientes sigue [el layout por defecto de archinstall](https://archinstall.archlinux.page/cli_parameters/config/disk_config.html#btrfs) (`@`, `@home`, `@log`, `@pkg`). Cada subvolumen se monta, snapshotea y restaura por separado:
 
 | Subvolumen | Montaje | Por qué separado |
 |---|---|---|
