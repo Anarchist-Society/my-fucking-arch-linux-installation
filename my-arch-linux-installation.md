@@ -351,6 +351,8 @@ echo "fucking-archlinux" > /etc/hostname
 
 ### Initramfs
 
+[Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio). El initramfs es un sistema de archivos temporal que se carga en memoria al arrancar. Contiene los módulos y herramientas necesarios para acceder al sistema raíz, incluyendo el descifrado LUKS.
+
 El hook [`encrypt`](https://wiki.archlinux.org/title/Mkinitcpio#Common_hooks) permite al initramfs descifrar LUKS usando el parámetro `cryptdevice=` del kernel.
 
 ```bash
