@@ -93,11 +93,20 @@ ping -c 3 ping.archlinux.org
 
 ### Hora
 
-[systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd) ya está activado por defecto en el entorno live. Necesitas la hora exacta para evitar errores de verificación de firma de paquetes y certificados TLS.
+[systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd) está activado por defecto en el entorno live. Necesitas la hora exacta para evitar errores de verificación de firma de paquetes y certificados TLS.
 
 ```bash
 # Verificar que la hora está sincronizada
 timedatectl
+
+# Activar sincronización NTP
+timedatectl set-ntp true
+
+# Establecer zona horaria
+timedatectl set-timezone Europe/Madrid
+
+# Verificar hora y fecha
+timedatectl status
 ```
 
 ### Limpieza del disco
