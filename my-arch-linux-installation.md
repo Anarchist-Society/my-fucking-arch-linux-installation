@@ -182,7 +182,7 @@ cryptsetup open /dev/nvme0n1p2 cryptroot
 
 ### Crear la estructura btrfs
 
-[btrfs](https://wiki.archlinux.org/title/Btrfs) permite snapshots, compresión transparente, sumas de verificación para integridad de datos, y subvolúmenes. Uso un layout plano (no anidado) porque es más flexible y evita problemas al restaurar snapshots.
+[btrfs](https://wiki.archlinux.org/title/Btrfs) permite snapshots, compresión transparente, sumas de verificación para integridad de datos, y subvolúmenes. Uso un layout plano (`@`, `@home`, `@log`, `@pkg` — no anidados) porque es más flexible y evita problemas al restaurar snapshots.
 
 Las opciones de montaje:
 - `noatime` — evita escrituras innecesarias al leer archivos.
@@ -191,7 +191,14 @@ Las opciones de montaje:
 - `space_cache=v2` — mejor gestión del espacio libre.
 - `discard=async` — TRIM paralelo sin bloquear operaciones.
 
-Subvolúmenes separados para `/home`, `/var/log` y `/var/cache/pacman/pkg` evitan que esas rutas se incluyan al hacer snapshots de la raíz.
+La separación en subvolúmenes independientes sigue [el layout sugerido por Snapper](https://wiki.archlinux.org/title/Snapper#Suggested_filesystem_layout). Cada subvolumen se monta, snapshotea y restaura por separado:
+
+| Subvolumen | Montaje | Por qué separado |
+|---|---|---|
+| `@` | `/` | Raíz del sistema |
+| `@home` | `/home` | Tus datos no se pierden al restaurar snapshots de `@` |
+| `@log` | `/var/log` | Logs volátiles; excluirlos evita snapshots enormes |
+| `@pkg` | `/var/cache/pacman/pkg` | Caché de paquetes (GBs); innecesaria en snapshots de raíz |
 
 ```bash
 # Formatear volumen cifrado como btrfs
