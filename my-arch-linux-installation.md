@@ -418,7 +418,7 @@ Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 
 ### Root password
 
-Set a secure password for the root user to allow performing administrative actions:
+Establece una contraseña segura para el usuario root para permitir realizar acciones administrativas:
 
 ```bash
 # passwd
