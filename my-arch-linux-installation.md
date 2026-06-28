@@ -281,6 +281,8 @@ pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limi
 
 ### Generar fstab
 
+`genfstab -U` usa [UUID](https://wiki.archlinux.org/title/UUID) en lugar de nombres de dispositivo (como `/dev/nvme0n1p1`). Los UUID no cambian aunque se reordenen los discos.
+
 ```bash
 # Generar fstab
 genfstab -U /mnt >> /mnt/etc/fstab
