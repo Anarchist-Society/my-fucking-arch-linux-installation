@@ -367,7 +367,6 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt 
 ```
 
 - `encrypt`: descifra el volumen LUKS usando `cryptdevice=` del kernel cmdline
-- `keyboard` + `keymap`: permiten escribir la contraseña con el teclado en español al arrancar
 
 ```bash
 # Regenerar initramfs
