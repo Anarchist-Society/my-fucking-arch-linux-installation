@@ -311,7 +311,7 @@ arch-chroot /mnt
 
 ### Zona horaria
 
-[System time (Arch Wiki)](https://wiki.archlinux.org/title/System_time)
+[System time (Arch Wiki)](https://wiki.archlinux.org/title/System_time). `ln -sf` crea un enlace simbólico al archivo de zona horaria correspondiente, haciendo que el sistema use la hora de Europa/Madrid. `hwclock --systohc` sincroniza el reloj hardware (RTC) con la hora del sistema para que se mantenga al apagar el equipo.
 
 ```bash
 # Establecer zona horaria
