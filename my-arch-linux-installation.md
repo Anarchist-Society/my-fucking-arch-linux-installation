@@ -373,15 +373,6 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt 
 mkinitcpio -P
 ```
 
-### Contraseña de root
-
-```bash
-# Establecer contraseña de root
-passwd
-```
-
----
-
 ## Configurar el bootloader (Limine)
 
 [Limine](https://wiki.archlinux.org/title/Limine) es un bootloader moderno, minimalista y rápido. Soporta arranque desde btrfs sobre LUKS y configuración en texto plano. A diferencia de GRUB, no necesita regenerar configuración tras cada actualización de kernel (el `module_path` apunta directamente a los archivos).
@@ -424,6 +415,14 @@ Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 ---
 
 ## Pasos finales
+
+### Root password
+
+[Root password (Arch Wiki)](https://wiki.archlinux.org/title/Installation_guide#Root_password). Establece una contraseña segura para el usuario root para permitir realizar acciones administrativas:
+
+```bash
+passwd
+```
 
 ### Servicios
 
