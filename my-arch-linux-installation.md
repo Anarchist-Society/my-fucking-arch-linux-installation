@@ -190,7 +190,7 @@ Las opciones de montaje:
 - `space_cache=v2` — mejor gestión del espacio libre.
 - `discard=async` — TRIM paralelo sin bloquear operaciones.
 
-La separación en subvolúmenes independientes sigue [el layout sugerido por Snapper](https://wiki.archlinux.org/title/Snapper#Suggested_filesystem_layout). Cada subvolumen se monta, snapshotea y restaura por separado:
+La separación en subvolúmenes independientes sigue el layout por defecto del instalador oficial de Arch Linux (`archinstall`) y el usado por [Omarchy](https://omarchy.net). Cada subvolumen se monta, snapshotea y restaura por separado:
 
 | Subvolumen | Montaje | Por qué separado |
 |---|---|---|
