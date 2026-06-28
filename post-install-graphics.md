@@ -8,10 +8,3 @@ pacman -S mesa vulkan-radeon
 
 - `mesa` — OpenGL, Vulkan y aceleración de video (VA-API/VDPAU)
 - `vulkan-radeon` — driver Vulkan para AMD
-
-Para verificar que la aceleración de video funciona, instala `libva-utils` y ejecuta `vainfo`:
-
-```bash
-pacman -S libva-utils
-vainfo
-```
