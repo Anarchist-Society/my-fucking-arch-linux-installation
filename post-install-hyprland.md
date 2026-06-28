@@ -1,13 +1,5 @@
 # Post-instalación: Hyprland
 
-## Drivers gráficos AMD
-
-[AMDGPU](https://wiki.archlinux.org/title/AMDGPU) es el driver oficial para GPUs Radeon modernas.
-
-```bash
-pacman -S mesa vulkan-radeon libva-mesa-driver
-```
-
 ## Hyprland
 
 [Hyprland](https://wiki.archlinux.org/title/Hyprland) es un compositor Wayland dinámico.
