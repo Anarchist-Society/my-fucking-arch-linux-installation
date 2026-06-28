@@ -61,7 +61,7 @@ Características de esta instalación:
 
 ### Teclado y consola
 
-[Keyboard configuration (Arch Wiki)](https://wiki.archlinux.org/title/Keyboard_configuration). `loadkeys es` configura el teclado en español para poder escribir la contraseña LUKS y comandos correctamente (ñ, teclas especiales). `setfont ter-132b` cambia a una fuente más grande para pantallas HiDPI (2560×1600) y mejora la legibilidad.
+[Keyboard configuration (Arch Wiki)](https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration). `loadkeys es` configura el teclado en español para poder escribir la contraseña LUKS y comandos correctamente (ñ, teclas especiales). `setfont ter-132b` cambia a una fuente más grande para pantallas HiDPI (2560×1600) y mejora la legibilidad.
 
 ```bash
 # Teclado español
