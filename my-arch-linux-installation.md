@@ -382,9 +382,11 @@ mkinitcpio -P
 El binario `BOOTX64.EFI` se copia a `EFI/BOOT/`, la ruta de **fallback UEFI** estándar. El firmware la encuentra automáticamente sin necesidad de `efibootmgr`.
 
 ```bash
-# Obtener PARTUUID de la partición LUKS
-blkid --match-tag PARTUUID --output value /dev/nvme0n1p2
-# ↑ Guarda este PARTUUID, lo necesitas para la configuración
+# Guardar PARTUUID en variable temporal
+PARTUUID=$(blkid --match-tag PARTUUID --output value /dev/nvme0n1p2)
+
+# Ver el PARTUUID (cópialo para limine.conf)
+echo $PARTUUID
 ```
 
 ```bash
