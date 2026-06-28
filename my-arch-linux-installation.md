@@ -93,21 +93,11 @@ ping -c 3 ping.archlinux.org
 
 ### Hora
 
-[systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd) sincroniza la hora del sistema por red. Es necesario para:
-
-- Que los certificados HTTPS/TLS no fallen (pacman, navegadores, curl)
-- Que la autenticación con servidores remotos (GitHub, mirrors) funcione
-- Que los timestamps de archivos y commits de git sean correctos
+[systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd) ya está activado por defecto en el entorno live. Necesitas la hora exacta para evitar errores de verificación de firma de paquetes y certificados TLS.
 
 ```bash
-# Activar sincronización NTP
-timedatectl set-ntp true
-
-# Establecer zona horaria
-timedatectl set-timezone Europe/Madrid
-
-# Verificar hora y fecha
-timedatectl status
+# Verificar que la hora está sincronizada
+timedatectl
 ```
 
 ### Limpieza del disco
