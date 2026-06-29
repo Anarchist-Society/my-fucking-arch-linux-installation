@@ -418,7 +418,7 @@ Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 
 ### Root password
 
-Establece una contraseña segura para el usuario root para permitir realizar acciones administrativas:
+[Users and groups (Arch Wiki)](https://wiki.archlinux.org/title/Users_and_groups#User_database). Establece una contraseña segura para el usuario root para permitir realizar acciones administrativas:
 
 ```bash
 passwd
