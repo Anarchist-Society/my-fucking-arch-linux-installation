@@ -18,4 +18,7 @@ passwd anarchist-penguin
 # Dar permisos sudo al usuario
 echo "anarchist-penguin ALL=(ALL) ALL" > /etc/sudoers.d/00-anarchist-penguin
 chmod 440 /etc/sudoers.d/00-anarchist-penguin
+
+# Verificar que la configuración de sudo es correcta
+visudo -c
 ```
