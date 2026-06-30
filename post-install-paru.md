@@ -2,11 +2,11 @@
 
 [Paru](https://github.com/Morganamilo/paru) es un asistente para AUR escrito en Rust, sucesor de yay. Permite instalar paquetes desde los repositorios oficiales y desde AUR con un solo comando.
 
-> **Nota:** No se recomienda ejecutar `makepkg` como root. Si estás en chroot, espera al primer arranque o ejecuta estos pasos con un usuario no root.
+> **Nota:** No se recomienda ejecutar `makepkg` como root. Ejecuta estos pasos con un usuario no root.
 
 ```bash
 # Instalar dependencias de compilación
-pacman -S --needed base-devel git
+sudo pacman -S --needed base-devel git
 
 # Clonar y compilar paru desde AUR
 git clone https://aur.archlinux.org/paru.git
