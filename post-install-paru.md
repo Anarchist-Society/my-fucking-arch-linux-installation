@@ -16,3 +16,7 @@ makepkg --syncdeps --install --clean
 
 Paru sincroniza automáticamente la base de datos de paquetes con `--syncdeps` y elimina los fuentes tras la instalación con `--clean`.
 
+| Paquete | Propósito |
+|---------|-----------|
+| `paru` | Asistente para AUR escrito en Rust. Permite instalar paquetes desde repos oficiales y AUR con un solo comando |
+
