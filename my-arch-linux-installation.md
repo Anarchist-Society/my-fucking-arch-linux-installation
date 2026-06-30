@@ -400,11 +400,14 @@ timeout: 5
 /Arch Linux
     # protocol: linux  ->  arranque tradicional (vmlinuz + initramfs), no UKI
     protocol: linux
+
     # Ruta al kernel dentro del ESP
     path: boot():/vmlinuz-linux
+
     # Parámetros del kernel: descifrar LUKS con PARTUUID,
     # montar root desde el mapeador, btrfs con subvol @
     cmdline: cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot rw rootflags=subvol=@ rootfstype=btrfs
+
     # Ruta al initramfs dentro del ESP
     module_path: boot():/initramfs-linux.img
 ```
