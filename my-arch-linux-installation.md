@@ -451,7 +451,7 @@ systemctl enable systemd-resolved
 exit
 
 # Desmontar todo
-umount -R /mnt
+umount --recursive /mnt
 
 # Cerrar volumen LUKS
 cryptsetup close cryptroot
