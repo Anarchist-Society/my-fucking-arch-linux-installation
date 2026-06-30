@@ -7,5 +7,7 @@
 pacman --sync mesa vulkan-radeon
 ```
 
-- `mesa` — implementación de OpenGL, Vulkan y VA-API
-- `vulkan-radeon` — driver Vulkan específico para AMD
+| Paquete | Propósito |
+|---------|-----------|
+| `mesa` | OpenGL, Vulkan y VA-API |
+| `vulkan-radeon` | Driver Vulkan específico para AMD |
