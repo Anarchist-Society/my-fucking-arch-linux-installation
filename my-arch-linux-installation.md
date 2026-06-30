@@ -33,14 +33,6 @@
 
 Esta guía documenta mi instalación de [Arch Linux](https://archlinux.org) con cifrado LUKS2 + btrfs con subvolúmenes y Limine como bootloader en un sistema UEFI (Slimbook EVO con AMD Ryzen 7 8845HS y Samsung SSD 990 PRO 4TB). No sustituye [la guía oficial de instalación](https://wiki.archlinux.org/title/Installation_guide), sino que es una versión condensada de los pasos esenciales adaptada a mi hardware.
 
-Características de esta instalación:
-
-- Partición del sistema cifrada con LUKS2 y formateada con btrfs usando subvolúmenes planos.
-- Partición EFI (FAT32) sin cifrar montada como `/boot`.
-- Bootloader Limine — ligero, soporta btrfs/LUKS.
-- Red con iwd + systemd-networkd (nativos de systemd, sin dependencias extra).
-- Sin LVM — btrfs gestiona volúmenes y snapshots por sí mismo.
-
 ---
 
 ## Especificaciones del equipo
