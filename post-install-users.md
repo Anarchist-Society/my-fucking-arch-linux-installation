@@ -4,7 +4,7 @@
 
 ```bash
 # Instalar sudo
-pacman --sync sudo
+sudo pacman --sync sudo
 
 # Contraseña de root (si no se estableció durante la instalación)
 passwd
@@ -22,3 +22,7 @@ chmod 440 /etc/sudoers.d/00-anarchist-penguin
 # Verificar que la configuración de sudo es correcta
 visudo -c
 ```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `sudo` | Ejecutar comandos con privilegios de otro usuario (normalmente root) |
