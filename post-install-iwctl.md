@@ -1,6 +1,6 @@
 # Post-instalación: Primera conexión Wi-Fi con iwctl
 
-[iwd (Arch Wiki)](https://wiki.archlinux.org/title/Iwd). Conectarse a una red Wi-Fi desde TTY usando `iwctl`.
+[iwd (Arch Wiki)](https://wiki.archlinux.org/title/Iwd) es el daemon de Wi-Fi nativo de systemd. Es ligero, no tiene dependencias externas y se gestiona con `iwctl` desde TTY. A diferencia de NetworkManager, no necesita un gestor de red adicional — iwd + systemd-networkd son suficientes para la conectividad completa.
 
 ### Verificar que iwd está activo
 
