@@ -8,3 +8,7 @@
 # Instalar Hyprland
 pacman --sync hyprland
 ```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `hyprland` | Compositor Wayland dinámico con animaciones, renderizado optimizado y configuración en texto plano |
