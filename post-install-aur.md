@@ -7,5 +7,5 @@ Paquetes instalados desde AUR vía `paru`.
 Navegador web basado en Chromium con bloqueador de anuncios integrado y énfasis en privacidad.
 
 ```bash
-paru -S brave-bin
+paru --sync brave-bin
 ```
