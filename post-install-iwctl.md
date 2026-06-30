@@ -40,7 +40,7 @@ iwctl device list
 
 ```bash
 # Conectarse a la red (iwctl pedirá la contraseña interactivamente)
-iwctl station <device> connect "<SSID>"
+iwctl station <device> connect <SSID>
 ```
 
 Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. La red se guarda automáticamente en `iwd` para reconexiones futuras.
