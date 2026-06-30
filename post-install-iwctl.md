@@ -23,13 +23,13 @@ systemctl start iwd
 
 ```bash
 # Escanear redes Wi-Fi
-iwctl station wlan0 scan
+iwctl station <device> scan
 
 # Listar las redes encontradas
-iwctl station wlan0 get-networks
+iwctl station <device> get-networks
 ```
 
-`wlan0` es la interfaz Wi-Fi habitual. Si no aparece, usa:
+`<device>` es el nombre de tu interfaz Wi-Fi (por ejemplo `wlan0`). Si no aparece, usa:
 
 ```bash
 # Listar dispositivos de red disponibles
@@ -40,7 +40,7 @@ iwctl device list
 
 ```bash
 # Conectarse a la red (iwctl pedirá la contraseña interactivamente)
-iwctl station wlan0 connect "<SSID>"
+iwctl station <device> connect "<SSID>"
 ```
 
 Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. La red se guarda automáticamente en `iwd` para reconexiones futuras.
