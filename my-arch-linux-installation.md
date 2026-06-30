@@ -416,6 +416,8 @@ Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 passwd
 ```
 
+> Una vez reiniciado el sistema, crea un usuario no root siguiendo la [guía de post-instalación de usuarios](post-install-users.md).
+
 ### Servicios
 
 - [`iwd`](https://wiki.archlinux.org/title/Iwd) — servicio de Wi-Fi, permite usar `iwctl` para conectarse.
