@@ -24,6 +24,7 @@ systemctl start iwd
 ```bash
 # Escanear redes Wi-Fi
 iwctl station wlan0 scan
+
 # Listar las redes encontradas
 iwctl station wlan0 get-networks
 ```
