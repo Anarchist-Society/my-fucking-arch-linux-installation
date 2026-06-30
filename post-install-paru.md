@@ -18,5 +18,6 @@ Paru sincroniza automáticamente la base de datos de paquetes con `--syncdeps` y
 
 | Paquete | Propósito |
 |---------|-----------|
-| `paru` | Asistente para AUR escrito en Rust. Permite instalar paquetes desde repos oficiales y AUR con un solo comando |
+| `base-devel` | Herramientas de compilación (make, gcc, pkg-config, etc.) necesarias para `makepkg` |
+| `git` | Sistema de control de versiones, necesario para clonar el repositorio de paru |
 
