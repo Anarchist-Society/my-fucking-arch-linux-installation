@@ -6,7 +6,7 @@
 # Instalar sudo
 pacman -S sudo
 
-# Contraseña de root
+# Contraseña de root (si no se estableció durante la instalación)
 passwd
 
 # Crear usuario
