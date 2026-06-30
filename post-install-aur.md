@@ -10,3 +10,7 @@ Paquetes instalados desde AUR vía `paru`.
 # Instalar Brave
 paru --sync brave-bin
 ```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `brave-bin` | Navegador Chromium con bloqueador de anuncios y protección antirrastreo (binario precompilado) |
