@@ -4,7 +4,7 @@
 
 ```bash
 # Instalar sudo
-pacman -S sudo
+pacman --sync sudo
 
 # Contraseña de root (si no se estableció durante la instalación)
 passwd
