@@ -39,11 +39,11 @@ iwctl device list
 ### Conectarse a una red
 
 ```bash
-# Conectarse a la red (se guarda automáticamente)
-iwctl --passphrase "<CONTRASEÑA>" station wlan0 connect "<SSID>"
+# Conectarse a la red (iwctl pedirá la contraseña interactivamente)
+iwctl station wlan0 connect "<SSID>"
 ```
 
-Sustituye `<SSID>` por el nombre de la red y `<CONTRASEÑA>` por su clave. La red se guarda automáticamente en `iwd` para reconexiones futuras.
+Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. La red se guarda automáticamente en `iwd` para reconexiones futuras.
 
 ### Verificar conexión
 
