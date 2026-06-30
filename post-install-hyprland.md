@@ -6,7 +6,7 @@
 
 ```bash
 # Instalar Hyprland
-pacman --sync hyprland
+sudo pacman --sync hyprland
 ```
 
 | Paquete | Propósito |
