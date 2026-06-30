@@ -16,13 +16,3 @@ makepkg --syncdeps --install --clean
 
 Paru sincroniza automáticamente la base de datos de paquetes con `--syncdeps` y elimina los fuentes tras la instalación con `--clean`.
 
-### Uso básico
-
-| Comando | Descripción |
-|---------|-------------|
-| `paru -S <paquete>` | Instalar desde repos o AUR |
-| `paru -Rns <paquete>` | Eliminar paquete y dependencias no necesarias |
-| `paru -Syu` | Actualizar sistema + AUR |
-| `paru -Qs <texto>` | Buscar paquete instalado |
-| `paru -G <paquete>` | Descargar PKGBUILD de AUR |
-| `paru -Si <paquete>` | Mostrar información del paquete |
