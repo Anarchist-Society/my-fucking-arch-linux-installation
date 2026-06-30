@@ -12,8 +12,11 @@ systemctl status iwd
 Si no está activo, iniciarlo y habilitarlo:
 
 ```bash
-# Iniciar y habilitar iwd automáticamente al arrancar
-systemctl enable --now iwd
+# Habilitar iwd para que arranque automáticamente al iniciar el sistema
+systemctl enable iwd
+
+# Iniciar iwd ahora
+systemctl start iwd
 ```
 
 ### Escanear redes disponibles
