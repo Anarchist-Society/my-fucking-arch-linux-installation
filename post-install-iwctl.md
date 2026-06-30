@@ -49,5 +49,5 @@ Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. 
 
 ```bash
 # Probar conectividad
-ping -c 4 archlinux.org
+ping --count 3 ping.archlinux.org
 ```
