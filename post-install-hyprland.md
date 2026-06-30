@@ -2,8 +2,8 @@
 
 ## Hyprland
 
-[Hyprland](https://wiki.archlinux.org/title/Hyprland) es un compositor Wayland dinámico.
+[Hyprland](https://wiki.archlinux.org/title/Hyprland) es un compositor Wayland dinámico con animaciones fluidas, renderizado optimizado y configuración en texto plano. Arranca desde TTY sin necesidad de display manager.
 
 ```bash
-pacman -S hyprland
+pacman --sync hyprland
 ```
