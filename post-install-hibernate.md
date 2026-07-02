@@ -35,13 +35,14 @@ Crear el fichero con `vim`:
 ```bash
 # Crear el directorio de drop-ins si no existe
 sudo mkdir --parents /etc/mkinitcpio.conf.d
+
 # Editar con vim (se crea automáticamente al guardar)
 sudo vim /etc/mkinitcpio.conf.d/archlinux-resume.conf
 ```
 
 Añadir el hook `resume` dentro de `HOOKS`:
 
-```bash
+```ini
 # Añadir resume después de encrypt (necesita /dev/mapper/cryptroot)
 HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt resume filesystems fsck)
 ```
