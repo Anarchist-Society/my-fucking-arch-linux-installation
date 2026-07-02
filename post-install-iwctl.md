@@ -47,23 +47,45 @@ Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. 
 
 ### Configurar red (asignación de IP)
 
-`systemd-networkd` necesita un fichero `.network` para asignar IP por DHCP. Sin esto, `iwd` se conecta al Wi-Fi pero la interfaz no obtiene dirección IP:
+`systemd-networkd` necesita ficheros `.network` para asignar IP por DHCP. Sin esto, `iwd` se conecta al Wi-Fi pero la interfaz no obtiene dirección IP:
 
 ```bash
-sudo vim /etc/systemd/network/20-dhcp.network
+sudo vim /etc/systemd/network/20-ethernet.network
 ```
-
-Contenido del fichero:
 
 ```
 [Match]
-Name=en* wl*
+Name=en*
 
 [Network]
 DHCP=yes
 ```
 
-Guardar y salir (`:wq`). Luego habilitar e iniciar systemd-networkd:
+```bash
+sudo vim /etc/systemd/network/20-wlan.network
+```
+
+```
+[Match]
+Name=wl*
+
+[Network]
+DHCP=yes
+```
+
+```bash
+sudo vim /etc/systemd/network/20-wwan.network
+```
+
+```
+[Match]
+Name=ww*
+
+[Network]
+DHCP=yes
+```
+
+Luego habilitar e iniciar systemd-networkd:
 
 ```bash
 sudo systemctl enable --now systemd-networkd
