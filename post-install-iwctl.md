@@ -78,7 +78,7 @@ sudo vim /etc/systemd/network/20-wlan.network
 ```
 
 ```ini
-# Red Wi-Fi: se aplica a la interfaz de tipo wlan (wlan0 en este sistema)
+# Red Wi-Fi: se aplica a la interfaz de tipo wlan
 [Match]
 Type=wlan
 
