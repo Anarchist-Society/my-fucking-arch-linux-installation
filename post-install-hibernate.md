@@ -30,10 +30,16 @@ Editar `/etc/fstab` con `vim` y añadir:
 
 ### mkinitcpio
 
-Crear `/etc/mkinitcpio.conf.d/archlinux-resume.conf`:
+Crear el fichero con `vim`:
 
 ```bash
-# Añadir resume después de encrypt (necesita /dev/mapper/cryptroot)
+sudo mkdir --parents /etc/mkinitcpio.conf.d
+sudo vim /etc/mkinitcpio.conf.d/archlinux-resume.conf
+```
+
+Añadir el hook `resume` dentro de `HOOKS`:
+
+```bash
 HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt resume filesystems fsck)
 ```
 
