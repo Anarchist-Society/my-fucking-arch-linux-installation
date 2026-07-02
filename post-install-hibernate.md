@@ -1,6 +1,6 @@
 # Post-instalación: Hibernación
 
-[Hibernation (Arch Wiki)](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation)
+[Hibernation (Arch Wiki)](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation) + [Btrfs swap file (Arch Wiki)](https://wiki.archlinux.org/title/Btrfs#Swap_file)
 
 La hibernación guarda el contenido de la RAM en el swap y apaga el equipo. Al encender, el kernel restaura el estado guardado. Requiere un swapfile del tamaño de la RAM, el hook `resume` en mkinitcpio y los parámetros `resume=` y `resume_offset=` en el cmdline del kernel.
 
