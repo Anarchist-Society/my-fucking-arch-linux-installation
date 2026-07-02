@@ -19,8 +19,10 @@ Crear `/etc/systemd/zram-generator.conf`:
 [zram0]
 # Mitad de la RAM como tamaño del dispositivo zram
 zram-size = ram / 2
+
 # Algoritmo de compresión: buena relación velocidad/tasa de compresión
 compression-algorithm = zstd
+
 # Prioridad alta para que zram se use antes que swap en disco
 swap-priority = 100
 ```
@@ -30,6 +32,7 @@ Arrancar el servicio:
 ```bash
 # Recargar systemd para que reconozca el generador
 sudo systemctl daemon-reload
+
 # Arrancar el servicio que crea el dispositivo zram0
 sudo systemctl start systemd-zram-setup@zram0.service
 ```
@@ -39,6 +42,7 @@ Verificar:
 ```bash
 # Mostrar dispositivos zram y su estado
 zramctl
+
 # Mostrar todos los swaps activos con prioridad y tamaño
 swapon --show
 ```
