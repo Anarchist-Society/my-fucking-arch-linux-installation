@@ -59,7 +59,9 @@ sudo vim /etc/systemd/network/20-ethernet.network
 # https://bugs.archlinux.org/task/70892
 [Match]
 Type=ether
-Kind=!*                 # Excluye interfaces virtuales (bridges, VLANs, veth...)
+
+# Excluye interfaces virtuales (bridges, VLANs, veth...)
+Kind=!* 
 
 [Link]
 # Esperar a que tenga una ruta por defecto antes de marcar el sistema como online
