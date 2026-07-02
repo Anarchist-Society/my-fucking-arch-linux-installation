@@ -15,13 +15,13 @@ sudo btrfs filesystem mkswapfile --size 60g --uuid clear /swap/swapfile
 ### fstab
 
 ```bash
-# Swapfile en subvolumen Btrfs dedicado para hibernación
-/swap/swapfile  none  swap  defaults,pri=0  0  0
+# Activar swap con prioridad baja para que zram se use primero
+sudo swapon -p 0 /swap/swapfile
 ```
 
 ```bash
-# Activar swap con prioridad baja para que zram se use primero
-sudo swapon -p 0 /swap/swapfile
+# Swapfile en subvolumen Btrfs dedicado para hibernación
+/swap/swapfile  none  swap  defaults,pri=0  0  0
 ```
 
 ### mkinitcpio
