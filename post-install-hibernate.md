@@ -12,10 +12,6 @@ sudo btrfs subvolume create /swap
 sudo btrfs filesystem mkswapfile --size 64G /swap/swapfile
 ```
 
-| Paquete | Propósito |
-|---------|-----------|
-| (ninguno — todo incluido en el sistema base) | |
-
 ### fstab
 
 ```bash
