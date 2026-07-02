@@ -8,11 +8,14 @@ WirePlumber actúa como gestor de sesiones: decide qué rutas de audio se conect
 pacman -S pipewire wireplumber pipewire-pulse pipewire-alsa alsa-utils
 ```
 
-- `pipewire` — servidor de audio/video
-- `wireplumber` — gestor de sesiones
-- `pipewire-pulse` — reemplazo de PulseAudio
-- `pipewire-alsa` — compatibilidad ALSA
-- `alsa-utils` — `alsamixer`, `amixer`
+| Paquete | Propósito |
+|---------|-----------|
+| `pipewire` | Servidor de audio/video |
+| `wireplumber` | Gestor de sesiones de PipeWire, maneja rutas y perfiles |
+| `pipewire-pulse` | Sustituye PulseAudio, permite que apps PulseAudio usen PipeWire |
+| `pipewire-alsa` | Capa de compatibilidad ALSA sobre PipeWire |
+| `alsa-utils` | Herramientas ALSA como `alsamixer`, `amixer` |
+| `sof-firmware` | Firmware para el DSP de audio en Ryzen 7000/8000 |
 
 Habilitar servicios de usuario:
 
@@ -20,10 +23,3 @@ Habilitar servicios de usuario:
 systemctl --user enable --now pipewire.socket pipewire-pulse.socket wireplumber
 ```
 
-### Firmware SOF (AMD)
-
-Los Ryzen 7000/8000 necesitan Sound Open Firmware para el DSP de audio:
-
-```bash
-pacman -S sof-firmware
-```
