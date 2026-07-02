@@ -45,6 +45,30 @@ iwctl station <device> connect <SSID>
 
 Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. La red se guarda automáticamente en `iwd` para reconexiones futuras.
 
+### Configurar red (asignación de IP)
+
+`systemd-networkd` necesita un fichero `.network` para asignar IP por DHCP. Sin esto, `iwd` se conecta al Wi-Fi pero la interfaz no obtiene dirección IP:
+
+```bash
+sudo vim /etc/systemd/network/20-dhcp.network
+```
+
+Contenido del fichero:
+
+```
+[Match]
+Name=en* wl*
+
+[Network]
+DHCP=yes
+```
+
+Guardar y salir (`:wq`). Luego habilitar e iniciar systemd-networkd:
+
+```bash
+sudo systemctl enable --now systemd-networkd
+```
+
 ### Verificar conexión
 
 ```bash
