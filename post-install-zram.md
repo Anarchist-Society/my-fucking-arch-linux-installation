@@ -17,14 +17,8 @@ Crear `/etc/systemd/zram-generator.conf`:
 
 ```ini
 [zram0]
-# Mitad de la RAM como tamaño del dispositivo zram
-zram-size = ram / 2
-
 # Algoritmo de compresión: buena relación velocidad/tasa de compresión
 compression-algorithm = zstd
-
-# Prioridad alta para que zram se use antes que swap en disco
-swap-priority = 100
 ```
 
 Arrancar el servicio:
