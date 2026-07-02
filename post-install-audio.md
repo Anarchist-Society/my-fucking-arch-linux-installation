@@ -20,6 +20,8 @@ pacman --sync pipewire wireplumber pipewire-pulse pipewire-alsa alsa-utils
 Habilitar servicios de usuario:
 
 ```bash
-systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service
+systemctl --user enable --now pipewire.service
+systemctl --user enable --now pipewire-pulse.service
+systemctl --user enable --now wireplumber.service
 ```
 
