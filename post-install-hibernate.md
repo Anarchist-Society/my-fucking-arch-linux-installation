@@ -7,6 +7,7 @@ La hibernación guarda el contenido de la RAM en el swap y apaga el equipo. Al e
 ```bash
 # Crear subvolumen Btrfs dedicado para swap
 sudo btrfs subvolume create /swap
+
 # Crear swapfile del tamaño de la RAM (64 GB)
 sudo btrfs filesystem mkswapfile -s 64G /swap/swapfile
 ```
@@ -63,6 +64,7 @@ sudo limine-update
 ```bash
 # Probar hibernación (guarda RAM en swap y apaga)
 systemctl hibernate
+
 # Probar suspensión (RAM, sin apagar)
 systemctl suspend
 ```
