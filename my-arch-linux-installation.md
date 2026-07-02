@@ -64,7 +64,7 @@ setfont ter-132b
 
 ### Red (Wi-Fi)
 
-Uso [`iwctl`](https://wiki.archlinux.org/title/Iwd) (de `iwd`) porque es más ligero que NetworkManager y funciona sin dependencias adicionales. La conexión se configura interactivamente; las credenciales se guardan automáticamente.
+Uso [`iwctl`](https://wiki.archlinux.org/title/Iwd) (de `iwd`) porque es más ligero que NetworkManager y funciona sin dependencias adicionales. La conexión se configura interactivamente. Las credenciales se guardan automáticamente.
 
 ```bash
 # Iniciar iwctl (Wi-Fi)
@@ -124,7 +124,7 @@ sgdisk --zap-all /dev/nvme0n1
 
 Creo dos particiones en [tabla GPT](https://wiki.archlinux.org/title/GUID_Partition_Table):
 - Una [**EFI**](https://wiki.archlinux.org/title/EFI_system_partition) de 2 GiB para el bootloader y kernels — suficiente para varios kernels sin quedarse corto.
-- El **resto del disco** sin cifrar a nivel de partición; el cifrado se aplica dentro con LUKS.
+- El **resto del disco** sin cifrar a nivel de partición. El cifrado se aplica dentro con LUKS.
 
 Uso [`fdisk`](https://wiki.archlinux.org/title/Fdisk) porque es la herramienta estándar en el ISO de Arch, minimalista y hace exactamente lo que necesito sin dependencias.
 
@@ -192,8 +192,8 @@ La separación en subvolúmenes independientes sigue [el layout por defecto de a
 |---|---|---|
 | `@` | `/` | Raíz del sistema |
 | `@home` | `/home` | Tus datos no se pierden al restaurar snapshots de `@` |
-| `@log` | `/var/log` | Logs volátiles; excluirlos evita snapshots enormes |
-| `@pkg` | `/var/cache/pacman/pkg` | Caché de paquetes (GBs); innecesaria en snapshots de raíz |
+| `@log` | `/var/log` | Logs volátiles, excluirlos evita snapshots enormes |
+| `@pkg` | `/var/cache/pacman/pkg` | Caché de paquetes (GBs), innecesaria en snapshots de raíz |
 
 ```bash
 # Formatear volumen cifrado como btrfs
