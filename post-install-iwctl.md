@@ -54,11 +54,23 @@ sudo vim /etc/systemd/network/20-ethernet.network
 ```
 
 ```
+# Ethernet (cableada) con DHCP
 [Match]
-Name=en*
+Type=ether                          # Solo interfaces Ethernet reales
+Kind=!*                             # Excluye interfaces virtuales (bridges, VLANs...)
+
+[Link]
+RequiredForOnline=routable           # Esperar a que tenga conectividad real
 
 [Network]
 DHCP=yes
+MulticastDNS=yes                     # Resolución .local en LAN
+
+[DHCPv4]
+RouteMetric=100                      # Prioridad alta (preferida sobre Wi-Fi)
+
+[IPv6AcceptRA]
+RouteMetric=100
 ```
 
 ```bash
@@ -66,11 +78,18 @@ sudo vim /etc/systemd/network/20-wlan.network
 ```
 
 ```
+# Wi-Fi con DHCP
 [Match]
-Name=wl*
+Name=wl*                             # Interfaces inalámbricas (wlan0, wlp2s0...)
 
 [Network]
 DHCP=yes
+
+[DHCPv4]
+RouteMetric=600                      # Prioridad media
+
+[IPv6AcceptRA]
+RouteMetric=600
 ```
 
 ```bash
@@ -78,11 +97,18 @@ sudo vim /etc/systemd/network/20-wwan.network
 ```
 
 ```
+# Móvil/ancho de banda ancha con DHCP
 [Match]
-Name=ww*
+Name=ww*                             # Interfaces móviles (wwan0...)
 
 [Network]
 DHCP=yes
+
+[DHCPv4]
+RouteMetric=900                      # Prioridad baja (solo si no hay Ethernet ni Wi-Fi)
+
+[IPv6AcceptRA]
+RouteMetric=900
 ```
 
 Luego habilitar e iniciar systemd-networkd:
@@ -91,7 +117,7 @@ Luego habilitar e iniciar systemd-networkd:
 sudo systemctl enable --now systemd-networkd
 ```
 
-Estos ficheros `.network` están basados en los ejemplos del [archiso oficial](https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/configs/releng/airootfs/etc/systemd/network/).
+Estos ficheros `.network` están basados en los ejemplos del [archiso oficial](https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/configs/releng/airootfs/etc/systemd/network/) con las métricas de ruta y opciones adicionales de la [guía de systemd-networkd](https://wiki.archlinux.org/title/Systemd-networkd#Configure_a_wired_network_with_DHCP).
 
 ### Verificar conexión
 
