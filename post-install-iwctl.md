@@ -53,23 +53,31 @@ Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. 
 sudo vim /etc/systemd/network/20-ethernet.network
 ```
 
-```bash
-# Ethernet (cableada) con DHCP
+```ini
+# Red cableada: se aplica a interfaces de tipo ether (enp2s0, eth0...)
 [Match]
-Type=ether                          # Solo interfaces Ethernet reales
-Kind=!*                             # Excluye interfaces virtuales (bridges, VLANs...)
+Type=ether
+Kind=!*                 # Excluye bridges, VLANs y otras interfaces virtuales
 
 [Link]
-RequiredForOnline=routable           # Esperar a que tenga conectividad real
+RequiredForOnline=routable
 
 [Network]
+# Obtener IP, puerta de enlace y DNS automáticamente desde el router
 DHCP=yes
-MulticastDNS=yes                     # Resolución .local en LAN
 
+# Resolver nombres .local en la LAN
+MulticastDNS=yes
+
+# systemd-networkd no asigna métricas de ruta por tipo de interfaz
+# https://github.com/systemd/systemd/issues/17698
+# Métrica baja = prioridad alta. Ethernet es la interfaz preferida.
 [DHCPv4]
-RouteMetric=100                      # Prioridad alta (preferida sobre Wi-Fi)
+# Ruta por defecto IPv4 para Ethernet
+RouteMetric=100
 
 [IPv6AcceptRA]
+# Ruta por defecto IPv6 para Ethernet (Router Advertisement)
 RouteMetric=100
 ```
 
