@@ -12,15 +12,17 @@ sudo btrfs subvolume create /swap
 sudo btrfs filesystem mkswapfile --size 60g --uuid clear /swap/swapfile
 ```
 
-### fstab
+### Activar swap
 
 ```bash
 # Activar swap con prioridad baja para que zram se use primero
 sudo swapon -p 0 /swap/swapfile
 ```
 
+### fstab
+
 ```bash
-# Swapfile en subvolumen Btrfs dedicado para hibernación
+# Añadir a /etc/fstab para que se monte automáticamente al arrancar
 /swap/swapfile  none  swap  defaults,pri=0  0  0
 ```
 
