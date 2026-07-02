@@ -87,17 +87,20 @@ Type=wlan
 RequiredForOnline=routable
 
 [Network]
-DHCP=yes
-MulticastDNS=yes        # Permite resolver nombres .local en la LAN
+DHCP=yes                    # Obtener IP, puerta de enlace y DNS automáticamente desde el router
+MulticastDNS=yes            # Resolver nombres .local en la LAN
 
-# Métrica media. Si Ethernet está disponible, el tráfico sale por Ethernet.
-# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
+# systemd-networkd no asigna métricas de ruta por tipo de interfaz automáticamente
 # https://github.com/systemd/systemd/issues/17698
+# Las métricas determinan qué interfaz usar cuando hay varias conectadas:
+#   Ethernet = 100 (prioridad máxima)
+#   Wi-Fi    = 600 (prioridad media)
+#   Móvil    = 900 (prioridad baja)
 [DHCPv4]
-RouteMetric=600
+RouteMetric=600              # Ruta por defecto IPv4 para Wi-Fi
 
 [IPv6AcceptRA]
-RouteMetric=600
+RouteMetric=600              # Ruta por defecto IPv6 para Wi-Fi (Router Advertisement)
 ```
 
 ```bash
