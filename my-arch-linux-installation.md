@@ -399,7 +399,7 @@ vim /boot/limine.conf
 
 ```bash
 # Tiempo de espera en segundos antes de arrancar la entrada por defecto
-timeout: 5
+timeout: 3
 
 # --- Entrada de arranque principal ---
 /Arch Linux
