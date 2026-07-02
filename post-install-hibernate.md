@@ -30,7 +30,7 @@ Editar `/etc/fstab` con `vim` y añadir:
 
 ### mkinitcpio
 
-Crear `/etc/mkinitcpio.conf.d/resume.conf`:
+Crear `/etc/mkinitcpio.conf.d/archlinux-resume.conf`:
 
 ```bash
 # Añadir resume después de encrypt (necesita /dev/mapper/cryptroot)
