@@ -5,7 +5,9 @@
 La hibernación guarda el contenido de la RAM en el swap y apaga el equipo. Al encender, el kernel restaura el estado guardado. Requiere un swapfile del tamaño de la RAM, el hook `resume` en mkinitcpio y los parámetros `resume=` y `resume_offset=` en el cmdline del kernel.
 
 ```bash
+# Crear subvolumen Btrfs dedicado para swap
 sudo btrfs subvolume create /swap
+# Crear swapfile del tamaño de la RAM (64 GB)
 sudo btrfs filesystem mkswapfile -s 64G /swap/swapfile
 ```
 
@@ -21,6 +23,7 @@ sudo btrfs filesystem mkswapfile -s 64G /swap/swapfile
 ```
 
 ```bash
+# Activar swap con prioridad baja para que zram se use primero
 sudo swapon -p 0 /swap/swapfile
 ```
 
@@ -51,12 +54,15 @@ KERNEL_CMDLINE[default]="... resume=/dev/mapper/cryptroot resume_offset=<N>"
 ### Reconstruir initramfs
 
 ```bash
+# Reconstruir initramfs con el hook resume y actualizar el bootloader
 sudo limine-update
 ```
 
 ### Probar
 
 ```bash
+# Probar hibernación (guarda RAM en swap y apaga)
 systemctl hibernate
+# Probar suspensión (RAM, sin apagar)
 systemctl suspend
 ```
