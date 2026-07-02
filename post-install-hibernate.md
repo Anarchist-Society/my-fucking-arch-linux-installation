@@ -24,6 +24,7 @@ sudo swapon -p 0 /swap/swapfile
 Editar `/etc/fstab` con `vim` y añadir:
 
 ```bash
+# Btrfs swapfile for system hibernation
 /swap/swapfile  none  swap  defaults,pri=0  0  0
 ```
 
