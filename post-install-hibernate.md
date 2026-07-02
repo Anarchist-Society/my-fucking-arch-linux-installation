@@ -33,13 +33,16 @@ Editar `/etc/fstab` con `vim` y añadir:
 Crear el fichero con `vim`:
 
 ```bash
+# Crear el directorio de drop-ins si no existe
 sudo mkdir --parents /etc/mkinitcpio.conf.d
+# Editar con vim (se crea automáticamente al guardar)
 sudo vim /etc/mkinitcpio.conf.d/archlinux-resume.conf
 ```
 
 Añadir el hook `resume` dentro de `HOOKS`:
 
 ```bash
+# Añadir resume después de encrypt (necesita /dev/mapper/cryptroot)
 HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt resume filesystems fsck)
 ```
 
@@ -55,6 +58,7 @@ sudo btrfs inspect-internal map-swapfile /swap/swapfile
 Editar `/etc/default/limine` y añadir al final de `KERNEL_CMDLINE[default]=`:
 
 ```bash
+# Añadir los parámetros de reanudación para hibernación
 KERNEL_CMDLINE[default]="... resume=/dev/mapper/cryptroot resume_offset=<N>"
 ```
 
