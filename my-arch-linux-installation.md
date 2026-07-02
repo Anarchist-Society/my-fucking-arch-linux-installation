@@ -74,10 +74,10 @@ iwctl
   device list
 
   # Escanear redes Wi-Fi
-  station wlan0 get-networks
+  station <device> get-networks
 
   # Conectarse a la red
-  station wlan0 connect SSID
+  station <device> connect <SSID>
 
   # Salir de iwctl
   exit
