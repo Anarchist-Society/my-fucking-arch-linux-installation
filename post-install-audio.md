@@ -5,7 +5,7 @@
 WirePlumber actúa como gestor de sesiones: decide qué rutas de audio se conectan, maneja perfiles de dispositivos (altavoz, auriculares, HDMI) y aplica reglas de enrutamiento configuradas por el usuario o por el propio dispositivo. Es el reemplazo moderno de `pipewire-media-session`.
 
 ```bash
-pacman --sync pipewire wireplumber pipewire-pulse pipewire-alsa alsa-utils
+pacman --sync pipewire wireplumber pipewire-pulse
 ```
 
 | Paquete | Propósito |
@@ -13,9 +13,6 @@ pacman --sync pipewire wireplumber pipewire-pulse pipewire-alsa alsa-utils
 | `pipewire` | Servidor de audio/video |
 | `wireplumber` | Gestor de sesiones de PipeWire, maneja rutas y perfiles |
 | `pipewire-pulse` | Sustituye PulseAudio, permite que apps PulseAudio usen PipeWire |
-| `pipewire-alsa` | Capa de compatibilidad ALSA sobre PipeWire |
-| `alsa-utils` | Herramientas ALSA como `alsamixer`, `amixer` |
-| `sof-firmware` | Firmware para el DSP de audio en Ryzen 7000/8000 |
 
 Habilitar servicios de usuario:
 
