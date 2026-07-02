@@ -87,20 +87,33 @@ Type=wlan
 RequiredForOnline=routable
 
 [Network]
-DHCP=yes                    # Obtener IP, puerta de enlace y DNS automáticamente desde el router
-MulticastDNS=yes            # Resolver nombres .local en la LAN
+# Obtener IP, puerta de enlace y DNS automáticamente desde el router
+DHCP=yes
 
-# systemd-networkd no asigna métricas de ruta por tipo de interfaz automáticamente
+# Resolver nombres .local en la LAN
+MulticastDNS=yes
+
+# systemd-networkd no asigna métricas de ruta por tipo de interfaz
 # https://github.com/systemd/systemd/issues/17698
-# Las métricas determinan qué interfaz usar cuando hay varias conectadas:
-#   Ethernet = 100 (prioridad máxima)
-#   Wi-Fi    = 600 (prioridad media)
+# Métrica explícita para que Ethernet (100) tenga prioridad sobre Wi-Fi (600) y Wi-Fi tenga prioridad sobre móvil (900). Valores de NetworkManager.
+# Las métricas determinan qué interfaz usar cuando hay varias conectadas:                                                                                                        
+#   Ethernet = 100 (prioridad máxima)                                                                                                                                            
+#   Wi-Fi    = 600 (prioridad media)                                                                                                                                             
 #   Móvil    = 900 (prioridad baja)
+
+# systemd-networkd does not set per-interface-type default route metrics
+# https://github.com/systemd/systemd/issues/17698
+# Explicitly set route metric, so that Ethernet is preferred over Wi-Fi and Wi-Fi is preferred over mobile broadband.
+# Use values from NetworkManager. From nm_device_get_route_metric_default in
+# https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/src/core/devices/nm-device.c
+
 [DHCPv4]
-RouteMetric=600              # Ruta por defecto IPv4 para Wi-Fi
+# Ruta por defecto IPv4 para Wi-Fi
+RouteMetric=600
 
 [IPv6AcceptRA]
-RouteMetric=600              # Ruta por defecto IPv6 para Wi-Fi (Router Advertisement)
+# Ruta por defecto IPv6 para Wi-Fi (Router Advertisement)
+RouteMetric=600
 ```
 
 ```bash
