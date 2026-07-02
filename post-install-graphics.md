@@ -4,7 +4,7 @@
 
 ```bash
 # Instalar drivers gráficos AMD
-pacman --sync mesa vulkan-radeon
+sudo pacman --sync mesa vulkan-radeon
 ```
 
 | Paquete | Propósito |
