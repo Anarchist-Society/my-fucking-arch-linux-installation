@@ -55,9 +55,11 @@ sudo vim /etc/systemd/network/20-ethernet.network
 
 ```ini
 # Red cableada: se aplica a interfaces de tipo ether (enp2s0, eth0...)
+# Type=ether sin Kind=!* también matchearía interfaces virtuales (veth*) de contenedores
+# https://bugs.archlinux.org/task/70892
 [Match]
 Type=ether
-Kind=!*                 # Excluye bridges, VLANs y otras interfaces virtuales
+Kind=!*                 # Excluye interfaces virtuales (bridges, VLANs, veth...)
 
 [Link]
 RequiredForOnline=routable
@@ -69,15 +71,13 @@ DHCP=yes
 # Resolver nombres .local en la LAN
 MulticastDNS=yes
 
-# systemd-networkd no asigna métricas de ruta por tipo de interfaz
-# https://github.com/systemd/systemd/issues/17698
 # Métrica baja = prioridad alta. Ethernet es la interfaz preferida.
+# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
+# https://github.com/systemd/systemd/issues/17698
 [DHCPv4]
-# Ruta por defecto IPv4 para Ethernet
 RouteMetric=100
 
 [IPv6AcceptRA]
-# Ruta por defecto IPv6 para Ethernet (Router Advertisement)
 RouteMetric=100
 ```
 
@@ -86,11 +86,10 @@ sudo vim /etc/systemd/network/20-wlan.network
 ```
 
 ```ini
-# Red Wi-Fi: se aplica a la interfaz de tipo wlan
+# Red Wi-Fi: se aplica a interfaces de tipo wlan (wlan0, wlp2s0...)
 [Match]
 Type=wlan
 
-# Esperar a que tenga conectividad real antes de marcar el sistema como online
 [Link]
 RequiredForOnline=routable
 
@@ -101,26 +100,13 @@ DHCP=yes
 # Resolver nombres .local en la LAN
 MulticastDNS=yes
 
-# systemd-networkd no asigna métricas de ruta por tipo de interfaz
+# Métrica media. Si Ethernet está disponible, el tráfico sale por Ethernet.
+# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
 # https://github.com/systemd/systemd/issues/17698
-# Métrica explícita para que Ethernet (100) tenga prioridad sobre Wi-Fi (600) y Wi-Fi tenga prioridad sobre móvil (900). Valores de NetworkManager.
-# Las métricas determinan qué interfaz usar cuando hay varias conectadas:                                                                                                        
-#   Ethernet = 100 (prioridad máxima)                                                                                                                                            
-#   Wi-Fi    = 600 (prioridad media)                                                                                                                                             
-#   Móvil    = 900 (prioridad baja)
-
-# systemd-networkd does not set per-interface-type default route metrics
-# https://github.com/systemd/systemd/issues/17698
-# Explicitly set route metric, so that Ethernet is preferred over Wi-Fi and Wi-Fi is preferred over mobile broadband.
-# Use values from NetworkManager. From nm_device_get_route_metric_default in
-# https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/src/core/devices/nm-device.c
-
 [DHCPv4]
-# Ruta por defecto IPv4 para Wi-Fi
 RouteMetric=600
 
 [IPv6AcceptRA]
-# Ruta por defecto IPv6 para Wi-Fi (Router Advertisement)
 RouteMetric=600
 ```
 
@@ -128,16 +114,26 @@ RouteMetric=600
 sudo vim /etc/systemd/network/20-wwan.network
 ```
 
-```bash
-# Móvil/ancho de banda ancha con DHCP
+```ini
+# Red móvil (WWAN): se aplica a interfaces de tipo wwan (wwan0...)
 [Match]
-Name=ww*                             # Interfaces móviles (wwan0...)
+Type=wwan
+
+[Link]
+RequiredForOnline=routable
 
 [Network]
+# Obtener IP, puerta de enlace y DNS automáticamente desde el router
 DHCP=yes
 
+# Resolver nombres .local en la LAN
+MulticastDNS=yes
+
+# Métrica alta = prioridad baja. Solo se usa si no hay Ethernet ni Wi-Fi.
+# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
+# https://github.com/systemd/systemd/issues/17698
 [DHCPv4]
-RouteMetric=900                      # Prioridad baja (solo si no hay Ethernet ni Wi-Fi)
+RouteMetric=900
 
 [IPv6AcceptRA]
 RouteMetric=900
