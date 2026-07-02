@@ -62,6 +62,7 @@ Type=ether
 Kind=!*                 # Excluye interfaces virtuales (bridges, VLANs, veth...)
 
 [Link]
+# Esperar a que tenga una ruta por defecto antes de marcar el sistema como online
 RequiredForOnline=routable
 
 [Network]
@@ -91,6 +92,7 @@ sudo vim /etc/systemd/network/20-wlan.network
 Type=wlan
 
 [Link]
+# Esperar a que tenga una ruta por defecto antes de marcar el sistema como online
 RequiredForOnline=routable
 
 [Network]
@@ -120,6 +122,7 @@ sudo vim /etc/systemd/network/20-wwan.network
 Type=wwan
 
 [Link]
+# Esperar a que tenga una ruta por defecto antes de marcar el sistema como online
 RequiredForOnline=routable
 
 [Network]
