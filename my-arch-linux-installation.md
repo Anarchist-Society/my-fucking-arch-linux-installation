@@ -393,7 +393,8 @@ cp /usr/share/limine/BOOTX64.EFI /boot/EFI/BOOT/
 
 ```bash
 # Escribir PARTUUID en limine.conf como base, luego editar
-echo $PARTUUID > /boot/limine.conf && vim /boot/limine.conf
+echo $PARTUUID > /boot/limine.conf
+vim /boot/limine.conf
 ```
 
 ```bash
