@@ -397,7 +397,7 @@ echo $PARTUUID > /boot/limine.conf
 vim /boot/limine.conf
 ```
 
-```bash
+```ini
 # Tiempo de espera en segundos antes de arrancar la entrada por defecto
 timeout: 3
 
