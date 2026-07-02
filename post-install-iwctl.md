@@ -138,10 +138,10 @@ MulticastDNS=yes
 # systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
 # https://github.com/systemd/systemd/issues/17698
 [DHCPv4]
-RouteMetric=900
+RouteMetric=700
 
 [IPv6AcceptRA]
-RouteMetric=900
+RouteMetric=700
 ```
 
 Luego habilitar e iniciar systemd-networkd:
