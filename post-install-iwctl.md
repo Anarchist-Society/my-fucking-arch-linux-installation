@@ -77,16 +77,24 @@ RouteMetric=100
 sudo vim /etc/systemd/network/20-wlan.network
 ```
 
-```bash
-# Wi-Fi con DHCP
+```ini
+# Red Wi-Fi: se aplica a la interfaz de tipo wlan (wlan0 en este sistema)
 [Match]
-Name=wl*                             # Interfaces inalámbricas (wlan0, wlp2s0...)
+Type=wlan
+
+# Esperar a que tenga conectividad real antes de marcar el sistema como online
+[Link]
+RequiredForOnline=routable
 
 [Network]
 DHCP=yes
+MulticastDNS=yes        # Permite resolver nombres .local en la LAN
 
+# Métrica media. Si Ethernet está disponible, el tráfico sale por Ethernet.
+# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
+# https://github.com/systemd/systemd/issues/17698
 [DHCPv4]
-RouteMetric=600                      # Prioridad media
+RouteMetric=600
 
 [IPv6AcceptRA]
 RouteMetric=600
