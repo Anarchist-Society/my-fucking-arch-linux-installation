@@ -21,8 +21,9 @@ sudo swapon -p 0 /swap/swapfile
 
 ### fstab
 
+Editar `/etc/fstab` con `vim` y añadir:
+
 ```bash
-# Añadir a /etc/fstab para que se monte automáticamente al arrancar
 /swap/swapfile  none  swap  defaults,pri=0  0  0
 ```
 
