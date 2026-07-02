@@ -53,7 +53,7 @@ Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. 
 sudo vim /etc/systemd/network/20-ethernet.network
 ```
 
-```
+```bash
 # Ethernet (cableada) con DHCP
 [Match]
 Type=ether                          # Solo interfaces Ethernet reales
@@ -77,7 +77,7 @@ RouteMetric=100
 sudo vim /etc/systemd/network/20-wlan.network
 ```
 
-```
+```bash
 # Wi-Fi con DHCP
 [Match]
 Name=wl*                             # Interfaces inalámbricas (wlan0, wlp2s0...)
@@ -96,7 +96,7 @@ RouteMetric=600
 sudo vim /etc/systemd/network/20-wwan.network
 ```
 
-```
+```bash
 # Móvil/ancho de banda ancha con DHCP
 [Match]
 Name=ww*                             # Interfaces móviles (wwan0...)
