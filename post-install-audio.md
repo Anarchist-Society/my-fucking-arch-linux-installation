@@ -1,6 +1,8 @@
 # Post-instalación: Audio
 
-[PipeWire](https://wiki.archlinux.org/title/PipeWire) es el servidor de audio para Linux.
+[PipeWire](https://wiki.archlinux.org/title/PipeWire) es un servidor multimedia que gestiona flujos de audio y vídeo en Linux. A diferencia de ALSA (nivel de kernel) y PulseAudio (servidor de sonido tradicional), PipeWire ofrece baja latencia, gestión segura de permisos (esencial en Wayland) y manejo unificado de audio y vídeo mediante un grafo de nodos enrutables.
+
+WirePlumber actúa como gestor de sesiones: decide qué rutas de audio se conectan, maneja perfiles de dispositivos (altavoz, auriculares, HDMI) y aplica reglas de enrutamiento configuradas por el usuario o por el propio dispositivo. Es el reemplazo moderno de `pipewire-media-session`.
 
 ```bash
 pacman -S pipewire wireplumber pipewire-pulse pipewire-alsa alsa-utils
