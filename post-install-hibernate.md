@@ -8,8 +8,8 @@ La hibernación guarda el contenido de la RAM en el swap y apaga el equipo. Al e
 # Crear subvolumen Btrfs dedicado para swap
 sudo btrfs subvolume create /swap
 
-# Crear swapfile del tamaño de la RAM (64 GiB)
-sudo btrfs filesystem mkswapfile --size 64g --uuid clear /swap/swapfile
+# Crear swapfile del tamaño exacto de la RAM
+sudo btrfs filesystem mkswapfile --size 60g --uuid clear /swap/swapfile
 ```
 
 ### fstab
