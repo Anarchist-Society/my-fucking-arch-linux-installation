@@ -47,7 +47,7 @@ Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. 
 
 ### Configurar red (asignación de IP)
 
-`systemd-networkd` necesita ficheros `.network` para asignar IP por DHCP. Sin esto, `iwd` se conecta al Wi-Fi pero la interfaz no obtiene dirección IP:
+[systemd-networkd](https://wiki.archlinux.org/title/Systemd-networkd) necesita ficheros `.network` para asignar IP por DHCP. Sin esto, `iwd` se conecta al Wi-Fi pero la interfaz no obtiene dirección IP:
 
 ```bash
 sudo vim /etc/systemd/network/20-ethernet.network
@@ -90,6 +90,8 @@ Luego habilitar e iniciar systemd-networkd:
 ```bash
 sudo systemctl enable --now systemd-networkd
 ```
+
+Estos ficheros `.network` están basados en los ejemplos del [archiso oficial](https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/configs/releng/airootfs/etc/systemd/network/).
 
 ### Verificar conexión
 
