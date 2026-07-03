@@ -4,7 +4,7 @@
 
 [AUR](https://wiki.archlinux.org/title/Arch_User_Repository) es un repositorio comunitario donde los usuarios comparten [PKGBUILDs](https://wiki.archlinux.org/title/PKGBUILD) para instalar software no incluido en los repositorios oficiales de Arch. A diferencia de `pacman`, que instala binarios precompilados, los paquetes AUR se compilan desde el código fuente en tu máquina.
 
-> **Nota:** Necesitas [paru](post-install-paru.md) instalado para seguir estos pasos. No ejecutes `paru` como root — aunque el comando `paru --sync` se asemeja a `pacman -S`, internamente compila desde fuente con `makepkg`, y este no debe ejecutarse como root por seguridad.
+> **Nota:** Necesitas [paru](post-install-paru.md) instalado para seguir estos pasos. No ejecutes `paru` como root — aunque el comando `paru --sync` se asemeja a `pacman --sync`, internamente compila desde fuente con `makepkg`, y este no debe ejecutarse como root por seguridad.
 
 ## Brave Browser
 
