@@ -56,18 +56,17 @@ sudo btrfs inspect-internal map-swapfile /swap/swapfile
 
 ### Limine
 
-Editar `/etc/default/limine` y añadir al final de `KERNEL_CMDLINE[default]=`:
+Editar `/boot/limine.conf` y añadir `resume=... resume_offset=...` al final del cmdline:
 
 ```bash
-# Añadir los parámetros de reanudación para hibernación
-KERNEL_CMDLINE[default]="... resume=/dev/mapper/cryptroot resume_offset=<N>"
+cmdline: ... resume=/dev/mapper/cryptroot resume_offset=<N>
 ```
 
 ### Reconstruir initramfs
 
 ```bash
-# Reconstruir initramfs con el hook resume y actualizar el bootloader
-sudo limine-update
+# Reconstruir initramfs con el hook resume
+sudo mkinitcpio -P
 ```
 
 ### Probar
