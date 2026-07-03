@@ -25,3 +25,14 @@ sudo pacman --sync hyprlauncher
 | Paquete | Propósito |
 |---------|-----------|
 | `hyprlauncher` | Lanzador de aplicaciones minimalista para Hyprland con búsqueda dinámica |
+
+### Atajo de teclado
+
+```bash
+# ~/.config/hypr/hyprland.conf
+bind = SUPER, Return, exec, hyprlauncher
+```
+
+| Atajo | Acción |
+|-------|--------|
+| <kbd>SUPER</kbd> + <kbd>Enter</kbd> | Abrir Hyprlauncher |
