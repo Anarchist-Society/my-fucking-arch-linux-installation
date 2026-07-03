@@ -30,7 +30,8 @@ sudo pacman --sync hyprlauncher
 
 ```lua
 -- ~/.config/hypr/hyprland.lua
-hl.bind("SUPER + Return", hl.dsp.exec_cmd("hyprlauncher"))
+local mainMod = "SUPER"
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("hyprlauncher"))
 ```
 
 | Atajo | Acción |
