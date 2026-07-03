@@ -40,11 +40,11 @@ sudo mkdir --parents /etc/mkinitcpio.conf.d
 sudo vim /etc/mkinitcpio.conf.d/archlinux-resume.conf
 ```
 
-Añadir el hook `resume` dentro de `HOOKS`:
+Añadir el hook `resume` al final:
 
-```ini
-# Añadir resume después de encrypt (necesita /dev/mapper/cryptroot)
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt resume filesystems fsck)
+```bash
+# Añadir resume al final de HOOKS
+HOOKS+=(resume)
 ```
 
 ### Calcular el offset del swapfile
