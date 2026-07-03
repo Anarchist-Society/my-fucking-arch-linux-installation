@@ -15,7 +15,7 @@ sudo pacman --sync hyprland
 
 ## Hyprlauncher
 
-[Hyprlauncher](https://github.com/hyprwm/hyprlauncher). Lanzador de aplicaciones multipropósito para Hyprland con búsqueda dinámica y atajo por teclado. Alternativa nativa a rofi/wofi.
+[Hyprlauncher](https://github.com/hyprwm/hyprlauncher). Lanzador de aplicaciones multipropósito para Hyprland con búsqueda dinámica y atajo por teclado.
 
 ```bash
 # Instalar Hyprlauncher
