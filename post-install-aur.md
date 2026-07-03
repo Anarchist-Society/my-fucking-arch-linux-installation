@@ -18,3 +18,16 @@ paru --sync brave-bin
 | Paquete | Propósito |
 |---------|-----------|
 | `brave-bin` | Navegador Chromium con bloqueador de anuncios y protección antirrastreo (binario precompilado) |
+
+## LocalSend
+
+[LocalSend](https://localsend.org/). Aplicación de código abierto para compartir archivos entre dispositivos en la red local de forma peer-to-peer, sin servidor central. Multiplataforma (Linux, Windows, macOS, Android, iOS).
+
+```bash
+# Instalar LocalSend
+paru --sync localsend
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `localsend` | Compartición de archivos local peer-to-peer multiplataforma |
