@@ -12,3 +12,16 @@ sudo pacman --sync hyprland
 | Paquete | Propósito |
 |---------|-----------|
 | `hyprland` | Compositor Wayland dinámico con animaciones, renderizado optimizado y configuración en texto plano |
+
+## Hyprlauncher
+
+[Hyprlauncher](https://github.com/hyprwm/hyprlauncher). Lanzador de aplicaciones multipropósito para Hyprland con búsqueda dinámica y atajo por teclado. Alternativa nativa a rofi/wofi.
+
+```bash
+# Instalar Hyprlauncher
+sudo pacman --sync hyprlauncher
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `hyprlauncher` | Lanzador de aplicaciones minimalista para Hyprland con búsqueda dinámica |
