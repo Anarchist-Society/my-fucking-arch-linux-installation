@@ -28,9 +28,9 @@ sudo pacman --sync hyprlauncher
 
 ### Atajo de teclado
 
-```bash
-# ~/.config/hypr/hyprland.conf
-bind = SUPER, Return, exec, hyprlauncher
+```lua
+-- ~/.config/hypr/hyprland.lua
+hl.bind("SUPER + Return", hl.dsp.exec_cmd("hyprlauncher"))
 ```
 
 | Atajo | Acción |
