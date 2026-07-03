@@ -31,9 +31,9 @@ sudo pacman --sync hyprlauncher
 ```lua
 -- ~/.config/hypr/hyprland.lua
 local mainMod = "SUPER"
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("hyprlauncher"))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("hyprlauncher"))
 ```
 
 | Atajo | Acción |
 |-------|--------|
-| <kbd>SUPER</kbd> + <kbd>Enter</kbd> | Abrir Hyprlauncher |
+| <kbd>SUPER</kbd> + <kbd>Space</kbd> | Abrir Hyprlauncher |
