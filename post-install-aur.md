@@ -25,9 +25,9 @@ paru --sync brave-bin
 
 ```bash
 # Instalar LocalSend
-paru --sync localsend
+paru --sync localsend-bin
 ```
 
 | Paquete | Propósito |
 |---------|-----------|
-| `localsend` | Compartición de archivos local peer-to-peer multiplataforma |
+| `localsend-bin` | Compartición de archivos local peer-to-peer multiplataforma (binario precompilado) |
