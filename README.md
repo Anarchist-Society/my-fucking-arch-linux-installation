@@ -1,6 +1,6 @@
 # My Fucking ArchLinux Installation
 
-<p align="center">
+<p>
   <img src="https://archlinux.org/static/logos/archlinux-logo-light-scalable.svg" alt="Arch Linux light" width="400"/>
 </p>
 
