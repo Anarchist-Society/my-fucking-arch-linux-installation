@@ -6,7 +6,7 @@
 
 Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + Limine** para un **Slimbook EVO (EVO15-A8)** ([slimbook.com](https://slimbook.com/en/evo-8845hs)).
 
-Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (EVO15-A8)**, un ultrabook de aluminio con **AMD Ryzen 7 8845HS** (8 núcleos físicos, 16 hilos de ejecución, hasta 5.1 GHz), **AMD Radeon 780M**, 64 GB DDR5 y un Samsung SSD 990 PRO 4 TB. El setup combina **LUKS2** para cifrado completo del disco, **btrfs** con subvolúmenes planos y compresión Zstd, **Limine** como bootloader UEFI (sin dependencia de NVRAM), y **Hyprland** sobre Wayland como escritorio, con **PipeWire** para audio, **iwd + systemd-networkd** para red y **Paru** como helper AUR.
+Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (EVO15-A8)**, un ultrabook de aluminio con **AMD Ryzen 7 8845HS** (8 núcleos físicos, 16 hilos de ejecución, hasta 5.1 GHz), **AMD Radeon 780M**, 64 GB DDR5 y un Samsung SSD 990 PRO 4 TB. El setup combina **LUKS2** para cifrado completo del disco, **btrfs** con subvolúmenes planos y compresión zstd, **Limine** como bootloader UEFI (sin dependencia de NVRAM), y **Hyprland** sobre Wayland como escritorio, con **PipeWire** para audio, **iwd + systemd-networkd** para red y **Paru** como helper AUR.
 
 ## My Fucking Hardware
 
