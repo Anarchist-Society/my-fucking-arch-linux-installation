@@ -361,10 +361,24 @@ vim /etc/mkinitcpio.conf
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
 ```bash
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
 ```
 
-- `encrypt`: descifra el volumen LUKS usando `cryptdevice=` del kernel cmdline
+| Hook | Propósito |
+|---|---|
+| `base` | Carga módulos esenciales y utilidades mínimas del initramfs |
+| `udev` | Detecta hardware y carga módulos automáticamente |
+| `autodetect` | Reduce el initramfs incluyendo solo módulos del hardware presente |
+| `microcode` | Aplica microcode de la CPU al arrancar |
+| `modconf` | Carga módulos adicionales desde `/etc/modprobe.d/` |
+| `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano |
+| `keyboard` | Carga el mapa de teclado para escribir la contraseña LUKS |
+| `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` |
+| `consolefont` | Carga la fuente de consola desde `/etc/vconsole.conf` |
+| `block` | Espera a que los dispositivos de bloque estén listos |
+| `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel |
+| `filesystems` | Monta el sistema de archivos raíz |
+| `fsck` | Comprueba integridad de los sistemas de archivos |
 
 ```bash
 # Regenerar initramfs
