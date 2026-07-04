@@ -1,4 +1,4 @@
-# my-fucking-arch-linux-installation
+# My Fucking ArchLinux Installation
 
 Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + Limine** para un **Slimbook EVO (EVO15-A8)**.
 
