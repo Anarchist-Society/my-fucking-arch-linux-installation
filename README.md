@@ -2,7 +2,7 @@
 
 Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + Limine** para un **Slimbook EVO (EVO15-A8)**.
 
-## Hardware
+## My Fucking Hardware
 
 | Componente | Especificación |
 |---|---|
@@ -12,7 +12,7 @@ Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + 
 | Almacenamiento | Samsung SSD 990 PRO 4 TB |
 | Pantalla | 2560×1600 @ 120 Hz |
 
-## Stack
+## My Fucking Stack
 
 | Componente | Tecnología |
 |---|---|
@@ -45,5 +45,3 @@ Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + 
 | [Programas](post-install-programs.md) | Software adicional (opencode) |
 
 ---
-
-Hecho con ❤️ para no tener que volver a googlearlo todo.
