@@ -233,11 +233,11 @@ mount --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@ 
 # /home
 mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home
 
-# Logs
-mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log
-
 # Caché pacman
 mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@pkg /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
+
+# Logs
+mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log
 
 # EFI sin cifrar
 mount --mkdir /dev/nvme0n1p1 /mnt/boot
