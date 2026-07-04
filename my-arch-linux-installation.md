@@ -361,7 +361,7 @@ vim /etc/mkinitcpio.conf
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
 ```bash
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
 ```
 
 | Hook | Propósito |
@@ -374,7 +374,6 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont bl
 | `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano |
 | `keyboard` | Carga el mapa de teclado para escribir la contraseña LUKS |
 | `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` |
-| `consolefont` | Carga la fuente de consola desde `/etc/vconsole.conf` |
 | `block` | Espera a que los dispositivos de bloque estén listos |
 | `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel |
 | `filesystems` | Monta el sistema de archivos raíz |
@@ -384,6 +383,8 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont bl
 # Regenerar initramfs
 mkinitcpio -P
 ```
+
+> Una vez reiniciado el sistema, puedes gestionar los hooks mediante drop-ins en `/etc/mkinitcpio.conf.d/` siguiendo la [guía de post-instalación de hooks](post-install-hooks.md).
 
 ## Configurar el bootloader (Limine)
 
