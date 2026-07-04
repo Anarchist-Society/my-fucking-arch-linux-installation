@@ -64,7 +64,7 @@ setfont ter-132b
 
 ### Red (Wi-Fi)
 
-Uso [iwctl](https://wiki.archlinux.org/title/Iwd) (de `iwd`) porque viene preinstalado en el ISO de Arch Linux y es la herramienta estándar para conectarse por Wi-Fi durante la instalación. La conexión se configura interactivamente. Las credenciales se guardan automáticamente.
+Uso [iwctl](https://wiki.archlinux.org/title/Iwd) (de iwd) porque viene preinstalado en el ISO de Arch Linux y es la herramienta estándar para conectarse por Wi-Fi durante la instalación. La conexión se configura interactivamente. Las credenciales se guardan automáticamente.
 
 ```bash
 # Iniciar iwctl (Wi-Fi)
@@ -126,7 +126,14 @@ Creo dos particiones en [tabla GPT](https://wiki.archlinux.org/title/GUID_Partit
 - Una [**EFI**](https://wiki.archlinux.org/title/EFI_system_partition) de 2 GiB para el bootloader y kernels — suficiente para varios kernels sin quedarse corto.
 - El **resto del disco** sin cifrar a nivel de partición. El cifrado se aplica dentro con LUKS.
 
-Uso [`fdisk`](https://wiki.archlinux.org/title/Fdisk) porque es la herramienta estándar en el ISO de Arch, minimalista y hace exactamente lo que necesito sin dependencias.
+Uso [fdisk](https://wiki.archlinux.org/title/Fdisk) porque es la herramienta estándar en el ISO de Arch, minimalista y hace exactamente lo que necesito sin dependencias.
+
+### Tabla de particiones resultante
+
+| Partición | Tamaño | Tipo |
+|---|---|---|
+| `nvme0n1p1` | 2 GiB | EFI System (FAT32) |
+| `nvme0n1p2` | Resto | Linux filesystem (LUKS + btrfs) |
 
 ```bash
 # Particionar el disco con fdisk
@@ -140,13 +147,6 @@ fdisk /dev/nvme0n1
 | `t` → `1` | Tipo EFI System |
 | `n` → Enter → Enter → Enter | Partición sistema (resto) |
 | `w` | Escribir y salir |
-
-### Tabla de particiones resultante
-
-| Partición | Tamaño | Tipo |
-|---|---|---|
-| `nvme0n1p1` | 2 GiB | EFI System (FAT32) |
-| `nvme0n1p2` | Resto | Linux filesystem (LUKS + btrfs) |
 
 ---
 
