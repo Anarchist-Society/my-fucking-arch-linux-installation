@@ -181,13 +181,6 @@ cryptsetup open /dev/nvme0n1p2 cryptroot
 
 [btrfs](https://wiki.archlinux.org/title/Btrfs) permite snapshots, compresión transparente, sumas de verificación para integridad de datos, y subvolúmenes. Uso un layout plano (`@`, `@home`, `@log`, `@pkg` — no anidados) porque es más flexible y evita problemas al restaurar snapshots.
 
-Las opciones de montaje:
-- `noatime` — evita escrituras innecesarias al leer archivos.
-- `ssd` — optimiza para NVMe/SSD (agrupa escrituras).
-- `compress=zstd` — comprime datos en vuelo, reduce espacio sin pérdida de rendimiento en CPUs modernas.
-- `space_cache=v2` — mejor gestión del espacio libre.
-- `discard=async` — TRIM paralelo sin bloquear operaciones.
-
 La separación en subvolúmenes independientes sigue [el layout por defecto de archinstall](https://archinstall.archlinux.page/cli_parameters/config/disk_config.html#btrfs) (`@`, `@home`, `@log`, `@pkg`). Cada subvolumen se monta, snapshotea y restaura por separado:
 
 | Subvolumen | Montaje | Por qué separado |
@@ -225,6 +218,13 @@ umount /mnt
 ```
 
 #### Montar con optimizaciones
+
+Las opciones de montaje:
+- `noatime` — evita escrituras innecesarias al leer archivos.
+- `ssd` — optimiza para NVMe/SSD (agrupa escrituras).
+- `compress=zstd` — comprime datos en vuelo, reduce espacio sin pérdida de rendimiento en CPUs modernas.
+- `space_cache=v2` — mejor gestión del espacio libre.
+- `discard=async` — TRIM paralelo sin bloquear operaciones.
 
 ```bash
 # Raíz
