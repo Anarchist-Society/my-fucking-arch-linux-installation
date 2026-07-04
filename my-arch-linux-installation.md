@@ -64,7 +64,7 @@ setfont ter-132b
 
 ### Red (Wi-Fi)
 
-Uso [`iwctl`](https://wiki.archlinux.org/title/Iwd) (de `iwd`) porque es más ligero que NetworkManager y funciona sin dependencias adicionales. La conexión se configura interactivamente. Las credenciales se guardan automáticamente.
+Uso [`iwctl`](https://wiki.archlinux.org/title/Iwd) (de `iwd`) porque viene preinstalado en el ISO de Arch Linux y es la herramienta estándar para conectarse por Wi-Fi durante la instalación. La conexión se configura interactivamente. Las credenciales se guardan automáticamente.
 
 ```bash
 # Iniciar iwctl (Wi-Fi)
