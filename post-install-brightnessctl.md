@@ -15,15 +15,9 @@ sudo pacman --sync brightnessctl
 brightnessctl info
 ```
 
-### Agregar usuario al grupo video (opcional pero recomendado)
+### Nota sobre permisos
 
-Sin esto, necesitarás `sudo` para cada comando.
-
-```bash
-sudo usermod --append --groups video $USER
-```
-
-Cierra sesión y vuelve a entrar para que el grupo surta efecto, o usa `newgrp video` en la sesión actual.
+Con systemd/logind no hace falta estar en el grupo `video`; el acceso de escritura a los backlights se otorga automáticamente via ACLs al iniciar sesión local.
 
 ### Comandos básicos
 
