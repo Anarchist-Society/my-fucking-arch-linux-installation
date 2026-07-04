@@ -1,9 +1,5 @@
 # My Fucking ArchLinux Installation
 
-<p align="center">
-  <img src="assets/archlinux-logo.svg" alt="Arch Linux" width="400"/>
-</p>
-
 Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + Limine** para un **Slimbook EVO (EVO15-A8)**.
 
 ## My Fucking Hardware
