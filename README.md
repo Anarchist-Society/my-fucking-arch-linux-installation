@@ -1,13 +1,7 @@
 # My Fucking ArchLinux Installation
 
 <p align="center">
-  <img src="https://archlinux.org/static/logos/archlinux-logo-dark-scalable.svg" alt="Arch Linux dark" width="400"/>
-  <br>
   <img src="https://archlinux.org/static/logos/archlinux-logo-light-scalable.svg" alt="Arch Linux light" width="400"/>
-  <br>
-  <img src="https://archlinux.org/static/logos/archlinux-logo-black-scalable.svg" alt="Arch Linux black" width="400"/>
-  <br>
-  <img src="https://archlinux.org/static/logos/archlinux-logo-white-scalable.svg" alt="Arch Linux white" width="400"/>
 </p>
 
 Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + Limine** para un **Slimbook EVO (EVO15-A8)**.
