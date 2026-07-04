@@ -128,6 +128,8 @@ Creo dos particiones en [tabla GPT](https://wiki.archlinux.org/title/GUID_Partit
 
 Uso [`fdisk`](https://wiki.archlinux.org/title/Fdisk) porque es la herramienta estándar en el ISO de Arch, minimalista y hace exactamente lo que necesito sin dependencias.
 
+Este esquema de particionado sigue la configuración documentada en [dm-crypt/Encrypting an entire system](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) (partición EFI + LUKS).
+
 ### Tabla de particiones resultante
 
 | Partición | Tamaño | Tipo |
