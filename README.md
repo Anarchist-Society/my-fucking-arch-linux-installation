@@ -48,4 +48,3 @@ Guías de instalación y configuración de **Arch Linux** con **LUKS2 + btrfs + 
 | [Brillo](post-install-brightnessctl.md) | Control de retroiluminación con brightnessctl |
 | [Programas](post-install-programs.md) | Software adicional (opencode) |
 
----
