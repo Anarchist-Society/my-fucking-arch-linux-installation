@@ -20,7 +20,6 @@ sudo vim /etc/mkinitcpio.conf.d/plymouth.conf
 
 ```ini
 # /etc/mkinitcpio.conf.d/plymouth.conf
-
 HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
 ```
 
