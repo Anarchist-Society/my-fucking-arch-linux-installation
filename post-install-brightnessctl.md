@@ -30,7 +30,3 @@ brightnessctl set 10%-
 # Usar dispositivo específico (si hay varios)
 brightnessctl --device='amdgpu_bl1' set 50%
 ```
-
-### Más información
-
-- [ArchWiki — Backlight](https://wiki.archlinux.org/title/Backlight)
