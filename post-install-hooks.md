@@ -29,9 +29,6 @@ Los drop-ins son archivos `.conf` que se fusionan con `/etc/mkinitcpio.conf` aut
 ```bash
 # Listar drop-ins existentes
 ls /etc/mkinitcpio.conf.d/
-
-# Ver la configuración fusionada (todos los drop-ins + archivo principal)
-mkinitcpio --config /etc/mkinitcpio.conf --docker
 ```
 
 ## Configuración base para LUKS + btrfs
