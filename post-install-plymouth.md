@@ -110,7 +110,8 @@ curl -OL https://archive.archlinux.org/packages/p/plymouth/plymouth-24.004.60-14
 sudo pacman --upgrade plymouth-24.004.60-14-x86_64.pkg.tar.zst
 
 # Pinear para que no se actualice en el próximo pacman -Syu
-echo "IgnorePkg = plymouth" | sudo tee -a /etc/pacman.conf
+# Añade al final de /etc/pacman.conf: IgnorePkg = plymouth
+sudo vim /etc/pacman.conf
 
 Puedes eliminar el archivo descargado: `rm plymouth-24.004.60-14-x86_64.pkg.tar.zst`
 ```
