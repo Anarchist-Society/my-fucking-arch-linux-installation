@@ -1,21 +1,92 @@
 # Post-instalación: Hooks de mkinitcpio
 
-[Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio). Los hooks de mkinitcpio definen qué módulos y herramientas se incluyen en el initramfs. Se configuran mediante drop-ins en `/etc/mkinitcpio.conf.d/` para no modificar el archivo principal.
+[Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio). Los hooks de mkinitcpio definen qué módulos y herramientas se incluyen en el initramfs — el sistema de archivos temporal que se carga en memoria al arrancar para montar la raíz y descifrar LUKS.
+
+## Drop-ins (`/etc/mkinitcpio.conf.d/`)
+
+Para no modificar el archivo principal `/etc/mkinitcpio.conf`, puedes usar **drop-ins** en `/etc/mkinitcpio.conf.d/`:
 
 ```bash
 # Crear el directorio de drop-ins si no existe
 sudo mkdir --parents /etc/mkinitcpio.conf.d
-# Editar con vim
+
+# Editar o crear un drop-in
 sudo vim /etc/mkinitcpio.conf.d/archlinux-hooks.conf
 ```
 
-Añadir los hooks base:
+Los drop-ins son archivos `.conf` que se fusionan con `/etc/mkinitcpio.conf` automáticamente. Puedes tener varios drop-ins para organizar la configuración (uno para hooks, otro para módulos, etc.).
+
+### Orden de precedencia
+
+- `/etc/mkinitcpio.conf.d/*.conf` tiene **prioridad** sobre `/etc/mkinitcpio.conf`
+- Si varios drop-ins definen la misma variable, **gana el último alfabéticamente**
+- Puedes usar `--dropin /etc/mkinitcpio.conf.d/<nombre>.conf` al regenerar para usar un drop-in específico
+
+### Revisar configuraciones activas
 
 ```bash
-# Hooks base para LUKS + btrfs + microcode
+# Listar drop-ins existentes
+ls /etc/mkinitcpio.conf.d/
+
+# Ver la configuración fusionada (todos los drop-ins + archivo principal)
+mkinitcpio --config /etc/mkinitcpio.conf --docker
+```
+
+## Configuración base para LUKS + btrfs
+
+```
+# /etc/mkinitcpio.conf.d/archlinux-hooks.conf
+
 HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
 ```
 
-| Paquete | Propósito |
-|---------|-----------|
-| (ninguno — incluido en `mkinitcpio`) | |
+### Explicación de cada hook
+
+Consulta la [tabla de hooks en la guía principal](my-arch-linux-installation.md#initramfs) para la descripción detallada de cada uno.
+
+## Otras variantes
+
+### Con systemd (sd-encrypt)
+
+Si prefieres el initramfs basado en systemd en lugar de busybox:
+
+```
+HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)
+```
+
+| Hook busybox | Hook systemd | Diferencia |
+|---|---|---|
+| `udev` | `systemd` | systemd incluye udev internamente |
+| `keymap` + `consolefont` | `sd-vconsole` | Unificado en un solo hook |
+| `encrypt` | `sd-encrypt` | Soporta TPM2, FIDO2, keyfiles |
+
+### Con LVM
+
+Si usas LVM además de LUKS, añade `lvm2`:
+
+```
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block lvm2 encrypt filesystems fsck)
+```
+
+Requiere el paquete `lvm2`.
+
+## Regenerar el initramfs
+
+Tras cualquier cambio en los hooks, regenera el initramfs:
+
+```bash
+sudo mkinitcpio -P
+```
+
+## Verificar hooks y módulos
+
+```bash
+# Ayuda de un hook específico
+mkinitcpio -H encrypt
+
+# Listar módulos incluidos en la imagen actual
+mkinitcpio -M
+
+# Ver el contenido del initramfs
+lsinitcpio /boot/initramfs-linux.img
+```
