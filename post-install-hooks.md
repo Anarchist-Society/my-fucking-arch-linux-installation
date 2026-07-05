@@ -4,7 +4,7 @@
 
 ## Drop-ins (`/etc/mkinitcpio.conf.d/`)
 
-Para no modificar el archivo principal `/etc/mkinitcpio.conf`, puedes usar **drop-ins** en `/etc/mkinitcpio.conf.d/`:
+Para no modificar el archivo principal `/etc/mkinitcpio.conf`, puedes usar **drop-ins** en `/etc/mkinitcpio.conf.d/`. Está documentado en la [sección de configuración de mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio#Configuration) y en la [página de manual `mkinitcpio.conf(5)`](https://man.archlinux.org/man/mkinitcpio.conf.5).
 
 ```bash
 # Crear el directorio de drop-ins si no existe
@@ -15,6 +15,8 @@ sudo vim /etc/mkinitcpio.conf.d/archlinux-hooks.conf
 ```
 
 Los drop-ins son archivos `.conf` que se fusionan con `/etc/mkinitcpio.conf` automáticamente. Puedes tener varios drop-ins para organizar la configuración (uno para hooks, otro para módulos, etc.).
+
+> **Aviso**: Si el preset del kernel (`/etc/mkinitcpio.d/linux.preset`) contiene la línea `ALL_config="/etc/mkinitcpio.conf"`, los drop-ins **no se cargan** (versiones de mkinitcpio anteriores a la 36). En ese caso, comenta la línea con `# ALL_config="/etc/mkinitcpio.conf"` para habilitarlos.
 
 ### Orden de precedencia
 
