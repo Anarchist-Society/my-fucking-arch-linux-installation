@@ -21,6 +21,7 @@ sudo pacman --sync pipewire wireplumber pipewire-pulse pipewire-jack pipewire-al
 Habilitar servicios de usuario:
 
 ```bash
+# Habilitar e iniciar servicios de PipeWire y WirePlumber
 systemctl --user enable --now pipewire.service
 systemctl --user enable --now pipewire-pulse.service
 systemctl --user enable --now wireplumber.service
