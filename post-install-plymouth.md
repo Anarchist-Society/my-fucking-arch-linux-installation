@@ -18,7 +18,7 @@ Añade el hook `plymouth` **antes de `encrypt`** mediante un drop-in:
 sudo vim /etc/mkinitcpio.conf.d/plymouth.conf
 ```
 
-```
+```ini
 # /etc/mkinitcpio.conf.d/plymouth.conf
 
 HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
