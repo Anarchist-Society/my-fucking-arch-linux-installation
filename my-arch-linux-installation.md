@@ -411,6 +411,8 @@ cp /usr/share/limine/BOOTX64.EFI /boot/EFI/BOOT/
 ```bash
 # Escribir PARTUUID en limine.conf como base, luego editar
 echo $PARTUUID > /boot/limine.conf
+
+# Editar la configuración de Limine
 vim /boot/limine.conf
 ```
 
