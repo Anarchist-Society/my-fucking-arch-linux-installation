@@ -9,17 +9,6 @@
 sudo pacman --sync brightnessctl
 ```
 
-### Verificar dispositivo detectado
-
-```bash
-# Muestra el dispositivo activo, brillo actual, máximo y clase
-brightnessctl info
-```
-
-### Nota sobre permisos
-
-Con systemd/logind no hace falta estar en el grupo `video`; el acceso de escritura a los backlights se otorga automáticamente via ACLs al iniciar sesión local.
-
 ### Comandos básicos
 
 ```bash
