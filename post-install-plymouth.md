@@ -63,13 +63,17 @@ DeviceScale=2
 | `spinner` | Simple, con un spinner de carga |
 | `bgrt` | Similar a spinner pero con el logo del fabricante (OEM) |
 | `solar` | Tema espacial con una estrella azul |
+| `spinfinity` | Símbolo de infinito giratorio |
 | `glow` | Corporativo, con gráfico de progreso circular |
 | `fade-in` | Fundido con estrellas |
-| `spinfinity` | Símbolo de infinito giratorio |
+| `details` | Muestra mensajes de arranque detallados (útil para depuración) |
+| `text` | Versión textual, sin gráficos |
+| `tribar` | Barra de progreso triple |
+| `script` | Tema basado en script, personalizable |
 
 ```bash
 # Listar temas instalados
-plymouth-set-default-theme -l
+plymouth-set-default-theme --list
 
 # Cambiar tema y regenerar initramfs
 sudo plymouth-set-default-theme -R spinner
