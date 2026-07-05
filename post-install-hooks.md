@@ -36,7 +36,7 @@ ls /etc/mkinitcpio.conf.d/
 ```
 # /etc/mkinitcpio.conf.d/archlinux-hooks.conf
 
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
 ```
 
 ### Explicación de cada hook
@@ -63,3 +63,13 @@ mkinitcpio -M
 # Ver el contenido del initramfs
 lsinitcpio /boot/initramfs-linux.img
 ```
+
+## Referencias
+
+- [Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio)
+- [Mkinitcpio#Configuration (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio#Configuration)
+- [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth)
+- [Linux console/Keyboard configuration (Arch Wiki)](https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration)
+- [Omarchy issue #6072 — Plymouth LUKS prompt keymap bug](https://github.com/basecamp/omarchy/issues/6072)
+- [Guía de instalación principal](my-arch-linux-installation.md)
+- [Guía de Plymouth](post-install-plymouth.md)

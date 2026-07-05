@@ -20,7 +20,7 @@ sudo vim /etc/mkinitcpio.conf.d/plymouth.conf
 ```
 # /etc/mkinitcpio.conf.d/plymouth.conf
 
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block plymouth encrypt filesystems fsck)
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
 ```
 
 > **Nota**: `plymouth` debe ir justo antes de `encrypt` para mostrar el prompt de contraseña LUKS de forma gráfica.
@@ -92,5 +92,9 @@ plymouth.enable=0 disablehooks=plymouth
 ## Referencias
 
 - [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth)
+- [Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio)
+- [Mkinitcpio#Configuration (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio#Configuration)
+- [Linux console/Keyboard configuration (Arch Wiki)](https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration)
 - [Silent boot (Arch Wiki)](https://wiki.archlinux.org/title/Silent_boot)
+- [Omarchy issue #6072 — Plymouth LUKS prompt keymap bug](https://github.com/basecamp/omarchy/issues/6072)
 - [Guía de post-instalación de hooks](post-install-hooks.md)
