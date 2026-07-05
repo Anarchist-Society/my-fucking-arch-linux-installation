@@ -107,10 +107,12 @@ Más información: [Foro Arch Linux](https://bbs.archlinux.org/viewtopic.php?id=
 curl -OL https://archive.archlinux.org/packages/p/plymouth/plymouth-24.004.60-14-x86_64.pkg.tar.zst
 
 # Downgrade forzado
-sudo pacman -U plymouth-24.004.60-14-x86_64.pkg.tar.zst
+sudo pacman --upgrade plymouth-24.004.60-14-x86_64.pkg.tar.zst
 
 # Pinear para que no se actualice en el próximo pacman -Syu
 echo "IgnorePkg = plymouth" | sudo tee -a /etc/pacman.conf
+
+Puedes eliminar el archivo descargado: `rm plymouth-24.004.60-14-x86_64.pkg.tar.zst`
 ```
 
 Verifica la versión instalada: `pacman -Qi plymouth | grep Versión`
