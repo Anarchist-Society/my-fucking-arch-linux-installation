@@ -115,9 +115,7 @@ sudo vim /etc/pacman.conf
 
 # Eliminar el paquete descargado
 rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
-```
 
-```bash
+# Verificar la versión instalada
 pacman -Q plymouth
 ```
-
