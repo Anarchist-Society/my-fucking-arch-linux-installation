@@ -31,20 +31,6 @@ brightnessctl set 10%-
 brightnessctl --device='amdgpu_bl1' set 50%
 ```
 
-### Atajo de teclado (Hyprland)
-
-```lua
--- ~/.config/hypr/hyprland.lua
-local mainMod = "SUPER"
-hl.bind(mainMod .. "+ F5", hl.dsp.exec_cmd("brightnessctl set 5%-"))
-hl.bind(mainMod .. "+ F6", hl.dsp.exec_cmd("brightnessctl set +5%"))
-```
-
-| Atajo | Acción |
-|-------|--------|
-| <kbd>SUPER</kbd> + <kbd>F5</kbd> | Bajar brillo 5 % |
-| <kbd>SUPER</kbd> + <kbd>F6</kbd> | Subir brillo 5 % |
-
 ### Más información
 
 - [ArchWiki — Backlight](https://wiki.archlinux.org/title/Backlight)
