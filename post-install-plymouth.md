@@ -78,6 +78,7 @@ sudo plymouth-set-default-theme -R spinner
 ## Regenerar initramfs
 
 ```bash
+# Reconstruir initramfs para aplicar los cambios
 sudo mkinitcpio -P
 ```
 
@@ -94,6 +95,25 @@ Si algo falla, añade estos parámetros al kernel en Limine:
 ```ini
 plymouth.enable=0 disablehooks=plymouth
 ```
+
+## Downgrade (bug conocido en v26)
+
+El hook `keymap` no funciona correctamente con Plymouth v26 (26.134.222-1 y -2). El prompt LUKS se muestra en inglés (US) aunque `KEYMAP=es` esté configurado. Solución: downgrade a v24.004.60-14.
+
+Más información: [Foro Arch Linux](https://bbs.archlinux.org/viewtopic.php?id=313743) — [Bug upstream](https://gitlab.freedesktop.org/plymouth/plymouth/-/work_items/337)
+
+```bash
+# Descargar v24 desde Arch Archive
+wget https://archive.archlinux.org/packages/p/plymouth/plymouth-24.004.60-14-x86_64.pkg.tar.zst
+
+# Downgrade forzado
+sudo pacman -U plymouth-24.004.60-14-x86_64.pkg.tar.zst
+
+# Pinear para que no se actualice en el próximo pacman -Syu
+echo "IgnorePkg = plymouth" | sudo tee -a /etc/pacman.conf
+```
+
+Verifica la versión instalada: `pacman -Qi plymouth | grep Versión`
 
 ## Referencias
 
