@@ -119,12 +119,3 @@ rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
 
 Verifica la versión instalada: `pacman -Qi plymouth | grep Versión`
 
-## Referencias
-
-- [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth)
-- [Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio)
-- [Mkinitcpio#Configuration (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio#Configuration)
-- [Linux console/Keyboard configuration (Arch Wiki)](https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration)
-- [Silent boot (Arch Wiki)](https://wiki.archlinux.org/title/Silent_boot)
-- [Omarchy issue #6072 — Plymouth LUKS prompt keymap bug](https://github.com/basecamp/omarchy/issues/6072)
-- [Guía de post-instalación de hooks](post-install-hooks.md)
