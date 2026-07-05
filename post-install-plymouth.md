@@ -104,7 +104,7 @@ Más información: [Foro Arch Linux](https://bbs.archlinux.org/viewtopic.php?id=
 
 ```bash
 # Descargar v24 desde Arch Archive
-wget https://archive.archlinux.org/packages/p/plymouth/plymouth-24.004.60-14-x86_64.pkg.tar.zst
+curl -OL https://archive.archlinux.org/packages/p/plymouth/plymouth-24.004.60-14-x86_64.pkg.tar.zst
 
 # Downgrade forzado
 sudo pacman -U plymouth-24.004.60-14-x86_64.pkg.tar.zst
