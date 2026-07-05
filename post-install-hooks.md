@@ -76,9 +76,3 @@ mkinitcpio -M
 lsinitcpio /boot/initramfs-linux.img
 ```
 
-## Referencias
-
-- [Linux console/Keyboard configuration (Arch Wiki)](https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration)
-- [Omarchy issue #6072 — Plymouth LUKS prompt keymap bug](https://github.com/basecamp/omarchy/issues/6072)
-- [Guía de instalación principal](my-arch-linux-installation.md)
-- [Guía de Plymouth](post-install-plymouth.md)
