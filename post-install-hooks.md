@@ -60,6 +60,7 @@ Consulta la [tabla de hooks en la guía principal](my-arch-linux-installation.md
 Tras cualquier cambio en los hooks, regenera el initramfs:
 
 ```bash
+# Regenerar el initramfs para aplicar los cambios
 sudo mkinitcpio -P
 ```
 
