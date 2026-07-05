@@ -86,12 +86,6 @@ sudo plymouth-set-default-theme -R spinner
 sudo mkinitcpio -P
 ```
 
-## Previsualizar el tema
-
-```bash
-sudo plymouthd; sudo plymouth --show-splash; sleep 5; sudo plymouth --quit
-```
-
 ## Desactivar Plymouth temporalmente
 
 Si algo falla, añade estos parámetros al kernel en Limine:
