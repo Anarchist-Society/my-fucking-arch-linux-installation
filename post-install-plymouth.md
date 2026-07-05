@@ -11,6 +11,8 @@ sudo pacman --sync plymouth
 
 ## Configurar mkinitcpio
 
+Este procedimiento se realiza según lo indicado en la [ArchWiki — Plymouth#mkinitcpio](https://wiki.archlinux.org/title/Plymouth#mkinitcpio).
+
 Plymouth se incluye como hook en mkinitcpio para que su binario y tema estén disponibles en el initramfs antes de montar la raíz. Para más información sobre drop-ins y el sistema de hooks, consulta la [guía de post-instalación de hooks](post-install-hooks.md).
 
 Añade el hook `plymouth` **antes de `encrypt`** mediante un drop-in:
