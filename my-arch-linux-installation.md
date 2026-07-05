@@ -360,7 +360,7 @@ vim /etc/mkinitcpio.conf
 
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
-```bash
+```ini
 HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
 ```
 
