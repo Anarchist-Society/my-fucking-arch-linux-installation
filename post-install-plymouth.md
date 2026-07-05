@@ -5,7 +5,8 @@
 ## Instalación
 
 ```bash
-sudo pacman --sync plymouth  # Instalar Plymouth para el splash gráfico de arranque
+# Instalar Plymouth para el splash gráfico de arranque
+sudo pacman --sync plymouth
 ```
 
 ## Configurar mkinitcpio
