@@ -33,9 +33,8 @@ ls /etc/mkinitcpio.conf.d/
 
 ## Configuración base para LUKS + btrfs
 
-```
+```ini
 # /etc/mkinitcpio.conf.d/archlinux-hooks.conf
-
 HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
 ```
 
