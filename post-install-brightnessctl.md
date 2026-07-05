@@ -2,7 +2,7 @@
 
 ## brightnessctl
 
-[brightnessctl](https://wiki.archlinux.org/title/Backlight#brightnessctl) — control de brillo ligero para Linux. Funciona con backlights {ambient, keyboard, monitor, etc} bajo `/sys/class/backlight/`.
+[brightnessctl](https://github.com/Hummer12007/brightnessctl) — herramienta de línea de comandos para leer y ajustar el brillo de dispositivos en Linux. Modifica valores directamente en `/sys/class/backlight/`, por lo que funciona tanto en X11 como en Wayland (o sin servidor gráfico). Soporta backlights de pantalla, retroiluminación de teclado y LEDs.
 
 ```bash
 # Instalar brightnessctl
@@ -12,6 +12,7 @@ sudo pacman --sync brightnessctl
 ### Verificar dispositivo detectado
 
 ```bash
+# Muestra el dispositivo activo, brillo actual, máximo y clase
 brightnessctl info
 ```
 
