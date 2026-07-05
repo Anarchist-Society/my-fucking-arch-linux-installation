@@ -88,14 +88,6 @@ sudo plymouth-set-default-theme --rebuild-initrd <theme>
 sudo mkinitcpio -P
 ```
 
-## Desactivar Plymouth temporalmente
-
-Si algo falla, añade estos parámetros al kernel en Limine:
-
-```ini
-plymouth.enable=0 disablehooks=plymouth
-```
-
 ## Downgrade (bug conocido en v26)
 
 El hook `keymap` no funciona correctamente con Plymouth v26 (26.134.222-1 y -2). El prompt LUKS se muestra en inglés (US) aunque `KEYMAP=es` esté configurado. Solución: downgrade a v24.004.60-14.
