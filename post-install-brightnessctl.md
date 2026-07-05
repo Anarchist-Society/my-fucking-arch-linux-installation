@@ -9,6 +9,10 @@
 sudo pacman --sync brightnessctl
 ```
 
+| Paquete | Propósito |
+|---------|-----------|
+| `brightnessctl` | Control de brillo ligero vía /sys/class/backlight/ |
+
 ### Comandos básicos
 
 ```bash
@@ -26,10 +30,6 @@ brightnessctl set 10%-
 # Usar dispositivo específico (si hay varios)
 brightnessctl --device='amdgpu_bl1' set 50%
 ```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `brightnessctl` | Control de brillo ligero vía /sys/class/backlight/ |
 
 ### Atajo de teclado (Hyprland)
 
