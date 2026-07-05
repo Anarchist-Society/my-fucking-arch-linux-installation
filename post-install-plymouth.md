@@ -117,5 +117,7 @@ sudo vim /etc/pacman.conf
 rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
 ```
 
-Verifica la versión instalada: `pacman -Qi plymouth | grep Versión`
+```bash
+pacman -Q plymouth
+```
 
