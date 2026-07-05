@@ -361,7 +361,7 @@ vim /etc/mkinitcpio.conf
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
 ```bash
-HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
 ```
 
 | Hook | Propósito |
@@ -372,10 +372,9 @@ HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth
 | `microcode` | Aplica microcode de la CPU al arrancar |
 | `modconf` | Carga módulos adicionales desde `/etc/modprobe.d/` |
 | `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano |
-| `keyboard` | Carga módulos USB HID para teclados externos (Moonlander, etc.) |
+| `keyboard` | Carga el mapa de teclado para escribir la contraseña LUKS |
 | `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` |
 | `block` | Espera a que los dispositivos de bloque estén listos |
-| `plymouth` | Muestra un splash gráfico de arranque e integra el prompt LUKS de forma gráfica |
 | `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel |
 | `filesystems` | Monta el sistema de archivos raíz |
 | `fsck` | Comprueba integridad de los sistemas de archivos |
