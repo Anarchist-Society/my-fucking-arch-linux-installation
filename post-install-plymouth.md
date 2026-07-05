@@ -78,7 +78,7 @@ DeviceScale=2
 plymouth-set-default-theme --list
 
 # Cambiar tema y regenerar initramfs
-sudo plymouth-set-default-theme -R spinner  # -R = --rebuild-initrd
+sudo plymouth-set-default-theme --rebuild-initrd <theme>
 ```
 
 ## Regenerar initramfs
