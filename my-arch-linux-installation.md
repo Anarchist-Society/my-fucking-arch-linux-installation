@@ -484,6 +484,3 @@ cryptsetup close cryptroot
 reboot
 ```
 
----
-
-*Guía de instalación completada.*
