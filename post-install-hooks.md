@@ -22,7 +22,7 @@ Los drop-ins son archivos `.conf` que se fusionan con `/etc/mkinitcpio.conf` aut
 
 - `/etc/mkinitcpio.conf.d/*.conf` tiene **prioridad** sobre `/etc/mkinitcpio.conf`
 - Si varios drop-ins definen la misma variable, **gana el último alfabéticamente**
-- Puedes usar `--dropin /etc/mkinitcpio.conf.d/<nombre>.conf` al regenerar para usar un drop-in específico
+- Los drop-ins se cargan automáticamente al regenerar con `mkinitcpio -P`. Solo se ignoran si usas `-c/--config` para especificar un archivo de configuración distinto.
 
 ### Revisar configuraciones activas
 
