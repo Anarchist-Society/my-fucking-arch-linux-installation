@@ -60,16 +60,16 @@ DeviceScale=2
 
 | Tema | Descripción |
 |---|---|
-| `spinner` | Simple, con un spinner de carga |
 | `bgrt` | Similar a spinner pero con el logo del fabricante (OEM) |
+| `details` | Muestra mensajes de arranque detallados (útil para depuración) |
+| `fade-in` | Fundido con estrellas |
+| `glow` | Corporativo, con gráfico de progreso circular |
+| `script` | Tema basado en script, personalizable |
 | `solar` | Tema espacial con una estrella azul |
 | `spinfinity` | Símbolo de infinito giratorio |
-| `glow` | Corporativo, con gráfico de progreso circular |
-| `fade-in` | Fundido con estrellas |
-| `details` | Muestra mensajes de arranque detallados (útil para depuración) |
+| `spinner` | Simple, con un spinner de carga |
 | `text` | Versión textual, sin gráficos |
 | `tribar` | Barra de progreso triple |
-| `script` | Tema basado en script, personalizable |
 
 ```bash
 # Listar temas instalados
