@@ -52,6 +52,10 @@ HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth
 
 Consulta la [tabla de hooks en la guía principal](my-arch-linux-installation.md#initramfs) para la descripción detallada de cada uno.
 
+| Hook | Propósito |
+|---|---|
+| `plymouth` | Muestra un splash gráfico de arranque e integra el prompt LUKS de forma gráfica |
+
 ## Regenerar el initramfs
 
 Tras cualquier cambio en los hooks, regenera el initramfs:
