@@ -43,32 +43,6 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt 
 
 Consulta la [tabla de hooks en la guía principal](my-arch-linux-installation.md#initramfs) para la descripción detallada de cada uno.
 
-## Otras variantes
-
-### Con systemd (sd-encrypt)
-
-Si prefieres el initramfs basado en systemd en lugar de busybox:
-
-```
-HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole block sd-encrypt filesystems fsck)
-```
-
-| Hook busybox | Hook systemd | Diferencia |
-|---|---|---|
-| `udev` | `systemd` | systemd incluye udev internamente |
-| `keymap` + `consolefont` | `sd-vconsole` | Unificado en un solo hook |
-| `encrypt` | `sd-encrypt` | Soporta TPM2, FIDO2, keyfiles |
-
-### Con LVM
-
-Si usas LVM además de LUKS, añade `lvm2`:
-
-```
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block lvm2 encrypt filesystems fsck)
-```
-
-Requiere el paquete `lvm2`.
-
 ## Regenerar el initramfs
 
 Tras cualquier cambio en los hooks, regenera el initramfs:
