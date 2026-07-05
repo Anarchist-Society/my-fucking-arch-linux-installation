@@ -113,7 +113,7 @@ sudo pacman --upgrade plymouth-24.004.60-14-x86_64.pkg.tar.zst
 # Añade al final de /etc/pacman.conf: IgnorePkg = plymouth
 sudo vim /etc/pacman.conf
 
-Puedes eliminar el archivo descargado: `rm plymouth-24.004.60-14-x86_64.pkg.tar.zst`
+rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
 ```
 
 Verifica la versión instalada: `pacman -Qi plymouth | grep Versión`
