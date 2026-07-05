@@ -29,7 +29,7 @@ HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth
 |---|---|---|---|
 | `keyboard` | Antes de `autodetect` | Teclado externo USB: `autodetect` debe incluir los módulos USB HID | [Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio#Hook_list) |
 | `keymap` | Antes de `plymouth` | El layout español debe cargarse antes de Plymouth para que el prompt LUKS reconozca `KEYMAP=es` | [Omarchy issue #6072](https://github.com/basecamp/omarchy/issues/6072) |
-| `block` | Antes de `encrypt` | Los dispositivos de bloque deben estar disponibles antes de descifrar LUKS | [dm-crypt (Arch Wiki)](https://wiki.archlinux.org/title/Dm-crypt/System_configuration) |
+| `block` | Antes de `encrypt` | Los dispositivos de bloque deben estar disponibles antes de descifrar LUKS | [dm-crypt/System configuration#Examples (Arch Wiki)](https://wiki.archlinux.org/title/Dm-crypt/System_configuration#Examples) |
 | `plymouth` | Antes de `encrypt` | Muestra el prompt de contraseña LUKS de forma gráfica | [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth#mkinitcpio) |
 
 Para más información sobre el sistema de drop-ins, consulta la [guía de post-instalación de hooks](post-install-hooks.md).
