@@ -50,21 +50,7 @@ HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth
 
 ### Explicación de cada hook
 
-| Hook | Propósito |
-|---|---|
-| `base` | Carga módulos esenciales y utilidades mínimas del initramfs |
-| `udev` | Detecta hardware y carga módulos automáticamente |
-| `keyboard` | Carga módulos USB HID para teclados externos (Moonlander, etc.) |
-| `autodetect` | Reduce el initramfs incluyendo solo módulos del hardware presente |
-| `microcode` | Aplica microcode de la CPU al arrancar |
-| `modconf` | Carga módulos adicionales desde `/etc/modprobe.d/` |
-| `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano |
-| `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` |
-| `block` | Espera a que los dispositivos de bloque estén listos |
-| `plymouth` | Muestra un splash gráfico de arranque e integra el prompt LUKS de forma gráfica |
-| `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel |
-| `filesystems` | Monta el sistema de archivos raíz |
-| `fsck` | Comprueba integridad de los sistemas de archivos |
+Consulta la [tabla de hooks en la guía principal](my-arch-linux-installation.md#initramfs) para la descripción detallada de cada uno.
 
 ## Regenerar el initramfs
 
