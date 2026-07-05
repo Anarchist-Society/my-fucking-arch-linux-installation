@@ -78,7 +78,6 @@ lsinitcpio /boot/initramfs-linux.img
 
 ## Referencias
 
-- [Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio)
 - [Mkinitcpio#Configuration (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio#Configuration)
 - [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth)
 - [Linux console/Keyboard configuration (Arch Wiki)](https://wiki.archlinux.org/title/Linux_console/Keyboard_configuration)
