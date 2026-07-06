@@ -57,14 +57,40 @@ Crear el archivo `~/.config/hypr/hyprpaper.conf`:
 
 ```
 # ~/.config/hypr/hyprpaper.conf
-preload = ~/Pictures/wallpapers/mi-fondo.jpg
-wallpaper = , ~/Pictures/wallpapers/mi-fondo.jpg
+wallpaper {
+    monitor = 
+    path = ~/Pictures/Wallpapers/
+    timeout = 60
+}
 ```
 
 | Opción | Función |
 |--------|---------|
-| `preload` | Precarga la imagen en memoria para cambio instantáneo |
-| `wallpaper` | Asigna la imagen a un monitor (`MONITOR, ruta`). `,` aplica a todos los monitores |
+| `monitor` | Monitor específico (`DP-1`, `HDMI-A-1`) o vacío para todos |
+| `path` | Carpeta donde están los fondos de pantalla |
+| `timeout` | Segundos entre cambio de fondo (default: 30) |
+
+Hyprpaper rotará automáticamente entre todas las imágenes de la carpeta cada `timeout` segundos.
+
+### Modos de ajuste
+
+Agregar `fit` al bloque para controlar cómo se escalan las imágenes:
+
+```
+wallpaper {
+    monitor = 
+    path = ~/Pictures/Wallpapers/
+    timeout = 60
+    fit = cover
+}
+```
+
+| `fit` | Función |
+|-------|---------|
+| `cover` | Rellena el monitor (default, recorta bordes) |
+| `contain` | Muestra la imagen completa (puede haber bordes negros) |
+| `fill` | Estira la imagen para llenar todo |
+| `tile` | Repite la imagen en mosaico |
 
 ### Spawn con Hyprland
 
