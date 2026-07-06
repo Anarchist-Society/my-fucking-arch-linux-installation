@@ -47,3 +47,41 @@ sudo pacman --sync yazi
 |---------|-----------|
 | `yazi` | Gestor de archivos terminal con previsualización y atajos |
 
+## Bluetooth
+
+[Bluetooth](https://wiki.archlinux.org/title/Bluetooth) es un estándar para la interconexión inalámbrica de corto alcance. El soporte básico se habilita con `bluez` y se gestiona desde `bluetoothctl`.
+
+```bash
+# Instalar Bluetooth
+sudo pacman --sync bluez bluez-utils
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `bluez` | Pila de protocolo Bluetooth |
+| `bluez-utils` | Utilidades como `bluetoothctl` |
+
+### Habilitar servicio
+
+```bash
+# Habilitar e iniciar el servicio Bluetooth
+sudo systemctl enable --now bluetooth.service
+```
+
+### Emparejar dispositivos
+
+```bash
+# Abrir bluetoothctl
+bluetoothctl
+
+# Dentro de bluetoothctl:
+scan on          # Buscar dispositivos
+pair XX:XX:XX:XX  # Emparejar
+connect XX:XX:XX:XX  # Conectar
+trust XX:XX:XX:XX   # Confiar (para reconexión automática)
+```
+
+| Fuente | Enlace |
+|--------|--------|
+| ArchWiki — Bluetooth | https://wiki.archlinux.org/title/Bluetooth |
+
