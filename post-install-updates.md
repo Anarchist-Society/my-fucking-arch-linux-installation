@@ -5,6 +5,7 @@
 Actualizar paquetes y sistema con parámetros largos:
 
 ```bash
+# Actualizar el sistema
 sudo pacman --sync --refresh --sysupgrade
 ```
 
