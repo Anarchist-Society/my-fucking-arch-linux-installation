@@ -107,3 +107,12 @@ end)
 |--------|--------|
 | [Hyprland Wiki — Autostart](https://wiki.hypr.land/Configuring/Basics/Autostart) | `hl.on("hyprland.start", ...)` |
 | [Hyprland Wiki — hyprpaper](https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper) | systemd: `systemctl --user enable --now hyprpaper.service` |
+
+## Referencias
+
+| Documento | Enlace |
+|-----------|--------|
+| Hyprland Wiki — Autostart | https://wiki.hypr.land/Configuring/Basics/Autostart |
+| Hyprland Wiki — hyprpaper | https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper |
+| Hyprpaper GitHub | https://github.com/hyprwm/hyprpaper |
+| Hyprlauncher GitHub | https://github.com/hyprwm/hyprlauncher |
