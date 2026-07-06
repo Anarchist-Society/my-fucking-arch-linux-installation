@@ -48,5 +48,5 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | [Drivers gráficos](post-install-graphics.md) | Mesa + vulkan-radeon para AMD Radeon |
 | [Hyprland](post-install-hyprland.md) | Compositor Wayland + Hyprlauncher + Hyprpaper |
 | [Brillo](post-install-brightnessctl.md) | Control de retroiluminación con brightnessctl |
-| [Programas](post-install-programs.md) | Software adicional (opencode) |
+| [Programas](post-install-programs.md) | Software adicional (opencode, unzip) |
 
