@@ -92,11 +92,18 @@ wallpaper {
 | `fill` | Estira la imagen para llenar todo |
 | `tile` | Repite la imagen en mosaico |
 
-### Spawn con Hyprland
+### Autostart
+
+Hyprpaper debe ejecutarse al iniciar Hyprland. Agregar al archivo `~/.config/hypr/hyprland.lua`:
 
 ```lua
 -- ~/.config/hypr/hyprland.lua
-hl.spawn_along("hyprpaper")
+hl.on("hyprland.start", function()
+    hl.exec_cmd("hyprpaper")
+end)
 ```
 
-Hyprpaper arranca automáticamente junto con Hyprland al usar `spawn_along`.
+| Fuente | Método |
+|--------|--------|
+| [Hyprland Wiki — Autostart](https://wiki.hypr.land/Configuring/Basics/Autostart) | `hl.on("hyprland.start", ...)` |
+| [Hyprland Wiki — hyprpaper](https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper) | systemd: `systemctl --user enable --now hyprpaper.service` |
