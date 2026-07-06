@@ -8,7 +8,7 @@
 
 ## Brave Browser
 
-[Brave (Linux)](https://brave.com/linux/). Navegador web basado en Chromium con bloqueador de anuncios integrado, protección contra rastreo y énfasis en privacidad. Compatible con extensiones de Chrome.
+[Brave](https://brave.com/linux/) es un navegador web basado en Chromium con bloqueador de anuncios integrado, protección contra rastreo y énfasis en privacidad. Compatible con extensiones de Chrome.
 
 ```bash
 # Instalar Brave
@@ -21,7 +21,7 @@ paru --sync brave-bin
 
 ## LocalSend
 
-[LocalSend](https://localsend.org/). Aplicación de código abierto para compartir archivos entre dispositivos en la red local de forma peer-to-peer, sin servidor central. Multiplataforma (Linux, Windows, macOS, Android, iOS).
+[LocalSend](https://localsend.org/) es una aplicación de código abierto para compartir archivos entre dispositivos en la red local de forma peer-to-peer, sin servidor central. Multiplataforma (Linux, Windows, macOS, Android, iOS).
 
 ```bash
 # Instalar LocalSend
