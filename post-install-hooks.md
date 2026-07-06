@@ -1,6 +1,6 @@
 # Post-instalación: Hooks de mkinitcpio
 
-[Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio). Los hooks de mkinitcpio definen qué módulos y herramientas se incluyen en el initramfs — el sistema de archivos temporal que se carga en memoria al arrancar para montar la raíz y descifrar LUKS.
+[Mkinitcpio](https://wiki.archlinux.org/title/Mkinitcpio) es la herramienta que genera el **initramfs** — un sistema de archivos temporal que se carga en memoria durante el arranque. Contiene los módulos del kernel y las utilidades necesarias para acceder al sistema raíz, incluyendo el descifrado LUKS. Los hooks definen qué módulos y herramientas se incluyen en esta imagen.
 
 ## Drop-ins (`/etc/mkinitcpio.conf.d/`)
 
