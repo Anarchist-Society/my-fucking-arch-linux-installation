@@ -352,6 +352,8 @@ echo "fucking-archlinux" > /etc/hostname
 
 [Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio). El initramfs es un sistema de archivos temporal que se carga en memoria al arrancar. Contiene los módulos y herramientas necesarios para acceder al sistema raíz, incluyendo el descifrado LUKS.
 
+Los hooks de mkinitcpio son scripts que se ejecutan durante la construcción del initramfs y al arrancar. Cada hook realiza una tarea específica: cargar módulos, configurar dispositivos o preparar el sistema antes de montar la raíz. El orden importa — se ejecutan en secuencia y algunos dependen de otros.
+
 El hook [`encrypt`](https://wiki.archlinux.org/title/Mkinitcpio#Common_hooks) permite al initramfs descifrar LUKS usando el parámetro `cryptdevice=` del kernel.
 
 ```bash
@@ -362,7 +364,7 @@ vim /etc/mkinitcpio.conf
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
 ```ini
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
 ```
 
 | Hook | Propósito |
@@ -375,6 +377,7 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt 
 | `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano |
 | `keyboard` | Carga el mapa de teclado para escribir la contraseña LUKS |
 | `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` |
+| `consolefont` | Carga la fuente definida en `FONT=` de `/etc/vconsole.conf` en la consola durante el arranque |
 | `block` | Espera a que los dispositivos de bloque estén listos |
 | `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel |
 | `filesystems` | Monta el sistema de archivos raíz |
