@@ -1,5 +1,18 @@
 # Post-instalación: Programas
 
+## kitty
+
+[Terminal emulator](https://sw.kovidgoyal.net/kitty/) GPU-acelerado, rápido y personalizable. Soporta tabs, splits, imágenes inline y temas.
+
+```bash
+# Instalar kitty
+sudo pacman --sync kitty
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `kitty` | Terminal emulator GPU-acelerado con soporte de imágenes y personalización |
+
 ## opencode
 
 [CLI interactiva de IA](https://opencode.ai) para desarrollo de software. Ejecuta comandos, edita archivos y responde preguntas sobre el código directamente en la terminal.
