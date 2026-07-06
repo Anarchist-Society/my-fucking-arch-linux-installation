@@ -21,3 +21,16 @@ sudo pacman --sync unzip
 |---------|-----------|
 | `unzip` | Descompresión de archivos ZIP |
 
+## yazi
+
+[Gestor de archivos terminal](https://github.com/sxyazi/yazi) rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
+
+```bash
+# Instalar yazi
+sudo pacman --sync yazi
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `yazi` | Gestor de archivos terminal con previsualización y atajos |
+
