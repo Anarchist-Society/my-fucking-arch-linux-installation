@@ -2,6 +2,10 @@
 
 La [hibernación](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation) guarda el contenido de la RAM en el swap y apaga el equipo. Al encender, el kernel restaura el estado guardado. Requiere un [swapfile en btrfs](https://wiki.archlinux.org/title/Btrfs#Swap_file) del tamaño de la RAM, el hook `resume` en mkinitcpio y los parámetros `resume=` y `resume_offset=` en el cmdline del kernel.
 
+### Crear subvolumen y swapfile
+
+Btrfs requiere un subvolumen dedicado para alojar el swapfile, y el swapfile debe tener al menos el tamaño de la RAM (64 GB) para que quepa el contenido completo al hibernar.
+
 ```bash
 # Crear subvolumen Btrfs dedicado para swap
 sudo btrfs subvolume create /swap
@@ -12,23 +16,24 @@ sudo btrfs filesystem mkswapfile --size 64g --uuid clear /swap/swapfile
 
 ### Activar swap
 
+Hay que activar el swap para que el sistema pueda escribir en él durante la hibernación. La prioridad baja (`-p 0`) asegura que zram se use primero para swap normal, reservando este swapfile exclusivamente para hibernar.
+
 ```bash
-# Activar swap con prioridad baja para que zram se use primero
 sudo swapon -p 0 /swap/swapfile
 ```
 
 ### fstab
 
-Editar `/etc/fstab` con `vim` y añadir:
+Se añade a `/etc/fstab` para que el swap se active automáticamente en cada arranque.
 
 ```bash
 # Btrfs swapfile for system hibernation
 /swap/swapfile none swap defaults,pri=0 0 0
 ```
 
-### mkinitcpio
+### mkinitcpio (hook resume)
 
-Crear el fichero con `vim`:
+El hook `resume` en el initramfs es necesario para que el kernel pueda restaurar el estado del sistema desde el swap al encender después de una hibernación.
 
 ```bash
 # Crear el directorio de drop-ins si no existe
@@ -38,23 +43,23 @@ sudo mkdir --parents /etc/mkinitcpio.conf.d
 sudo vim /etc/mkinitcpio.conf.d/archlinux-resume.conf
 ```
 
-Añadir el hook `resume` al final:
+Contenido del archivo:
 
 ```bash
-# Añadir resume al final de HOOKS
 HOOKS+=(resume)
 ```
 
 ### Calcular el offset del swapfile
 
+En btrfs, el swapfile no está en una posición fija en el disco, por lo que el kernel necesita el offset físico para localizarlo al reanudar.
+
 ```bash
-# Obtener el offset físico necesario para resume_offset=
 sudo btrfs inspect-internal map-swapfile /swap/swapfile
 ```
 
-### Limine
+### Limine (parámetros del kernel)
 
-Editar `/boot/limine.conf` y añadir `resume=... resume_offset=...` al final del cmdline:
+Hay que pasarle al kernel la ruta del dispositivo de swap (`resume=`) y el offset físico (`resume_offset=`) para que sepa dónde está guardado el estado de hibernación.
 
 ```bash
 cmdline: ... resume=/dev/mapper/cryptroot resume_offset=<N>
@@ -62,17 +67,18 @@ cmdline: ... resume=/dev/mapper/cryptroot resume_offset=<N>
 
 ### Reconstruir initramfs
 
+Después de añadir el hook `resume` hay que regenerar el initramfs para que lo incluya.
+
 ```bash
-# Reconstruir initramfs con el hook resume
 sudo mkinitcpio -P
 ```
 
 ### Probar
 
+Verificar que la hibernación funciona correctamente:
+
 ```bash
-# Probar hibernación (guarda RAM en swap y apaga)
 systemctl hibernate
 
-# Probar suspensión (RAM, sin apagar)
 systemctl suspend
 ```
