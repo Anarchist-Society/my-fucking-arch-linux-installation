@@ -68,6 +68,7 @@ connect XX:XX:XX:XX
 
 # Confiar (para conexión automática,)
 trust XX:XX:XX:XX
+```
 
 ## unzip
 
