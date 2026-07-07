@@ -6,7 +6,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 
 ### kitty
 
-[Terminal emulator](https://sw.kovidgoyal.net/kitty/) GPU-acelerado, rápido y personalizable. Soporta tabs, splits, imágenes inline y temas.
+[Kitty](https://sw.kovidgoyal.net/kitty/) es un emulador de terminal con GPU-acelerado, rápido y personalizable. Soporta tabs, splits, imágenes inline y temas.
 
 ```bash
 # Instalar kitty
@@ -19,7 +19,7 @@ sudo pacman --sync kitty
 
 ### yazi
 
-[Gestor de archivos terminal](https://github.com/sxyazi/yazi) rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
+[yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de termianl, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
 
 ```bash
 # Instalar yazi
@@ -34,7 +34,7 @@ sudo pacman --sync yazi
 
 ### opencode
 
-[CLI interactiva de IA](https://opencode.ai) para desarrollo de software. Ejecuta comandos, edita archivos y responde preguntas sobre el código directamente en la terminal.
+[OpenCode](https://opencode.ai) es una CLI interactiva de IA para desarrollo de software. Ejecuta comandos, edita archivos y responde preguntas sobre el código directamente en la terminal.
 
 ```bash
 curl -fsSL https://opencode.ai/install | bash
@@ -44,7 +44,7 @@ curl -fsSL https://opencode.ai/install | bash
 
 ### unzip
 
-Herramienta para descomprimir archivos `.zip`. Esencial para extraer paquetes y archivos comprimidos.
+`unzip` es una herramienta para descomprimir archivos `.zip`. Esencial para extraer paquetes y archivos comprimidos.
 
 ```bash
 # Instalar unzip
