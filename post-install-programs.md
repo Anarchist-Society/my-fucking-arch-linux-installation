@@ -19,7 +19,7 @@ sudo pacman --sync kitty
 
 ### yazi
 
-[yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de termianl, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
+[yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
 
 ```bash
 # Instalar yazi
