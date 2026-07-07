@@ -1,5 +1,7 @@
 # Post-instalación: Programas
 
+Estos son los programas que uso en el sistema, ordenados por categoría.
+
 ## kitty
 
 [Terminal emulator](https://sw.kovidgoyal.net/kitty/) GPU-acelerado, rápido y personalizable. Soporta tabs, splits, imágenes inline y temas.
