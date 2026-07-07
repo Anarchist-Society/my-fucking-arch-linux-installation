@@ -26,6 +26,9 @@ Al hacer login en `tty1`, el shell ejecuta `.zprofile`. Ahí se detecta si es la
 
 ```bash
 # ~/.zprofile
+# -z "${WAYLAND_DISPLAY}" → true si NO hay sesión Wayland activa (evita bucles)
+# "${XDG_VTNR}" -eq 1      → true si estamos en tty1
+# exec Hyprland             → reemplaza el shell por Hyprland
 if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
   exec Hyprland
 fi
