@@ -487,4 +487,3 @@ cryptsetup close cryptroot
 # Reiniciar
 reboot
 ```
-

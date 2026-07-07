@@ -56,9 +56,16 @@ sudo systemctl enable --now bluetooth.service
 bluetoothctl
 
 # Dentro de bluetoothctl:
-scan on          # Buscar dispositivos
-pair XX:XX:XX:XX  # Emparejar
-connect XX:XX:XX:XX  # Conectar
-trust XX:XX:XX:XX   # Confiar (para reconexión automática)
-```
 
+# Buscar dispositivos
+scan on
+
+# Emparejar
+pair XX:XX:XX:XX
+
+# Conectar
+connect XX:XX:XX:XX
+
+# Confiar (para conexión automática,)
+trust XX:XX:XX:XX
+```

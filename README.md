@@ -50,4 +50,3 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | [Utilidades sistema](post-install-system-utilities.md) | Brillo y Bluetooth |
 | [Actualizaciones](post-install-updates.md) | Comando de actualización del sistema con parámetros largos |
 | [Programas](post-install-programs.md) | Software adicional |
-

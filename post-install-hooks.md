@@ -72,6 +72,3 @@ Tras cualquier cambio en los hooks, regenera el initramfs:
 # Regenerar el initramfs para aplicar los cambios
 sudo mkinitcpio -P
 ```
-
-
-
