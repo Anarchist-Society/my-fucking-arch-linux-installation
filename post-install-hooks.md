@@ -82,7 +82,6 @@ mkinitcpio -H encrypt
 # Listar módulos incluidos en la imagen actual
 mkinitcpio -M
 
-# Ver el contenido del initramfs
-lsinitcpio /boot/initramfs-linux.img
+
 ```
 
