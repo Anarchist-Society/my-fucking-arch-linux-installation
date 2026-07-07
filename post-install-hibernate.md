@@ -63,8 +63,10 @@ sudo btrfs inspect-internal map-swapfile /swap/swapfile
 
 Hay que pasarle al kernel la ruta del dispositivo de swap (`resume=`) y el offset físico (`resume_offset=`) para que sepa dónde está guardado el estado de hibernación. — [Suspend_and_hibernate#Hibernation](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation)
 
+Editar `/boot/limine.conf` y añadir al final de la línea `cmdline`:
+
 ```bash
-# Añadir resume y resume_offset al final de la línea cmdline en /boot/limine.conf
+# /boot/limine.conf
 cmdline: ... resume=/dev/mapper/cryptroot resume_offset=<N>
 ```
 
