@@ -4,14 +4,14 @@ La [hibernación](https://wiki.archlinux.org/title/Power_management/Suspend_and_
 
 ### Crear subvolumen y swapfile
 
-Btrfs requiere un subvolumen dedicado para alojar el swapfile, y el swapfile debe tener al menos el tamaño de la RAM (64 GB) para que quepa el contenido completo al hibernar. — [Btrfs#Swap_file](https://wiki.archlinux.org/title/Btrfs#Swap_file)
+Btrfs requiere un subvolumen dedicado para alojar el swapfile, y el swapfile debe tener al menos el tamaño de la RAM (60 GiB) para que quepa el contenido completo al hibernar. — [Btrfs#Swap_file](https://wiki.archlinux.org/title/Btrfs#Swap_file)
 
 ```bash
 # Crear subvolumen Btrfs dedicado para swap
 sudo btrfs subvolume create /swap
 
 # Crear swapfile del tamaño exacto de la RAM
-sudo btrfs filesystem mkswapfile --size 64g --uuid clear /swap/swapfile
+sudo btrfs filesystem mkswapfile --size 60g --uuid clear /swap/swapfile
 ```
 
 ### Activar swap
