@@ -28,7 +28,7 @@ sudo swapon /swap/swapfile
 Se añade a `/etc/fstab` para que el swap se active automáticamente en cada arranque. — [Fstab](https://wiki.archlinux.org/title/Fstab)
 
 ```bash
-# Btrfs swapfile for system hibernation
+# Añadir entrada de swap al fstab para montaje automático al arrancar
 /swap/swapfile none swap defaults,pri=0 0 0
 ```
 
@@ -55,6 +55,7 @@ HOOKS+=(resume)
 En btrfs, el swapfile no está en una posición fija en el disco, por lo que el kernel necesita el offset físico para localizarlo al reanudar. — [Btrfs#Swap_file](https://wiki.archlinux.org/title/Btrfs#Swap_file)
 
 ```bash
+# Obtener el offset físico del swapfile para el parámetro resume_offset=
 sudo btrfs inspect-internal map-swapfile /swap/swapfile
 ```
 
@@ -63,6 +64,7 @@ sudo btrfs inspect-internal map-swapfile /swap/swapfile
 Hay que pasarle al kernel la ruta del dispositivo de swap (`resume=`) y el offset físico (`resume_offset=`) para que sepa dónde está guardado el estado de hibernación. — [Kernel_parameters](https://wiki.archlinux.org/title/Kernel_parameters)
 
 ```bash
+# Añadir resume y resume_offset al final de la línea cmdline en /boot/limine.conf
 cmdline: ... resume=/dev/mapper/cryptroot resume_offset=<N>
 ```
 
@@ -71,6 +73,7 @@ cmdline: ... resume=/dev/mapper/cryptroot resume_offset=<N>
 Después de añadir el hook `resume` hay que regenerar el initramfs para que lo incluya. — [Mkinitcpio](https://wiki.archlinux.org/title/Mkinitcpio)
 
 ```bash
+# Reconstruir initramfs para incluir el nuevo hook resume
 sudo mkinitcpio -P
 ```
 
@@ -79,7 +82,9 @@ sudo mkinitcpio -P
 Verificar que la hibernación funciona correctamente: — [Power_management/Suspend_and_hibernate](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate)
 
 ```bash
+# Probar hibernación (guarda la RAM en el swap y apaga el equipo)
 systemctl hibernate
 
+# Probar suspensión (mantiene la RAM encendida, consumo mínimo)
 systemctl suspend
 ```
