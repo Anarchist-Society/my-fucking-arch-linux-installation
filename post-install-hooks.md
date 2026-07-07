@@ -35,7 +35,7 @@ ls /etc/mkinitcpio.conf.d/
 
 ```ini
 # /etc/mkinitcpio.conf.d/archlinux-hooks.conf
-HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems fsck)
 ```
 
 ### Justificación del orden
