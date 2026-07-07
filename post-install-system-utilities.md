@@ -82,4 +82,3 @@ sudo pacman --sync unzip
 | Paquete | Propósito |
 |---------|-----------|
 | `unzip` | Descompresión de archivos ZIP |
-```
