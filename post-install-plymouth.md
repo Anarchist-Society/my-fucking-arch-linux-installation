@@ -29,7 +29,6 @@ Si también usas hibernación, `resume` debe ir después de `filesystems`. Consu
 | Hook | Posición | Motivo | Referencia |
 |---|---|---|---|
 | `plymouth` | Antes de `encrypt` | Muestra el prompt de contraseña LUKS de forma gráfica | [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth#mkinitcpio) |
-| `resume` | Después de `filesystems` | Debe ir después de `encrypt` en sistemas dm-crypt; el ejemplo oficial lo sitúa tras `filesystems` | [Suspend and hibernate (Arch Wiki)](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Configure_the_initramfs) |
 
 Para más información sobre el sistema de drop-ins, consulta la [guía de post-instalación de hooks](post-install-hooks.md).
 
