@@ -62,6 +62,3 @@ connect XX:XX:XX:XX  # Conectar
 trust XX:XX:XX:XX   # Confiar (para reconexión automática)
 ```
 
-| Fuente | Enlace |
-|--------|--------|
-| ArchWiki — Bluetooth | https://wiki.archlinux.org/title/Bluetooth |
