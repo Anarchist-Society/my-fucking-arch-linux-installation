@@ -1,6 +1,6 @@
 # Post-instalación: SDDM (display manager)
 
-[SDDM (Simple Desktop Display Manager)](https://wiki.archlinux.org/title/SDDM) es el gestor de sesiones gráfico que muestra la pantalla de inicio de sesión. Omarchy lo recomienda por su compatibilidad con Hyprland y Wayland.
+[SDDM (Simple Desktop Display Manager)](https://wiki.archlinux.org/title/SDDM) es el gestor de sesiones gráfico que muestra la pantalla de inicio de sesión. Es compatible con Hyprland y Wayland.
 
 ```bash
 # Instalar SDDM
@@ -13,7 +13,7 @@ sudo pacman --sync sddm
 
 ## Autologin
 
-SDDM soporta inicio de sesión automático mediante un archivo de configuración. Se usan **drop-ins** en `/etc/sddm.conf.d/` en lugar de modificar el archivo principal, siguiendo el enfoque de [Omarchy](https://github.com/basecamp/omarchy/blob/dev/install/login/sddm.sh):
+SDDM soporta inicio de sesión automático mediante un archivo de configuración. Se usan **drop-ins** en `/etc/sddm.conf.d/` en lugar de modificar el archivo principal:
 
 ```bash
 # Crear el directorio de drop-ins si no existe
@@ -58,8 +58,6 @@ Para evitar que se cree un llavero de claves cifradas al iniciar sesión con aut
 sudo sed -i '/-auth.*pam_gnome_keyring\.so/d' /etc/pam.d/sddm
 sudo sed -i '/-password.*pam_gnome_keyring\.so/d' /etc/pam.d/sddm
 ```
-
-Esto es lo que hace [Omarchy por defecto](https://github.com/basecamp/omarchy/blob/dev/install/login/sddm.sh).
 
 ## Verificar
 
