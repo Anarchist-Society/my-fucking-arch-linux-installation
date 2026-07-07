@@ -19,6 +19,7 @@ sudo btrfs filesystem mkswapfile --size 64g --uuid clear /swap/swapfile
 Hay que activar el swap para que el sistema pueda escribir en él durante la hibernación.
 
 ```bash
+# Activar swap para hibernación
 sudo swapon /swap/swapfile
 ```
 
