@@ -4,7 +4,26 @@
 
 [AUR](https://wiki.archlinux.org/title/Arch_User_Repository) es un repositorio comunitario donde los usuarios comparten [PKGBUILDs](https://wiki.archlinux.org/title/PKGBUILD) para instalar software no incluido en los repositorios oficiales de Arch. A diferencia de `pacman`, que instala binarios precompilados, los paquetes AUR se compilan desde el código fuente en tu máquina.
 
-> **Nota:** Necesitas [paru](post-install-paru.md) instalado para seguir estos pasos. No ejecutes `paru` como root — aunque el comando `paru --sync` se asemeja a `pacman --sync`, internamente compila desde fuente con `makepkg`, y este no debe ejecutarse como root por seguridad.
+## Paru (AUR helper)
+
+[Paru](https://github.com/Morganamilo/paru) es un asistente para AUR escrito en Rust, sucesor de yay. Permite instalar paquetes desde los repositorios oficiales y desde AUR con un solo comando.
+
+```bash
+# Instalar dependencias de compilación
+sudo pacman -S --needed base-devel git
+
+# Clonar y compilar paru desde AUR
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg --syncdeps --install --clean
+```
+
+Paru sincroniza automáticamente la base de datos de paquetes con `--syncdeps` y elimina los fuentes tras la instalación con `--clean`.
+
+| Paquete | Propósito |
+|---------|-----------|
+| `base-devel` | Herramientas de compilación (make, gcc, pkg-config, etc.) necesarias para `makepkg` |
+| `git` | Sistema de control de versiones, necesario para clonar el repositorio de paru |
 
 ## Brave Browser
 

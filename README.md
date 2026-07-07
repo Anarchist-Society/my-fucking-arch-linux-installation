@@ -43,7 +43,7 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | [zram](post-install-zram.md) | Swap comprimido en RAM con zram-generator |
 | [Hibernación](post-install-hibernate.md) | Swapfile en btrfs, resume hook y resume_offset |
 | [Usuarios](post-install-users.md) | Creación de usuario no-root y sudo |
-| [Paru](post-install-paru.md) | Instalación del helper AUR desde fuente |
+| [AUR](post-install-aur.md) | Helper AUR y paquetes AUR |
 | [AUR](post-install-aur.md) | Paquetes desde AUR (Brave, LocalSend) |
 | [Drivers gráficos](post-install-graphics.md) | Mesa + vulkan-radeon para AMD Radeon |
 | [Hyprland](post-install-hyprland.md) | Compositor Wayland + Hyprlauncher + Hyprpaper |
