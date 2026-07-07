@@ -13,7 +13,7 @@ sudo pacman --sync zram-generator
 |---------|-----------|
 | `zram-generator` | Generador de unidades systemd para configurar dispositivos zram en cada arranque |
 
-Hay que crear el archivo `/etc/systemd/zram-generator.conf`:
+Hay que crear el archivo `/etc/systemd/zram-generator.conf` porque así lo dice la [ArchWiki](https://wiki.archlinux.org/title/Zram#Using_zram-generator):
 
 ```ini
 # /etc/systemd/zram-generator.conf
