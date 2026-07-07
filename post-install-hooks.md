@@ -73,15 +73,5 @@ Tras cualquier cambio en los hooks, regenera el initramfs:
 sudo mkinitcpio -P
 ```
 
-## Verificar hooks y módulos
 
-```bash
-# Ayuda de un hook específico
-mkinitcpio -H encrypt
-
-# Listar módulos incluidos en la imagen actual
-mkinitcpio -M
-
-
-```
 
