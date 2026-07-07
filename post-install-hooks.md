@@ -31,20 +31,14 @@ Los drop-ins son archivos `.conf` que se fusionan con `/etc/mkinitcpio.conf` aut
 ls /etc/mkinitcpio.conf.d/
 ```
 
-## Configuración completa para LUKS + btrfs + Plymouth + hibernación
-
-Usar múltiples drop-ins que definan `HOOKS=(...)` hace que el último alfabéticamente sobrescriba a los anteriores. Para evitarlo, se usa un solo drop-in con todos los hooks, usando prefijo `zzz` para que sea el último en cargarse y no sea sobrescrito:
+## Configuración base para LUKS + btrfs + Plymouth + hibernación
 
 ```ini
-# /etc/mkinitcpio.conf.d/zzz-hooks.conf
+# /etc/mkinitcpio.conf.d/archlinux-hooks.conf
 HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems resume fsck)
 ```
 
-Eliminar cualquier otro drop-in que defina `HOOKS` para evitar conflictos:
-
-```bash
-sudo rm /etc/mkinitcpio.conf.d/archlinux-hooks.conf /etc/mkinitcpio.conf.d/plymouth.conf /etc/mkinitcpio.conf.d/archlinux-resume.conf 2>/dev/null
-```
+> **Nota**: Si usas múltiples drop-ins que definan `HOOKS=(...)`, el último alfabéticamente sobrescribe a los anteriores. Se recomienda usar un solo archivo para evitar conflictos.
 
 ### Orden de los hooks
 
