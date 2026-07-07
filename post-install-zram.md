@@ -18,9 +18,7 @@ Hay que crear el archivo `/etc/systemd/zram-generator.conf`:
 ```ini
 # /etc/systemd/zram-generator.conf
 [zram0]
-# Por defecto usa zstd (óptimo), y el tamaño máximo son 4 GiB.
-# Para 64 GB de RAM se recomienda ampliar el límite:
-zram-size = min(ram / 2, 16384)
+compression-algorithm = zstd
 ```
 
 Arrancar el servicio:
