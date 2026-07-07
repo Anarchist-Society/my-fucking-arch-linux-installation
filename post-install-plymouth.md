@@ -92,7 +92,7 @@ sudo mkinitcpio -P
 
 El hook `keymap` no funciona correctamente con Plymouth v26 (26.134.222-1 y -2). El prompt LUKS se muestra en inglés (US) aunque `KEYMAP=es` esté configurado. Solución: downgrade a v24.004.60-14.
 
-Más información: [Foro Arch Linux](https://bbs.archlinux.org/viewtopic.php?id=313743) — [Bug upstream](https://gitlab.freedesktop.org/plymouth/plymouth/-/work_items/337)
+Más información: [Foro Arch Linux](https://bbs.archlinux.org/viewtopic.php?id=313743) — [Bug upstream](https://gitlab.freedesktop.org/plymouth/plymouth/-/work_items/337) — [Omarchy #6072](https://github.com/basecamp/omarchy/issues/6072)
 
 ```bash
 # Descargar v24 desde Arch Archive
