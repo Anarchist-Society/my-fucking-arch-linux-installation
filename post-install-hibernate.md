@@ -16,10 +16,10 @@ sudo btrfs filesystem mkswapfile --size 64g --uuid clear /swap/swapfile
 
 ### Activar swap
 
-Hay que activar el swap para que el sistema pueda escribir en él durante la hibernación. La prioridad baja (`-p 0`) asegura que zram se use primero para swap normal, reservando este swapfile exclusivamente para hibernar.
+Hay que activar el swap para que el sistema pueda escribir en él durante la hibernación.
 
 ```bash
-sudo swapon -p 0 /swap/swapfile
+sudo swapon /swap/swapfile
 ```
 
 ### fstab
