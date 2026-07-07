@@ -61,7 +61,7 @@ sudo btrfs inspect-internal map-swapfile /swap/swapfile
 
 ### Limine (parámetros del kernel)
 
-Hay que pasarle al kernel la ruta del dispositivo de swap (`resume=`) y el offset físico (`resume_offset=`) para que sepa dónde está guardado el estado de hibernación. — [Kernel_parameters](https://wiki.archlinux.org/title/Kernel_parameters)
+Hay que pasarle al kernel la ruta del dispositivo de swap (`resume=`) y el offset físico (`resume_offset=`) para que sepa dónde está guardado el estado de hibernación. — [Kernel_parameters](https://wiki.archlinux.org/title/Kernel_parameters), [Limine CONFIG.md](https://github.com/limine-bootloader/limine/blob/master/CONFIG.md)
 
 ```bash
 # Añadir resume y resume_offset al final de la línea cmdline en /boot/limine.conf
