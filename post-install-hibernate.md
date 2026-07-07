@@ -7,7 +7,7 @@ La [hibernación](https://wiki.archlinux.org/title/Power_management/Suspend_and_
 sudo btrfs subvolume create /swap
 
 # Crear swapfile del tamaño exacto de la RAM
-sudo btrfs filesystem mkswapfile --size 60g --uuid clear /swap/swapfile
+sudo btrfs filesystem mkswapfile --size 64g --uuid clear /swap/swapfile
 ```
 
 ### Activar swap
