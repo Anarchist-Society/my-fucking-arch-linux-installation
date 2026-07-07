@@ -13,12 +13,14 @@ sudo pacman --sync zram-generator
 |---------|-----------|
 | `zram-generator` | Generador de unidades systemd para configurar dispositivos zram en cada arranque |
 
-Crear `/etc/systemd/zram-generator.conf`:
+Hay que crear el archivo `/etc/systemd/zram-generator.conf`:
 
 ```ini
+# /etc/systemd/zram-generator.conf
 [zram0]
-# Algoritmo de compresión: buena relación velocidad/tasa de compresión
-compression-algorithm = zstd
+# Por defecto usa zstd (óptimo), y el tamaño máximo son 4 GiB.
+# Para 64 GB de RAM se recomienda ampliar el límite:
+zram-size = min(ram / 2, 16384)
 ```
 
 Arrancar el servicio:
