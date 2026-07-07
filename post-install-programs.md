@@ -40,17 +40,3 @@ sudo pacman --sync yazi
 curl -fsSL https://opencode.ai/install | bash
 ```
 
-## Sistema
-
-### unzip
-
-`unzip` es una herramienta para descomprimir archivos `.zip`. Esencial para extraer paquetes y archivos comprimidos.
-
-```bash
-# Instalar unzip
-sudo pacman --sync unzip
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `unzip` | Descompresión de archivos ZIP |

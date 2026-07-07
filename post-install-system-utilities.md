@@ -68,4 +68,17 @@ connect XX:XX:XX:XX
 
 # Confiar (para conexión automática,)
 trust XX:XX:XX:XX
+
+## unzip
+
+`unzip` es una herramienta para descomprimir archivos `.zip`. Esencial para extraer paquetes y archivos comprimidos.
+
+```bash
+# Instalar unzip
+sudo pacman --sync unzip
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `unzip` | Descompresión de archivos ZIP |
 ```
