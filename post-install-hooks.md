@@ -55,6 +55,15 @@ Consulta la [tabla de hooks en la guía principal](my-arch-linux-installation.md
 |---|---|
 | `plymouth` | Muestra un splash gráfico de arranque e integra el prompt LUKS de forma gráfica |
 
+## Configuración para hibernación
+
+```ini
+# /etc/mkinitcpio.conf.d/archlinux-resume.conf
+HOOKS+=(resume)
+```
+
+El hook `resume` es necesario para hibernar. Consulta [Hibernación](post-install-hibernate.md) para la configuración completa del swapfile y parámetros del kernel.
+
 ## Regenerar el initramfs
 
 Tras cualquier cambio en los hooks, regenera el initramfs:
