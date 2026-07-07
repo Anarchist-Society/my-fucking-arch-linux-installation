@@ -36,18 +36,25 @@ Se añade a `/etc/fstab` para que el swap se active automáticamente en cada arr
 
 El hook `resume` en el initramfs es necesario para que el kernel pueda restaurar el estado del sistema desde el swap al encender después de una hibernación. — [Mkinitcpio#HOOKS](https://wiki.archlinux.org/title/Mkinitcpio#HOOKS)
 
+Según la [ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Configure_the_initramfs), en sistemas con cifrado (dm-crypt) el hook `resume` debe colocarse **después del hook `encrypt`**. El ejemplo oficial para sistemas sin cifrar lo sitúa tras `filesystems`, por lo que el orden completo con LUKS + Plymouth queda:
+
+```init
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems resume fsck)
+```
+
+Para evitar conflictos entre múltiples drop-ins, se usa un solo archivo con prefijo `zzz` que contenga todos los hooks:
+
 ```bash
 # Crear el directorio de drop-ins si no existe
 sudo mkdir --parents /etc/mkinitcpio.conf.d
 
-# Editar con vim (se crea automáticamente al guardar)
-sudo vim /etc/mkinitcpio.conf.d/archlinux-resume.conf
-```
+# Crear drop-in único con todos los hooks (incluyendo resume)
+sudo tee /etc/mkinitcpio.conf.d/zzz-hooks.conf << 'EOF'
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems resume fsck)
+EOF
 
-Contenido del archivo:
-
-```init
-HOOKS+=(resume)
+# Eliminar drop-ins redundantes que definan HOOKS
+sudo rm /etc/mkinitcpio.conf.d/archlinux-hooks.conf /etc/mkinitcpio.conf.d/plymouth.conf /etc/mkinitcpio.conf.d/archlinux-resume.conf 2>/dev/null
 ```
 
 ### Calcular el offset del swapfile

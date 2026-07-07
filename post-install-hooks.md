@@ -31,38 +31,34 @@ Los drop-ins son archivos `.conf` que se fusionan con `/etc/mkinitcpio.conf` aut
 ls /etc/mkinitcpio.conf.d/
 ```
 
-## Configuración base para LUKS + btrfs
+## Configuración completa para LUKS + btrfs + Plymouth + hibernación
+
+Usar múltiples drop-ins que definan `HOOKS=(...)` hace que el último alfabéticamente sobrescriba a los anteriores. Para evitarlo, se usa un solo drop-in con todos los hooks, usando prefijo `zzz` para que sea el último en cargarse y no sea sobrescrito:
 
 ```ini
-# /etc/mkinitcpio.conf.d/archlinux-hooks.conf
-HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems fsck)
+# /etc/mkinitcpio.conf.d/zzz-hooks.conf
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems resume fsck)
 ```
 
-### Justificación del orden
+Eliminar cualquier otro drop-in que defina `HOOKS` para evitar conflictos:
+
+```bash
+sudo rm /etc/mkinitcpio.conf.d/archlinux-hooks.conf /etc/mkinitcpio.conf.d/plymouth.conf /etc/mkinitcpio.conf.d/archlinux-resume.conf 2>/dev/null
+```
+
+### Orden de los hooks
 
 | Hook | Posición | Motivo | Referencia |
 |---|---|---|---|
 | `keyboard` | Antes de `autodetect` | Teclado externo USB: `autodetect` debe incluir los módulos USB HID | [Mkinitcpio (Arch Wiki)](https://wiki.archlinux.org/title/Mkinitcpio#Hook_list) |
-| `keymap` | Antes de `plymouth` | El layout español debe cargarse antes de Plymouth para que el prompt LUKS reconozca `KEYMAP=es` | [Omarchy issue #6072](https://github.com/basecamp/omarchy/issues/6072) |
 | `block` | Antes de `encrypt` | Los dispositivos de bloque deben estar disponibles antes de descifrar LUKS | [dm-crypt/System configuration#Examples (Arch Wiki)](https://wiki.archlinux.org/title/Dm-crypt/System_configuration#Examples) |
 | `plymouth` | Antes de `encrypt` | Muestra el prompt de contraseña LUKS de forma gráfica | [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth#mkinitcpio) |
+| `resume` | Después de `filesystems` | Debe ir después de `encrypt` (dm-crypt) y después de `filesystems` (orden del ejemplo oficial) | [Power management/Suspend and hibernate#Configure the initramfs](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Configure_the_initramfs) |
+| `keymap` | Antes de `consolefont` | El layout español debe cargarse antes de Plymouth | [Omarchy issue #6072](https://github.com/basecamp/omarchy/issues/6072) |
 
 ### Explicación de cada hook
 
 Consulta la [tabla de hooks en la guía principal](my-arch-linux-installation.md#initramfs) para la descripción detallada de cada uno.
-
-| Hook | Propósito |
-|---|---|
-| `plymouth` | Muestra un splash gráfico de arranque e integra el prompt LUKS de forma gráfica |
-
-## Configuración para hibernación
-
-```ini
-# /etc/mkinitcpio.conf.d/archlinux-resume.conf
-HOOKS+=(resume)
-```
-
-El hook `resume` es necesario para hibernar. Consulta [Hibernación](post-install-hibernate.md) para la configuración completa del swapfile y parámetros del kernel.
 
 ## Regenerar el initramfs
 

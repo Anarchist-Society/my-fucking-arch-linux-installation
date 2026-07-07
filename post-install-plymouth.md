@@ -15,16 +15,19 @@ Este procedimiento se realiza según lo indicado en la [ArchWiki — Plymouth#mk
 
 Plymouth se incluye como hook en mkinitcpio para que su binario y tema estén disponibles en el initramfs antes de montar la raíz. Para más información sobre drop-ins y el sistema de hooks, consulta la [guía de post-instalación de hooks](post-install-hooks.md).
 
-Añade el hook `plymouth` **antes de `encrypt`** mediante un drop-in:
+Añade el hook `plymouth` **antes de `encrypt`** dentro del drop-in único de hooks. Si también usas hibernación, unifica todo en un solo archivo para evitar que múltiples drop-ins se sobrescriban entre sí:
 
 ```bash
-# Crear el drop-in para Plymouth
-sudo vim /etc/mkinitcpio.conf.d/plymouth.conf
-```
+# Crear el directorio de drop-ins si no existe
+sudo mkdir --parents /etc/mkinitcpio.conf.d
 
-```ini
-# /etc/mkinitcpio.conf.d/plymouth.conf
-HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth encrypt filesystems fsck)
+# Drop-in único con todos los hooks (plymouth antes de encrypt, resume después de filesystems)
+sudo tee /etc/mkinitcpio.conf.d/zzz-hooks.conf << 'EOF'
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems resume fsck)
+EOF
+
+# Eliminar drop-ins redundantes
+sudo rm /etc/mkinitcpio.conf.d/archlinux-hooks.conf /etc/mkinitcpio.conf.d/plymouth.conf /etc/mkinitcpio.conf.d/archlinux-resume.conf 2>/dev/null
 ```
 
 ### Justificación del orden
@@ -32,6 +35,7 @@ HOOKS=(base udev keyboard autodetect microcode modconf kms keymap block plymouth
 | Hook | Posición | Motivo | Referencia |
 |---|---|---|---|
 | `plymouth` | Antes de `encrypt` | Muestra el prompt de contraseña LUKS de forma gráfica | [Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth#mkinitcpio) |
+| `resume` | Después de `filesystems` | Debe ir después de `encrypt` en sistemas dm-crypt; el ejemplo oficial lo sitúa tras `filesystems` | [Suspend and hibernate (Arch Wiki)](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Configure_the_initramfs) |
 
 Para más información sobre el sistema de drop-ins, consulta la [guía de post-instalación de hooks](post-install-hooks.md).
 
