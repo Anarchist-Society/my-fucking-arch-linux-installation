@@ -46,7 +46,7 @@ sudo vim /etc/mkinitcpio.conf.d/archlinux-resume.conf
 
 Contenido del archivo:
 
-```bash
+```init
 HOOKS+=(resume)
 ```
 
