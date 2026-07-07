@@ -71,7 +71,7 @@ trust XX:XX:XX:XX
 
 ## unzip
 
-`unzip` es una herramienta para descomprimir archivos `.zip`. Esencial para extraer paquetes y archivos comprimidos.
+`unzip` es una herramienta para descomprimir archivos `.zip`. Es esencial para extraer paquetes y archivos comprimidos.
 
 ```bash
 # Instalar unzip
