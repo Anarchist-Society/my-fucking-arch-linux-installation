@@ -1,6 +1,6 @@
 # Post-instalación: Usuarios
 
-[Sudo (Arch Wiki)](https://wiki.archlinux.org/title/Sudo). Creación de usuario y configuración de sudo mediante `sudoers.d` sin grupo `wheel`, siguiendo el principio de mínimos privilegios.
+[Sudo](https://wiki.archlinux.org/title/Sudo) es un programa para ejecutar comandos con privilegios elevados mediante `sudoers.d` sin grupo `wheel`, siguiendo el principio de mínimos privilegios.
 
 ```bash
 # Instalar sudo
