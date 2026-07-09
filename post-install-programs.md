@@ -30,6 +30,19 @@ sudo pacman --sync yazi
 |---------|-----------|
 | `yazi` | Gestor de archivos terminal con previsualización y atajos |
 
+### btop
+
+[btop](https://github.com/aristocratos/btop) es un monitor de sistema con interfaz gráfica en terminal. Muestra CPU, RAM, discos, red y procesos en tiempo real.
+
+```bash
+# Instalar btop
+sudo pacman --sync btop
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `btop` | Monitor de sistema con interfaz visual en terminal |
+
 ## Desarrollo
 
 ### opencode
