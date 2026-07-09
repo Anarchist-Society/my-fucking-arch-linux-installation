@@ -388,7 +388,15 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont bl
 mkinitcpio -P
 ```
 
-> Una vez reiniciado el sistema, puedes gestionar los hooks mediante drop-ins en `/etc/mkinitcpio.conf.d/` siguiendo la [guía de post-instalación de hooks](post-install-hooks.md).
+### Orden de los hooks
+
+El orden en la línea `HOOKS=(...)` importa — algunos hooks necesitan ejecutarse antes que otros:
+
+| Hook | Posición | Motivo |
+|------|----------|--------|
+| `keyboard` | Antes de `autodetect` | Teclado externo USB: `autodetect` debe incluir los módulos USB HID |
+| `block` | Antes de `encrypt` | Los dispositivos de bloque deben estar listos antes de descifrar LUKS |
+| `keymap` | Antes de `consolefont` | El layout español debe cargarse antes que la fuente |
 
 ## Configurar el bootloader (Limine)
 
