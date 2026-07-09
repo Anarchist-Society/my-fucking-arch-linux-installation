@@ -490,6 +490,22 @@ reboot
 
 ---
 
+## Gráficos (AMDGPU)
+
+[AMDGPU (Arch Wiki)](https://wiki.archlinux.org/title/AMDGPU) es el driver oficial para GPUs Radeon modernas (incluyendo la Radeon 780M del Ryzen 8845HS). OpenGL, Vulkan y aceleración de video (VA-API/VDPAU) están incluidos en mesa.
+
+```bash
+# Instalar drivers gráficos AMD
+sudo pacman --sync mesa vulkan-radeon
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `mesa` | OpenGL, Vulkan y VA-API |
+| `vulkan-radeon` | Driver Vulkan específico para AMD |
+
+---
+
 ## Audio (PipeWire + WirePlumber)
 
 [PipeWire](https://wiki.archlinux.org/title/PipeWire) es un servidor multimedia que gestiona flujos de audio y vídeo en Linux. A diferencia de ALSA (nivel de kernel) y PulseAudio (servidor de sonido tradicional), PipeWire ofrece baja latencia, gestión segura de permisos (esencial en Wayland) y manejo unificado de audio y vídeo mediante un grafo de nodos enrutables.
