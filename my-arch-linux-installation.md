@@ -179,16 +179,12 @@ cryptsetup open /dev/nvme0n1p2 cryptroot
 
 ### Crear la estructura btrfs
 
-[btrfs](https://wiki.archlinux.org/title/Btrfs) permite snapshots, compresión transparente, sumas de verificación para integridad de datos, y subvolúmenes. Uso un layout plano (`@`, `@home`, `@log`, `@pkg` — no anidados) porque es más flexible y evita problemas al restaurar snapshots.
+[btrfs](https://wiki.archlinux.org/title/Btrfs) permite compresión transparente, sumas de verificación para integridad de datos y subvolúmenes. Uso layout plano (`@`, `@home`) separando datos del sistema de los del usuario.
 
-La separación en subvolúmenes independientes sigue [el layout por defecto de archinstall](https://archinstall.archlinux.page/cli_parameters/config/disk_config.html#btrfs) (`@`, `@home`, `@log`, `@pkg`). Cada subvolumen se monta, snapshotea y restaura por separado:
-
-| Subvolumen | Montaje | Por qué separado |
-|---|---|---|
-| `@` | `/` | Raíz del sistema |
-| `@home` | `/home` | Tus datos no se pierden al restaurar snapshots de `@` |
-| `@log` | `/var/log` | Logs volátiles, excluirlos evita snapshots enormes |
-| `@pkg` | `/var/cache/pacman/pkg` | Caché de paquetes (GBs), innecesaria en snapshots de raíz |
+| Subvolumen | Montaje |
+|---|---|
+| `@` | `/` |
+| `@home` | `/home` |
 
 ```bash
 # Formatear volumen cifrado como btrfs
@@ -206,12 +202,6 @@ btrfs subvolume create /mnt/@
 
 # Subvolumen /home
 btrfs subvolume create /mnt/@home
-
-# Subvolumen /var/log
-btrfs subvolume create /mnt/@log
-
-# Subvolumen /var/cache/pacman/pkg
-btrfs subvolume create /mnt/@pkg
 
 # Desmontar para remontar con subvols
 umount /mnt
@@ -233,12 +223,6 @@ mount --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@ 
 # /home
 mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/home
 
-# Caché pacman
-mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@pkg /dev/mapper/cryptroot /mnt/var/cache/pacman/pkg
-
-# Logs
-mount --mkdir --options noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/var/log
-
 # EFI sin cifrar
 mount --mkdir /dev/nvme0n1p1 /mnt/boot
 ```
@@ -252,8 +236,6 @@ mount --mkdir /dev/nvme0n1p1 /mnt/boot
 | Mapper | `/dev/mapper/cryptroot` | btrfs | — |
 | Subvolumen `@` | `/dev/mapper/cryptroot` | btrfs | `/` |
 | Subvolumen `@home` | `/dev/mapper/cryptroot` | btrfs | `/home` |
-| Subvolumen `@log` | `/dev/mapper/cryptroot` | btrfs | `/var/log` |
-| Subvolumen `@pkg` | `/dev/mapper/cryptroot` | btrfs | `/var/cache/pacman/pkg` |
 
 ---
 
@@ -273,7 +255,7 @@ reflector --country Spain --latest 10 --protocol http,https --sort rate --save /
 Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 
 | Paquete | Propósito |
-|---|---|
+|---|---|---|
 | `base` | Sistema base mínimo de Arch Linux |
 | `linux` | Kernel Linux |
 | `linux-firmware` | Firmware para hardware |
@@ -283,10 +265,23 @@ Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 | `limine` | Bootloader |
 | `iwd` | Conexión Wi-Fi (iwctl) |
 | `vim` | Editor de texto |
+| `mesa` | OpenGL, Vulkan y VA-API |
+| `vulkan-radeon` | Driver Vulkan para AMD |
+| `pipewire` | Servidor de audio/video |
+| `wireplumber` | Gestor de sesiones de PipeWire |
+| `pipewire-pulse` | Sustituye PulseAudio |
+| `pipewire-jack` | Compatibilidad con JACK |
+| `pipewire-alsa` | Capa ALSA sobre PipeWire |
+| `sof-firmware` | Firmware DSP de audio |
+| `brightnessctl` | Control de brillo |
+| `bluez` | Pila Bluetooth |
+| `bluez-utils` | Utilidades Bluetooth |
+| `unzip` | Descompresión ZIP |
+| `sudo` | Ejecutar comandos como root |
 
 ```bash
 # Instalar sistema base
-pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine iwd vim
+pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine iwd vim mesa vulkan-radeon pipewire wireplumber pipewire-pulse pipewire-jack pipewire-alsa sof-firmware brightnessctl bluez bluez-utils unzip sudo
 ```
 
 ### Generar fstab
@@ -367,36 +362,26 @@ Localiza la línea `HOOKS=(...` y cámbiala a:
 HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
 ```
 
-| Hook | Propósito |
-|---|---|
-| `base` | Carga módulos esenciales y utilidades mínimas del initramfs |
-| `udev` | Detecta hardware y carga módulos automáticamente |
-| `autodetect` | Reduce el initramfs incluyendo solo módulos del hardware presente |
-| `microcode` | Aplica microcode de la CPU al arrancar |
-| `modconf` | Carga módulos adicionales desde `/etc/modprobe.d/` |
-| `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano |
-| `keyboard` | Carga el mapa de teclado para escribir la contraseña LUKS |
-| `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` |
-| `consolefont` | Carga la fuente definida en `FONT=` de `/etc/vconsole.conf` en la consola durante el arranque |
-| `block` | Espera a que los dispositivos de bloque estén listos |
-| `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel |
-| `filesystems` | Monta el sistema de archivos raíz |
-| `fsck` | Comprueba integridad de los sistemas de archivos |
+| Hook | Propósito | Posición |
+|---|---|---|
+| `base` | Carga módulos esenciales y utilidades mínimas del initramfs | — |
+| `udev` | Detecta hardware y carga módulos automáticamente | — |
+| `autodetect` | Reduce el initramfs incluyendo solo módulos del hardware presente | — |
+| `microcode` | Aplica microcode de la CPU al arrancar | — |
+| `modconf` | Carga módulos adicionales desde `/etc/modprobe.d/` | — |
+| `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano | — |
+| `keyboard` | Carga el mapa de teclado para escribir la contraseña LUKS | Antes de `autodetect` |
+| `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` | Antes de `consolefont` |
+| `consolefont` | Carga la fuente definida en `FONT=` de `/etc/vconsole.conf` en la consola durante el arranque | — |
+| `block` | Espera a que los dispositivos de bloque estén listos | Antes de `encrypt` |
+| `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel | — |
+| `filesystems` | Monta el sistema de archivos raíz | — |
+| `fsck` | Comprueba integridad de los sistemas de archivos | — |
 
 ```bash
 # Regenerar initramfs
 mkinitcpio -P
 ```
-
-### Orden de los hooks
-
-El orden en la línea `HOOKS=(...)` importa — algunos hooks necesitan ejecutarse antes que otros:
-
-| Hook | Posición | Motivo |
-|------|----------|--------|
-| `keyboard` | Antes de `autodetect` | Teclado externo USB: `autodetect` debe incluir los módulos USB HID |
-| `block` | Antes de `encrypt` | Los dispositivos de bloque deben estar listos antes de descifrar LUKS |
-| `keymap` | Antes de `consolefont` | El layout español debe cargarse antes que la fuente |
 
 ## Configurar el bootloader (Limine)
 
@@ -450,99 +435,7 @@ timeout: 3
 
 Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 
----
 
-## Plymouth (boot splash)
-
-[Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth) es un splash gráfico de arranque que oculta los mensajes del kernel y muestra una animación. También integra el prompt de contraseña LUKS de forma gráfica.
-
-```bash
-# Instalar Plymouth
-pacman --sync plymouth
-```
-
-### Configurar mkinitcpio
-
-Añade el hook `plymouth` **antes de `encrypt`** en `/etc/mkinitcpio.conf`:
-
-```ini
-HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems fsck)
-```
-
-| Hook | Posición | Motivo |
-|------|----------|--------|
-| `plymouth` | Antes de `encrypt` | Muestra el prompt de contraseña LUKS de forma gráfica |
-
-### Configurar el bootloader
-
-Añade `splash` y opcionalmente `quiet` a los parámetros del kernel en `/boot/limine.conf`:
-
-```ini
-cmdline: cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot rw rootflags=subvol=@ rootfstype=btrfs splash quiet
-```
-
-- `splash` — activa Plymouth
-- `quiet` — oculta los mensajes del kernel (opcional)
-
-### HiDPI
-
-Para tu pantalla 2560×1600, configura el factor de escala en `/etc/plymouth/plymouthd.conf`:
-
-```ini
-[Daemon]
-Theme=spinner
-DeviceScale=2
-```
-
-### Temas disponibles
-
-| Tema | Descripción |
-|------|------------|
-| `bgrt` | Similar a spinner pero con el logo del fabricante (OEM) |
-| `details` | Muestra mensajes de arranque detallados (útil para depuración) |
-| `fade-in` | Fundido con estrellas |
-| `glow` | Corporativo, con gráfico de progreso circular |
-| `script` | Tema basado en script, personalizable |
-| `solar` | Tema espacial con una estrella azul |
-| `spinfinity` | Símbolo de infinito giratorio |
-| `spinner` | Simple, con un spinner de carga |
-| `text` | Versión textual, sin gráficos |
-| `tribar` | Barra de progreso triple |
-
-```bash
-# Listar temas instalados
-plymouth-set-default-theme --list
-
-# Cambiar tema y regenerar initramfs
-plymouth-set-default-theme --rebuild-initrd <theme>
-```
-
-```bash
-# Regenerar initramfs
-mkinitcpio -P
-```
-
-### Downgrade (bug conocido en v26)
-
-El hook `keymap` no funciona correctamente con Plymouth v26 (26.134.222-1 y -2). El prompt LUKS se muestra en inglés (US) aunque `KEYMAP=es` esté configurado. Solución: downgrade a v24.004.60-14.
-
-Más información: [Foro Arch Linux](https://bbs.archlinux.org/viewtopic.php?id=313743) — [Bug upstream](https://gitlab.freedesktop.org/plymouth/plymouth/-/work_items/337)
-
-```bash
-# Descargar v24 desde Arch Archive
-curl -OL https://archive.archlinux.org/packages/p/plymouth/plymouth-24.004.60-14-x86_64.pkg.tar.zst
-
-# Downgrade forzado
-pacman --upgrade plymouth-24.004.60-14-x86_64.pkg.tar.zst
-
-# Pinear para que no se actualice
-# Añadir al final de /etc/pacman.conf: IgnorePkg = plymouth
-
-# Eliminar el paquete descargado
-rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
-```
-
----
 
 ## Pasos finales
 
@@ -555,7 +448,40 @@ rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
 passwd
 ```
 
-> Una vez reiniciado el sistema, crea un usuario no root siguiendo la sección [Usuarios](#usuarios).
+### Configuración adicional
+
+Crea un usuario no-root y dale permisos sudo:
+
+```bash
+# Crear usuario
+useradd --create-home anarchist-penguin
+passwd anarchist-penguin
+
+# Dar permisos sudo
+echo "anarchist-penguin ALL=(ALL) ALL" > /etc/sudoers.d/00-anarchist-penguin
+chmod 440 /etc/sudoers.d/00-anarchist-penguin
+```
+
+Configura la red Wi-Fi con systemd-networkd (fichero de configuración, el servicio se habilita más abajo):
+
+```bash
+mkdir --parents /etc/systemd/network
+```
+
+```ini
+# /etc/systemd/network/20-wireless.network
+[Match]
+Type=wlan
+
+[Network]
+DHCP=yes
+```
+
+Habilita Bluetooth:
+
+```bash
+systemctl enable bluetooth.service
+```
 
 ### Servicios
 
@@ -588,324 +514,6 @@ cryptsetup close cryptroot
 reboot
 ```
 
----
+> Tras el primer inicio, habilita los servicios de usuario de PipeWire: `systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service`
 
-## Gráficos (AMDGPU)
 
-[AMDGPU (Arch Wiki)](https://wiki.archlinux.org/title/AMDGPU) es el driver oficial para GPUs Radeon modernas (incluyendo la Radeon 780M del Ryzen 8845HS). OpenGL, Vulkan y aceleración de video (VA-API/VDPAU) están incluidos en mesa.
-
-```bash
-# Instalar drivers gráficos AMD
-sudo pacman --sync mesa vulkan-radeon
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `mesa` | OpenGL, Vulkan y VA-API |
-| `vulkan-radeon` | Driver Vulkan específico para AMD |
-
----
-
-## Red (iwd + systemd-networkd)
-
-[iwd (Arch Wiki)](https://wiki.archlinux.org/title/Iwd) es el daemon de Wi-Fi nativo de systemd. Es ligero, no tiene dependencias externas y se gestiona con `iwctl` desde TTY. A diferencia de NetworkManager, no necesita un gestor de red adicional — iwd + systemd-networkd son suficientes para la conectividad completa.
-
-### Verificar que iwd está activo
-
-```bash
-# Verificar estado del servicio iwd
-systemctl status iwd
-```
-
-Si no está activo, iniciarlo y habilitarlo:
-
-```bash
-# Habilitar iwd para que arranque automáticamente al iniciar el sistema
-systemctl enable iwd
-
-# Iniciar iwd ahora
-systemctl start iwd
-```
-
-### Escanear redes disponibles
-
-```bash
-# Escanear redes Wi-Fi
-iwctl station <device> scan
-
-# Listar las redes encontradas
-iwctl station <device> get-networks
-```
-
-`<device>` es el nombre de tu interfaz Wi-Fi (por ejemplo `wlan0`). Si no aparece, usa:
-
-```bash
-# Listar dispositivos de red disponibles
-iwctl device list
-```
-
-### Conectarse a una red
-
-```bash
-# Conectarse a la red (iwctl pedirá la contraseña interactivamente)
-iwctl station <device> connect <SSID>
-```
-
-Sustituye `<SSID>` por el nombre de la red. `iwctl` solicitará la contraseña. La red se guarda automáticamente en `iwd` para reconexiones futuras.
-
-### Configurar red (asignación de IP)
-
-[systemd-networkd](https://wiki.archlinux.org/title/Systemd-networkd) necesita ficheros `.network` para asignar IP por DHCP. Sin esto, `iwd` se conecta al Wi-Fi pero la interfaz no obtiene dirección IP:
-
-```bash
-sudo vim /etc/systemd/network/20-ethernet.network
-```
-
-```ini
-# Red cableada: se aplica a interfaces de tipo ether (enp2s0, eth0...)
-# Type=ether sin Kind=!* también matchearía interfaces virtuales (veth*) de contenedores
-# https://bugs.archlinux.org/task/70892
-[Match]
-Type=ether
-
-# Excluye interfaces virtuales (bridges, VLANs, veth...)
-Kind=!*
-
-[Link]
-# Esperar a que tenga una ruta por defecto antes de marcar el sistema como online
-RequiredForOnline=routable
-
-[Network]
-# Obtener IP, puerta de enlace y DNS automáticamente desde el router
-DHCP=yes
-
-# Resolver nombres .local en la LAN
-MulticastDNS=yes
-
-# Métrica baja = prioridad alta. Ethernet es la interfaz preferida.
-# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
-# https://github.com/systemd/systemd/issues/17698
-[DHCPv4]
-RouteMetric=100
-
-[IPv6AcceptRA]
-RouteMetric=100
-```
-
-```bash
-sudo vim /etc/systemd/network/20-wlan.network
-```
-
-```ini
-# Red Wi-Fi: se aplica a interfaces de tipo wlan (wlan0, wlp2s0...)
-[Match]
-Type=wlan
-
-[Link]
-# Esperar a que tenga una ruta por defecto antes de marcar el sistema como online
-RequiredForOnline=routable
-
-[Network]
-# Obtener IP, puerta de enlace y DNS automáticamente desde el router
-DHCP=yes
-
-# Resolver nombres .local en la LAN
-MulticastDNS=yes
-
-# Métrica media. Si Ethernet está disponible, el tráfico sale por Ethernet.
-# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
-# https://github.com/systemd/systemd/issues/17698
-[DHCPv4]
-RouteMetric=600
-
-[IPv6AcceptRA]
-RouteMetric=600
-```
-
-```bash
-sudo vim /etc/systemd/network/20-wwan.network
-```
-
-```ini
-# Red móvil (WWAN): se aplica a interfaces de tipo wwan (wwan0...)
-[Match]
-Type=wwan
-
-[Link]
-# Esperar a que tenga una ruta por defecto antes de marcar el sistema como online
-RequiredForOnline=routable
-
-[Network]
-# Obtener IP, puerta de enlace y DNS automáticamente desde el router
-DHCP=yes
-
-# Resolver nombres .local en la LAN
-MulticastDNS=yes
-
-# Métrica alta = prioridad baja. Solo se usa si no hay Ethernet ni Wi-Fi.
-# systemd-networkd no asigna métricas por tipo de interfaz automáticamente:
-# https://github.com/systemd/systemd/issues/17698
-[DHCPv4]
-RouteMetric=700
-
-[IPv6AcceptRA]
-RouteMetric=700
-```
-
-Luego habilitar e iniciar systemd-networkd:
-
-```bash
-sudo systemctl enable --now systemd-networkd
-```
-
-Estos ficheros `.network` están basados en los ejemplos del [archiso oficial](https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/configs/releng/airootfs/etc/systemd/network/) con las métricas de ruta y opciones adicionales de la [guía de systemd-networkd](https://wiki.archlinux.org/title/Systemd-networkd#Configure_a_wired_network_with_DHCP).
-
-### Verificar conexión
-
-```bash
-# Probar conectividad
-ping -c 3 ping.archlinux.org
-```
-
----
-
-## Audio (PipeWire + WirePlumber)
-
-[PipeWire](https://wiki.archlinux.org/title/PipeWire) es un servidor multimedia que gestiona flujos de audio y vídeo en Linux. A diferencia de ALSA (nivel de kernel) y PulseAudio (servidor de sonido tradicional), PipeWire ofrece baja latencia, gestión segura de permisos (esencial en Wayland) y manejo unificado de audio y vídeo mediante un grafo de nodos enrutables.
-
-WirePlumber actúa como gestor de sesiones: decide qué rutas de audio se conectan, maneja perfiles de dispositivos (altavoz, auriculares, HDMI) y aplica reglas de enrutamiento configuradas por el usuario o por el propio dispositivo. Es el reemplazo moderno de `pipewire-media-session`.
-
-```bash
-# Instalar PipeWire como servidor de audio y WirePlumber como gestor de sesiones
-sudo pacman --sync pipewire wireplumber pipewire-pulse pipewire-jack pipewire-alsa sof-firmware
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `pipewire` | Servidor de audio/video |
-| `wireplumber` | Gestor de sesiones de PipeWire, maneja rutas y perfiles |
-| `pipewire-pulse` | Sustituye PulseAudio, permite que apps PulseAudio usen PipeWire |
-| `pipewire-jack` | Compatibilidad con JACK, permite usar apps de audio profesional |
-| `pipewire-alsa` | Capa de compatibilidad ALSA sobre PipeWire |
-| `sof-firmware` | Firmware para el DSP de audio en portátiles modernos |
-
-Habilitar servicios de usuario:
-
-```bash
-# Habilitar e iniciar servicios de PipeWire y WirePlumber
-systemctl --user enable --now pipewire.service
-systemctl --user enable --now pipewire-pulse.service
-systemctl --user enable --now wireplumber.service
-```
-
----
-
-## Utilidades del sistema
-
-### brightnessctl
-
-[brightnessctl](https://github.com/Hummer12007/brightnessctl) es una herramienta de línea de comandos para leer y ajustar el brillo de dispositivos en Linux. Modifica valores directamente en `/sys/class/backlight/`, por lo que funciona tanto en X11 como en Wayland (o sin servidor gráfico). Soporta backlights de pantalla, retroiluminación de teclado y LEDs.
-
-```bash
-# Instalar brightnessctl
-sudo pacman --sync brightnessctl
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `brightnessctl` | Control de brillo ligero vía /sys/class/backlight/ |
-
-```bash
-# Ver nivel actual y máximo
-brightnessctl get
-brightnessctl max
-
-# Establecer brillo al 50 %
-brightnessctl set 50%
-
-# Subir/bajar 10 puntos porcentuales
-brightnessctl set +10%
-brightnessctl set 10%-
-```
-
-### Bluetooth
-
-[Bluetooth](https://wiki.archlinux.org/title/Bluetooth) es un estándar para la interconexión inalámbrica de corto alcance. El soporte básico se habilita con `bluez` y se gestiona desde `bluetoothctl`.
-
-```bash
-# Instalar Bluetooth
-sudo pacman --sync bluez bluez-utils
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `bluez` | Pila de protocolo Bluetooth |
-| `bluez-utils` | Utilidades como `bluetoothctl` |
-
-```bash
-# Habilitar e iniciar el servicio Bluetooth
-sudo systemctl enable --now bluetooth.service
-```
-
-```bash
-# Abrir bluetoothctl
-bluetoothctl
-
-# Dentro de bluetoothctl:
-
-# Buscar dispositivos
-scan on
-
-# Emparejar
-pair XX:XX:XX:XX
-
-# Conectar
-connect XX:XX:XX:XX
-
-# Confiar (para conexión automática)
-trust XX:XX:XX:XX
-```
-
-### unzip
-
-`unzip` es una herramienta para descomprimir archivos `.zip`. Es esencial para extraer paquetes y archivos comprimidos.
-
-```bash
-# Instalar unzip
-sudo pacman --sync unzip
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `unzip` | Descompresión de archivos ZIP |
-
----
-
-## Usuarios
-
-[Sudo](https://wiki.archlinux.org/title/Sudo) es un programa para ejecutar comandos con privilegios elevados mediante `sudoers.d` sin grupo `wheel`, siguiendo el principio de mínimos privilegios.
-
-```bash
-# Instalar sudo
-sudo pacman --sync sudo
-
-# Contraseña de root (si no se estableció durante la instalación)
-passwd
-
-# Crear usuario
-sudo useradd --create-home anarchist-penguin
-
-# Contraseña del usuario
-sudo passwd anarchist-penguin
-
-# Dar permisos sudo al usuario
-echo "anarchist-penguin ALL=(ALL) ALL" | sudo tee /etc/sudoers.d/00-anarchist-penguin
-sudo chmod 440 /etc/sudoers.d/00-anarchist-penguin
-
-# Verificar que la configuración de sudo es correcta
-sudo visudo -c
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `sudo` | Ejecutar comandos con privilegios de otro usuario (normalmente root) |
