@@ -45,7 +45,7 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | [AUR](post-install-aur.md) | Helper AUR y paquetes AUR |
 | [AUR](post-install-aur.md) | Paquetes desde AUR (Brave, LocalSend) |
 | [Drivers gráficos](post-install-graphics.md) | Mesa + vulkan-radeon para AMD Radeon |
-| [Hyprland](post-install-hyprland.md) | Compositor Wayland + Hyprlauncher + Hyprpaper |
+| [Hyprland](my-fucking-hyprland-configuration.md) | Compositor Wayland + Hyprlauncher + Hyprpaper |
 | [Utilidades sistema](post-install-system-utilities.md) | Brillo y Bluetooth |
 | [Actualizaciones](post-install-updates.md) | Comando de actualización del sistema con parámetros largos |
 | [Programas](post-install-programs.md) | Software adicional |
