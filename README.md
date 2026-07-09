@@ -41,7 +41,6 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | [Red](post-install-iwctl.md) | iwd + systemd-networkd para ethernet, Wi-Fi y WWAN |
 | [Hooks de mkinitcpio](post-install-hooks.md) | Hooks del initramfs (encrypt, resume, microcode, etc.) |
 | [zram](post-install-zram.md) | Swap comprimido en RAM con zram-generator |
-| [Hibernación](post-install-hibernate.md) | Swapfile en btrfs, resume hook y resume_offset |
 | [Usuarios](post-install-users.md) | Creación de usuario no-root y sudo |
 | [AUR](post-install-aur.md) | Helper AUR y paquetes AUR |
 | [AUR](post-install-aur.md) | Paquetes desde AUR (Brave, LocalSend) |

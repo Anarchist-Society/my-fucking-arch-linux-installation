@@ -19,10 +19,8 @@ Añade el hook `plymouth` **antes de `encrypt`** en tu drop-in de hooks:
 
 ```ini
 # /etc/mkinitcpio.conf.d/archlinux-hooks.conf
-HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems resume fsck)
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems fsck)
 ```
-
-Si también usas hibernación, `resume` debe ir después de `filesystems`. Consulta la guía de [Hibernación](post-install-hibernate.md) para la configuración completa.
 
 ### Justificación del orden
 
