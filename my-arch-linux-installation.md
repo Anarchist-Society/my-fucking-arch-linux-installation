@@ -468,17 +468,12 @@ Type=wlan
 DHCP=yes
 ```
 
-Habilita Bluetooth:
-
-```bash
-systemctl enable bluetooth.service
-```
-
 ### Servicios
 
 - [`iwd`](https://wiki.archlinux.org/title/Iwd) — servicio de Wi-Fi, permite usar `iwctl` para conectarse.
 - [`systemd-networkd`](https://wiki.archlinux.org/title/Systemd-networkd) — gestor de red nativo de systemd, asigna IP por DHCP.
 - [`systemd-resolved`](https://wiki.archlinux.org/title/Systemd-resolved) — resolución DNS automática (recibe los DNS del router por DHCP).
+- [`bluetooth`](https://wiki.archlinux.org/title/Bluetooth) — pila Bluetooth para dispositivos inalámbricos.
 
 ```bash
 # Habilitar Wi-Fi (iwd)
@@ -487,6 +482,9 @@ systemctl enable iwd
 # Habilitar red dinámica (DHCP) y resolución DNS
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
+
+# Habilitar Bluetooth
+systemctl enable bluetooth.service
 ```
 
 ### Salir y reiniciar
