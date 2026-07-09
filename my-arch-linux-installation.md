@@ -555,7 +555,7 @@ rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
 passwd
 ```
 
-> Una vez reiniciado el sistema, crea un usuario no root siguiendo la [guía de post-instalación de usuarios](post-install-users.md).
+> Una vez reiniciado el sistema, crea un usuario no root siguiendo la sección [Usuarios](#usuarios).
 
 ### Servicios
 
@@ -878,4 +878,35 @@ sudo pacman --sync unzip
 | Paquete | Propósito |
 |---------|-----------|
 | `unzip` | Descompresión de archivos ZIP |
+
+---
+
+## Usuarios
+
+[Sudo](https://wiki.archlinux.org/title/Sudo) es un programa para ejecutar comandos con privilegios elevados mediante `sudoers.d` sin grupo `wheel`, siguiendo el principio de mínimos privilegios.
+
+```bash
+# Instalar sudo
+sudo pacman --sync sudo
+
+# Contraseña de root (si no se estableció durante la instalación)
+passwd
+
+# Crear usuario
+sudo useradd --create-home anarchist-penguin
+
+# Contraseña del usuario
+sudo passwd anarchist-penguin
+
+# Dar permisos sudo al usuario
+echo "anarchist-penguin ALL=(ALL) ALL" | sudo tee /etc/sudoers.d/00-anarchist-penguin
+sudo chmod 440 /etc/sudoers.d/00-anarchist-penguin
+
+# Verificar que la configuración de sudo es correcta
+sudo visudo -c
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `sudo` | Ejecutar comandos con privilegios de otro usuario (normalmente root) |
 ```
