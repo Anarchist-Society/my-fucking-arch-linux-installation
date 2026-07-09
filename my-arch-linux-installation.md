@@ -324,7 +324,6 @@ echo "LANG=es_ES.UTF-8" > /etc/locale.conf
 
 # Configurar teclado en consola
 echo "KEYMAP=es" > /etc/vconsole.conf
-echo "FONT=default8x16" >> /etc/vconsole.conf
 ```
 
 ### Hostname
@@ -352,7 +351,7 @@ vim /etc/mkinitcpio.conf
 Localiza la línea `HOOKS=(...` y cámbiala a:
 
 ```ini
-HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block encrypt filesystems fsck)
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap block encrypt filesystems fsck)
 ```
 
 | Hook | Propósito | Posición |
@@ -364,8 +363,7 @@ HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont bl
 | `modconf` | Carga módulos adicionales desde `/etc/modprobe.d/` | — |
 | `kms` | Inicializa el modo de vídeo (Kernel Mode Setting) temprano | — |
 | `keyboard` | Carga el mapa de teclado para escribir la contraseña LUKS | Antes de `autodetect` |
-| `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` | Antes de `consolefont` |
-| `consolefont` | Carga la fuente definida en `FONT=` de `/etc/vconsole.conf` en la consola durante el arranque | — |
+| `keymap` | Aplica `KEYMAP=es` de `/etc/vconsole.conf` | — |
 | `block` | Espera a que los dispositivos de bloque estén listos | Antes de `encrypt` |
 | `encrypt` | Descifra el volumen LUKS usando `cryptdevice=` del kernel | — |
 | `filesystems` | Monta el sistema de archivos raíz | — |
