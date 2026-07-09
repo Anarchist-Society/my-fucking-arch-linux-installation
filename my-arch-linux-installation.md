@@ -452,6 +452,98 @@ Reemplaza `<PARTUUID>` por el PARTUUID de tu partición LUKS (`/dev/nvme0n1p2`).
 
 ---
 
+## Plymouth (boot splash)
+
+[Plymouth (Arch Wiki)](https://wiki.archlinux.org/title/Plymouth) es un splash gráfico de arranque que oculta los mensajes del kernel y muestra una animación. También integra el prompt de contraseña LUKS de forma gráfica.
+
+```bash
+# Instalar Plymouth
+pacman --sync plymouth
+```
+
+### Configurar mkinitcpio
+
+Añade el hook `plymouth` **antes de `encrypt`** en `/etc/mkinitcpio.conf`:
+
+```ini
+HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block plymouth encrypt filesystems fsck)
+```
+
+| Hook | Posición | Motivo |
+|------|----------|--------|
+| `plymouth` | Antes de `encrypt` | Muestra el prompt de contraseña LUKS de forma gráfica |
+
+### Configurar el bootloader
+
+Añade `splash` y opcionalmente `quiet` a los parámetros del kernel en `/boot/limine.conf`:
+
+```ini
+cmdline: cryptdevice=PARTUUID=<PARTUUID>:cryptroot root=/dev/mapper/cryptroot rw rootflags=subvol=@ rootfstype=btrfs splash quiet
+```
+
+- `splash` — activa Plymouth
+- `quiet` — oculta los mensajes del kernel (opcional)
+
+### HiDPI
+
+Para tu pantalla 2560×1600, configura el factor de escala en `/etc/plymouth/plymouthd.conf`:
+
+```ini
+[Daemon]
+Theme=spinner
+DeviceScale=2
+```
+
+### Temas disponibles
+
+| Tema | Descripción |
+|------|------------|
+| `bgrt` | Similar a spinner pero con el logo del fabricante (OEM) |
+| `details` | Muestra mensajes de arranque detallados (útil para depuración) |
+| `fade-in` | Fundido con estrellas |
+| `glow` | Corporativo, con gráfico de progreso circular |
+| `script` | Tema basado en script, personalizable |
+| `solar` | Tema espacial con una estrella azul |
+| `spinfinity` | Símbolo de infinito giratorio |
+| `spinner` | Simple, con un spinner de carga |
+| `text` | Versión textual, sin gráficos |
+| `tribar` | Barra de progreso triple |
+
+```bash
+# Listar temas instalados
+plymouth-set-default-theme --list
+
+# Cambiar tema y regenerar initramfs
+plymouth-set-default-theme --rebuild-initrd <theme>
+```
+
+```bash
+# Regenerar initramfs
+mkinitcpio -P
+```
+
+### Downgrade (bug conocido en v26)
+
+El hook `keymap` no funciona correctamente con Plymouth v26 (26.134.222-1 y -2). El prompt LUKS se muestra en inglés (US) aunque `KEYMAP=es` esté configurado. Solución: downgrade a v24.004.60-14.
+
+Más información: [Foro Arch Linux](https://bbs.archlinux.org/viewtopic.php?id=313743) — [Bug upstream](https://gitlab.freedesktop.org/plymouth/plymouth/-/work_items/337)
+
+```bash
+# Descargar v24 desde Arch Archive
+curl -OL https://archive.archlinux.org/packages/p/plymouth/plymouth-24.004.60-14-x86_64.pkg.tar.zst
+
+# Downgrade forzado
+pacman --upgrade plymouth-24.004.60-14-x86_64.pkg.tar.zst
+
+# Pinear para que no se actualice
+# Añadir al final de /etc/pacman.conf: IgnorePkg = plymouth
+
+# Eliminar el paquete descargado
+rm plymouth-24.004.60-14-x86_64.pkg.tar.zst
+```
+
+---
+
 ## Pasos finales
 
 ### Root password
