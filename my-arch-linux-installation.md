@@ -253,32 +253,28 @@ Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 
 | Paquete | Propósito |
 |---|---|
-| `base` | Sistema base mínimo de Arch Linux |
-| `linux` | Kernel Linux |
-| `linux-firmware` | Firmware para hardware |
-| `amd-ucode` | Microcode para CPU AMD Ryzen |
-| `cryptsetup` | Descifrar LUKS al arrancar |
-| `btrfs-progs` | Herramientas para gestionar btrfs |
+| `base` | Sistema base |
+| `linux` | Kernel |
+| `linux-firmware` | Firmware |
+| `amd-ucode` | Microcode AMD |
+| `cryptsetup` | Descifrar LUKS |
+| `btrfs-progs` | Herramientas btrfs |
 | `limine` | Bootloader |
-| `iwd` | Conexión Wi-Fi (iwctl) |
-| `vim` | Editor de texto |
-| `mesa` | OpenGL, Vulkan y VA-API |
-| `vulkan-radeon` | Driver Vulkan para AMD |
-| `pipewire` | Servidor de audio/video |
-| `wireplumber` | Gestor de sesiones de PipeWire |
-| `pipewire-pulse` | Sustituye PulseAudio |
-| `pipewire-jack` | Compatibilidad con JACK |
-| `pipewire-alsa` | Capa ALSA sobre PipeWire |
-| `sof-firmware` | Firmware DSP de audio |
-| `brightnessctl` | Control de brillo |
-| `bluez` | Pila Bluetooth |
+| `iwd` | Wi-Fi |
+| `sudo` | Privilegios |
+| `vim` | Editor |
+| `mesa` | OpenGL/Vulkan |
+| `vulkan-radeon` | Driver Vulkan AMD |
+| `pipewire` | Audio |
+| `wireplumber` | Gestor sesiones audio |
+| `pipewire-pulse` | Compatibilidad PulseAudio |
+| `brightnessctl` | Brillo |
+| `bluez` | Bluetooth |
 | `bluez-utils` | Utilidades Bluetooth |
-| `unzip` | Descompresión ZIP |
-| `sudo` | Ejecutar comandos como root |
 
 ```bash
 # Instalar sistema base
-pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine iwd vim mesa vulkan-radeon pipewire wireplumber pipewire-pulse pipewire-jack pipewire-alsa sof-firmware brightnessctl bluez bluez-utils unzip sudo
+pacstrap -K /mnt base linux linux-firmware amd-ucode cryptsetup btrfs-progs limine iwd sudo vim mesa vulkan-radeon pipewire wireplumber pipewire-pulse brightnessctl bluez bluez-utils
 ```
 
 ### Generar fstab
