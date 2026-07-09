@@ -108,14 +108,11 @@ timedatectl status
 
 ### Limpieza del disco
 
-[Securely wipe disk (Arch Wiki)](https://wiki.archlinux.org/title/Securely_wipe_disk). Elimina firmas de sistemas de archivo anteriores (`wipefs --all`) y la tabla de particiones GPT (`sgdisk --zap-all`) para empezar con un disco limpio y evitar conflictos al particionar y montar.
+[blkdiscard](https://man.archlinux.org/man/blkdiscard.8) envía el comando TRIM al SSD, que internamente borra todos los bloques. Elimina cualquier rastro (GPT, LUKS, sistemas de archivo) y es instantáneo en SSD/NVMe.
 
 ```bash
-# Borrar firmas de filesystem/LVM
-wipefs --all /dev/nvme0n1
-
-# Limpiar tabla de particiones
-sgdisk --zap-all /dev/nvme0n1
+# TRIM seguro del SSD completo
+blkdiscard /dev/nvme0n1
 ```
 
 ---
