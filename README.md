@@ -38,7 +38,7 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 |---|---|
 | [Instalación principal](my-arch-linux-installation.md) | Particionado, LUKS2, btrfs, Limine, red y servicios base |
 | [Audio](post-install-audio.md) | PipeWire, WirePlumber, pipewire-pulse y sof-firmware |
-| [Red](post-install-iwctl.md) | iwd + systemd-networkd para ethernet, Wi-Fi y WWAN |
+| [Red](my-arch-linux-installation.md#red-iwd--systemd-networkd) | iwd + systemd-networkd para ethernet, Wi-Fi y WWAN |
 | [Hooks de mkinitcpio](post-install-hooks.md) | Hooks del initramfs (encrypt, resume, microcode, etc.) |
 | [zram](post-install-zram.md) | Swap comprimido en RAM con zram-generator |
 | [Usuarios](post-install-users.md) | Creación de usuario no-root y sudo |
