@@ -909,4 +909,3 @@ sudo visudo -c
 | Paquete | Propósito |
 |---------|-----------|
 | `sudo` | Ejecutar comandos con privilegios de otro usuario (normalmente root) |
-```

@@ -31,4 +31,3 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | Audio | PipeWire + WirePlumber |
 | Red | iwd + systemd-networkd |
 | AUR | Paru |
-
