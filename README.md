@@ -32,19 +32,3 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | Red | iwd + systemd-networkd |
 | AUR | Paru |
 
-## Guías
-
-| Guía | Descripción |
-|---|---|
-| [Instalación principal](my-arch-linux-installation.md) | Particionado, LUKS2, btrfs, Limine, red y servicios base |
-| [Audio](post-install-audio.md) | PipeWire, WirePlumber, pipewire-pulse y sof-firmware |
-| [Red](my-arch-linux-installation.md#red-iwd--systemd-networkd) | iwd + systemd-networkd para ethernet, Wi-Fi y WWAN |
-| [Hooks de mkinitcpio](post-install-hooks.md) | Hooks del initramfs (encrypt, resume, microcode, etc.) |
-| [Usuarios](my-arch-linux-installation.md#usuarios) | Creación de usuario no-root y sudo |
-| [AUR](post-install-aur.md) | Helper AUR y paquetes AUR |
-| [AUR](post-install-aur.md) | Paquetes desde AUR (Brave, LocalSend) |
-| [Drivers gráficos](post-install-graphics.md) | Mesa + vulkan-radeon para AMD Radeon |
-| [Hyprland](my-fucking-hyprland-configuration.md) | Compositor Wayland + Hyprlauncher + Hyprpaper |
-| [Utilidades sistema](my-arch-linux-installation.md#utilidades-del-sistema) | Brillo y Bluetooth |
-
-| [Programas](post-install-programs.md) | Software adicional |
