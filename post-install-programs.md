@@ -68,3 +68,18 @@ sudo pacman --sync unzip
 |---------|-----------|
 | `unzip` | Extraer archivos comprimidos en formato ZIP |
 
+## Red
+
+### openssh
+
+[OpenSSH](https://www.openssh.com/portable.html) es una implementación del protocolo SSH para acceso remoto, ejecución de comandos y transferencia de archivos de forma segura.
+
+```bash
+# Instalar openssh
+sudo pacman --sync openssh
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `openssh` | Cliente/servidor SSH para acceso remoto y transferencia de archivos |
+
