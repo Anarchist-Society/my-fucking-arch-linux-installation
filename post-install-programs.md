@@ -53,3 +53,18 @@ sudo pacman --sync btop
 curl -fsSL https://opencode.ai/install | bash
 ```
 
+## Utilidades
+
+### unzip
+
+[unzip](https://infozip.sourceforge.net/unzip.html) es una herramienta para extraer archivos comprimidos en formato ZIP. Lista, extrae y examina archivos de archivos ZIP.
+
+```bash
+# Instalar unzip
+sudo pacman --sync unzip
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `unzip` | Extraer archivos comprimidos en formato ZIP |
+
