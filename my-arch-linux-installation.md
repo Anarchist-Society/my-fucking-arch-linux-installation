@@ -253,24 +253,24 @@ Instalo solo los paquetes necesarios para que el sistema arranque y tenga red.
 
 | Paquete | Propósito |
 |---|---|
-| `base` | Sistema base |
-| `linux` | Kernel |
-| `linux-firmware` | Firmware |
-| `amd-ucode` | Microcode AMD |
-| `cryptsetup` | Descifrar LUKS |
-| `btrfs-progs` | Herramientas btrfs |
-| `limine` | Bootloader |
-| `iwd` | Wi-Fi |
-| `sudo` | Privilegios |
-| `vim` | Editor |
-| `mesa` | OpenGL/Vulkan |
-| `vulkan-radeon` | Driver Vulkan AMD |
-| `pipewire` | Audio |
-| `wireplumber` | Gestor sesiones audio |
-| `pipewire-pulse` | Compatibilidad PulseAudio |
-| `brightnessctl` | Brillo |
-| `bluez` | Bluetooth |
-| `bluez-utils` | Utilidades Bluetooth |
+| `base` | Paquetes esenciales del sistema (coreutils, filesystem, etc.) |
+| `linux` | Kernel del sistema operativo |
+| `linux-firmware` | Archivos de firmware para hardware (Wi-Fi, GPU, etc.) |
+| `amd-ucode` | Microcode para corregir vulnerabilidades y bugs de CPU AMD |
+| `cryptsetup` | Herramientas para descifrar volúmenes LUKS |
+| `btrfs-progs` | Herramientas para gestionar sistemas de archivos btrfs |
+| `limine` | Bootloader moderno para arrancar el sistema |
+| `iwd` | Gestor de redes Wi-Fi (interfaz `iwctl`) |
+| `sudo` | Ejecutar comandos con privilegios de administrador |
+| `vim` | Editor de texto para configurar el sistema |
+| `mesa` | Implementación de OpenGL/Vulkan para GPU AMD |
+| `vulkan-radeon` | Driver Vulkan nativo para GPU AMD RDNA |
+| `pipewire` | Servidor de audio y vídeo moderno |
+| `wireplumber` | Gestor de sesiones y dispositivos de PipeWire |
+| `pipewire-pulse` | Capa de compatibilidad con aplicaciones PulseAudio |
+| `brightnessctl` | Controlar el brillo de la pantalla |
+| `bluez` | Pila Bluetooth para conectar dispositivos inalámbricos |
+| `bluez-utils` | Herramientas CLI para Bluetooth (bluetoothctl, etc.) |
 
 ```bash
 # Instalar sistema base
