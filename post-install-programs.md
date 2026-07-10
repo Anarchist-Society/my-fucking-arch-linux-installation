@@ -26,7 +26,7 @@ sudo pacman --sync kitty
 sudo pacman --sync ttf-jetbrains-mono-nerd
 
 # Actualizar caché de fuentes
-fc-cache -fv
+fc-cache
 ```
 
 | Paquete | Propósito |
