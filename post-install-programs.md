@@ -17,6 +17,27 @@ sudo pacman --sync kitty
 |---------|-----------|
 | `kitty` | Terminal emulator GPU-acelerado con soporte de imágenes y personalización |
 
+### JetBrains Mono Nerd Font
+
+[JetBrains Mono](https://www.jetbrains.com/mono/) es una fuente monoespaciada con ligaduras y soporte Nerd Font para iconos. Diseñada para desarrolladores con excelente legibilidad.
+
+```bash
+# Instalar JetBrains Mono Nerd Font
+sudo pacman --sync ttf-jetbrains-mono-nerd
+
+# Actualizar caché de fuentes
+fc-cache -fv
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `ttf-jetbrains-mono-nerd` | Fuente monoespaciada con ligaduras e iconos Nerd Font |
+
+```bash
+# Configurar en kitty (~/.config/kitty/kitty.conf)
+font_family JetBrainsMono Nerd Font
+```
+
 ### yazi
 
 [yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
