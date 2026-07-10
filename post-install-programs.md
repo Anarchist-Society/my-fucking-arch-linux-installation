@@ -35,7 +35,7 @@ fc-cache
 
 ```bash
 # Configurar en kitty (~/.config/kitty/kitty.conf)
-font_family JetBrainsMono Nerd Font
+echo "font_family JetBrainsMono Nerd Font" >> ~/.config/kitty/kitty.conf
 ```
 
 ### yazi
