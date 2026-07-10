@@ -43,6 +43,19 @@ sudo pacman --sync btop
 |---------|-----------|
 | `btop` | Monitor de sistema con interfaz visual en terminal |
 
+### fastfetch
+
+[fastfetch](https://github.com/fastfetch-cli/fastfetch) es una herramienta para obtener y mostrar información del sistema de forma rápida y personalizable. Muestra SO, kernel, shell, terminal, CPU, GPU, memoria y más.
+
+```bash
+# Instalar fastfetch
+sudo pacman --sync fastfetch
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `fastfetch` | Mostrar información del sistema de forma rápida y personalizable |
+
 ## Desarrollo
 
 ### opencode
@@ -52,6 +65,20 @@ sudo pacman --sync btop
 ```bash
 curl -fsSL https://opencode.ai/install | bash
 ```
+
+### nodejs y npm
+
+[Node.js](https://nodejs.org/) es un entorno de ejecución de JavaScript fuera del navegador. [npm](https://www.npmjs.com/) es el gestor de paquetes oficial de Node.js.
+
+```bash
+# Instalar nodejs y npm
+sudo pacman --sync nodejs npm
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `nodejs` | Entorno de ejecución de JavaScript |
+| `npm` | Gestor de paquetes de Node.js |
 
 ## Utilidades
 
