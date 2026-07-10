@@ -8,3 +8,7 @@
 # Instalar Hyprland
 sudo pacman --sync hyprland
 ```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `hyprland` | Compositor Wayland dinámico y personalizable |
