@@ -507,5 +507,3 @@ reboot
 # Habilitar servicios de usuario de PipeWire (tras primer inicio)
 systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service
 ```
-
-
