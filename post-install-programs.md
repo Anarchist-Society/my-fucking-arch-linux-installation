@@ -101,6 +101,16 @@ sudo pacman --sync nodejs npm
 | `nodejs` | Entorno de ejecución de JavaScript |
 | `npm` | Gestor de paquetes de Node.js |
 
+```bash
+# Configurar directorio global para paquetes npm (evitar sudo)
+mkdir ~/.npm-global
+npm config set prefix ~/.npm-global
+
+# Agregar al PATH en ~/.bashrc
+echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
 ## Utilidades
 
 ### unzip
