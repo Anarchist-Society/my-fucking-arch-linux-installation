@@ -79,6 +79,25 @@ sudo pacman --sync fastfetch
 
 ## Desarrollo
 
+### git
+
+[Git](https://git-scm.com/) es un sistema de control de versiones distribuido, usado para gestionar el código fuente y colaborar en proyectos.
+
+```bash
+# Instalar git
+sudo pacman --sync git
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `git` | Sistema de control de versiones distribuido |
+
+```bash
+# Configurar identidad global
+git config --global user.name "John Doe"
+git config --global user.email "johndoe@example.com"
+```
+
 ### opencode
 
 [OpenCode](https://opencode.ai) es una CLI interactiva de IA para desarrollo de software. Ejecuta comandos, edita archivos y responde preguntas sobre el código directamente en la terminal.
