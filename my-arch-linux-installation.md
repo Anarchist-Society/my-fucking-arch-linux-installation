@@ -503,6 +503,9 @@ cryptsetup close cryptroot
 reboot
 ```
 
-> Tras el primer inicio, habilita los servicios de usuario de PipeWire: `systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service`
+```bash
+# Habilitar servicios de usuario de PipeWire (tras primer inicio)
+systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service
+```
 
 
