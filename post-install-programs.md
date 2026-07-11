@@ -141,3 +141,14 @@ sudo pacman --sync openssh
 |---------|-----------|
 | `openssh` | Cliente/servidor SSH para acceso remoto y transferencia de archivos |
 
+```bash
+# Generar par de claves SSH ed25519
+ssh-keygen -t ed25519 -C "tu_email@ejemplo.com"
+
+# Iniciar el agente SSH
+eval "$(ssh-agent -s)"
+
+# Agregar clave privada al agente
+ssh-add ~/.ssh/id_ed25519
+```
+
