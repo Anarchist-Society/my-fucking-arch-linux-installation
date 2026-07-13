@@ -53,7 +53,6 @@ fc-cache
 | Paquete | Propósito |
 |---------|-----------|
 | `noto-fonts-emoji` | Fuente de emojis para navegadores y aplicaciones |
-```
 
 ### yazi
 
