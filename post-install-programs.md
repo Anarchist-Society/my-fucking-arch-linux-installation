@@ -38,6 +38,23 @@ fc-cache
 echo "font_family JetBrainsMono Nerd Font" >> ~/.config/kitty/kitty.conf
 ```
 
+### noto-fonts-emoji
+
+[Noto Fonts Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji) es la fuente de emojis de Google. Compatible con la mayoría de aplicaciones y navegadores en Linux.
+
+```bash
+# Instalar fuente de emojis
+sudo pacman --sync noto-fonts-emoji
+
+# Actualizar caché de fuentes
+fc-cache
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `noto-fonts-emoji` | Fuente de emojis para navegadores y aplicaciones |
+```
+
 ### yazi
 
 [yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
