@@ -211,11 +211,15 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE:="066
 ```
 
 ```bash
+# Crear grupo plugdev si no existe
 sudo groupadd plugdev
-sudo usermod -aG plugdev $USER
-```
 
-> Una vez hecho, reinicia el sistema.
+# Añadir usuario al grupo plugdev
+sudo usermod -aG plugdev $USER
+
+# Reiniciar para aplicar reglas udev
+sudo reboot
+```
 
 | Fichero | Propósito |
 |---------|-----------|
