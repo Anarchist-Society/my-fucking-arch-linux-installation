@@ -187,6 +187,40 @@ sudo pacman --sync unzip
 |---------|-----------|
 | `unzip` | Extraer archivos comprimidos en formato ZIP |
 
+## Hardware
+
+### zsa-moonlander
+
+[ZSA Moonlander](https://zsa.io/moonlander/) es un teclado ergonómico programable. Requiere reglas udev para flashear el firmware desde el navegador (Oryx) o con Keymapp/Wally.
+
+Crea el fichero `/etc/udev/rules.d/50-zsa.rules` e introduce el siguiente contenido:
+
+```ini
+# Oryx web flashing and live training
+KERNEL=="hidraw*", ATTRS{idVendor}=="16c0", MODE="0664", GROUP="plugdev"
+KERNEL=="hidraw*", ATTRS{idVendor}=="3297", MODE="0664", GROUP="plugdev"
+
+# Live training over webusb (legacy, not needed for v21+)
+SUBSYSTEM=="usb", ATTR{idVendor}=="3297", GROUP="plugdev"
+
+# Moonlander
+SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", GROUP="plugdev"
+
+# Keymapp / Wally flashing for Moonlander
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE:="0666", SYMLINK+="stm32_dfu"
+```
+
+```bash
+sudo groupadd plugdev
+sudo usermod -aG plugdev $USER
+```
+
+> Una vez hecho, reinicia el sistema.
+
+| Fichero | Propósito |
+|---------|-----------|
+| `50-zsa.rules` | Reglas udev para el Moonlander |
+
 ## Red
 
 ### openssh
