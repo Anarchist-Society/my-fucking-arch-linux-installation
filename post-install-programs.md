@@ -157,6 +157,20 @@ source ~/.bashrc
 
 ## Utilidades
 
+### sudo
+
+[Sudo](https://wiki.archlinux.org/title/Sudo) permite ejecutar comandos con privilegios de administrador. Los "insults" muestran mensajes humorísticos al introducir una contraseña incorrecta.
+
+```bash
+# Activar insults de sudo
+echo "Defaults insults" | sudo tee /etc/sudoers.d/10-insults
+sudo chmod 440 /etc/sudoers.d/10-insults
+```
+
+| Fichero | Propósito |
+|---------|-----------|
+| `/etc/sudoers.d/10-insults` | Habilita mensajes de error humorísticos en sudo |
+
 ### unzip
 
 [unzip](https://infozip.sourceforge.net/unzip.html) es una herramienta para extraer archivos comprimidos en formato ZIP. Lista, extrae y examina archivos de archivos ZIP.
