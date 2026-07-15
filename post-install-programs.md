@@ -163,8 +163,11 @@ source ~/.bashrc
 
 ```bash
 # Activar insults de sudo
-echo "Defaults insults" | sudo tee /etc/sudoers.d/10-insults
+sudo tee /etc/sudoers.d/10-insults <<< "Defaults insults"
 sudo chmod 440 /etc/sudoers.d/10-insults
+
+# Verificar configuración con visudo
+sudo visudo -c -f /etc/sudoers.d/10-insults
 ```
 
 | Fichero | Propósito |
