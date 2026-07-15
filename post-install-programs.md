@@ -54,6 +54,15 @@ fc-cache
 |---------|-----------|
 | `noto-fonts-emoji` | Fuente de emojis para navegadores y aplicaciones |
 
+### bashrc
+
+[~/.bashrc](bashrc.sh) es el archivo de configuración del shell Bash. Contiene alias, prompt, modo de edición y variables de entorno. Se copia al home tras la instalación.
+
+```bash
+# Copiar configuración de bashrc al home
+cp bashrc.sh ~/.bashrc
+```
+
 ### yazi
 
 [yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
