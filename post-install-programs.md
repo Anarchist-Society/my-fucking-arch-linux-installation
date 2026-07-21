@@ -174,6 +174,19 @@ sudo visudo -c -f /etc/sudoers.d/10-insults
 |---------|-----------|
 | `/etc/sudoers.d/10-insults` | Habilita mensajes de error humorísticos en sudo |
 
+### dosfstools
+
+[dosfstools](https://github.com/dosfstools/dosfstools) es una colección de herramientas para gestionar sistemas de archivos FAT. Útil para formatear y verificar particiones EFI (FAT32).
+
+```bash
+# Instalar dosfstools
+sudo pacman --sync dosfstools
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `dosfstools` | Herramientas para gestionar sistemas de archivos FAT |
+
 ### unzip
 
 [unzip](https://infozip.sourceforge.net/unzip.html) es una herramienta para extraer archivos comprimidos en formato ZIP. Lista, extrae y examina archivos de archivos ZIP.
