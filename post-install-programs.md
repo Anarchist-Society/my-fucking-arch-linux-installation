@@ -202,6 +202,58 @@ sudo pacman --sync unzip
 
 ## Hardware
 
+### slimbook-bios-ec
+
+Guía para actualizar BIOS y EC en [Slimbook EVO](https://www.slimbook.com/es/). Necesitas un pendrive y los ficheros BIOS y EC descomprimidos.
+
+> **SECURE BOOT** debe estar desactivado para realizar el proceso.
+
+#### Preparar el pendrive
+
+```bash
+# Particionar el pendrive (reemplaza /dev/sdX por tu dispositivo)
+sudo fdisk /dev/sdX
+```
+
+| Comando | Acción |
+|---------|--------|
+| `g` | Crear tabla GPT |
+| `n` → Enter → Enter → Enter | Crear partición en todo el disco |
+| `t` | Cambiar tipo |
+| `1` | Seleccionar tipo EFI System |
+| `w` | Escribir y salir |
+
+```bash
+# Formatear partición como FAT32
+sudo mkfs.fat -F32 /dev/sdX1
+```
+
+> Sustituye `/dev/sdX` por el dispositivo de tu pendrive. Puedes identificarlo con `lsblk`.
+
+Monta el pendrive y copia los directorios `BIOS`, `EC` y `EFI` a la raíz.
+
+#### Flashear la BIOS
+
+1. Conecta el cargador al equipo.
+2. Ve a BIOS y establece el perfil de límite de carga en 100% o restablece los valores por defecto.
+3. Con el equipo apagado, introduce el pendrive en cualquier puerto USB y enciéndelo.
+4. Nada más pulses el botón de encendido, pulsa repetidamente **F7** hasta que aparezca el menú de arranque. Selecciona la unidad USB.
+5. Aparecerá un listado de unidades y una línea de comandos. Identifica el pendrive (etiquetado como "removable hard disk" o similar, ruta `FS0`, `FS1` o `FS2`).
+6. Para acceder al pendrive, escribe la ruta seguida de dos puntos (ej. `FS1:`).
+7. Entra en el directorio BIOS: `cd BIOS` y ejecuta `F.nsh`.
+8. Espera a que termine el proceso y el equipo se apague o reinicie.
+
+#### Flashear el EC
+
+> Tras el reinicio puede aparecer una ventana roja avisando de que las firmas de arranque no son válidas. Entra en la BIOS y desactiva el **Secure Boot** para flashear el EC.
+
+Repite el proceso anterior:
+
+1. Entra en el directorio EC: `cd EC` y ejecuta `F.nsh`.
+2. Los ventiladores se pondrán a máxima potencia durante el flasheo y se apagarán al finalizar o el equipo se reiniciará.
+
+Tras este último paso, tendrás instaladas las últimas versiones de BIOS y EC en tu Slimbook.
+
 ### zsa-moonlander
 
 [ZSA Moonlander](https://zsa.io/moonlander/) es un teclado ergonómico programable. Requiere reglas udev para flashear el firmware desde el navegador (Oryx) o con Keymapp/Wally.
