@@ -220,7 +220,7 @@ sudo fdisk /dev/sdX
 | `o` | Crear tabla MBR |
 | `n` → Enter → Enter → Enter | Crear partición en todo el disco |
 | `t` | Cambiar tipo |
-| `1` | Seleccionar tipo EFI System |
+| `c` | Seleccionar tipo W95 FAT32 (LBA) |
 | `w` | Escribir y salir |
 
 ```bash
