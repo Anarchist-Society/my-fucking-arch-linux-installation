@@ -230,7 +230,16 @@ sudo mkfs.fat -F32 /dev/sdX1
 
 > Sustituye `/dev/sdX` por el dispositivo de tu pendrive. Puedes identificarlo con `lsblk`.
 
-Monta el pendrive y copia los directorios `BIOS`, `EC` y `EFI` a la raíz.
+```bash
+# Montar el pendrive
+sudo mount /dev/sdX1 /mnt
+
+# Copiar directorios BIOS, EC y EFI a la raíz del pendrive
+sudo cp -r BIOS EC EFI /mnt/
+
+# Desmontar el pendrive
+sudo umount /mnt
+```
 
 #### Flashear la BIOS
 
