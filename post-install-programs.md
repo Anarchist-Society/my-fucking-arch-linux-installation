@@ -204,7 +204,7 @@ sudo pacman --sync unzip
 
 ### slimbook-bios-ec
 
-Guía para actualizar BIOS y EC en [Slimbook EVO](https://www.slimbook.com/es/). Necesitas un pendrive y los ficheros BIOS y EC descomprimidos.
+Guía para actualizar BIOS y EC en [Slimbook EVO](https://slimbook.com/evo). Necesitas un pendrive y los ficheros BIOS y EC descomprimidos.
 
 > **SECURE BOOT** debe estar desactivado para realizar el proceso.
 
