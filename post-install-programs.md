@@ -217,7 +217,7 @@ sudo fdisk /dev/sdX
 
 | Comando | Acción |
 |---------|--------|
-| `g` | Crear tabla GPT |
+| `o` | Crear tabla MBR |
 | `n` → Enter → Enter → Enter | Crear partición en todo el disco |
 | `t` | Cambiar tipo |
 | `1` | Seleccionar tipo EFI System |
