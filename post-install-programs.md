@@ -221,6 +221,7 @@ sudo fdisk /dev/sdX
 | `n` → Enter → Enter → Enter | Crear partición en todo el disco |
 | `t` | Cambiar tipo |
 | `c` | Seleccionar tipo W95 FAT32 (LBA) |
+| `a` | Activar bandera de arranque |
 | `w` | Escribir y salir |
 
 ```bash
