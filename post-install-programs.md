@@ -226,7 +226,7 @@ sudo fdisk /dev/sdX
 
 ```bash
 # Formatear partición como FAT32
-sudo mkfs.fat -F32 /dev/sdX1
+sudo mkfs.fat -F 32 /dev/sdX1
 ```
 
 > Sustituye `/dev/sdX` por el dispositivo de tu pendrive. Puedes identificarlo con `lsblk`.
