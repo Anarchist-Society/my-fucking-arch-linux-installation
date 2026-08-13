@@ -123,6 +123,19 @@ git config --global user.name "John Doe"
 git config --global user.email "johndoe@example.com"
 ```
 
+### jdk-openjdk
+
+[OpenJDK](https://openjdk.org/) es la implementación de referencia de Java. Incluye el JDK (Java Development Kit) para compilar y ejecutar aplicaciones Java.
+
+```bash
+# Instalar OpenJDK
+sudo pacman --sync jdk-openjdk
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `jdk-openjdk` | Kit de desarrollo de Java (JDK) |
+
 ### opencode
 
 [OpenCode](https://opencode.ai) es una CLI interactiva de IA para desarrollo de software. Ejecuta comandos, edita archivos y responde preguntas sobre el código directamente en la terminal.
@@ -186,6 +199,19 @@ sudo pacman --sync dosfstools
 | Paquete | Propósito |
 |---------|-----------|
 | `dosfstools` | Herramientas para gestionar sistemas de archivos FAT |
+
+### flatpak
+
+[Flatpak](https://flatpak.org/) es un framework de sandboxing y distribución de aplicaciones Linux. Permite instalar aplicaciones aisladas del sistema con sus dependencias incluidas.
+
+```bash
+# Instalar flatpak
+sudo pacman --sync flatpak
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `flatpak` | Sandboxing y distribución de aplicaciones Linux |
 
 ### unzip
 
