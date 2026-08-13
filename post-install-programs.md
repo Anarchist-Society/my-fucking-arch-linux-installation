@@ -329,6 +329,21 @@ sudo reboot
 |---------|-----------|
 | `50-zsa.rules` | Reglas udev para el Moonlander |
 
+## Juegos
+
+### sober
+
+[Sober](https://sober.vinegarhq.org/) es un launcher de código abierto para jugar a Roblox en Linux usando Vinegar, que traduce el juego para ejecutarlo de forma nativa.
+
+```bash
+# Instalar Sober (Roblox) vía Flatpak
+flatpak install flathub org.vinegarhq.Sober
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `org.vinegarhq.Sober` | Launcher de Roblox para Linux (Flatpak) |
+
 ## Red
 
 ### openssh
