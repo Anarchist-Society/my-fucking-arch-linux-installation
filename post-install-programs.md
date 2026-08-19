@@ -119,7 +119,7 @@ sudo pacman --sync grim slurp wl-clipboard
 
 ```lua
 -- Copiar región seleccionada al portapapeles (SUPER + Print)
-hl.bind("SUPER + Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
+hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 ```
 
 ## Desarrollo
