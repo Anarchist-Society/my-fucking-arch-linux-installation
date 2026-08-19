@@ -235,7 +235,7 @@ sudo pacman --sync flatpak
 
 ### unzip
 
-[unzip](https://infozip.sourceforge.net/unzip.html) es una herramienta para extraer archivos comprimidos en formato ZIP. Lista, extrae y examina archivos de archivos ZIP.
+[unzip](https://infozip.sourceforge.net/UnZip.html) es una herramienta para extraer archivos comprimidos en formato ZIP. Lista, extrae y examina archivos de archivos ZIP.
 
 ```bash
 # Instalar unzip
