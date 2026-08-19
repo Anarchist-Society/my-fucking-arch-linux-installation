@@ -102,6 +102,26 @@ sudo pacman --sync fastfetch
 |---------|-----------|
 | `fastfetch` | Mostrar información del sistema de forma rápida y personalizable |
 
+### grim + slurp
+
+[grim](https://github.com/swaywm/grim) es una herramienta de captura de pantalla para Wayland. [slurp](https://github.com/adenorinator/slurp) permite seleccionar una región de la pantalla de forma interactiva. Combinados, permiten copiar capturas directamente al portapapeles.
+
+```bash
+# Instalar grim, slurp y wl-clipboard
+sudo pacman --sync grim slurp wl-clipboard
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `grim` | Captura de pantalla para Wayland |
+| `slurp` | Selector de región interactivo |
+| `wl-clipboard` | Copiar al portapapeles en Wayland |
+
+```lua
+-- Copiar región seleccionada al portapapeles (SUPER + Print)
+hl.bind("SUPER + Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
+```
+
 ## Desarrollo
 
 ### git
