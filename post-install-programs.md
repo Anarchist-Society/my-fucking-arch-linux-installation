@@ -122,6 +122,20 @@ sudo pacman --sync grim slurp wl-clipboard
 hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 ```
 
+### obs-studio
+
+[OBS Studio](https://obsproject.com/) es un software de grabación y streaming de código abierto.
+
+```bash
+# Instalar OBS Studio
+sudo pacman --sync obs-studio pipewire-jack
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `obs-studio` | Software de grabación y streaming |
+| `pipewire-jack` | Compatibilidad JACK a través de PipeWire |
+
 ## Desarrollo
 
 ### git
