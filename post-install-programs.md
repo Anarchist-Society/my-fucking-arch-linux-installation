@@ -124,17 +124,19 @@ hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 
 ### obs-studio
 
-[OBS Studio](https://obsproject.com/) es un software de grabación y streaming de código abierto.
+[OBS Studio](https://obsproject.com/) es un software de grabación y streaming de código abierto. En Hyprland requiere `xdg-desktop-portal-hyprland` para la captura de pantalla y `qt6-wayland` para evitar crashes.
 
 ```bash
 # Instalar OBS Studio
-sudo pacman --sync obs-studio pipewire-jack
+sudo pacman --sync obs-studio pipewire-jack qt6-wayland xdg-desktop-portal-hyprland
 ```
 
 | Paquete | Propósito |
 |---------|-----------|
 | `obs-studio` | Software de grabación y streaming |
 | `pipewire-jack` | Compatibilidad JACK a través de PipeWire |
+| `qt6-wayland` | Soporte Wayland para Qt (evita crashes de OBS) |
+| `xdg-desktop-portal-hyprland` | Portal de captura de pantalla para Hyprland |
 
 ## Desarrollo
 
