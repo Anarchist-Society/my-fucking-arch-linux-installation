@@ -262,6 +262,19 @@ sudo pacman --sync unzip
 |---------|-----------|
 | `unzip` | Extraer archivos comprimidos en formato ZIP |
 
+### mpv
+
+[mpv](https://mpv.io/) es un reproductor de vídeo minimalista y ligero, altamente configurable. Soporta una amplia variedad de formatos de vídeo y audio.
+
+```bash
+# Instalar mpv
+sudo pacman --sync mpv
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `mpv` | Reproductor de vídeo minimalista |
+
 ## Hardware
 
 ### slimbook-bios-ec
