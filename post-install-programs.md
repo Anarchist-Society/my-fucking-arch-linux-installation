@@ -138,6 +138,28 @@ sudo pacman --sync obs-studio pipewire-jack qt6-wayland xdg-desktop-portal-hyprl
 | `qt6-wayland` | Soporte Wayland para Qt (evita crashes de OBS) |
 | `xdg-desktop-portal-hyprland` | Portal de captura de pantalla para Hyprland |
 
+### hyprlauncher
+
+[Hyprlauncher](https://github.com/hyprwm/hyprlauncher) es el lanzador de aplicaciones oficial de Hyprland. Es multipropósito (aplicaciones, búsqueda de unicode, calculadora), rápido y funciona como daemon.
+
+```bash
+# Instalar Hyprlauncher
+sudo pacman --sync hyprlauncher
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `hyprlauncher` | Lanzador de aplicaciones oficial de Hyprland |
+
+Ejecutar `hyprlauncher` la primera vez arranca el daemon. Para abrirlo con una tecla, añade el siguiente binding en `~/.config/hypr/hyprland.lua`:
+
+```lua
+-- Abrir lanzador de aplicaciones (SUPER + Space)
+hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("hyprlauncher"))
+```
+
+Config adicional en `~/.config/hypr/hyprlauncher.conf` (opcional).
+
 ## Desarrollo
 
 ### git
