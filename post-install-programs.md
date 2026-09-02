@@ -151,14 +151,7 @@ sudo pacman --sync hyprlauncher
 |---------|-----------|
 | `hyprlauncher` | Lanzador de aplicaciones oficial de Hyprland |
 
-Ejecutar `hyprlauncher` la primera vez arranca el daemon. Para abrirlo con una tecla, añade el siguiente binding en `~/.config/hypr/hyprland.lua`:
-
-```lua
--- Abrir lanzador de aplicaciones (SUPER + Space)
-hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("hyprlauncher"))
-```
-
-Config adicional en `~/.config/hypr/hyprlauncher.conf` (opcional).
+La configuración predeterminada de Hyprland ya controla el lanzador; solo hay que pulsar **SUPER + R**.
 
 ## Desarrollo
 
