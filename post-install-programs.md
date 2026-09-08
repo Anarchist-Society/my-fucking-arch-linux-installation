@@ -219,34 +219,6 @@ echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### nvm (Node Version Manager)
-
-[nvm](https://github.com/nvm-sh/nvm) es un gestor de versiones de Node.js. Se usa para instalar node 20 (LTS) en paralelo al node v26 global, sin conflicto, ya que coc-emmet no es compatible con node v26.
-
-```bash
-# Instalar nvm con pacman
-sudo pacman --sync nvm
-
-# Cargar nvm en cada sesión de shell (añadir a ~/.bashrc)
-echo '. /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
-
-# Instalar y usar node 20
-nvm install 20
-nvm use 20
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `nvm` | Gestor de versiones de Node.js |
-| node 20 (LTS) | Versión 20 |
-
-> **Nota**: nvm entra en conflicto con el `prefix` de `~/.npmrc` (configurado para `~/.npm-global`). Antes de usar nvm, renombra el fichero y desbloquea con `nvm use --delete-prefix`:
-> ```bash
-> mv ~/.npmrc ~/.npmrc.backup
-> nvm use --delete-prefix 20
-> nvm use 20
-> ```
-
 ## Utilidades
 
 ### sudo
