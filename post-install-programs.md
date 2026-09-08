@@ -221,25 +221,31 @@ source ~/.bashrc
 
 ### nvm (Node Version Manager)
 
-[nvm](https://github.com/nvm-sh/nvm) es un gestor de versiones de Node.js. Permite instalar varias versiones de node en paralelo y alternar entre ellas (p. ej. versiones LTS compatibles con extensiones antiguas de coc.nvim).
+[nvm](https://github.com/nvm-sh/nvm) es un gestor de versiones de Node.js. Se usa para instalar node 20 (LTS) en paralelo al node v26 global, sin conflicto, ya que coc-emmet no es compatible con node v26.
 
 ```bash
 # Instalar nvm con pacman
 sudo pacman --sync nvm
 
-# Cargar nvm en la sesión actual
-. /usr/share/nvm/init-nvm.sh
+# Cargar nvm en cada sesión de shell (añadir a ~/.bashrc)
+echo '. /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
 
-# Instalar y usar una versión de node (ej. LTS)
-nvm install --lts
-nvm use --lts
+# Instalar y usar node 20
+nvm install 20
+nvm use 20
 ```
 
 | Paquete | Propósito |
 |---------|-----------|
 | `nvm` | Gestor de versiones de Node.js |
+| node 20 (LTS) | Versión compatible con coc-emmet |
 
-> **Nota**: nvm se carga manualmente (`. /usr/share/nvm/init-nvm.sh`) — no está en `~/.bashrc`. Si otros paquetes requieren `nodejs` como dependencia usándose con nvm, instálalos con `--assume-installed nodejs=<versión>`.
+> **Nota**: nvm entra en conflicto con el `prefix` de `~/.npmrc` (configurado para `~/.npm-global`). Antes de usar nvm, renombra el fichero y desbloquea con `nvm use --delete-prefix`:
+> ```bash
+> mv ~/.npmrc ~/.npmrc.backup
+> nvm use --delete-prefix v20.20.2
+> nvm use 20
+> ```
 
 ## Utilidades
 
