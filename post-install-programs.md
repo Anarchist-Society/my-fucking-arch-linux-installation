@@ -238,12 +238,12 @@ nvm use 20
 | Paquete | Propósito |
 |---------|-----------|
 | `nvm` | Gestor de versiones de Node.js |
-| node 20 (LTS) | Versión compatible con coc-emmet |
+| node 20 (LTS) | Versión 20 |
 
 > **Nota**: nvm entra en conflicto con el `prefix` de `~/.npmrc` (configurado para `~/.npm-global`). Antes de usar nvm, renombra el fichero y desbloquea con `nvm use --delete-prefix`:
 > ```bash
 > mv ~/.npmrc ~/.npmrc.backup
-> nvm use --delete-prefix v20.20.2
+> nvm use --delete-prefix 20
 > nvm use 20
 > ```
 
