@@ -219,6 +219,28 @@ echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
+### nvm (Node Version Manager)
+
+[nvm](https://github.com/nvm-sh/nvm) es un gestor de versiones de Node.js. Permite instalar varias versiones de node en paralelo y alternar entre ellas (p. ej. versiones LTS compatibles con extensiones antiguas de coc.nvim).
+
+```bash
+# Instalar nvm con pacman
+sudo pacman --sync nvm
+
+# Cargar nvm en la sesión actual
+. /usr/share/nvm/init-nvm.sh
+
+# Instalar y usar una versión de node (ej. LTS)
+nvm install --lts
+nvm use --lts
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `nvm` | Gestor de versiones de Node.js |
+
+> **Nota**: nvm se carga manualmente (`. /usr/share/nvm/init-nvm.sh`) — no está en `~/.bashrc`. Si otros paquetes requieren `nodejs` como dependencia usándose con nvm, instálalos con `--assume-installed nodejs=<versión>`.
+
 ## Utilidades
 
 ### sudo
