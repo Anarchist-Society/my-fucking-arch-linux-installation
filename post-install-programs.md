@@ -405,9 +405,9 @@ Para integrar funciones del sistema anfitrión en los invitados (carpetas compar
 # Instalar VirtualBox, módulos DKMS del host y headers del kernel
 sudo pacman --sync virtualbox virtualbox-host-dkms linux-headers
 
-# Cargar el módulo del host y activar el servicio
+# Cargar el módulo del host y arrancar el servicio manualmente (no se inicia al arrancar el sistema)
 sudo modprobe vboxdrv
-sudo systemctl enable --now vboxdrv
+sudo systemctl start vboxdrv
 
 # Agregar usuario al grupo vboxusers (requiere cerrar sesión para surtir efecto)
 sudo usermod -aG vboxusers $USER
