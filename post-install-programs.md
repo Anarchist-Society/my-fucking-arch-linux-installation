@@ -393,6 +393,32 @@ sudo reboot
 |---------|-----------|
 | `50-zsa.rules` | Reglas udev para el Moonlander |
 
+## Virtualización
+
+### VirtualBox
+
+[VirtualBox](https://www.virtualbox.org/) es un hypervisor que permite ejecutar sistemas operativos en un entorno especial, llamado máquina virtual, sobre el sistema operativo existente. Está en constante desarrollo e incluye una interfaz gráfica Qt, así como herramientas de línea de comandos headless y SDL para gestionar y ejecutar máquinas virtuales.
+
+Para integrar funciones del sistema anfitrión en los invitados (carpetas compartidas, portapapeles, aceleración de vídeo y modo de integración de ventanas), se proporcionan las VirtualBox Guest Additions para algunos sistemas operativos invitados.
+
+```bash
+# Instalar VirtualBox, módulos DKMS del host y headers del kernel
+sudo pacman --sync virtualbox virtualbox-host-dkms linux-headers
+
+# Cargar el módulo del host y activar el servicio
+sudo modprobe vboxdrv
+sudo systemctl enable --now vboxdrv
+
+# Agregar usuario al grupo vboxusers (requiere cerrar sesión para surtir efecto)
+sudo usermod -aG vboxusers $USER
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `virtualbox` | Hypervisor con GUI Qt y herramientas CLI headless y SDL |
+| `virtualbox-host-dkms` | Módulos del kernel del host (`vboxdrv`, etc.), recompilados automáticamente por el hook DKMS al actualizar VirtualBox o el kernel |
+| `linux-headers` | Headers del kernel `linux`, necesarios para compilar los módulos DKMS |
+
 ## Juegos
 
 ### sober
