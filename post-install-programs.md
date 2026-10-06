@@ -174,6 +174,19 @@ git config --global user.name "John Doe"
 git config --global user.email "johndoe@example.com"
 ```
 
+### lazygit
+
+[Lazygit](https://github.com/jesseduffield/lazygit) es una interfaz TUI para Git que permite gestionar el repositorio (staging, commits, ramas, rebase, log) sin salir de la terminal.
+
+```bash
+# Instalar lazygit
+sudo pacman --sync lazygit
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `lazygit` | Interfaz interactiva en terminal para Git |
+
 ### jdk-openjdk
 
 [OpenJDK](https://openjdk.org/) es la implementación de referencia de Java. Incluye el JDK (Java Development Kit) para compilar y ejecutar aplicaciones Java.
