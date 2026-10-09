@@ -303,6 +303,25 @@ sudo pacman --sync mpv
 |---------|-----------|
 | `mpv` | Reproductor de vídeo minimalista |
 
+### yt-dlp
+
+[yt-dlp](https://github.com/yt-dlp/yt-dlp) es una herramienta de línea de comandos para descargar vídeos de YouTube y otros sitios. Soporta alta calidad, playlists, subtítulos y más.
+
+```bash
+# Instalar yt-dlp y ffmpeg (ffmpeg combina el vídeo y el audio descargados)
+sudo pacman --sync yt-dlp ffmpeg
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `yt-dlp` | Descargar vídeos de YouTube y otros sitios |
+| `ffmpeg` | Combina/remuxea el vídeo y el audio descargados |
+
+```bash
+# Ejemplo: mejor calidad, guardado en ~/Videos con el nombre del vídeo
+yt-dlp -f "bestvideo+bestaudio" -o "~/Videos/%(title)s.%(ext)s" "URL"
+```
+
 ## Hardware
 
 ### slimbook-bios-ec
