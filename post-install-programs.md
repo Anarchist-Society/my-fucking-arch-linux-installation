@@ -491,3 +491,63 @@ eval "$(ssh-agent -s)"
 # Agregar clave privada al agente
 ssh-add ~/.ssh/id_ed25519
 ```
+
+## Educación
+
+### exam-env (freeCodeCamp)
+
+[Exam Environment](https://github.com/freeCodeCamp/exam-env) es la aplicación de escritorio (Tauri) que usa [freeCodeCamp](https://www.freecodecamp.org/) para sus exámenes certificados. Se distribuye como AppImage de 64 bits.
+
+En Arch + Hyprland el AppImage tal cual da dos problemas:
+
+1. **No arranca por Wayland** (`Failed to initialize GTK`): su hook interno fuerza `GDK_BACKEND=x11`, y además X11 necesita que exista `/tmp/.X11-unix` (que `systemd-tmpfiles` puede borrar).
+2. **Pantalla en blanco**: el bundle incluye su propia `libwayland-client.so.0`, incompatible con la Mesa del sistema. El proceso de WebKit aborta con `Could not create default EGL display: EGL_BAD_PARAMETER`.
+
+La solución es extraerlo, cambiar el backend a Wayland y lanzarlo precargando la `libwayland-client` del sistema.
+
+```bash
+# Extraer el AppImage
+mkdir -p ~/.local/opt/exam-env
+cd ~/.local/opt/exam-env
+~/Downloads/Exam.Environment_2.2.0_amd64.AppImage --appimage-extract
+mv squashfs-root app
+```
+
+Abre el hook de GTK y cambia la línea del backend:
+
+```bash
+# Abrir el hook de GTK
+vim app/apprun-hooks/linuxdeploy-plugin-gtk.sh
+```
+
+Busca esta línea:
+
+```sh
+export GDK_BACKEND=x11
+```
+
+y déjala así:
+
+```sh
+export GDK_BACKEND=wayland
+```
+
+```bash
+# Crear lanzador
+mkdir -p ~/.local/bin
+cat > ~/.local/bin/exam-env <<'EOF'
+#!/bin/sh
+# Precargar la libwayland-client del sistema evita el aborto de WebKit
+# (EGL_BAD_PARAMETER → pantalla en blanco)
+LD_PRELOAD=/usr/lib/libwayland-client.so.0 \
+  exec "$HOME/.local/opt/exam-env/app/AppRun" "$@"
+EOF
+chmod +x ~/.local/bin/exam-env
+```
+
+| Fichero | Propósito |
+|---------|-----------|
+| `~/.local/opt/exam-env/app` | AppImage extraído con el backend cambiado a Wayland |
+| `~/.local/bin/exam-env` | Lanzador que precarga la `libwayland-client` del sistema |
+
+> Ejecutar el AppImage directamente (`./Exam.Environment_2.2.0_amd64.AppImage`) arranca por X11/XWayland y se ve borroso con escalado fraccionario. Para ese caso X11 debe funcionar: en Arch, `systemd-tmpfiles` puede borrar `/tmp/.X11-unix` cada hora; se evita con `sudo touch /etc/tmpfiles.d/x11.conf` y reiniciando.
