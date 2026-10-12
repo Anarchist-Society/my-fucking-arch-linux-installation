@@ -50,3 +50,16 @@ paru --sync localsend-bin
 | Paquete | Propósito |
 |---------|-----------|
 | `localsend-bin` | Compartición de archivos local peer-to-peer multiplataforma (binario precompilado) |
+
+## Exam Environment (freeCodeCamp)
+
+[Exam Environment](https://github.com/freeCodeCamp/exam-env) es la aplicación de escritorio (Tauri) que usa [freeCodeCamp](https://www.freecodecamp.org/) para los exámenes certificados de su plataforma.
+
+```bash
+# Instalar Exam Environment
+paru --sync exam-env
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `exam-env` | Aplicación de escritorio de freeCodeCamp para los exámenes certificados |
