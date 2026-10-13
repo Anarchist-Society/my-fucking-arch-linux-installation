@@ -6,6 +6,7 @@
 - [Brave Browser](#brave-browser)
 - [LocalSend](#localsend)
 - [Exam Environment (freeCodeCamp)](#exam-environment-freecodecamp)
+- [Minecraft (Java Edition)](#minecraft-java-edition)
 
 ---
 
@@ -72,3 +73,16 @@ paru --sync exam-env
 | Paquete | Propósito |
 |---------|-----------|
 | `exam-env` | Aplicación de escritorio de freeCodeCamp para los exámenes certificados |
+
+## Minecraft (Java Edition)
+
+[Minecraft Java Edition](https://www.minecraft.net/) es el juego original de construcción y supervivencia. El launcher oficial de Mojang se distribuye en AUR como `minecraft-launcher` e incluye el cliente, un script de lanzamiento y una entrada `.desktop`.
+
+```bash
+# Instalar el launcher oficial de Minecraft
+paru --sync minecraft-launcher
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `minecraft-launcher` | Launcher oficial de Minecraft Java Edition |
