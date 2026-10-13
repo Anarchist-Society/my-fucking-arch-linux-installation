@@ -2,7 +2,7 @@
 
 ## Hyprland
 
-[Hyprland](https://wiki.archlinux.org/title/Hyprland) es un compositor Wayland dinámico. Arranca desde TTY sin display manager.
+[Hyprland](https://wiki.archlinux.org/title/Hyprland) es un compositor Wayland dinámico. Se puede arrancar desde TTY o desde un gestor de pantalla como SDDM.
 
 ```bash
 # Instalar Hyprland
