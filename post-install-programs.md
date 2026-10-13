@@ -2,6 +2,43 @@
 
 Estos son los programas que uso en el sistema, ordenados por categoría.
 
+## Tabla de contenidos
+- [Terminal](#terminal)
+  - [kitty](#kitty)
+  - [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)
+  - [noto-fonts-emoji](#noto-fonts-emoji)
+  - [bashrc](#bashrc)
+  - [yazi](#yazi)
+  - [btop](#btop)
+  - [fastfetch](#fastfetch)
+  - [grim + slurp](#grim--slurp)
+  - [obs-studio](#obs-studio)
+  - [hyprlauncher](#hyprlauncher)
+- [Desarrollo](#desarrollo)
+  - [git](#git)
+  - [lazygit](#lazygit)
+  - [jdk-openjdk](#jdk-openjdk)
+  - [opencode](#opencode)
+  - [nodejs y npm](#nodejs-y-npm)
+- [Utilidades](#utilidades)
+  - [sudo](#sudo)
+  - [dosfstools](#dosfstools)
+  - [flatpak](#flatpak)
+  - [unzip](#unzip)
+  - [mpv](#mpv)
+  - [yt-dlp](#yt-dlp)
+- [Hardware](#hardware)
+  - [slimbook-bios-ec](#slimbook-bios-ec)
+  - [zsa-moonlander](#zsa-moonlander)
+- [Virtualización](#virtualización)
+  - [VirtualBox](#virtualbox)
+- [Juegos](#juegos)
+  - [sober](#sober)
+- [Red](#red)
+  - [openssh](#openssh)
+
+---
+
 ## Terminal
 
 ### kitty
