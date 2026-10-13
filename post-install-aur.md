@@ -1,5 +1,14 @@
 # Post-instalación: Paquetes AUR
 
+## Tabla de contenidos
+- [AUR (Arch User Repository)](#aur-arch-user-repository)
+- [Paru (AUR helper)](#paru-aur-helper)
+- [Brave Browser](#brave-browser)
+- [LocalSend](#localsend)
+- [Exam Environment (freeCodeCamp)](#exam-environment-freecodecamp)
+
+---
+
 ## AUR (Arch User Repository)
 
 [AUR](https://wiki.archlinux.org/title/Arch_User_Repository) es un repositorio comunitario donde los usuarios comparten [PKGBUILDs](https://wiki.archlinux.org/title/PKGBUILD) para instalar software no incluido en los repositorios oficiales de Arch. A diferencia de `pacman`, que instala binarios precompilados, los paquetes AUR se compilan desde el código fuente en tu máquina.
