@@ -60,6 +60,19 @@ sudo systemctl enable sddm.service
 |---------|-----------|
 | `sddm` | Gestor de pantalla (login gráfico) |
 
+#### Teclado en español (X11)
+
+El greeter de SDDM corre por defecto sobre X11 y toma su distribución de teclado de `/etc/X11/xorg.conf.d/00-keyboard.conf`. `localectl` genera ese fichero de forma declarativa, aplicándose al login de SDDM antes de que aparezca el diálogo.
+
+```bash
+# Fijar distribución española para X11 (greeter de SDDM)
+localectl set-x11-keymap es
+```
+
+| Fichero | Propósito |
+|---------|-----------|
+| `/etc/X11/xorg.conf.d/00-keyboard.conf` | Distribución de teclado para X11 (lo usa el greeter de SDDM) |
+
 ### gnome-keyring
 
 [GNOME Keyring](https://wiki.archlinux.org/title/GNOME/Keyring) provee `org.freedesktop.secrets`, el API de freedesktop que permite a las aplicaciones guardar secretos (tokens, contraseñas) de forma segura. Sin un proveedor de este servicio, aplicaciones como el launcher de Minecraft no recuerdan la sesión y vuelven a pedir las credenciales en cada arranque.
@@ -72,8 +85,6 @@ sudo pacman --sync gnome-keyring
 | Paquete | Propósito |
 |---------|-----------|
 | `gnome-keyring` | Proveedor de Secret Service para almacenar secretos de las aplicaciones |
-
-Con SDDM el keyring se desbloquea automáticamente: su configuración PAM (`/etc/pam.d/sddm`) ya incluye `pam_gnome_keyring.so`. No hace falta editar nada a mano.
 
 ## Terminal
 
@@ -389,11 +400,6 @@ sudo pacman --sync yt-dlp ffmpeg
 |---------|-----------|
 | `yt-dlp` | Descargar vídeos de YouTube y otros sitios |
 | `ffmpeg` | Combina/remuxea el vídeo y el audio descargados |
-
-```bash
-# Ejemplo: mejor calidad, guardado en ~/Videos con el nombre del vídeo
-yt-dlp -f "bestvideo+bestaudio" -o "~/Videos/%(title)s.%(ext)s" "URL"
-```
 
 ## Hardware
 
