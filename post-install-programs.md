@@ -3,6 +3,8 @@
 Estos son los programas que uso en el sistema, ordenados por categoría.
 
 ## Tabla de contenidos
+- [Escritorio](#escritorio)
+  - [sddm](#sddm)
 - [Terminal](#terminal)
   - [kitty](#kitty)
   - [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)
@@ -38,6 +40,24 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [openssh](#openssh)
 
 ---
+
+## Escritorio
+
+### sddm
+
+[SDDM](https://wiki.archlinux.org/title/SDDM) (Simple Desktop Display Manager) es el gestor de pantalla que permite iniciar sesión gráficamente y elegir la sesión (Hyprland) sin entrar por TTY.
+
+```bash
+# Instalar SDDM
+sudo pacman --sync sddm
+
+# Habilitar el servicio para que arranque en el boot
+sudo systemctl enable sddm.service
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `sddm` | Gestor de pantalla (login gráfico) |
 
 ## Terminal
 
