@@ -5,6 +5,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 ## Tabla de contenidos
 - [Escritorio](#escritorio)
   - [sddm](#sddm)
+  - [gnome-keyring](#gnome-keyring)
 - [Terminal](#terminal)
   - [kitty](#kitty)
   - [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)
@@ -58,6 +59,21 @@ sudo systemctl enable sddm.service
 | Paquete | Propósito |
 |---------|-----------|
 | `sddm` | Gestor de pantalla (login gráfico) |
+
+### gnome-keyring
+
+[GNOME Keyring](https://wiki.archlinux.org/title/GNOME/Keyring) provee `org.freedesktop.secrets`, el API de freedesktop que permite a las aplicaciones guardar secretos (tokens, contraseñas) de forma segura. Sin un proveedor de este servicio, aplicaciones como el launcher de Minecraft no recuerdan la sesión y vuelven a pedir las credenciales en cada arranque.
+
+```bash
+# Instalar gnome-keyring
+sudo pacman --sync gnome-keyring
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `gnome-keyring` | Proveedor de Secret Service para almacenar secretos de las aplicaciones |
+
+Con SDDM el keyring se desbloquea automáticamente: su configuración PAM (`/etc/pam.d/sddm`) ya incluye `pam_gnome_keyring.so`. No hace falta editar nada a mano.
 
 ## Terminal
 
