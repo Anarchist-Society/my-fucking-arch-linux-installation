@@ -26,9 +26,9 @@ sudo pacman -S --needed base-devel git
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg --syncdeps --install --clean
-```
 
-Paru sincroniza automáticamente la base de datos de paquetes con `--syncdeps` y elimina los fuentes tras la instalación con `--clean`.
+# Paru sincroniza automáticamente la base de datos de paquetes con `--syncdeps` y elimina los fuentes tras la instalación con `--clean`.
+```
 
 | Paquete | Propósito |
 |---------|-----------|
