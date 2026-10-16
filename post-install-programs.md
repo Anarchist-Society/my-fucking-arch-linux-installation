@@ -392,14 +392,15 @@ sudo pacman --sync mpv
 [yt-dlp](https://github.com/yt-dlp/yt-dlp) es una herramienta de línea de comandos para descargar vídeos de YouTube y otros sitios. Soporta alta calidad, playlists, subtítulos y más.
 
 ```bash
-# Instalar yt-dlp y ffmpeg (ffmpeg combina el vídeo y el audio descargados)
-sudo pacman --sync yt-dlp ffmpeg
+# Instalar yt-dlp, ffmpeg y python-curl_cffi (ffmpeg combina el vídeo y el audio descargados; python-curl_cffi impersona el navegador para evitar el HTTP 429 de YouTube al descargar subtítulos)
+sudo pacman --sync yt-dlp ffmpeg python-curl_cffi
 ```
 
 | Paquete | Propósito |
 |---------|-----------|
 | `yt-dlp` | Descargar vídeos de YouTube y otros sitios |
 | `ffmpeg` | Combina/remuxea el vídeo y el audio descargados |
+| `python-curl_cffi` | Impersonación de navegador para yt-dlp (evita el HTTP 429 al descargar subtítulos) |
 
 ## Hardware
 
