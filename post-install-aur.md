@@ -7,7 +7,6 @@
 - [LocalSend](#localsend)
 - [Exam Environment (freeCodeCamp)](#exam-environment-freecodecamp)
 - [Minecraft (Java Edition)](#minecraft-java-edition)
-- [HolyC](#holyc)
 
 ---
 
@@ -87,60 +86,3 @@ paru --sync minecraft-launcher
 | Paquete | Propósito |
 |---------|-----------|
 | `minecraft-launcher` | Launcher oficial de Minecraft Java Edition |
-
-## HolyC
-
-[HolyC](https://holyc-lang.com) es el lenguaje de programación creado por Terry Davis para TempleOS. `holyc-lang` es un compilador (`hcc`) reescrito desde cero en C, que compila código HolyC a binarios nativos x86_64/arm64 e incluye la librería estándar `tos` (cadenas, tablas hash, I/O, matemáticas, parsing JSON, etc.).
-
-```bash
-# Instalar el compilador de HolyC
-paru --sync holyc-lang-git
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `holyc-lang-git` | Compilador HolyC (`hcc`) con la librería estándar `tos` |
-
-#### Nota: PKGBUILD roto en AUR (v0.0.15-beta)
-
-El PKGBUILD de AUR actualmente falla al compilar con dos errores:
-
-1. **`pkgver() ha generado una versión no válida`** — upstream cambió el formato de sus tags git de `beta-v0.0.10` a `v0.0.15-beta` y la función `pkgver()` del PKGBUILD no lo interpreta, generando una versión con guiones que pacman rechaza.
-2. **`referencia a 'asm_encode' sin definir`** — el PKGBUILD no compila con `-DHCC_ENABLE_JIT=on`. Sin esa flag, la librería del ensamblador (`tasm`) no se enlaza con `hcc`. El Makefile oficial del proyecto sí la usa.
-
-Solución: parchear el PKGBUILD en la caché de paru y compilar con `makepkg`:
-
-```bash
-# Editar el PKGBUILD
-vim ~/.cache/paru/clone/holyc-lang-git/PKGBUILD
-```
-
-| Fix | Dónde | Cambio |
-|-----|-------|--------|
-| 1 | función `pkgver()` | `local version=$(git describe --tags --no-abbrev \| sed -e 's/^v//' -e 's/^beta-v//' -e 's/-beta$//')` |
-| 2 | función `build()` | añadir `-DHCC_ENABLE_JIT=on \` a las flags de `cmake` |
-
-```bash
-# Compilar e instalar desde la caché de paru
-cd ~/.cache/paru/clone/holyc-lang-git
-makepkg --cleanbuild --syncdeps --install --clean
-```
-
-> `--cleanbuild` es importante: si hay un `src/holyc-lang/src/build` de un intento anterior, la caché de CMake puede estar configurada sin el JIT.
-
-> `-DHCC_ENABLE_JIT=on` además habilita el REPL y `hcc -jit`. Al ser un paquete `-git`, si lo reconstruyes hay que volver a aplicar el fix hasta que el maintainer actualice el PKGBUILD de AUR.
-
-#### Observaciones del PKGBUILD corregido
-
-| Tema | Detalle |
-|------|---------|
-| `.SRCINFO` desactualizado | Sigue indicando `pkgver = beta_v0.0.10`. No afecta a `makepkg`, solo a helpers/AUR; regenerar con `makepkg --printsrcinfo > .SRCINFO`. |
-| Dependencia implícita de `gcc` | `hcc` invoca `cc` para ensamblar/enlazar los programas HolyC, pero el PKGBUILD solo declara `glibc`. En un sistema con `base-devel` está cubierto. `clang` solo hace falta para cross-compilar (`--target`). |
-| Sin optimización | `-DCMAKE_BUILD_TYPE:STRING='None'` compila sin `-O2`; el Makefile oficial usa `Release`. Opcional cambiarlo para un `hcc` más rápido. |
-| Caché de paru | `paru --sync holyc-lang-git` puede resetear el PKGBUILD parcheado; por eso se compila con `makepkg` directamente desde esa carpeta. |
-
-```bash
-# Verificar la instalación con un hola mundo
-printf '"#Hello, HolyC!\n";' > hello.HC
-hcc -o hello hello.HC && ./hello
-```
