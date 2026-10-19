@@ -7,6 +7,7 @@
 - [LocalSend](#localsend)
 - [Exam Environment (freeCodeCamp)](#exam-environment-freecodecamp)
 - [Minecraft (Java Edition)](#minecraft-java-edition)
+- [HolyC](#holyc)
 
 ---
 
@@ -86,3 +87,22 @@ paru --sync minecraft-launcher
 | Paquete | Propósito |
 |---------|-----------|
 | `minecraft-launcher` | Launcher oficial de Minecraft Java Edition |
+
+## HolyC
+
+[HolyC](https://holyc-lang.com) es el lenguaje de programación creado por Terry Davis para TempleOS. `holyc-lang` es un compilador (`hcc`) reescrito desde cero en C, que compila código HolyC a binarios nativos x86_64/arm64 e incluye la librería estándar `tos` (cadenas, tablas hash, I/O, matemáticas, parsing JSON, etc.).
+
+```bash
+# Instalar el compilador de HolyC
+paru --sync holyc-lang-git
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `holyc-lang-git` | Compilador HolyC (`hcc`) con la librería estándar `tos` |
+
+```bash
+# Verificar la instalación con un hola mundo
+printf '"#Hello, HolyC!\n";' > hello.HC
+hcc -o hello hello.HC && ./hello
+```
