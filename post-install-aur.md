@@ -123,10 +123,21 @@ vim ~/.cache/paru/clone/holyc-lang-git/PKGBUILD
 ```bash
 # Compilar e instalar desde la caché de paru
 cd ~/.cache/paru/clone/holyc-lang-git
-makepkg --syncdeps --install --clean
+makepkg --cleanbuild --syncdeps --install --clean
 ```
 
+> `--cleanbuild` es importante: si hay un `src/holyc-lang/src/build` de un intento anterior, la caché de CMake puede estar configurada sin el JIT.
+
 > `-DHCC_ENABLE_JIT=on` además habilita el REPL y `hcc -jit`. Al ser un paquete `-git`, si lo reconstruyes hay que volver a aplicar el fix hasta que el maintainer actualice el PKGBUILD de AUR.
+
+#### Observaciones del PKGBUILD corregido
+
+| Tema | Detalle |
+|------|---------|
+| `.SRCINFO` desactualizado | Sigue indicando `pkgver = beta_v0.0.10`. No afecta a `makepkg`, solo a helpers/AUR; regenerar con `makepkg --printsrcinfo > .SRCINFO`. |
+| Dependencia implícita de `gcc` | `hcc` invoca `cc` para ensamblar/enlazar los programas HolyC, pero el PKGBUILD solo declara `glibc`. En un sistema con `base-devel` está cubierto. `clang` solo hace falta para cross-compilar (`--target`). |
+| Sin optimización | `-DCMAKE_BUILD_TYPE:STRING='None'` compila sin `-O2`; el Makefile oficial usa `Release`. Opcional cambiarlo para un `hcc` más rápido. |
+| Caché de paru | `paru --sync holyc-lang-git` puede resetear el PKGBUILD parcheado; por eso se compila con `makepkg` directamente desde esa carpeta. |
 
 ```bash
 # Verificar la instalación con un hola mundo
