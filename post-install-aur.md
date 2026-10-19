@@ -101,6 +101,33 @@ paru --sync holyc-lang-git
 |---------|-----------|
 | `holyc-lang-git` | Compilador HolyC (`hcc`) con la librería estándar `tos` |
 
+#### Nota: PKGBUILD roto en AUR (v0.0.15-beta)
+
+El PKGBUILD de AUR actualmente falla al compilar con dos errores:
+
+1. **`pkgver() ha generado una versión no válida`** — upstream cambió el formato de sus tags git de `beta-v0.0.10` a `v0.0.15-beta` y la función `pkgver()` del PKGBUILD no lo interpreta, generando una versión con guiones que pacman rechaza.
+2. **`referencia a 'asm_encode' sin definir`** — el PKGBUILD no compila con `-DHCC_ENABLE_JIT=on`. Sin esa flag, la librería del ensamblador (`tasm`) no se enlaza con `hcc`. El Makefile oficial del proyecto sí la usa.
+
+Solución: parchear el PKGBUILD en la caché de paru y compilar con `makepkg`:
+
+```bash
+# Editar el PKGBUILD
+vim ~/.cache/paru/clone/holyc-lang-git/PKGBUILD
+```
+
+| Fix | Dónde | Cambio |
+|-----|-------|--------|
+| 1 | función `pkgver()` | `local version=$(git describe --tags --no-abbrev \| sed -e 's/^v//' -e 's/^beta-v//' -e 's/-beta$//')` |
+| 2 | función `build()` | añadir `-DHCC_ENABLE_JIT=on \` a las flags de `cmake` |
+
+```bash
+# Compilar e instalar desde la caché de paru
+cd ~/.cache/paru/clone/holyc-lang-git
+makepkg --syncdeps --install --clean
+```
+
+> `-DHCC_ENABLE_JIT=on` además habilita el REPL y `hcc -jit`. Al ser un paquete `-git`, si lo reconstruyes hay que volver a aplicar el fix hasta que el maintainer actualice el PKGBUILD de AUR.
+
 ```bash
 # Verificar la instalación con un hola mundo
 printf '"#Hello, HolyC!\n";' > hello.HC
