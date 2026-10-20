@@ -28,6 +28,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [dosfstools](#dosfstools)
   - [flatpak](#flatpak)
   - [unzip](#unzip)
+  - [7zip](#7zip)
   - [mpv](#mpv)
   - [yt-dlp](#yt-dlp)
 - [Hardware](#hardware)
@@ -373,6 +374,19 @@ sudo pacman --sync unzip
 | Paquete | Propósito |
 |---------|-----------|
 | `unzip` | Extraer archivos comprimidos en formato ZIP |
+
+### 7zip
+
+[7-Zip](https://www.7-zip.org/) es un archivador de archivos con alta ratio de compresión. Se distribuye bajo la LGPL y soporta formatos como 7z, ZIP, RAR, TAR o GZ. Antes era provisto por el paquete `p7zip`, ya obsoleto en Arch.
+
+```bash
+# Instalar 7zip
+sudo pacman --sync 7zip
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `7zip` | Extraer y crear archivos comprimidos en formato 7z |
 
 ### mpv
 
