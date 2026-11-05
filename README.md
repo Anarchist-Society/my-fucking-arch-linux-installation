@@ -44,19 +44,19 @@ Las configuraciones viven en este repositorio y se enlazan simbólicamente en el
 
 ```bash
 # Bash
-ln -sf ~/Development/my-fucking-arch-linux-installation/bashrc.sh ~/.bashrc
+ln -sf $(pwd)/bashrc.sh ~/.bashrc
 ```
 
 ```bash
 # Hyprland
 mkdir -p ~/.config/hypr
-ln -sf ~/Development/my-fucking-arch-linux-installation/hyprland.lua ~/.config/hypr/hyprland.lua
+ln -sf $(pwd)/hyprland.lua ~/.config/hypr/hyprland.lua
 ```
 
 ```bash
 # kitty
 mkdir -p ~/.config/kitty
-ln -sf ~/Development/my-fucking-arch-linux-installation/kitty.conf ~/.config/kitty/kitty.conf
+ln -sf $(pwd)/kitty.conf ~/.config/kitty/kitty.conf
 ```
 
 > Los enlaces se pueden comprobar con `ls -la ~/.bashrc ~/.config/hypr/ ~/.config/kitty/`.
