@@ -31,3 +31,28 @@ Este repositorio documenta la instalación de Arch Linux en mi **Slimbook EVO (E
 | Audio | PipeWire + WirePlumber |
 | Red | iwd + systemd-networkd |
 | AUR | Paru |
+
+## My Fucking Dotfiles
+
+Las configuraciones viven en este repositorio y se enlazan simbólicamente en el sistema, de modo que cualquier cambio en el repo se aplica directamente.
+
+| Configuración | Enlace en el sistema | Archivo en el repo |
+|---|---|---|
+| Bash | `~/.bashrc` | [`bashrc.sh`](bashrc.sh) |
+| Hyprland | `~/.config/hypr/hyprland.lua` | [`hyprland.lua`](hyprland.lua) |
+| kitty | `~/.config/kitty/kitty.conf` | [`kitty.conf`](kitty.conf) |
+
+```bash
+# Bash
+ln -sf ~/Development/my-fucking-arch-linux-installation/bashrc.sh ~/.bashrc
+
+# Hyprland
+mkdir -p ~/.config/hypr
+ln -sf ~/Development/my-fucking-arch-linux-installation/hyprland.lua ~/.config/hypr/hyprland.lua
+
+# kitty
+mkdir -p ~/.config/kitty
+ln -sf ~/Development/my-fucking-arch-linux-installation/kitty.conf ~/.config/kitty/kitty.conf
+```
+
+> Los enlaces se pueden comprobar con `ls -la ~/.bashrc ~/.config/hypr/ ~/.config/kitty/`.
