@@ -42,21 +42,23 @@ Las configuraciones viven en este repositorio y se enlazan simbólicamente en el
 | Hyprland | `~/.config/hypr/hyprland.lua` | [`hyprland.lua`](hyprland.lua) |
 | kitty | `~/.config/kitty/kitty.conf` | [`kitty.conf`](kitty.conf) |
 
+Ejecuta los comandos desde la raíz de este repositorio.
+
 ```bash
 # Bash
-ln -sf $(pwd)/bashrc.sh ~/.bashrc
+ln -sf "$(pwd)/bashrc.sh" ~/.bashrc
 ```
 
 ```bash
 # Hyprland
 mkdir -p ~/.config/hypr
-ln -sf $(pwd)/hyprland.lua ~/.config/hypr/hyprland.lua
+ln -sf "$(pwd)/hyprland.lua" ~/.config/hypr/hyprland.lua
 ```
 
 ```bash
 # kitty
 mkdir -p ~/.config/kitty
-ln -sf $(pwd)/kitty.conf ~/.config/kitty/kitty.conf
+ln -sf "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
 ```
 
 > Los enlaces se pueden comprobar con `ls -la ~/.bashrc ~/.config/hypr/ ~/.config/kitty/`.
