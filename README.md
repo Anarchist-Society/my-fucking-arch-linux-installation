@@ -51,13 +51,11 @@ ln -sf "$(pwd)/bashrc.sh" ~/.bashrc
 
 ```bash
 # Hyprland
-mkdir -p ~/.config/hypr
 ln -sf "$(pwd)/hyprland.lua" ~/.config/hypr/hyprland.lua
 ```
 
 ```bash
 # kitty
-mkdir -p ~/.config/kitty
 ln -sf "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
 ```
 
