@@ -10,7 +10,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # Prompt: usuario@hostname directorio_actual $
-PS1='[\u@\h \W]\$ '
+PS1='\[\e[0;32m\][\u@\h]\[\e[0m\] \[\e[0;34m\][\W]\[\e[0m\]\[\e[1;31m\]\$\[\e[0m\] '
 
 # Modo Vi en la terminal
 set -o vi
