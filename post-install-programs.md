@@ -41,6 +41,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [sober](#sober)
 - [Red](#red)
   - [openssh](#openssh)
+  - [nmap](#nmap)
 
 ---
 
@@ -599,3 +600,16 @@ eval "$(ssh-agent -s)"
 # Agregar clave privada al agente
 ssh-add ~/.ssh/id_ed25519
 ```
+
+### nmap
+
+[nmap](https://nmap.org/) es un escáner de red que permite descubrir hosts, puertos y servicios activos, así como detectar versiones y sistemas operativos. Es útil para auditar la seguridad de una red local.
+
+```bash
+# Instalar nmap
+sudo pacman --sync nmap
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `nmap` | Escáner de red para descubrir hosts, puertos y servicios |
