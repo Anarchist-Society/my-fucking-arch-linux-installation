@@ -143,8 +143,8 @@ sudo minecraftd start
 ### Arranque y control
 
 ```bash
-# Habilitar y arrancar al inicio
-sudo systemctl enable --now minecraftd.service
+# Arrancar cuando lo necesites
+sudo systemctl start minecraftd.service
 
 # Alternativa sin systemd
 sudo minecraftd start
@@ -438,7 +438,7 @@ También puedes comprobarlo en `mcsrvstat.us` con `TU_IP:25565`. En el cliente: 
 ```bash
 # Actualizar el paquete y reiniciar el servidor
 paru -Syu
-sudo systemctl restart minecraftd.service
+sudo minecraftd restart
 ```
 
 El mundo y la configuración se conservan en `/srv/minecraft`.
@@ -447,14 +447,14 @@ Si el paquete AUR va por detrás del último release, sustituye el `.jar` manual
 
 ```bash
 # Parar el servidor
-sudo systemctl stop minecraftd.service
+sudo minecraftd stop
 
 # Copiar el .jar descargado de minecraft.net/download/server
 sudo cp minecraft_server.1.21.x.jar /srv/minecraft/minecraft_server.jar
 sudo chown minecraft:minecraft /srv/minecraft/minecraft_server.jar
 
 # Arrancar de nuevo
-sudo systemctl start minecraftd.service
+sudo minecraftd start
 ```
 
 ### Diagnóstico
