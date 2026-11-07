@@ -185,7 +185,7 @@ Cierra sesión y vuelve a entrar para aplicar el grupo. Todos los archivos de `/
 
 ### Configuración del servidor
 
-El primer arranque ya genera un `server.properties` con valores por defecto. La configuración siguiente es solo un **ejemplo**; ajusta los valores a lo que necesites.
+El primer arranque ya genera un `server.properties` con valores por defecto. Cambia solo lo que necesites; lo que no aparezca aquí se queda con su valor por defecto.
 
 ```bash
 # Parar antes de editar
@@ -194,56 +194,24 @@ vim /srv/minecraft/server.properties
 ```
 
 ```properties
-# Mensaje que aparece en la lista de servidores
+# Nombre que aparece en la lista de servidores
 motd=A Minecraft Server
 
 # Puerto TCP en el que escucha el servidor (25565 por defecto)
 server-port=25565
 
-# IP en la que escucha. Vacío = todas las interfaces
-server-ip=
+# Dificultad: peaceful, easy, normal o hard (por defecto easy)
+difficulty=hard
 
-# Responde a las peticiones de estado de la lista de servidores
-enable-status=true
-
-# Número máximo de jugadores conectados a la vez
-max-players=10
-
-# Modo de juego por defecto: survival, creative, adventure o spectator
-gamemode=survival
-
-# Dificultad: peaceful, easy, normal o hard
-difficulty=normal
-
-# Permite que los jugadores se ataquen entre sí
-pvp=true
-
-# Solo permite entrar a los jugadores de la whitelist
-white-list=true
-
-# Expulsa a los jugadores que no estén en la whitelist
-enforce-whitelist=true
-
-# Verifica las cuentas con Mojang. No lo desactives en un servidor público
-online-mode=true
-
-# Distancia (en chunks) a la que el cliente recibe datos del mundo
-view-distance=10
-
-# Distancia (en chunks) en la que se simulan entidades y bloques
-simulation-distance=10
-
-# Responde a las consultas de estado (protocolo query)
-enable-query=true
-
-# Puerto UDP para query; puede compartir el 25565 con el TCP
-query.port=25565
-
-# Consola remota. Riesgo de seguridad: déjalo en false en un servidor público
-enable-rcon=false
+# Número máximo de jugadores conectados a la vez (20 por defecto)
+max-players=5
 ```
 
-`white-list=true` sin nombres dentro impide que entre nadie; los añades en la sección de seguridad.
+Los comentarios son solo documentación: el servidor reescribe `server.properties` en cada arranque y los elimina.
+
+- La whitelist viene activada por defecto en 26.3 (`white-list=true`); si no añades nombres, no entra nadie. Los añades en la sección de seguridad. Para expulsar a los que no estén en la lista al recargarla, añade `enforce-whitelist=true` (por defecto `false`).
+- `pvp` ya no es una propiedad de `server.properties` desde 1.21.9: ahora es una game rule del mundo. Se cambia desde la consola con `sudo minecraftd command "gamerule pvp true"` (por defecto `true`).
+- `enable-rcon` está desactivado por defecto. No lo actives en un servidor público; si lo necesitas, usa una contraseña larga y bíndalo a `127.0.0.1`. El firewall no abre su puerto (`25575/tcp`).
 
 ### RAM y suspensión
 
@@ -342,7 +310,6 @@ table inet filter {
 
         # Minecraft
         tcp dport 25565 accept
-        # udp dport 25565 accept   # descomenta si abres query por UDP
 
         # LocalSend (opcional)
         # tcp dport 53317 accept
