@@ -215,7 +215,7 @@ Los comentarios son solo documentación: el servidor reescribe `server.propertie
 
 ```bash
 # Configuración del script de gestión
-sudo nano /etc/conf.d/minecraft
+sudo vim /etc/conf.d/minecraft
 ```
 
 ```bash
