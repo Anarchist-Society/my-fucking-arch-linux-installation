@@ -174,8 +174,8 @@ sudo minecraftd console
 sudo usermod --append --groups minecraft "$USER"
 
 # Escritura de grupo en todo el directorio
-sudo chgrp -R minecraft /srv/minecraft
-sudo chmod -R g+rwX /srv/minecraft
+sudo chgrp --recursive minecraft /srv/minecraft
+sudo chmod --recursive g+rwX /srv/minecraft
 
 # Setgid: los archivos nuevos conservan el grupo minecraft
 sudo find /srv/minecraft -type d -exec chmod g+s {} \;
