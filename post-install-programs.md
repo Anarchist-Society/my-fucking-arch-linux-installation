@@ -523,7 +523,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE:="066
 sudo groupadd plugdev
 
 # Añadir usuario al grupo plugdev
-sudo usermod -aG plugdev $USER
+sudo usermod --append --groups plugdev $USER
 
 # Reiniciar para aplicar reglas udev
 sudo reboot
@@ -549,7 +549,7 @@ sudo pacman --sync virtualbox virtualbox-host-dkms linux-headers
 sudo modprobe vboxdrv
 
 # Agregar usuario al grupo vboxusers (requiere cerrar sesión para surtir efecto)
-sudo usermod -aG vboxusers $USER
+sudo usermod --append --groups vboxusers $USER
 ```
 
 | Paquete | Propósito |
