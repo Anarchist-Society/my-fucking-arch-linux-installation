@@ -123,7 +123,7 @@ El paquete crea el usuario y grupo `minecraft`, el directorio `/srv/minecraft` y
 
 ```bash
 # Editar la EULA
-sudo nano /srv/minecraft/eula.txt
+sudo vim /srv/minecraft/eula.txt
 ```
 
 ```properties
