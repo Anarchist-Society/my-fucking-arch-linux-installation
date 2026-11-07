@@ -181,44 +181,69 @@ sudo chmod --recursive g+rwX /srv/minecraft
 sudo find /srv/minecraft -type d -exec chmod g+s {} \;
 ```
 
-Cierra sesión y vuelve a entrar (o ejecuta `newgrp minecraft`) para aplicar el grupo. Todos los archivos de `/srv/minecraft` deben pertenecer al usuario `minecraft` o, como mínimo, ser legibles y escribibles por él. Si el servidor no puede acceder a un archivo, fallará; y si los permisos son muy restrictivos, puede que ni siquiera pueda escribir el error en el log.
+Cierra sesión y vuelve a entrar para aplicar el grupo. Todos los archivos de `/srv/minecraft` deben pertenecer al usuario `minecraft` o, como mínimo, ser legibles y escribibles por él. Si el servidor no puede acceder a un archivo, fallará; y si los permisos son muy restrictivos, puede que ni siquiera pueda escribir el error en el log.
 
 ### Configuración del servidor
+
+El primer arranque ya genera un `server.properties` con valores por defecto. La configuración siguiente es solo un **ejemplo**; ajusta los valores a lo que necesites.
 
 ```bash
 # Parar antes de editar
 sudo minecraftd stop
-nano /srv/minecraft/server.properties
+vim /srv/minecraft/server.properties
 ```
 
 ```properties
-motd=Mi servidor de Arch
+# Mensaje que aparece en la lista de servidores
+motd=A Minecraft Server
+
+# Puerto TCP en el que escucha el servidor (25565 por defecto)
 server-port=25565
+
+# IP en la que escucha. Vacío = todas las interfaces
 server-ip=
+
+# Responde a las peticiones de estado de la lista de servidores
 enable-status=true
 
+# Número máximo de jugadores conectados a la vez
 max-players=10
+
+# Modo de juego por defecto: survival, creative, adventure o spectator
 gamemode=survival
+
+# Dificultad: peaceful, easy, normal o hard
 difficulty=normal
+
+# Permite que los jugadores se ataquen entre sí
 pvp=true
+
+# Solo permite entrar a los jugadores de la whitelist
 white-list=true
+
+# Expulsa a los jugadores que no estén en la whitelist
 enforce-whitelist=true
+
+# Verifica las cuentas con Mojang. No lo desactives en un servidor público
 online-mode=true
 
+# Distancia (en chunks) a la que el cliente recibe datos del mundo
 view-distance=10
+
+# Distancia (en chunks) en la que se simulan entidades y bloques
 simulation-distance=10
 
+# Responde a las consultas de estado (protocolo query)
 enable-query=true
+
+# Puerto UDP para query; puede compartir el 25565 con el TCP
 query.port=25565
 
+# Consola remota. Riesgo de seguridad: déjalo en false en un servidor público
 enable-rcon=false
 ```
 
-- `server-ip=` vacío hace que escuche en todas las interfaces.
-- `online-mode=true` verifica las cuentas con Mojang; no lo desactives en un servidor público.
-- `white-list=true` sin nombres dentro impide que entre nadie; los añades en la sección de seguridad.
-- `rcon` (`25575/tcp`) es un riesgo de seguridad: si lo necesitas, bíndalo a `127.0.0.1` y usa una contraseña larga.
-- `view-distance` y `simulation-distance` son los valores que más afectan al rendimiento.
+`white-list=true` sin nombres dentro impide que entre nadie; los añades en la sección de seguridad.
 
 ### RAM y suspensión
 
