@@ -171,7 +171,7 @@ sudo minecraftd console
 
 ```bash
 # Añadir tu usuario al grupo minecraft
-sudo usermod -aG minecraft "$USER"
+sudo usermod --append --groups minecraft "$USER"
 
 # Escritura de grupo en todo el directorio
 sudo chgrp -R minecraft /srv/minecraft
