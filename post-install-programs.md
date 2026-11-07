@@ -8,6 +8,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [gnome-keyring](#gnome-keyring)
 - [Terminal](#terminal)
   - [kitty](#kitty)
+  - [tmux](#tmux)
   - [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)
   - [noto-fonts-emoji](#noto-fonts-emoji)
   - [bashrc](#bashrc)
@@ -101,6 +102,19 @@ sudo pacman --sync kitty
 | Paquete | Propósito |
 |---------|-----------|
 | `kitty` | Terminal emulator GPU-acelerado con soporte de imágenes y personalización |
+
+### tmux
+
+[tmux](https://github.com/tmux/tmux) es un multiplexor de terminal que permite mantener sesiones persistentes, organizar el trabajo en ventanas y paneles, y recuperar la sesión aunque se cierre el terminal o se desconecte la conexión SSH.
+
+```bash
+# Instalar tmux
+sudo pacman --sync tmux
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `tmux` | Multiplexor de terminal con sesiones persistentes, ventanas y paneles |
 
 ### JetBrains Mono Nerd Font
 
