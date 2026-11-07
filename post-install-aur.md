@@ -195,7 +195,7 @@ vim /srv/minecraft/server.properties
 
 ```properties
 # Nombre que aparece en la lista de servidores
-motd=A Minecraft Server
+motd=A Minecraft Server Of Anarchist-Penguin
 
 # Puerto TCP en el que escucha el servidor (25565 por defecto)
 server-port=25565
@@ -210,8 +210,6 @@ max-players=5
 Los comentarios son solo documentación: el servidor reescribe `server.properties` en cada arranque y los elimina.
 
 - La whitelist viene activada por defecto en 26.3 (`white-list=true`); si no añades nombres, no entra nadie. Los añades en la sección de seguridad. Para expulsar a los que no estén en la lista al recargarla, añade `enforce-whitelist=true` (por defecto `false`).
-- `pvp` ya no es una propiedad de `server.properties` desde 1.21.9: ahora es una game rule del mundo. Se cambia desde la consola con `sudo minecraftd command "gamerule pvp true"` (por defecto `true`).
-- `enable-rcon` está desactivado por defecto. No lo actives en un servidor público; si lo necesitas, usa una contraseña larga y bíndalo a `127.0.0.1`. El firewall no abre su puerto (`25575/tcp`).
 
 ### RAM y suspensión
 
