@@ -483,8 +483,8 @@ systemctl enable iwd
 systemctl enable systemd-networkd
 systemctl enable systemd-resolved
 
-# Habilitar Bluetooth
-systemctl enable bluetooth.service
+# Habilitar Bluetooth cuando lo necesites
+systemctl start bluetooth.service
 ```
 
 ### Salir y reiniciar
