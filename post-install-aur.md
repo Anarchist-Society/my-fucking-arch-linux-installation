@@ -124,6 +124,9 @@ El paquete crea el usuario y grupo `minecraft`, el directorio `/srv/minecraft` y
 ### Aceptar la EULA
 
 ```bash
+# Arrancar una vez para generar eula.txt
+sudo minecraftd start
+
 # Editar la EULA
 sudo vim /srv/minecraft/eula.txt
 ```
@@ -132,7 +135,10 @@ sudo vim /srv/minecraft/eula.txt
 eula=true
 ```
 
-Si el archivo no existe, arranca el servidor una vez (`sudo minecraftd start`) para que se genere; fallará hasta que aceptes la EULA. No actives `IDLE_SERVER` antes de aceptarla, porque en ese caso el archivo no se crea.
+```bash
+# Arrancar de nuevo, ahora con la EULA aceptada
+sudo minecraftd start
+```
 
 ### Arranque y control
 
