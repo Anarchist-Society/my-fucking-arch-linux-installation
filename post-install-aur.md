@@ -7,6 +7,7 @@
 - [LocalSend](#localsend)
 - [Exam Environment (freeCodeCamp)](#exam-environment-freecodecamp)
 - [Minecraft (Java Edition)](#minecraft-java-edition)
+- [Servidor de Minecraft (Java Edition)](#servidor-de-minecraft-java-edition)
 
 ---
 
@@ -86,3 +87,393 @@ paru --sync minecraft-launcher
 | Paquete | Propósito |
 |---------|-----------|
 | `minecraft-launcher` | Launcher oficial de Minecraft Java Edition |
+
+## Servidor de Minecraft (Java Edition)
+
+El servidor vanilla se instala con el paquete AUR `minecraft-server`, que descarga el `.jar` oficial de Mojang y añade la integración con Arch: usuario y grupo `minecraft`, directorio `/srv/minecraft`, script de control `minecraftd`, unidad systemd y timer de backups. La referencia completa está en la [ArchWiki](https://wiki.archlinux.org/title/Minecraft/Java_Edition_server).
+
+> El paquete ya incluye el `.jar` oficial de [minecraft.net/download/server](https://www.minecraft.net/es-es/download/server). Descargarlo a mano solo es necesario si quieres una versión concreta, actualizar antes que el paquete AUR o prescindir de `minecraftd` y systemd.
+
+### Instalación
+
+```bash
+# Instalar el servidor vanilla y ncat (para IDLE_SERVER)
+paru --sync minecraft-server nmap
+
+# tar suele venir en el grupo base; comprobar que está instalado
+pacman -Q tar
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `minecraft-server` | Servidor vanilla oficial, usuario `minecraft`, `/srv/minecraft`, script `minecraftd` y unidades systemd |
+| `nmap` | Aporta `ncat`, necesario para suspender el servidor con `IDLE_SERVER` |
+| `tar` | Necesario para crear backups; suele estar instalado por defecto |
+
+El paquete crea el usuario y grupo `minecraft`, el directorio `/srv/minecraft` y los siguientes archivos:
+
+| Archivo | Propósito |
+|---------|-----------|
+| `minecraftd.service` | Servicio systemd del servidor |
+| `minecraftd-backup.service` / `.timer` | Backup diario del mundo |
+| `/usr/bin/minecraftd` | Script de control (`start`, `stop`, `console`, `backup`, etc.) |
+| `/etc/conf.d/minecraft` | Configuración del script (RAM, backups, suspensión) |
+
+### Aceptar la EULA
+
+```bash
+# Editar la EULA
+sudo nano /srv/minecraft/eula.txt
+```
+
+```properties
+eula=true
+```
+
+Si el archivo no existe, arranca el servidor una vez (`sudo minecraftd start`) para que se genere; fallará hasta que aceptes la EULA. No actives `IDLE_SERVER` antes de aceptarla, porque en ese caso el archivo no se crea.
+
+### Arranque y control
+
+```bash
+# Habilitar y arrancar al inicio
+sudo systemctl enable --now minecraftd.service
+
+# Alternativa sin systemd
+sudo minecraftd start
+
+# Estado del servidor
+sudo minecraftd status
+
+# Consola interactiva (tmux; se sale con Ctrl+b y luego d)
+sudo minecraftd console
+```
+
+| Comando | Propósito |
+|---------|-----------|
+| `minecraftd start` | Arranca el servidor |
+| `minecraftd stop` | Detiene el servidor |
+| `minecraftd restart` | Reinicia el servidor |
+| `minecraftd status` | Muestra el estado |
+| `minecraftd console` | Abre la consola interactiva en tmux |
+| `minecraftd command <cmd>` | Ejecuta un comando en la consola |
+| `minecraftd backup` | Crea un backup del mundo |
+| `minecraftd restore` | Restaura un backup |
+
+### Permisos
+
+```bash
+# Añadir tu usuario al grupo minecraft
+sudo usermod -aG minecraft "$USER"
+
+# Escritura de grupo en todo el directorio
+sudo chgrp -R minecraft /srv/minecraft
+sudo chmod -R g+rwX /srv/minecraft
+
+# Setgid: los archivos nuevos conservan el grupo minecraft
+sudo find /srv/minecraft -type d -exec chmod g+s {} \;
+```
+
+Cierra sesión y vuelve a entrar (o ejecuta `newgrp minecraft`) para aplicar el grupo. Si el servidor no puede leer o escribir sus archivos, fallará y puede que ni siquiera pueda escribir el error en el log.
+
+### Configuración del servidor
+
+```bash
+# Parar antes de editar
+sudo minecraftd stop
+nano /srv/minecraft/server.properties
+```
+
+```properties
+motd=Mi servidor de Arch
+server-port=25565
+server-ip=
+enable-status=true
+
+max-players=10
+gamemode=survival
+difficulty=normal
+pvp=true
+white-list=true
+enforce-whitelist=true
+online-mode=true
+
+view-distance=10
+simulation-distance=10
+
+enable-query=true
+query.port=25565
+
+enable-rcon=false
+```
+
+- `server-ip=` vacío hace que escuche en todas las interfaces.
+- `online-mode=true` verifica las cuentas con Mojang; no lo desactives en un servidor público.
+- `white-list=true` sin nombres dentro impide que entre nadie; los añades en la sección de seguridad.
+- `rcon` (`25575/tcp`) es un riesgo de seguridad: si lo necesitas, bíndalo a `127.0.0.1` y usa una contraseña larga.
+- `view-distance` y `simulation-distance` son los valores que más afectan al rendimiento.
+
+### RAM y suspensión
+
+```bash
+# Configuración del script de gestión
+sudo nano /etc/conf.d/minecraft
+```
+
+```bash
+# RAM inicial y máxima (usar el mismo valor evita reajustes)
+SERVER_START_CMD="java -Xms4G -Xmx4G -jar ./${MAIN_EXECUTABLE} nogui"
+
+# Suspender el servidor si no hay jugadores
+IDLE_SERVER=true
+IDLE_IF_TIME=1200
+```
+
+| Variable | Propósito |
+|----------|-----------|
+| `SERVER_START_CMD` | Comando de arranque; aquí se ajustan `-Xms` (RAM inicial) y `-Xmx` (RAM máxima) |
+| `IDLE_SERVER` | Suspende el servidor cuando no hay jugadores; al primer intento de conexión arranca solo |
+| `IDLE_IF_TIME` | Segundos sin jugadores antes de suspender (por defecto 1200, 20 minutos) |
+| `GAME_PORT` | Puerto que escucha `ncat` mientras el servidor está suspendido |
+
+### Backups
+
+```bash
+# Habilitar el backup diario
+sudo systemctl enable --now minecraftd-backup.timer
+systemctl list-timers minecraftd-backup.timer
+
+# Backup y restauración manual
+sudo minecraftd backup
+sudo minecraftd restore
+```
+
+En `/etc/conf.d/minecraft`:
+
+```bash
+BACKUP_DEST="/srv/minecraft/backup"
+BACKUP_PATHS="world"    # en vanilla incluye Nether y End
+BACKUP_FLAGS="-z"       # compresión gzip
+KEEP_BACKUPS=10         # conserva los 10 más recientes
+```
+
+Copia los backups también fuera del equipo (otro disco, NAS o nube): un backup en el mismo SSD no protege de un fallo de disco.
+
+### Firewall (nftables)
+
+```bash
+# Instalar nftables
+sudo pacman --sync nftables
+
+# Editar la configuración
+sudo nano /etc/nftables.conf
+```
+
+```nft
+#!/usr/bin/nft -f
+
+flush ruleset
+
+table inet filter {
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+        iif "lo" accept
+        ct state established,related accept
+        ct state invalid drop
+
+        # ICMP / ICMPv6 (ping, vecinos IPv6, MTU)
+        ip protocol icmp accept
+        ip6 nexthdr icmpv6 accept
+
+        # DHCP / DHCPv6 (systemd-networkd)
+        udp dport 68 accept
+        udp dport 546 accept
+
+        # SSH (solo si usas sshd)
+        tcp dport 22 accept
+
+        # Minecraft
+        tcp dport 25565 accept
+        # udp dport 25565 accept   # descomenta si abres query por UDP
+
+        # LocalSend (opcional)
+        # tcp dport 53317 accept
+        # udp dport 53317 accept
+
+        # mDNS (opcional; descubrimiento en LAN)
+        # udp dport 5353 accept
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+    }
+
+    chain output {
+        type filter hook output priority filter; policy accept;
+    }
+}
+```
+
+```bash
+# Aplicar y habilitar al inicio
+sudo systemctl enable --now nftables
+
+# Revisar las reglas activas
+sudo nft list ruleset
+```
+
+- `policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente, KDE Connect o LocalSend, revisa la cadena `forward` y los puertos opcionales.
+- Para revertir los cambios: `sudo systemctl stop nftables`.
+- No abras `25575/tcp` (rcon).
+
+### Acceso desde Internet
+
+#### Comprobar CGNAT
+
+```bash
+# IP pública vista desde tu red
+curl -s https://ifconfig.me; echo
+```
+
+Compara esa IP con la IP WAN del router. Si son distintas, o la del router está en el rango `100.64.0.0/10`, el ISP usa CGNAT y el port forwarding no funcionará. Alternativas: IPv6, un túnel (Tailscale, playit.gg) o un VPS.
+
+#### IP local fija
+
+```bash
+# Ver la IP local del equipo
+ip -4 addr show
+```
+
+Anota la IP (por ejemplo `192.168.1.50`) y crea una reserva DHCP para esa MAC en el router, o configura una IP estática con systemd-networkd. Si la IP cambia, el port forwarding deja de apuntar al equipo.
+
+#### Port forwarding en el router
+
+En la administración del router, dentro de *Port Forwarding* o *NAT*:
+
+| Campo | Valor |
+|-------|-------|
+| Puerto externo | `25565` |
+| Puerto interno | `25565` |
+| Protocolo | `TCP` |
+| Destino | IP local del equipo (`192.168.1.50`) |
+
+Abre solo `25565/TCP`. El puerto de rcon no se abre nunca.
+
+#### DDNS (IP dinámica)
+
+Si el ISP cambia la IP pública, configura un dominio DDNS (DuckDNS, Cloudflare, No-IP) en el router o con un cliente DDNS. Así los jugadores usan `tuservidor.duckdns.org:25565` en lugar de una IP que cambia.
+
+#### IPv6 (opcional)
+
+Si tienes IPv6 pública, puedes abrir `25565/tcp` para IPv6 en nftables y conectar mediante `[tu-ipv6]:25565`, evitando el CGNAT. Requiere que el cliente también tenga IPv6.
+
+### Seguridad
+
+Con el servidor arrancado, abre la consola:
+
+```bash
+sudo minecraftd console
+```
+
+```text
+whitelist on
+whitelist add NombreExactoDeUsuario
+whitelist list
+whitelist reload
+op NombreExactoDeUsuario
+```
+
+- `online-mode=true`, whitelist activa y `enforce-whitelist=true`.
+- rcon desactivado.
+- El servidor corre como usuario `minecraft`, nunca como root.
+- Sistema y paquete actualizados con `paru -Syu`.
+- Backups copiados fuera del equipo.
+
+### Verificación
+
+```bash
+# Puerto a la escucha
+ss -tulpn | grep 25565
+
+# Prueba local
+nc -vz 127.0.0.1 25565
+
+# Estado del servicio
+sudo minecraftd status
+```
+
+Desde fuera de la red (móvil con datos o un amigo):
+
+```bash
+nc -vz TU_IP_PUBLICA 25565
+```
+
+También puedes comprobarlo en `mcsrvstat.us` con `TU_IP:25565`. En el cliente: *Multijugador → Añadir servidor → `TU_IP:25565`*.
+
+### Actualización
+
+```bash
+# Actualizar el paquete y reiniciar el servidor
+paru -Syu
+sudo systemctl restart minecraftd.service
+```
+
+El mundo y la configuración se conservan en `/srv/minecraft`.
+
+Si el paquete AUR va por detrás del último release, sustituye el `.jar` manualmente:
+
+```bash
+# Parar el servidor
+sudo systemctl stop minecraftd.service
+
+# Copiar el .jar descargado de minecraft.net/download/server
+sudo cp minecraft_server.1.21.x.jar /srv/minecraft/minecraft_server.jar
+sudo chown minecraft:minecraft /srv/minecraft/minecraft_server.jar
+
+# Arrancar de nuevo
+sudo systemctl start minecraftd.service
+```
+
+### Diagnóstico
+
+```bash
+# Estado y logs del servicio
+sudo systemctl status minecraftd.service
+journalctl -u minecraftd -e
+
+# Log del servidor
+tail -f /srv/minecraft/logs/latest.log
+
+# Permisos
+ls -la /srv/minecraft
+
+# Puerto ocupado o a la escucha
+ss -tulpn | grep 25565
+
+# Firewall
+sudo nft list ruleset
+```
+
+| Síntoma | Causa probable |
+|---------|----------------|
+| `You need to agree to the EULA` | `eula.txt` en `false` o sin generar |
+| `Permission denied` en logs o mundo | dueño o permisos incorrectos en `/srv/minecraft` |
+| `Address already in use` | otro proceso en `25565` o dos instancias |
+| `UnsupportedClassVersionError` | Java demasiado antiguo |
+| Se conecta en LAN pero no desde fuera | port forwarding, CGNAT o firewall |
+| `Connection refused` desde Internet | el router no redirige o nftables bloquea |
+
+### Alternativas
+
+| Necesidad | Paquete | Script |
+|-----------|---------|--------|
+| Plugins y mejor rendimiento | `papermc` | `papermc` |
+| Plugins clásicos | `spigot` | `spigot` |
+| Mods ligeros | `fabric-server` | `fabricd` |
+| Mods pesados | `forge-server` | `forged` |
+| Fork de Fabric | `quilt-server` | `quiltd` |
+| Servidor en C++ | `cuberite` | `cuberite` |
+
+El resto del flujo es idéntico: sustituye `minecraftd` por el script correspondiente y `/etc/conf.d/minecraft` por `/etc/conf.d/<script>`.
+
+Para más información: [ArchWiki: Minecraft/Java Edition server](https://wiki.archlinux.org/title/Minecraft/Java_Edition_server), [Minecraft Wiki: Server.properties](https://minecraft.wiki/w/Server.properties) y [Minecraft Wiki: Setting up a server](https://minecraft.wiki/w/Tutorial:Setting_up_a_Java_Edition_server).
