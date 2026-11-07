@@ -92,6 +92,8 @@ paru --sync minecraft-launcher
 
 El servidor vanilla se instala con el paquete AUR `minecraft-server`, que descarga el `.jar` oficial de Mojang y añade la integración con Arch: usuario y grupo `minecraft`, directorio `/srv/minecraft`, script de control `minecraftd`, unidad systemd y timer de backups. La referencia completa está en la [ArchWiki](https://wiki.archlinux.org/title/Minecraft/Java_Edition_server).
 
+El servidor se ejecuta con el usuario sin privilegios `minecraft`. Si alguien consigue explotar el servidor, solo obtiene acceso a esa cuenta, no a la tuya. Por eso no se debe ejecutar como root ni cambiar el usuario del servicio.
+
 > El paquete ya incluye el `.jar` oficial de [minecraft.net/download/server](https://www.minecraft.net/es-es/download/server). Descargarlo a mano solo es necesario si quieres una versión concreta, actualizar antes que el paquete AUR o prescindir de `minecraftd` y systemd.
 
 ### Instalación
@@ -173,7 +175,7 @@ sudo chmod -R g+rwX /srv/minecraft
 sudo find /srv/minecraft -type d -exec chmod g+s {} \;
 ```
 
-Cierra sesión y vuelve a entrar (o ejecuta `newgrp minecraft`) para aplicar el grupo. Si el servidor no puede leer o escribir sus archivos, fallará y puede que ni siquiera pueda escribir el error en el log.
+Cierra sesión y vuelve a entrar (o ejecuta `newgrp minecraft`) para aplicar el grupo. Todos los archivos de `/srv/minecraft` deben pertenecer al usuario `minecraft` o, como mínimo, ser legibles y escribibles por él. Si el servidor no puede acceder a un archivo, fallará; y si los permisos son muy restrictivos, puede que ni siquiera pueda escribir el error en el log.
 
 ### Configuración del servidor
 
@@ -255,6 +257,21 @@ BACKUP_PATHS="world"    # en vanilla incluye Nether y End
 BACKUP_FLAGS="-z"       # compresión gzip
 KEEP_BACKUPS=10         # conserva los 10 más recientes
 ```
+
+Para cambiar el intervalo del backup diario:
+
+```bash
+# Drop-in de systemd
+sudo systemctl edit minecraftd-backup.timer
+```
+
+```ini
+[Timer]
+OnCalendar=
+OnCalendar=*-*-* 04:00:00
+```
+
+El `OnCalendar=` vacío borra el valor heredado antes de definir el nuevo. El timer ya usa `Persistent=true`, así que si el equipo estaba apagado a esa hora, el backup se ejecuta al arrancar. Los archivos originales son `minecraftd-backup.timer` y `minecraftd-backup.service`; la próxima ejecución se comprueba con `systemctl list-timers minecraftd-backup.timer`.
 
 Copia los backups también fuera del equipo (otro disco, NAS o nube): un backup en el mismo SSD no protege de un fallo de disco.
 
