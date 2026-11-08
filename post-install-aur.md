@@ -251,9 +251,9 @@ En `/etc/conf.d/minecraft`:
 
 ```bash
 BACKUP_DEST="/srv/minecraft/backup"
-BACKUP_PATHS="world"    # en vanilla incluye Nether y End
-BACKUP_FLAGS="-z"       # compresión gzip
-KEEP_BACKUPS=10         # conserva los 10 más recientes
+BACKUP_PATHS="world" # en vanilla incluye Nether y End
+BACKUP_FLAGS="-z" # compresión gzip
+KEEP_BACKUPS=10 # conserva los 10 más recientes
 ```
 
 Copia los backups también fuera del equipo (otro disco, NAS o nube): un backup en el mismo SSD no protege de un fallo de disco.
@@ -265,7 +265,7 @@ Copia los backups también fuera del equipo (otro disco, NAS o nube): un backup 
 sudo pacman --sync nftables
 
 # Editar la configuración
-sudo nano /etc/nftables.conf
+sudo vim /etc/nftables.conf
 ```
 
 ```nft
