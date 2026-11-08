@@ -57,7 +57,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 sudo pacman --sync sddm
 
 # Habilitar el servicio para que arranque en el boot
-sudo systemctl enable sddm.service
+sudo systemctl enable --now sddm.service
 ```
 
 | Paquete | Propósito |
@@ -651,6 +651,12 @@ table inet filter {
         # Descartar paquetes malformados
         ct state invalid drop
 
+        # Curiosidad: no responder a ping, como Windows (opcional)
+        # Descomenta estas dos líneas para bloquear el eco entrante.
+        # Deben ir ANTES del accept de ICMP; el resto de ICMP sigue permitido.
+        # icmp type echo-request drop
+        # icmpv6 type echo-request drop
+
         # ICMP (ping, IPv4) e ICMPv6 (ping, vecinos IPv6, MTU)
         # meta l4proto es agnóstico de familia: una regla cubre IPv4 e IPv6
         meta l4proto { icmp, icmpv6 } accept comment "allow icmp"
@@ -686,14 +692,14 @@ table inet filter {
 
 ```bash
 # Aplicar y habilitar al inicio
-sudo systemctl enable --now nftables
+sudo systemctl enable --now nftables.service
 
 # Revisar las reglas activas
 sudo nft list ruleset
 ```
 
 - `policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente, KDE Connect o LocalSend, revisa la cadena `forward` y los puertos opcionales.
-- Para revertir los cambios: `sudo systemctl stop nftables`.
+- Para revertir los cambios: `sudo systemctl stop nftables.service`.
 
 Si más adelante instalas el servidor de Minecraft, añade a la cadena `input`:
 
