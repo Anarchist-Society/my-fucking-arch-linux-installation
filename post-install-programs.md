@@ -664,6 +664,10 @@ table inet filter {
 
         # mDNS (descubrimiento en LAN; opcional)
         # udp dport 5353 accept
+
+        # Rechazar el resto con ICMP (máx. 5/s) y contar
+        pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
+        counter
     }
 
     # Paquetes reenviados (routing): bloquear
