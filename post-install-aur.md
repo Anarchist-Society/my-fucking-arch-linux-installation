@@ -464,18 +464,3 @@ sudo nft list ruleset
 | `UnsupportedClassVersionError` | Java demasiado antiguo |
 | Se conecta en LAN pero no desde fuera | port forwarding, CGNAT o firewall |
 | `Connection refused` desde Internet | el router no redirige o nftables bloquea |
-
-### Alternativas
-
-| Necesidad | Paquete | Script |
-|-----------|---------|--------|
-| Plugins y mejor rendimiento | `papermc` | `papermc` |
-| Plugins clásicos | `spigot` | `spigot` |
-| Mods ligeros | `fabric-server` | `fabricd` |
-| Mods pesados | `forge-server` | `forged` |
-| Fork de Fabric | `quilt-server` | `quiltd` |
-| Servidor en C++ | `cuberite` | `cuberite` |
-
-El resto del flujo es idéntico: sustituye `minecraftd` por el script correspondiente y `/etc/conf.d/minecraft` por `/etc/conf.d/<script>`.
-
-Para más información: [ArchWiki: Minecraft/Java Edition server](https://wiki.archlinux.org/title/Minecraft/Java_Edition_server), [Minecraft Wiki: Server.properties](https://minecraft.wiki/w/Server.properties) y [Minecraft Wiki: Setting up a server](https://minecraft.wiki/w/Tutorial:Setting_up_a_Java_Edition_server).
