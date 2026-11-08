@@ -356,23 +356,9 @@ sudo systemctl disable --now nftables.service
 
 ### Acceso desde Internet
 
-#### Comprobar CGNAT
-
-```bash
-# IP pública vista desde tu red
-curl -s https://ifconfig.me; echo
-```
-
-Compara esa IP con la IP WAN del router. Si son distintas, o la del router está en el rango `100.64.0.0/10`, el ISP usa CGNAT y el port forwarding no funcionará. Alternativas: IPv6, un túnel (Tailscale, playit.gg) o un VPS.
-
 #### IP local fija
 
-```bash
-# Ver la IP local del equipo
-ip -4 addr # -4 para ver solo IPv4
-```
-
-Anota la IP (por ejemplo `192.168.1.15`) y crea una reserva DHCP para esa MAC en el router, o configura una IP estática con systemd-networkd. Si usas reserva DHCP, descomenta las reglas de DHCP en nftables. Si la IP cambia, el port forwarding deja de apuntar al equipo.
+IP local del equipo: `192.168.1.15` (reserva DHCP en el router). Si la IP cambia, el port forwarding deja de apuntar al equipo.
 
 #### Port forwarding en el router
 
@@ -387,14 +373,6 @@ En la administración del router, dentro de *Port Forwarding* o *NAT*:
 | Destino | IP local del equipo (`192.168.1.15`) |
 
 Abre solo `25565/TCP`.
-
-#### DDNS (IP dinámica)
-
-Si el ISP cambia la IP pública, configura un dominio DDNS (DuckDNS, Cloudflare, No-IP) en el router o con un cliente DDNS. Así los jugadores usan `tuservidor.duckdns.org:25565` en lugar de una IP que cambia.
-
-#### IPv6 (opcional)
-
-Si tienes IPv6 pública, puedes abrir `25565/tcp` para IPv6 en nftables y conectar mediante `[tu-ipv6]:25565`, evitando el CGNAT. Requiere que el cliente también tenga IPv6.
 
 ### Seguridad
 
