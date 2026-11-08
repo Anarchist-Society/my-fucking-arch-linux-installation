@@ -270,65 +270,73 @@ sudo vim /etc/nftables.conf
 
 ```nft
 #!/usr/bin/nft -f
+# vim:set ts=2 sw=2 et:
 
-# Borrar la tabla si ya existía (permite re-ejecutar sin error)
+# IPv4/IPv6 Simple & Safe firewall ruleset.
+# More examples in /usr/share/nftables/ and /usr/share/doc/nftables/examples/.
+
+# Borra la tabla si ya existía (permite re-ejecutar sin error)
 destroy table inet filter
 
 # Tabla única para IPv4 e IPv6
+# Crea una tabla llamada filter en la familia inet, abarca IPv4 e IPv6
 table inet filter {
-    chain input {
-        # Filtrar paquetes entrantes; por defecto, descartar
-        type filter hook input priority filter
-        policy drop
+  # Cadena que procesa los paquetes que entran al equipo
+  chain input {
+    # Filtrar paquetes entrantes; por defecto, descartar
+    type filter hook input priority filter
+    policy drop
 
-        # Loopback (localhost) siempre permitido
-        iif "lo" accept
+    # Loopback (localhost) siempre permitido
+    iif "lo" accept comment "allow from loopback"
 
-        # Conexiones ya establecidas o relacionadas (respuestas a tus conexiones salientes)
-        ct state established,related accept
+    # ct Connections Tracking
+    # Conexiones ya establecidas o relacionadas (respuestas a tus conexiones salientes)
+    ct state {established, related} accept comment "allow tracked connections"
 
-        # Descartar paquetes malformados
-        ct state invalid drop
+    # Descartar paquetes malformados o que no encajan en ninguna conexión conocida
+    ct state invalid drop comment "early drop of invalid connections"
 
-        # Curiosidad: no responder a ping, como Windows (opcional)
-        # Descomenta estas dos líneas para bloquear el eco entrante.
-        # Deben ir ANTES del accept de ICMP; el resto de ICMP sigue permitido.
-        # icmp type echo-request drop
-        # icmpv6 type echo-request drop
+    # Curiosidad: no responder a ping, como Windows (opcional)
+    # Descomenta estas dos líneas para bloquear el eco entrante.
+    # Deben ir ANTES del accept de ICMP; el resto de ICMP sigue permitido.
+    icmp type echo-request drop
+    icmpv6 type echo-request drop
 
-        # ICMP (ping, IPv4) e ICMPv6 (ping, vecinos IPv6, MTU)
-        # meta l4proto es agnóstico de familia: una regla cubre IPv4 e IPv6
-        meta l4proto { icmp, icmpv6 } accept comment "allow icmp"
+    # ICMP (ping, IPv4) e ICMPv6 (ping, IPv6, MTU)
+    # meta l4proto es agnóstico de familia: una regla cubre IPv4 e IPv6
+    meta l4proto { icmp, icmpv6 } accept comment "allow icmp"
 
-        # DHCP (obtener IP por DHCP / DHCPv6)
-        udp dport 68 accept
-        udp dport 546 accept
+    # DHCP (obtener IP por DCHP / DHCPv6)
+    # udp dport 68 accept comment "allow dhcp ipv4"
+    # udp dport 546 accept comment "allow dhcp ipv6"
 
-        # SSH (solo si usas sshd)
-        tcp dport 22 accept
+    # SSH
+    # tcp dport 22 accept comment "allow sshd"
+    # tcp dport ssh accept comment "allow sshd"
 
-        # Minecraft (servidor público)
-        tcp dport 25565 accept
+    # Minecraft
+    tcp dport 25565 accept comment "allow minecraft"
 
-        # mDNS (descubrimiento en LAN; opcional)
-        # udp dport 5353 accept
+    # mDNS (descubrimiento en LAN)
+    # udp dport 5353 accept
 
-        # Rechazar el resto con ICMP (máx. 5/s) y contar
-        pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
-        counter
-    }
+    # Rechazar el resto con ICMP (máx. 5/s) y contar
+    # pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
+    # counter
+  }
 
-    # Paquetes reenviados (routing): bloquear
-    chain forward {
-        type filter hook forward priority filter
-        policy drop
-    }
+  # Cadena que procesa los paquetes reenviados (routing): bloquear
+  chain forward {
+    type filter hook forward priority filter
+    policy drop
+  }
 
-    # Paquetes salientes: permitir todo
-    chain output {
-        type filter hook output priority filter
-        policy accept
-    }
+  # Cadena que procesa los paquetes salientes: permitir todo
+  # chain output {
+  #   type filter hook output priority filter
+  #   policy accept
+  # }
 }
 ```
 
@@ -338,11 +346,10 @@ sudo systemctl enable --now nftables.service
 
 # Revisar las reglas activas
 sudo nft list ruleset
-```
 
-- `policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente, KDE Connect o LocalSend, revisa la cadena `forward` y los puertos opcionales.
-- Para revertir los cambios: `sudo systemctl stop nftables.service`.
-- No abras `25575/tcp` (rcon).
+# Para revertir los cambios
+sudo systemctl stop nftables.service
+```
 
 ### Acceso desde Internet
 

@@ -704,7 +704,7 @@ sudo systemctl enable --now nftables.service
 
 # Revisar las reglas activas
 sudo nft list ruleset
-```
 
-- policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente, KDE Connect o LocalSend, revisa la cadena `forward` y los puertos opcionales.
-- Para revertir los cambios: `sudo systemctl stop nftables.service`.
+# Para revertir los cambios
+sudo systemctl stop nftables.service
+```
