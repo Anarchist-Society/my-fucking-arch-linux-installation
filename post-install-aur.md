@@ -135,11 +135,6 @@ sudo vim /srv/minecraft/eula.txt
 eula=true
 ```
 
-```bash
-# Arrancar de nuevo, ahora con la EULA aceptada
-sudo minecraftd start
-```
-
 ### Arranque y control
 
 ```bash
