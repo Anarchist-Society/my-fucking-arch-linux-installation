@@ -642,27 +642,25 @@ table inet filter {
         type filter hook input priority filter; policy drop;
 
         # Loopback (localhost) siempre permitido
-        iif "lo" accept
+        iif "lo" accept;
 
         # Conexiones ya establecidas o relacionadas (respuestas a tus conexiones salientes)
-        ct state established,related accept
+        ct state established,related accept;
 
         # Descartar paquetes malformados
-        ct state invalid drop
+        ct state invalid drop;
 
         # ICMP (ping, IPv4) e ICMPv6 (ping, vecinos IPv6, MTU)
-        ip protocol icmp accept
-        ip6 nexthdr icmpv6 accept
+        ip protocol icmp accept; ip6 nexthdr icmpv6 accept;
 
         # DHCP (obtener IP por DHCP / DHCPv6)
-        udp dport 68 accept
-        udp dport 546 accept
+        udp dport 68 accept; udp dport 546 accept;
 
         # SSH (solo si usas sshd)
-        tcp dport 22 accept
+        tcp dport 22 accept;
 
         # mDNS (descubrimiento en LAN; opcional)
-        # udp dport 5353 accept
+        # udp dport 5353 accept;
     }
 
     # Paquetes reenviados (routing): bloquear
