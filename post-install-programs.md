@@ -639,38 +639,43 @@ destroy table inet filter
 table inet filter {
     chain input {
         # Filtrar paquetes entrantes; por defecto, descartar
-        type filter hook input priority filter; policy drop;
+        type filter hook input priority filter
+        policy drop
 
         # Loopback (localhost) siempre permitido
-        iif "lo" accept;
+        iif "lo" accept
 
         # Conexiones ya establecidas o relacionadas (respuestas a tus conexiones salientes)
-        ct state established,related accept;
+        ct state established,related accept
 
         # Descartar paquetes malformados
-        ct state invalid drop;
+        ct state invalid drop
 
         # ICMP (ping, IPv4) e ICMPv6 (ping, vecinos IPv6, MTU)
-        ip protocol icmp accept; ip6 nexthdr icmpv6 accept;
+        ip protocol icmp accept
+        ip6 nexthdr icmpv6 accept
 
         # DHCP (obtener IP por DHCP / DHCPv6)
-        udp dport 68 accept; udp dport 546 accept;
+        udp dport 68 accept
+        udp dport 546 accept
 
         # SSH (solo si usas sshd)
-        tcp dport 22 accept;
+        tcp dport 22 accept
 
         # mDNS (descubrimiento en LAN; opcional)
-        # udp dport 5353 accept;
+        # udp dport 5353 accept
     }
 
     # Paquetes reenviados (routing): bloquear
     chain forward {
-        type filter hook forward priority filter; policy drop;
+        type filter hook forward priority filter
+        policy drop
     }
 
     # Paquetes salientes: permitir todo
     chain output {
-        type filter hook output priority filter; policy accept;
+        type filter hook output priority filter
+        policy accept
     }
 }
 ```
