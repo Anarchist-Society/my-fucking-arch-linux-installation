@@ -369,10 +369,10 @@ Compara esa IP con la IP WAN del router. Si son distintas, o la del router está
 
 ```bash
 # Ver la IP local del equipo
-ip -4 addr show
+ip -4 addr # -4 para ver solo IPv4
 ```
 
-Anota la IP (por ejemplo `192.168.1.50`) y crea una reserva DHCP para esa MAC en el router, o configura una IP estática con systemd-networkd. Si usas reserva DHCP, descomenta las reglas de DHCP en nftables. Si la IP cambia, el port forwarding deja de apuntar al equipo.
+Anota la IP (por ejemplo `192.168.1.15`) y crea una reserva DHCP para esa MAC en el router, o configura una IP estática con systemd-networkd. Si usas reserva DHCP, descomenta las reglas de DHCP en nftables. Si la IP cambia, el port forwarding deja de apuntar al equipo.
 
 #### Port forwarding en el router
 
@@ -380,12 +380,13 @@ En la administración del router, dentro de *Port Forwarding* o *NAT*:
 
 | Campo | Valor |
 |-------|-------|
-| Puerto externo | `25565` |
+| aplicación / servicio | `Minecraft Server` |
 | Puerto interno | `25565` |
+| Puerto externo | `25565` |
 | Protocolo | `TCP` |
-| Destino | IP local del equipo (`192.168.1.50`) |
+| Destino | IP local del equipo (`192.168.1.15`) |
 
-Abre solo `25565/TCP`. El puerto de rcon no se abre nunca.
+Abre solo `25565/TCP`.
 
 #### DDNS (IP dinámica)
 
