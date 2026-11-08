@@ -42,6 +42,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 - [Red](#red)
   - [openssh](#openssh)
   - [nmap](#nmap)
+  - [nftables](#nftables)
 
 ---
 
@@ -613,3 +614,67 @@ sudo pacman --sync nmap
 | Paquete | Propósito |
 |---------|-----------|
 | `nmap` | Escáner de red para descubrir hosts, puertos y servicios |
+
+### nftables
+
+[nftables](https://wiki.nftables.org/) es el firewall moderno del kernel Linux. Reemplaza a iptables y a ufw.
+
+```bash
+# Instalar nftables
+sudo pacman --sync nftables
+```
+
+```bash
+# Configurar
+sudo nano /etc/nftables.conf
+```
+
+```nft
+table inet filter {
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+        iif "lo" accept
+        ct state established,related accept
+        ct state invalid drop
+
+        # ICMP / ICMPv6 (ping, vecinos IPv6, MTU)
+        ip protocol icmp accept
+        ip6 nexthdr icmpv6 accept
+
+        # DHCP / DHCPv6 (systemd-networkd)
+        udp dport 68 accept
+        udp dport 546 accept
+
+        # SSH (solo si usas sshd)
+        tcp dport 22 accept
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+    }
+
+    chain output {
+        type filter hook output priority filter; policy accept;
+    }
+}
+```
+
+```bash
+# Aplicar y habilitar al inicio
+sudo systemctl enable --now nftables
+
+# Revisar las reglas activas
+sudo nft list ruleset
+```
+
+- `policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente, KDE Connect o LocalSend, revisa la cadena `forward` y los puertos opcionales.
+- Para revertir los cambios: `sudo systemctl stop nftables`.
+
+Si más adelante instalas el servidor de Minecraft, añade a la cadena `input`:
+
+```nft
+tcp dport 25565 accept
+```
+
+Y no abras `25575/tcp` (rcon).
