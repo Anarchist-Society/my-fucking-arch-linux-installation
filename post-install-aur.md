@@ -271,42 +271,48 @@ sudo vim /etc/nftables.conf
 ```nft
 #!/usr/bin/nft -f
 
-flush ruleset
+# Borrar la tabla si ya existía (permite re-ejecutar sin error)
+destroy table inet filter
 
+# Tabla única para IPv4 e IPv6
 table inet filter {
     chain input {
+        # Filtrar paquetes entrantes; por defecto, descartar
         type filter hook input priority filter; policy drop;
 
+        # Loopback (localhost) siempre permitido
         iif "lo" accept
+
+        # Conexiones ya establecidas o relacionadas (respuestas a tus conexiones salientes)
         ct state established,related accept
+
+        # Descartar paquetes malformados
         ct state invalid drop
 
-        # ICMP / ICMPv6 (ping, vecinos IPv6, MTU)
+        # ICMP (ping, IPv4) e ICMPv6 (ping, vecinos IPv6, MTU)
         ip protocol icmp accept
         ip6 nexthdr icmpv6 accept
 
-        # DHCP / DHCPv6 (systemd-networkd)
+        # DHCP (obtener IP por DHCP / DHCPv6)
         udp dport 68 accept
         udp dport 546 accept
 
         # SSH (solo si usas sshd)
         tcp dport 22 accept
 
-        # Minecraft
+        # Minecraft (servidor público)
         tcp dport 25565 accept
 
-        # LocalSend (opcional)
-        # tcp dport 53317 accept
-        # udp dport 53317 accept
-
-        # mDNS (opcional; descubrimiento en LAN)
+        # mDNS (descubrimiento en LAN; opcional)
         # udp dport 5353 accept
     }
 
+    # Paquetes reenviados (routing): bloquear
     chain forward {
         type filter hook forward priority filter; policy drop;
     }
 
+    # Paquetes salientes: permitir todo
     chain output {
         type filter hook output priority filter; policy accept;
     }
