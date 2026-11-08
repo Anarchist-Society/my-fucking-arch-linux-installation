@@ -658,8 +658,8 @@ table inet filter {
     # Descartar paquetes malformados o que no encajan en ninguna conexión conocida
     ct state invalid drop comment "early drop of invalid connections"
 
-    # Curiosidad: no responder a ping, como Windows (opcional)
-    # Descomenta estas dos líneas para bloquear el eco entrante.
+    # No responder a ping, como Windows
+    # Comenta estas dos líneas si quieres que te puedan hacer ping.
     # Deben ir ANTES del accept de ICMP; el resto de ICMP sigue permitido.
     icmp type echo-request drop
     icmpv6 type echo-request drop
@@ -668,7 +668,8 @@ table inet filter {
     # meta l4proto es agnóstico de familia: una regla cubre IPv4 e IPv6
     meta l4proto { icmp, icmpv6 } accept comment "allow icmp"
 
-    # DHCP (obtener IP por DCHP / DHCPv6)
+    # DHCP (obtener IP por DHCP / DHCPv6)
+    # Si usas IP dinámica (incluida una reserva DHCP), descomenta estas dos líneas.
     # udp dport 68 accept comment "allow dhcp ipv4"
     # udp dport 546 accept comment "allow dhcp ipv6"
 
@@ -705,6 +706,8 @@ sudo systemctl enable --now nftables.service
 # Revisar las reglas activas
 sudo nft list ruleset
 
-# Para revertir los cambios
-sudo systemctl stop nftables.service
+# Para revertir los cambios (parar y deshabilitar al inicio)
+sudo systemctl disable --now nftables.service
 ```
+
+- `policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente o KDE Connect, revisa la cadena `forward` y los puertos opcionales.
