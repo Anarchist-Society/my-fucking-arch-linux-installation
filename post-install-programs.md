@@ -652,8 +652,8 @@ table inet filter {
         ct state invalid drop
 
         # ICMP (ping, IPv4) e ICMPv6 (ping, vecinos IPv6, MTU)
-        ip protocol icmp accept
-        ip6 nexthdr icmpv6 accept
+        # meta l4proto es agnóstico de familia: una regla cubre IPv4 e IPv6
+        meta l4proto { icmp, icmpv6 } accept comment "allow icmp"
 
         # DHCP (obtener IP por DHCP / DHCPv6)
         udp dport 68 accept
