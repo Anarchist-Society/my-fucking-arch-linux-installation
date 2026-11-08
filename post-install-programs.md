@@ -626,7 +626,7 @@ sudo pacman --sync nftables
 
 ```bash
 # Configurar
-sudo nano /etc/nftables.conf
+sudo vim /etc/nftables.conf
 ```
 
 ```nft
