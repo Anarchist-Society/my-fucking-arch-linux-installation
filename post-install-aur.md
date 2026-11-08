@@ -237,14 +237,15 @@ IDLE_IF_TIME=1200
 ### Backups
 
 ```bash
-# Habilitar el backup diario
-sudo systemctl enable --now minecraftd-backup.timer
-systemctl list-timers minecraftd-backup.timer
-
-# Backup y restauración manual
+# Backup manual (funciona con el servidor arrancado o parado)
 sudo minecraftd backup
+
+# Restaurar (el servidor debe estar parado)
+sudo minecraftd stop
 sudo minecraftd restore
 ```
+
+Haz un backup manual antes de actualizar, de parar el servidor o de hacer cambios importantes. Cada `sudo minecraftd backup` crea una copia nueva y elimina las antiguas, dejando solo `KEEP_BACKUPS`.
 
 En `/etc/conf.d/minecraft`:
 
@@ -254,21 +255,6 @@ BACKUP_PATHS="world"    # en vanilla incluye Nether y End
 BACKUP_FLAGS="-z"       # compresión gzip
 KEEP_BACKUPS=10         # conserva los 10 más recientes
 ```
-
-Para cambiar el intervalo del backup diario:
-
-```bash
-# Drop-in de systemd
-sudo systemctl edit minecraftd-backup.timer
-```
-
-```ini
-[Timer]
-OnCalendar=
-OnCalendar=*-*-* 04:00:00
-```
-
-El `OnCalendar=` vacío borra el valor heredado antes de definir el nuevo. El timer ya usa `Persistent=true`, así que si el equipo estaba apagado a esa hora, el backup se ejecuta al arrancar. Los archivos originales son `minecraftd-backup.timer` y `minecraftd-backup.service`; la próxima ejecución se comprueba con `systemctl list-timers minecraftd-backup.timer`.
 
 Copia los backups también fuera del equipo (otro disco, NAS o nube): un backup en el mismo SSD no protege de un fallo de disco.
 
