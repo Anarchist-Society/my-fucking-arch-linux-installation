@@ -215,7 +215,7 @@ sudo vim /etc/conf.d/minecraft
 
 ```bash
 # RAM inicial y máxima (usar el mismo valor evita reajustes)
-SERVER_START_CMD="java -Xms4G -Xmx4G -jar ./${MAIN_EXECUTABLE} nogui"
+SERVER_START_CMD="java -Xms4G -Xmx4G -jar ./minecraft_server.jar nogui"
 
 # Suspender el servidor si no hay jugadores
 IDLE_SERVER=true
