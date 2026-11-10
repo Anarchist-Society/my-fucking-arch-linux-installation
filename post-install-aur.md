@@ -206,7 +206,7 @@ Los comentarios son solo documentación: el servidor reescribe `server.propertie
 
 - La whitelist viene activada por defecto en 26.3 (`white-list=true`); si no añades nombres, no entra nadie. Los añades en la sección de seguridad. Para expulsar a los que no estén en la lista al recargarla, añade `enforce-whitelist=true` (por defecto `false`).
 
-### RAM y suspensión
+### RAM
 
 ```bash
 # Configuración del script de gestión
@@ -216,18 +216,11 @@ sudo vim /etc/conf.d/minecraft
 ```bash
 # RAM inicial y máxima (usar el mismo valor evita reajustes)
 SERVER_START_CMD="java -Xms4G -Xmx4G -jar ./minecraft_server.jar nogui"
-
-# Suspender el servidor si no hay jugadores
-IDLE_SERVER=true
-IDLE_IF_TIME=1200
 ```
 
 | Variable | Propósito |
 |----------|-----------|
 | `SERVER_START_CMD` | Comando de arranque; aquí se ajustan `-Xms` (RAM inicial) y `-Xmx` (RAM máxima) |
-| `IDLE_SERVER` | Suspende el servidor cuando no hay jugadores; al primer intento de conexión arranca solo |
-| `IDLE_IF_TIME` | Segundos sin jugadores antes de suspender (por defecto 1200, 20 minutos) |
-| `GAME_PORT` | Puerto que escucha `ncat` mientras el servidor está suspendido |
 
 ### Backups
 
@@ -386,16 +379,3 @@ op NombreExactoDeUsuario
 - El servidor corre como usuario `minecraft`, nunca como root.
 - Sistema y paquete actualizados con `paru -Syu`.
 - Backups copiados fuera del equipo.
-
-### Verificación
-
-```bash
-# Puerto a la escucha
-ss -tulpn | grep 25565
-
-# Prueba local
-nc -vz 127.0.0.1 25565
-
-# Estado del servicio
-sudo minecraftd status
-```
