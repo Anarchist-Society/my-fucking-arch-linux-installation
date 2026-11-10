@@ -202,10 +202,6 @@ difficulty=hard
 max-players=5
 ```
 
-Los comentarios son solo documentación: el servidor reescribe `server.properties` en cada arranque y los elimina.
-
-- La whitelist viene activada por defecto en 26.3 (`white-list=true`); si no añades nombres, no entra nadie. Los añades en la sección de seguridad. Para expulsar a los que no estén en la lista al recargarla, añade `enforce-whitelist=true` (por defecto `false`).
-
 ### RAM
 
 ```bash
