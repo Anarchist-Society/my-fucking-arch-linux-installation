@@ -38,6 +38,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 - [Virtualización](#virtualización)
   - [VirtualBox](#virtualbox)
 - [Juegos](#juegos)
+  - [steam](#steam)
   - [sober](#sober)
 - [Red](#red)
   - [openssh](#openssh)
@@ -561,6 +562,109 @@ sudo usermod --append --groups vboxusers $USER
 | `linux-headers` | Headers del kernel `linux`, necesarios para compilar los módulos DKMS |
 
 ## Juegos
+
+### steam
+
+[Steam](https://store.steampowered.com/) es la plataforma de distribución de videojuegos de Valve. El cliente y buena parte del catálogo usan bibliotecas de 32 bits, así que la instalación necesita el repositorio `multilib`, el locale `en_US.UTF-8` y los drivers gráficos de 32 bits de la GPU.
+
+#### Habilitar multilib
+
+`multilib` contiene los paquetes de 32 bits que necesita Steam, pero viene deshabilitado por defecto en `/etc/pacman.conf`. Hay que descomentar el repositorio:
+
+```ini
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+```
+
+```bash
+# Editar pacman.conf y descomentar el bloque [multilib]
+sudo vim /etc/pacman.conf
+```
+
+| Fichero | Propósito |
+|---------|-----------|
+| `/etc/pacman.conf` | Habilitar `[multilib]` para acceder a los paquetes de 32 bits |
+
+#### Generar el locale en_US.UTF-8
+
+El runtime de Steam asume `en_US.UTF-8`. Si no está generado, el cliente puede fallar con errores de puntero inválido. No hace falta cambiar `LANG`; basta con que el locale exista en el sistema.
+
+```bash
+# Descomentar "en_US.UTF-8 UTF-8" en /etc/locale.gen
+sudo vim /etc/locale.gen
+
+# Generar los locales
+sudo locale-gen
+
+# Verificar que existe
+locale --all-locales | grep en_US.utf8
+```
+
+| Fichero | Propósito |
+|---------|-----------|
+| `/etc/locale.gen` | Descomentar `en_US.UTF-8 UTF-8` para generar el locale que usa Steam |
+
+#### Instalar Steam
+
+```bash
+# Sincronizar la base de datos tras habilitar multilib
+sudo pacman --sync --refresh --sysupgrade
+
+# Instalar Steam y los drivers OpenGL/Vulkan de 32 bits (AMD Radeon)
+sudo pacman --sync steam lib32-mesa lib32-vulkan-radeon
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `steam` | Cliente de Steam y su runtime, con las dependencias `lib32-*` que necesita |
+| `lib32-mesa` | OpenGL de 32 bits para la GPU AMD |
+| `lib32-vulkan-radeon` | Vulkan de 32 bits para la GPU AMD (DXVK/vkd3d y juegos de 32 bits) |
+
+> Si `pacman` pregunta por un proveedor de `lib32-vulkan-driver`, selecciona `lib32-vulkan-radeon`. Por orden alfabético propone `lib32-nvidia-utils`, que no corresponde a la AMD Radeon 780M.
+
+#### DNS con systemd-resolved
+
+Steam resuelve nombres con su propio runtime, que lee `/etc/resolv.conf` directamente. Si se usa `systemd-resolved` y ese fichero es estático y sin `nameserver`, el cliente no podrá iniciar sesión ni descargar juegos.
+
+```bash
+# Enlazar resolv.conf al stub de systemd-resolved
+sudo ln --symbolic --force /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+# Comprobar que el modo es "stub" y que hay servidores DNS
+resolvectl status
+```
+
+| Fichero | Propósito |
+|---------|-----------|
+| `/etc/resolv.conf` | Symlink a `stub-resolv.conf` para que Steam pueda resolver nombres |
+
+#### ntsync
+
+El kernel incluye el módulo `ntsync`, que implementa las primitivas de sincronización de Windows y mejora el rendimiento y la compatibilidad de los juegos de Windows con Wine/Proton. `ntsync-autoload` lo carga al arrancar.
+
+```bash
+# Instalar el autoload del módulo ntsync
+sudo pacman --sync ntsync-autoload
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `ntsync-autoload` | Carga el módulo `ntsync` al arrancar para Wine/Proton |
+
+#### Añadir carpetas o juegos no-Steam
+
+Steam usa el portal de escritorio para abrir el selector de archivos. Sin un backend que implemente `FileChooser`, los diálogos de "Añadir carpeta de biblioteca" o "Añadir juego no-Steam" no aparecen.
+
+```bash
+# Instalar el backend GTK del portal (file chooser)
+sudo pacman --sync xdg-desktop-portal-gtk
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `xdg-desktop-portal-gtk` | Implementa `FileChooser` en `xdg-desktop-portal` (selector de archivos de Steam) |
+
+> Big Picture: los paneles de red del modo Big Picture requieren NetworkManager. Este equipo usa `iwd` + `systemd-networkd`, así que no funcionarán.
 
 ### sober
 
