@@ -347,8 +347,6 @@ sudo nft list ruleset
 sudo systemctl disable --now nftables.service
 ```
 
-- `policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente o KDE Connect, revisa la cadena `forward` y los puertos opcionales.
-
 ### Acceso desde Internet
 
 #### IP local fija
@@ -366,8 +364,6 @@ En la administración del router, dentro de *Port Forwarding* o *NAT*:
 | Puerto externo | `25565` |
 | Protocolo | `TCP` |
 | Destino | IP local del equipo (`192.168.1.15`) |
-
-Abre solo `25565/TCP`.
 
 ### Seguridad
 
