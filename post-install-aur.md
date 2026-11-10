@@ -240,8 +240,6 @@ BACKUP_FLAGS="-z" # compresión gzip
 KEEP_BACKUPS=10 # conserva los 10 más recientes
 ```
 
-Copia los backups también fuera del equipo (otro disco, NAS o nube): un backup en el mismo SSD no protege de un fallo de disco.
-
 ### Firewall (nftables)
 
 ```bash
@@ -369,9 +367,3 @@ whitelist list
 whitelist reload
 op NombreExactoDeUsuario
 ```
-
-- `online-mode=true`, whitelist activa y `enforce-whitelist=true`.
-- rcon desactivado.
-- El servidor corre como usuario `minecraft`, nunca como root.
-- Sistema y paquete actualizados con `paru -Syu`.
-- Backups copiados fuera del equipo.
