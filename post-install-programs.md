@@ -40,6 +40,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 - [Juegos](#juegos)
   - [steam](#steam)
   - [sober](#sober)
+  - [ppsspp](#ppsspp)
 - [Red](#red)
   - [openssh](#openssh)
   - [nmap](#nmap)
@@ -679,6 +680,68 @@ flatpak install flathub org.vinegarhq.Sober
 |---------|-----------|
 | `org.vinegarhq.Sober` | Launcher de Roblox para Linux (Flatpak) |
 | `flathub` | Repositorio de Flatpak con miles de aplicaciones |
+
+### ppsspp
+
+[PPSSPP](https://www.ppsspp.org/) es un emulador de PlayStation Portable (PSP) con frontend Qt y backend OpenGL/Vulkan. Está en el repositorio `extra`, así que no requiere AUR.
+
+#### Instalar
+
+```bash
+# Instalar PPSSPP
+sudo pacman --sync ppsspp
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `ppsspp` | Emulador de PSP con backend OpenGL y Vulkan |
+
+#### ISO del juego
+
+PPSSPP no incluye juegos y la PSP no necesita BIOS para la mayoría de títulos. Hay que usar una copia volcada de la propia UMD; la distribución de ISOs de terceros es ilegal y Arch no las proporciona.
+
+```bash
+# Crear la carpeta para las ISOs
+mkdir -p ~/roms/psp
+```
+
+#### Configuración gráfica
+
+Ajustes recomendados para la Radeon 780M a 2560×1600 (Settings → Graphics):
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Backend | Vulkan | Mejor rendimiento en RDNA3 |
+| Mode | Buffered rendering | Necesario para conservar los efectos |
+| Rendering resolution | 5x (2400×1360) | Casi 1:1 con el panel de 2560×1600 |
+| VSync | Off | Con VRR y `allow_tearing = false` no hay tearing |
+| Frame skipping | 0 | Evita tirones |
+| Texture filtering | Auto (Linear) | Suaviza sin romper el pixel art |
+| Anisotropic filtering | 16x | Texturas nítidas en perspectiva |
+| Texture scaling | Hybrid | Suaviza el 2D y el HUD |
+| Display layout | Keep aspect ratio | PSP es 16:9 y el panel 16:10: no deformar |
+
+> Si aparecen tirones al girar la cámara, activar VSync o limitar a 60 fps. Si no se mantienen los 60 fps, bajar a 4x o 3x: en 16 pulgadas la diferencia es mínima.
+
+#### Rendimiento
+
+`Settings → Graphics → Overlay information` muestra los fps. A 5x la 780M mantiene los 60 fps; para localizar el cuello de botella se puede usar `radeontop` en otra terminal.
+
+#### Rutas
+
+| Fichero | Propósito |
+|---------|-----------|
+| `~/.config/ppsspp/PSP/SYSTEM/ppsspp.ini` | Configuración del emulador (backend, resolución, filtros) |
+| `~/.config/ppsspp/PSP/SAVEDATA` | Partidas guardadas y savestates |
+| `~/roms/psp` | ISOs volcadas de las UMD |
+
+#### Problemas típicos
+
+| Síntoma | Solución |
+|---------|----------|
+| Pantalla negra al arrancar | Cambiar el backend a OpenGL y volver a probar Vulkan |
+| Audio con crujidos | Subir el buffer en `Settings → Audio` |
+| Mando no detectado | Asignarlo en `Settings → Controls → Control mapping` |
 
 ## Red
 
