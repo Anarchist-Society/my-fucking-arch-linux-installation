@@ -333,7 +333,9 @@ hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 -- captura de pantalla
-hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
+-- hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
+-- hl.bind("Print", hl.dsp.exec_cmd('mkdir -p ~/Pictures/screenshots && grim -g "$(slurp -d)" ~/Pictures/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png'))
+hl.bind("Print", hl.dsp.exec_cmd('f="$HOME/Pictures/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png"; mkdir -p "$HOME/Pictures/screenshots" && grim -g "$(slurp -d)" "$f" && wl-copy < "$f"'))
 
 
 --------------------------------
