@@ -683,7 +683,7 @@ flatpak install flathub org.vinegarhq.Sober
 
 ### ppsspp
 
-[PPSSPP](https://www.ppsspp.org/) es un emulador de PlayStation Portable (PSP) con frontend Qt y backend OpenGL/Vulkan. Está en el repositorio `extra`, así que no requiere AUR.
+[PPSSPP](https://www.ppsspp.org/) es un emulador de PlayStation Portable (PSP) con frontend Qt y soporte para OpenGL y Vulkan. Está en el repositorio `extra`, así que no requiere AUR.
 
 #### Instalar
 
@@ -694,7 +694,7 @@ sudo pacman --sync ppsspp
 
 | Paquete | Propósito |
 |---------|-----------|
-| `ppsspp` | Emulador de PSP con backend OpenGL y Vulkan |
+| `ppsspp` | Emulador de PSP con soporte para OpenGL y Vulkan |
 
 #### ISO del juego
 
@@ -707,21 +707,40 @@ mkdir -p ~/roms/psp
 
 #### Configuración gráfica
 
-Ajustes recomendados para la Radeon 780M a 2560×1600 (Settings → Graphics):
+Ajustes recomendados en `Settings → Graphics`:
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| Backend | Vulkan | Mejor rendimiento en RDNA3 |
-| Mode | Buffered rendering | Necesario para conservar los efectos |
-| Rendering resolution | 5x (2400×1360) | Casi 1:1 con el panel de 2560×1600 |
-| VSync | Off | Con VRR y `allow_tearing = false` no hay tearing |
-| Frame skipping | 0 | Evita tirones |
-| Texture filtering | Auto (Linear) | Suaviza sin romper el pixel art |
-| Anisotropic filtering | 16x | Texturas nítidas en perspectiva |
-| Texture scaling | Hybrid | Suaviza el 2D y el HUD |
-| Display layout | Keep aspect ratio | PSP es 16:9 y el panel 16:10: no deformar |
+| API gráfica | Vulkan | Mejor rendimiento en RDNA3 |
+| Resolución de renderizado | PSP x5 | Casi 1:1 con el panel; x4 si buscas batería |
+| Renderizado por software | Deshabilitado | Solo para depurar; usa la CPU y baja a 480×272 |
+| Antialiasing (MSAA) | Deshabilitar | A 5x ya hay supersampling; MSAA solo añade coste |
+| Reemplazar texturas | Deshabilitado | Solo tiene sentido con un pack HD de la versión exacta |
 
-> Si aparecen tirones al girar la cámara, activar VSync o limitar a 60 fps. Si no se mantienen los 60 fps, bajar a 4x o 3x: en 16 pulgadas la diferencia es mínima.
+> Si no se mantienen los 60 fps, bajar la resolución de renderizado a PSP x4 o x3: en 16 pulgadas la diferencia es mínima.
+
+#### Pantalla
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Pantalla completa | Habilitada | Hyprland solo activa VRR (`vrr = 1`) en fullscreen |
+| Usar todas las pantallas | Deshabilitado | Solo sirve para repartir la imagen entre varios monitores |
+| Sincronización vertical (VSync) | Habilitada | Frame pacing estable a 60 fps en un panel de 120 Hz |
+| Pantalla de baja latencia | Deshabilitado | Reduce la cola de presentación a costa de tearing; con VSync no aporta |
+
+**Distribución de pantalla y efectos**: agrupa los ajustes que deciden cómo se presenta la imagen ya renderizada, no cómo se renderiza. Incluye la relación de aspecto y el escalado (mantener 16:9, estirar o escalar por enteros), el filtro de escalado (nearest o linear) y los shaders de post-procesado (FXAA, CRT, etc.). No modifica la resolución interna del juego.
+
+#### Control de fotogramas
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Salto de fotogramas | Deshabilitado | Recorta frames para ganar velocidad y provoca tirones; innecesario en la 780M |
+| Salto automático de fotogramas | Deshabilitado | Solo para hardware muy limitado |
+| Velocidad alternativa | Ilimitado (0) | Adelanta al máximo mientras se mantiene el atajo de avance rápido |
+| Velocidad alternativa 2 | Deshabilitado | Segunda velocidad opcional; no se usa |
+| Velocidad alternativa analógica | 400 % | Velocidad máxima del atajo analógico; escala con el recorrido del gatillo |
+
+> A velocidades distintas del 100 % el audio puede crujir. Se suaviza con `Playback mode` en **Smooth** (`Settings → Audio`). El avance rápido ilimitado sube consumo y temperatura; si molesta, usar 400 %.
 
 #### Rendimiento
 
@@ -731,7 +750,7 @@ Ajustes recomendados para la Radeon 780M a 2560×1600 (Settings → Graphics):
 
 | Fichero | Propósito |
 |---------|-----------|
-| `~/.config/ppsspp/PSP/SYSTEM/ppsspp.ini` | Configuración del emulador (backend, resolución, filtros) |
+| `~/.config/ppsspp/PSP/SYSTEM/ppsspp.ini` | Configuración del emulador (API gráfica, resolución, filtros) |
 | `~/.config/ppsspp/PSP/SAVEDATA` | Partidas guardadas y savestates |
 | `~/roms/psp` | ISOs volcadas de las UMD |
 
@@ -739,7 +758,7 @@ Ajustes recomendados para la Radeon 780M a 2560×1600 (Settings → Graphics):
 
 | Síntoma | Solución |
 |---------|----------|
-| Pantalla negra al arrancar | Cambiar el backend a OpenGL y volver a probar Vulkan |
+| Pantalla negra al arrancar | Cambiar la API gráfica a OpenGL y volver a probar Vulkan |
 | Audio con crujidos | Subir el buffer en `Settings → Audio` |
 | Mando no detectado | Asignarlo en `Settings → Controls → Control mapping` |
 
