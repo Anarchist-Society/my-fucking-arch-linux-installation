@@ -179,6 +179,34 @@ sudo pacman --sync yazi
 |---------|-----------|
 | `yazi` | Gestor de archivos terminal con previsualización y atajos |
 
+#### Dependencias opcionales
+
+Yazi funciona sin ellas, pero habilitan miniaturas, previsualizaciones y búsqueda:
+
+```bash
+# Instalar dependencias opcionales de yazi
+sudo pacman --sync ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libheif libjxl
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `ffmpeg` | Miniaturas de vídeo |
+| `7zip` | Extracción y previsualización de archivos comprimidos |
+| `jq` | Previsualización de JSON |
+| `poppler` | Previsualización de PDF |
+| `fd` | Búsqueda de archivos |
+| `ripgrep` | Búsqueda de contenido en archivos (`rg`) |
+| `fzf` | Navegación rápida por subárboles (>= 0.53.0) |
+| `zoxide` | Navegación por directorios históricos (requiere `fzf`) |
+| `resvg` | Previsualización de SVG |
+| `imagemagick` | Previsualización de imágenes y fuentes (>= 7.1.1) |
+| `libheif` | Soporte HEIC para ImageMagick |
+| `libjxl` | Soporte JPEG XL para ImageMagick |
+
+> Los iconos ya están cubiertos por `ttf-jetbrains-mono-nerd` (sección [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)) y el portapapeles por `wl-clipboard` (sección [grim + slurp](#grim--slurp)), así que no hace falta añadir `xclip` ni `xsel`.
+
+> Opcionales adicionales: `chafa` para previsualización ASCII de imágenes y `git` para la gestión de paquetes de Yazi; `git` ya se instala en la sección de desarrollo.
+
 ### btop
 
 [btop](https://github.com/aristocratos/btop) es un monitor de sistema con interfaz gráfica en terminal. Muestra CPU, RAM, discos, red y procesos en tiempo real.
