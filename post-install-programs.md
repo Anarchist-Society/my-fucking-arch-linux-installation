@@ -647,34 +647,6 @@ resolvectl status
 |---------|-----------|
 | `/etc/resolv.conf` | Symlink a `stub-resolv.conf` para que Steam pueda resolver nombres |
 
-#### ntsync
-
-El kernel incluye el módulo `ntsync`, que implementa las primitivas de sincronización de Windows y mejora el rendimiento y la compatibilidad de los juegos de Windows con Wine/Proton. `ntsync-autoload` lo carga al arrancar.
-
-```bash
-# Instalar el autoload del módulo ntsync
-sudo pacman --sync ntsync-autoload
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `ntsync-autoload` | Carga el módulo `ntsync` al arrancar para Wine/Proton |
-
-#### Añadir carpetas o juegos no-Steam
-
-Steam usa el portal de escritorio para abrir el selector de archivos. Sin un backend que implemente `FileChooser`, los diálogos de "Añadir carpeta de biblioteca" o "Añadir juego no-Steam" no aparecen.
-
-```bash
-# Instalar el backend GTK del portal (file chooser)
-sudo pacman --sync xdg-desktop-portal-gtk
-```
-
-| Paquete | Propósito |
-|---------|-----------|
-| `xdg-desktop-portal-gtk` | Implementa `FileChooser` en `xdg-desktop-portal` (selector de archivos de Steam) |
-
-> Big Picture: los paneles de red del modo Big Picture requieren NetworkManager. Este equipo usa `iwd` + `systemd-networkd`, así que no funcionarán.
-
 ### sober
 
 [Sober](https://sober.vinegarhq.org/) es un launcher de código abierto para jugar a Roblox en Linux usando Vinegar, que traduce el juego para ejecutarlo de forma nativa. Se distribuye a través de [Flathub](https://flathub.org/), el repositorio principal de aplicaciones Flatpak.
