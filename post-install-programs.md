@@ -705,14 +705,15 @@ PPSSPP no incluye juegos y la PSP no necesita BIOS para la mayoría de títulos.
 mkdir -p ~/roms/psp
 ```
 
-#### Configuración gráfica
+#### Gráficos
 
-Ajustes recomendados en `Settings → Graphics`:
+Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue la interfaz del emulador.
+
+#### Modo de renderizado
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | API gráfica | Vulkan | Mejor rendimiento en RDNA3 |
-| Modo de renderizado | Buffered rendering | Conserva todos los efectos; es el modo por defecto |
 | Resolución de renderizado | PSP x5 | Nitidez alta; bajar a x4 o x3 en juegos pesados |
 | Renderizado por software | Deshabilitado | Solo para depurar; usa la CPU y baja a 480×272 |
 | Antialiasing (MSAA) | Deshabilitar | Con x4–x5 ya hay supersampling; usar 2x solo si se baja a x2–x3 |
@@ -731,7 +732,7 @@ Ajustes recomendados en `Settings → Graphics`:
 
 **Distribución de pantalla y efectos**: agrupa los ajustes que deciden cómo se presenta la imagen ya renderizada, no cómo se renderiza. Incluye la relación de aspecto y el escalado (mantener 16:9, estirar o escalar por enteros), el filtro de escalado (nearest o linear) y los shaders de post-procesado (FXAA, CRT, etc.). No modifica la resolución interna del juego.
 
-#### Control de fotogramas
+#### Control de tasa de fotogramas
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
@@ -742,17 +743,6 @@ Ajustes recomendados en `Settings → Graphics`:
 | Velocidad alternativa analógica | 400 % | Velocidad máxima del atajo analógico; escala con el recorrido del gatillo |
 
 > A velocidades distintas del 100 % el audio puede crujir. Se suaviza con `Playback mode` en **Smooth** (`Settings → Audio`). El avance rápido ilimitado sube consumo y temperatura; si molesta, usar 400 %.
-
-#### Escalado de texturas
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| Escalador de texturas de GPU (rápido) | Spline36 (2x) | Buen equilibrio general para texturas 3D; sin coste de CPU |
-| Tipo de escalado (lento) | xBRZ | Solo se usa con el escalador de CPU |
-| Nivel de escalado | Deshabilitado | El escalador de GPU ya fija el factor |
-| Deposterizar | Deshabilitado | Solo corrige bandas de color del escalado de CPU |
-
-> En juegos con sprites pixelados (2D), cambiar el escalador de GPU a **Tex2xBRZ** o **MMPX**. Para máxima calidad, **NNEDI3 Multi (2x)**, a cambio de más VRAM y carga inicial.
 
 #### Hacks de velocidad
 
@@ -779,6 +769,34 @@ Ajustes recomendados en `Settings → Graphics`:
 | Teselación de hardware | Deshabilitado | Solo útil en juegos con muchas curvas; puede causar artefactos |
 
 `Settings → Graphics → Overlay information` muestra los fps. A 5x la 780M mantiene los 60 fps; para localizar el cuello de botella se puede usar `radeontop` en otra terminal.
+
+#### Escalado de texturas
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Escalador de texturas de GPU (rápido) | Spline36 (2x) | Buen equilibrio general para texturas 3D; sin coste de CPU |
+| Tipo de escalado (lento) | xBRZ | Solo se usa con el escalador de CPU |
+| Nivel de escalado | Deshabilitado | El escalador de GPU ya fija el factor |
+| Deposterizar | Deshabilitado | Solo corrige bandas de color del escalado de CPU |
+
+> En juegos con sprites pixelados (2D), cambiar el escalador de GPU a **Tex2xBRZ** o **MMPX**. Para máxima calidad, **NNEDI3 Multi (2x)**, a cambio de más VRAM y carga inicial.
+
+#### Filtrado de texturas
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Filtrado anisotrópico | x16 | Nitidez en superficies en ángulo; sin coste apreciable |
+| Filtro de texturas | Auto Max Quality | Genera mipmaps extra y suaviza la distancia; bajar a Automático si aparecen artefactos |
+| Filtrado inteligente de texturas 2D | Activado | Mantiene el 2D y el HUD nítidos al escalar; desactivar si un juego 2D se ve demasiado pixelado |
+
+#### Información de pantalla
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Mostrar contador de fps | Deshabilitado | Activar solo para medir rendimiento |
+| Mostrar velocidad | Deshabilitado | Diagnóstico: por debajo del 100 % hay caída real de velocidad |
+| Mostrar % de batería | Deshabilitado | Opcional en portátil; útil jugando sin enchufar |
+| Información de depuración en pantalla | Deshabilitar | Solo para desarrollo |
 
 #### Rutas
 
