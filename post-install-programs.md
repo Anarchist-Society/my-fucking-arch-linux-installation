@@ -346,10 +346,11 @@ source ~/.bashrc
 
 ### sudo
 
-[Sudo](https://wiki.archlinux.org/title/Sudo) permite ejecutar comandos con privilegios de administrador. Los "insults" muestran mensajes humorísticos al introducir una contraseña incorrecta.
+[Sudo](https://wiki.archlinux.org/title/Sudo) permite ejecutar comandos con privilegios de administrador.
 
 ```bash
 # Activar insults de sudo
+# Los "insults" muestran mensajes humorísticos al introducir una contraseña incorrecta.
 sudo tee /etc/sudoers.d/10-insults <<< "Defaults insults"
 sudo chmod 440 /etc/sudoers.d/10-insults
 
