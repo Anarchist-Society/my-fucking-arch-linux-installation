@@ -254,7 +254,29 @@ sudo pacman --sync hyprlauncher
 |---------|-----------|
 | `hyprlauncher` | Lanzador de aplicaciones oficial de Hyprland |
 
-La configuración predeterminada de Hyprland ya controla el lanzador; solo hay que pulsar **SUPER + R**.
+En esta configuración, **SUPER + R** abre el lanzador. La calculadora y la búsqueda Unicode no se detectan solas: hay que escribir su prefijo como **primer carácter** de la búsqueda.
+
+| Prefijo | Finder | Ejemplo | Resultado |
+|---------|--------|---------|-----------|
+| *(ninguno)* | Aplicaciones | `firefox` | Abre Firefox |
+| `=` | Calculadora | `=2+2` | `= 4` |
+| `.` | Unicode | `.arrow` | `→ -> RIGHTWARDS ARROW` |
+| `'` | Fuentes | `'mono` | Fuentes que coinciden |
+
+Sin prefijo solo se buscan aplicaciones, por eso escribir `2+2` a secas no muestra la calculadora.
+
+En la calculadora y en Unicode, **Enter copia el resultado al portapapeles** (no lo escribe en la aplicación activa). Después se pega con el atajo de la aplicación, por ejemplo `Ctrl + Shift + V` en kitty.
+
+La configuración es opcional y se lee de `~/.config/hypr/hyprlauncher.conf`. Ejemplo:
+
+```ini
+finders {
+    math_prefix = =
+    unicode_prefix = .
+}
+```
+
+El daemon arranca con la primera invocación. Para que esté listo desde el inicio de sesión, se puede añadir `hyprlauncher --daemon` al autostart de Hyprland.
 
 ## Desarrollo
 
