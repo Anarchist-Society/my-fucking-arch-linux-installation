@@ -477,7 +477,7 @@ sudo mkfs.fat -F 32 /dev/sdX1
 sudo mount /dev/sdX1 /mnt
 
 # Copiar directorios BIOS, EC y EFI a la raíz del pendrive
-sudo cp -r BIOS EC EFI /mnt/
+sudo cp --recursive BIOS EC EFI /mnt/
 
 # Sincronizar datos pendientes
 sudo sync
