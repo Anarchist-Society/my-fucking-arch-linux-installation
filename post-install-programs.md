@@ -712,9 +712,10 @@ Ajustes recomendados en `Settings → Graphics`:
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | API gráfica | Vulkan | Mejor rendimiento en RDNA3 |
-| Resolución de renderizado | PSP x5 | Casi 1:1 con el panel; x4 si buscas batería |
+| Modo de renderizado | Buffered rendering | Conserva todos los efectos; es el modo por defecto |
+| Resolución de renderizado | PSP x5 | Nitidez alta; bajar a x4 o x3 en juegos pesados |
 | Renderizado por software | Deshabilitado | Solo para depurar; usa la CPU y baja a 480×272 |
-| Antialiasing (MSAA) | Deshabilitar | A 5x ya hay supersampling; MSAA solo añade coste |
+| Antialiasing (MSAA) | Deshabilitar | Con x4–x5 ya hay supersampling; usar 2x solo si se baja a x2–x3 |
 | Reemplazar texturas | Deshabilitado | Solo tiene sentido con un pack HD de la versión exacta |
 
 > Si no se mantienen los 60 fps, bajar la resolución de renderizado a PSP x4 o x3: en 16 pulgadas la diferencia es mínima.
@@ -742,7 +743,40 @@ Ajustes recomendados en `Settings → Graphics`:
 
 > A velocidades distintas del 100 % el audio puede crujir. Se suaviza con `Playback mode` en **Smooth** (`Settings → Audio`). El avance rápido ilimitado sube consumo y temperatura; si molesta, usar 400 %.
 
+#### Escalado de texturas
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Escalador de texturas de GPU (rápido) | Spline36 (2x) | Buen equilibrio general para texturas 3D; sin coste de CPU |
+| Tipo de escalado (lento) | xBRZ | Solo se usa con el escalador de CPU |
+| Nivel de escalado | Deshabilitado | El escalador de GPU ya fija el factor |
+| Deposterizar | Deshabilitado | Solo corrige bandas de color del escalado de CPU |
+
+> En juegos con sprites pixelados (2D), cambiar el escalador de GPU a **Tex2xBRZ** o **MMPX**. Para máxima calidad, **NNEDI3 Multi (2x)**, a cambio de más VRAM y carga inicial.
+
+#### Hacks de velocidad
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Omitir efectos del búfer | Deshabilitado | Elimina efectos y puede causar parpadeos |
+| Desactivar selección (culling) | Desactivado | Solo si falta geometría o parpadea |
+| Omitir lecturas de GPU | No | Mantiene los efectos; "Skip" puede romperlos |
+| Oclusión por destello de lente | Desactivado | Ahorra CPU; solo afecta a la precisión de los destellos |
+| Almacenamiento en caché de texturas lento | Deshabilitado | Puede romper el texto |
+| Calidad de curvas Spline/Bezier | Alto | Solo lo usan algunos juegos |
+| Resolución más baja para efectos | Deshabilitado | Activar en Safe si aparecen halos o ghosting de bloom a alta resolución |
+
+> Son hacks de rendimiento: no tocarlos salvo un problema gráfico o de fps concreto.
+
 #### Rendimiento
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| Renderizar fotogramas duplicados | Deshabilitado | Activar en juegos a 30 Hz que se ven con microtirones |
+| Comando de búfer gráfico | Hasta 2 | Equilibrio latencia/paralelismo; bajar a 1 en juegos de ritmo |
+| Transformación por hardware | Activado | Desactivarlo siempre es más lento |
+| "Skinning" por software | Activado | Combina draw calls y suele rendir mejor |
+| Teselación de hardware | Deshabilitado | Solo útil en juegos con muchas curvas; puede causar artefactos |
 
 `Settings → Graphics → Overlay information` muestra los fps. A 5x la 780M mantiene los 60 fps; para localizar el cuello de botella se puede usar `radeontop` en otra terminal.
 
@@ -761,6 +795,10 @@ Ajustes recomendados en `Settings → Graphics`:
 | Pantalla negra al arrancar | Cambiar la API gráfica a OpenGL y volver a probar Vulkan |
 | Audio con crujidos | Subir el buffer en `Settings → Audio` |
 | Mando no detectado | Asignarlo en `Settings → Controls → Control mapping` |
+
+#### Configuración por juego
+
+Los ajustes anteriores forman el perfil global. PPSSPP permite sobrescribirlos por juego con clic derecho sobre el título en la lista → **Game settings**, o desde el menú durante la partida. Es la vía para bajar la resolución en juegos pesados o cambiar el escalador de texturas en títulos 2D sin tocar el perfil general.
 
 ## Red
 
