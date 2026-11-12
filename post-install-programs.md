@@ -402,7 +402,7 @@ sudo pacman --sync unzip
 
 ### 7zip
 
-[7-Zip](https://www.7-zip.org/) es un archivador de archivos con alta ratio de compresión. Se distribuye bajo la LGPL y soporta formatos como 7z, ZIP, RAR, TAR o GZ. Antes era provisto por el paquete `p7zip`, ya obsoleto en Arch.
+[7-Zip](https://www.7-zip.org/) es un archivador de archivos con alta ratio de compresión. Se distribuye bajo la LGPL y soporta formatos como 7z, ZIP, RAR, TAR o GZ.
 
 ```bash
 # Instalar 7zip
