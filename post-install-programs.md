@@ -702,7 +702,7 @@ PPSSPP no incluye juegos y la PSP no necesita BIOS para la mayoría de títulos.
 
 ```bash
 # Crear la carpeta para las ISOs
-mkdir -p ~/roms/psp
+mkdir --parents ~/Isos/psp
 ```
 
 #### Gráficos
@@ -951,5 +951,3 @@ sudo nft list ruleset
 # Para revertir los cambios (parar y deshabilitar al inicio)
 sudo systemctl disable --now nftables.service
 ```
-
-- `policy drop` afecta a todo el sistema: si usas Docker, VirtualBox con red puente o KDE Connect, revisa la cadena `forward` y los puertos opcionales.
