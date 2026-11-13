@@ -102,7 +102,7 @@ El servidor se ejecuta con el usuario sin privilegios `minecraft`. Si alguien co
 # Instalar el servidor vanilla y ncat (para IDLE_SERVER)
 paru --sync minecraft-server nmap
 
-# tar suele venir en el grupo base; comprobar que está instalado
+# tar suele venir en el grupo base, comprobar que está instalado
 pacman -Q tar
 ```
 
@@ -110,7 +110,7 @@ pacman -Q tar
 |---------|-----------|
 | `minecraft-server` | Servidor vanilla oficial, usuario `minecraft`, `/srv/minecraft`, script `minecraftd` y unidades systemd |
 | `nmap` | Aporta `ncat`, necesario para suspender el servidor con `IDLE_SERVER` |
-| `tar` | Necesario para crear backups; suele estar instalado por defecto |
+| `tar` | Necesario para crear backups. Suele estar instalado por defecto |
 
 El paquete crea el usuario y grupo `minecraft`, el directorio `/srv/minecraft` y los siguientes archivos:
 
@@ -147,7 +147,7 @@ sudo minecraftd start
 # Estado del servidor
 sudo minecraftd status
 
-# Consola interactiva (tmux; se sale con Ctrl+b y luego d)
+# Consola interactiva (tmux, se sale con Ctrl+b y luego d)
 sudo minecraftd console
 ```
 
@@ -176,11 +176,11 @@ sudo chmod --recursive g+rwX /srv/minecraft
 sudo find /srv/minecraft -type d -exec chmod g+s {} \;
 ```
 
-Cierra sesión y vuelve a entrar para aplicar el grupo. Todos los archivos de `/srv/minecraft` deben pertenecer al usuario `minecraft` o, como mínimo, ser legibles y escribibles por él. Si el servidor no puede acceder a un archivo, fallará; y si los permisos son muy restrictivos, puede que ni siquiera pueda escribir el error en el log.
+Cierra sesión y vuelve a entrar para aplicar el grupo. Todos los archivos de `/srv/minecraft` deben pertenecer al usuario `minecraft` o, como mínimo, ser legibles y escribibles por él. Si el servidor no puede acceder a un archivo, fallará. Y si los permisos son muy restrictivos, puede que ni siquiera pueda escribir el error en el log.
 
 ### Configuración del servidor
 
-El primer arranque ya genera un `server.properties` con valores por defecto. Cambia solo lo que necesites; lo que no aparezca aquí se queda con su valor por defecto.
+El primer arranque ya genera un `server.properties` con valores por defecto. Cambia solo lo que necesites. Lo que no aparezca aquí se queda con su valor por defecto.
 
 ```bash
 # Parar antes de editar
@@ -216,7 +216,7 @@ SERVER_START_CMD="java -Xms4G -Xmx4G -jar ./minecraft_server.jar nogui"
 
 | Variable | Propósito |
 |----------|-----------|
-| `SERVER_START_CMD` | Comando de arranque; aquí se ajustan `-Xms` (RAM inicial) y `-Xmx` (RAM máxima) |
+| `SERVER_START_CMD` | Comando de arranque. Aquí se ajustan `-Xms` (RAM inicial) y `-Xmx` (RAM máxima) |
 
 ### Backups
 
@@ -265,7 +265,7 @@ destroy table inet filter
 table inet filter {
   # Cadena que procesa los paquetes que entran al equipo
   chain input {
-    # Filtrar paquetes entrantes; por defecto, descartar
+    # Filtrar paquetes entrantes. Por defecto, descartar
     type filter hook input priority filter
     policy drop
 
@@ -281,7 +281,7 @@ table inet filter {
 
     # No responder a ping, como Windows
     # Comenta estas dos líneas si quieres que te puedan hacer ping.
-    # Deben ir ANTES del accept de ICMP; el resto de ICMP sigue permitido.
+    # Deben ir ANTES del accept de ICMP. El resto de ICMP sigue permitido.
     icmp type echo-request drop
     icmpv6 type echo-request drop
 
