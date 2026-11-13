@@ -52,17 +52,19 @@ ln -sf "$(pwd)/bashrc.sh" ~/.bashrc
 
 ```bash
 # Hyprland
+mkdir --parents ~/.config/hypr
 ln -sf "$(pwd)/hyprland.lua" ~/.config/hypr/hyprland.lua
 ```
 
 ```bash
 # kitty
+mkdir --parents ~/.config/kitty
 ln -sf "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
 ```
 
 ```bash
 # Yazi
-mkdir -p ~/.config/yazi
+mkdir --parents ~/.config/yazi
 ln -sf "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
 ```
 
