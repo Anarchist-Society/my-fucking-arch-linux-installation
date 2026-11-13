@@ -185,7 +185,7 @@ Yazi funciona sin ellas, pero habilitan miniaturas, previsualizaciones y búsque
 
 ```bash
 # Instalar dependencias opcionales de yazi
-sudo pacman --sync ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick libheif libjxl
+sudo pacman --sync ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick
 ```
 
 | Paquete | Propósito |
@@ -200,12 +200,8 @@ sudo pacman --sync ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagic
 | `zoxide` | Navegación por directorios históricos (requiere `fzf`) |
 | `resvg` | Previsualización de SVG |
 | `imagemagick` | Previsualización de imágenes y fuentes (>= 7.1.1) |
-| `libheif` | Soporte HEIC para ImageMagick |
-| `libjxl` | Soporte JPEG XL para ImageMagick |
 
 > Los iconos ya están cubiertos por `ttf-jetbrains-mono-nerd` (sección [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)) y el portapapeles por `wl-clipboard` (sección [grim + slurp](#grim--slurp)), así que no hace falta añadir `xclip` ni `xsel`.
-
-> Opcionales adicionales: `chafa` para previsualización ASCII de imágenes y `git` para la gestión de paquetes de Yazi. `git` ya se instala en la sección de desarrollo.
 
 ### btop
 
