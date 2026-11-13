@@ -67,5 +67,3 @@ ln -sf "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
 mkdir --parents ~/.config/yazi
 ln -sf "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
 ```
-
-> Los enlaces se pueden comprobar con `ls -la ~/.bashrc ~/.config/hypr/ ~/.config/kitty/ ~/.config/yazi/`.
