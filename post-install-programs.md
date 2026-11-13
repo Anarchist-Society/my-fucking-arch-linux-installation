@@ -46,7 +46,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [openssh](#openssh)
   - [nmap](#nmap)
   - [nftables](#nftables)
-  - [openvpn](#openvpn)
+  - [wireguard](#wireguard)
 
 ---
 
@@ -967,22 +967,54 @@ sudo nft list ruleset
 sudo systemctl disable --now nftables.service
 ```
 
-### openvpn
+### wireguard
 
-[OpenVPN](https://openvpn.net/) es un cliente VPN que usa ficheros de configuración `.ovpn`/`.conf` proporcionados por el proveedor.
+[WireGuard](https://www.wireguard.com/) es un protocolo VPN moderno, rápido y ligero. Se configura con un fichero `.conf` que proporciona el proveedor.
 
 ```bash
-# Instalar OpenVPN
-sudo pacman --sync openvpn
+# Instalar cliente y soporte de DNS para systemd-resolved
+sudo pacman --sync wireguard-tools systemd-resolvconf
 ```
 
 | Paquete | Propósito |
 |---------|-----------|
-| `openvpn` | Cliente OpenVPN |
+| `wireguard-tools` | Cliente WireGuard (`wg`, `wg-quick`) |
+| `systemd-resolvconf` | Aplica la línea `DNS =` mediante `systemd-resolved` |
+
+Guarda el fichero del proveedor en `/etc/wireguard/`:
 
 ```bash
-# Conectar con un fichero de configuración
-sudo openvpn --config /etc/openvpn/client/vpn.conf
+sudo install -m 600 /dev/null /etc/wireguard/proton.conf
+sudo vim /etc/wireguard/proton.conf
 ```
 
-> Guarda los `.ovpn`/`.conf` del proveedor en `/etc/openvpn/client/`. Para usarlo como servicio: `sudo systemctl start openvpn-client@vpn` (el fichero debe llamarse `vpn.conf`).
+```ini
+# /etc/wireguard/proton.conf
+[Interface]
+PrivateKey = <CLAVE_PRIVADA>
+Address = 10.2.0.2/32
+DNS = 10.2.0.1
+
+[Peer]
+PublicKey = <CLAVE_PÚBLICA_DEL_SERVIDOR>
+AllowedIPs = 0.0.0.0/0, ::/0
+Endpoint = <IP_O_DOMINIO>:51820
+PersistentKeepalive = 25
+```
+
+```bash
+# Conectar
+sudo wg-quick up proton
+
+# Ver estado e IP pública
+sudo wg show
+curl --silent https://ifconfig.me; echo
+
+# Desconectar
+sudo wg-quick down proton
+
+# Conectar al inicio
+sudo systemctl enable --now wg-quick@proton
+```
+
+> El contenido real lo genera el proveedor. No copies claves privadas reales al repositorio.
