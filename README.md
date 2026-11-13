@@ -41,6 +41,7 @@ Las configuraciones viven en este repositorio y se enlazan simbólicamente en el
 | Bash | `~/.bashrc` | [`bashrc.sh`](bashrc.sh) |
 | Hyprland | `~/.config/hypr/hyprland.lua` | [`hyprland.lua`](hyprland.lua) |
 | kitty | `~/.config/kitty/kitty.conf` | [`kitty.conf`](kitty.conf) |
+| Yazi | `~/.config/yazi/yazi.toml` | [`yazi.toml`](yazi.toml) |
 
 Ejecuta los comandos desde la raíz de este repositorio.
 
@@ -59,4 +60,10 @@ ln -sf "$(pwd)/hyprland.lua" ~/.config/hypr/hyprland.lua
 ln -sf "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
 ```
 
-> Los enlaces se pueden comprobar con `ls -la ~/.bashrc ~/.config/hypr/ ~/.config/kitty/`.
+```bash
+# Yazi
+mkdir -p ~/.config/yazi
+ln -sf "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
+```
+
+> Los enlaces se pueden comprobar con `ls -la ~/.bashrc ~/.config/hypr/ ~/.config/kitty/ ~/.config/yazi/`.
