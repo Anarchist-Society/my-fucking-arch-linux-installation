@@ -203,6 +203,20 @@ sudo pacman --sync ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagic
 
 > Los iconos ya están cubiertos por `ttf-jetbrains-mono-nerd` (sección [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)) y el portapapeles por `wl-clipboard` (sección [grim + slurp](#grim--slurp)), así que no hace falta añadir `xclip` ni `xsel`.
 
+#### Configuración
+
+La configuración de yazi vive en el repositorio y se enlaza simbólicamente. Ejecuta el comando desde la raíz del repo:
+
+```bash
+# Enlazar configuración de yazi
+mkdir -p ~/.config/yazi
+ln -sf "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
+```
+
+| Fichero | Propósito |
+|---------|-----------|
+| `~/.config/yazi/yazi.toml` | Enlace simbólico a la configuración del repo |
+
 ### btop
 
 [btop](https://github.com/aristocratos/btop) es un monitor de sistema con interfaz gráfica en terminal. Muestra CPU, RAM, discos, red y procesos en tiempo real.
