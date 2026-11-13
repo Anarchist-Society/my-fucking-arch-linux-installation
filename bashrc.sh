@@ -26,3 +26,12 @@ export SUDO_PROMPT="$(tput setab 1 setaf 7 bold)[sudo]$(tput sgr0) $(tput setaf 
 
 # kitty ssh fix
 [[ "$TERM" == "xterm-kitty" ]] && alias ssh="TERM=xterm-256color ssh"
+
+# Shell wrapper Yazi
+function y() {
+	local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+	command rm -f -- "$tmp"
+}
