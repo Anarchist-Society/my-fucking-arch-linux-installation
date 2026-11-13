@@ -205,7 +205,7 @@ sudo pacman --sync ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagic
 
 > Los iconos ya están cubiertos por `ttf-jetbrains-mono-nerd` (sección [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)) y el portapapeles por `wl-clipboard` (sección [grim + slurp](#grim--slurp)), así que no hace falta añadir `xclip` ni `xsel`.
 
-> Opcionales adicionales: `chafa` para previsualización ASCII de imágenes y `git` para la gestión de paquetes de Yazi; `git` ya se instala en la sección de desarrollo.
+> Opcionales adicionales: `chafa` para previsualización ASCII de imágenes y `git` para la gestión de paquetes de Yazi. `git` ya se instala en la sección de desarrollo.
 
 ### btop
 
@@ -624,7 +624,7 @@ sudo vim /etc/pacman.conf
 
 #### Generar el locale en_US.UTF-8
 
-El runtime de Steam asume `en_US.UTF-8`. Si no está generado, el cliente puede fallar con errores de puntero inválido. No hace falta cambiar `LANG`; basta con que el locale exista en el sistema.
+El runtime de Steam asume `en_US.UTF-8`. Si no está generado, el cliente puede fallar con errores de puntero inválido. No hace falta cambiar `LANG`. Basta con que el locale exista en el sistema.
 
 ```bash
 # Descomentar "en_US.UTF-8 UTF-8" en /etc/locale.gen
@@ -722,9 +722,9 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | API gráfica | Vulkan | Mejor rendimiento en RDNA3 |
-| Resolución de renderizado | PSP x5 | Nitidez alta; bajar a x4 o x3 en juegos pesados |
-| Renderizado por software | Deshabilitado | Solo para depurar; usa la CPU y baja a 480×272 |
-| Antialiasing (MSAA) | Deshabilitar | Con x4–x5 ya hay supersampling; usar 2x solo si se baja a x2–x3 |
+| Resolución de renderizado | PSP x5 | Nitidez alta. Bajar a x4 o x3 en juegos pesados |
+| Renderizado por software | Deshabilitado | Solo para depurar. Usa la CPU y baja a 480×272 |
+| Antialiasing (MSAA) | Deshabilitar | Con x4–x5 ya hay supersampling. Usar 2x solo si se baja a x2–x3 |
 | Reemplazar texturas | Deshabilitado | Solo tiene sentido con un pack HD de la versión exacta |
 
 > Si no se mantienen los 60 fps, bajar la resolución de renderizado a PSP x4 o x3: en 16 pulgadas la diferencia es mínima.
@@ -736,7 +736,7 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 | Pantalla completa | Habilitada | Hyprland solo activa VRR (`vrr = 1`) en fullscreen |
 | Usar todas las pantallas | Deshabilitado | Solo sirve para repartir la imagen entre varios monitores |
 | Sincronización vertical (VSync) | Habilitada | Frame pacing estable a 60 fps en un panel de 120 Hz |
-| Pantalla de baja latencia | Deshabilitado | Reduce la cola de presentación a costa de tearing; con VSync no aporta |
+| Pantalla de baja latencia | Deshabilitado | Reduce la cola de presentación a costa de tearing. Con VSync no aporta |
 
 **Distribución de pantalla y efectos**: agrupa los ajustes que deciden cómo se presenta la imagen ya renderizada, no cómo se renderiza. Incluye la relación de aspecto y el escalado (mantener 16:9, estirar o escalar por enteros), el filtro de escalado (nearest o linear) y los shaders de post-procesado (FXAA, CRT, etc.). No modifica la resolución interna del juego.
 
@@ -744,13 +744,13 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| Salto de fotogramas | Deshabilitado | Recorta frames para ganar velocidad y provoca tirones; innecesario en la 780M |
+| Salto de fotogramas | Deshabilitado | Recorta frames para ganar velocidad y provoca tirones. Innecesario en la 780M |
 | Salto automático de fotogramas | Deshabilitado | Solo para hardware muy limitado |
 | Velocidad alternativa | Ilimitado (0) | Adelanta al máximo mientras se mantiene el atajo de avance rápido |
-| Velocidad alternativa 2 | Deshabilitado | Segunda velocidad opcional; no se usa |
-| Velocidad alternativa analógica | 400 % | Velocidad máxima del atajo analógico; escala con el recorrido del gatillo |
+| Velocidad alternativa 2 | Deshabilitado | Segunda velocidad opcional. No se usa |
+| Velocidad alternativa analógica | 400 % | Velocidad máxima del atajo analógico. Escala con el recorrido del gatillo |
 
-> A velocidades distintas del 100 % el audio puede crujir. Se suaviza con `Playback mode` en **Smooth** (`Settings → Audio`). El avance rápido ilimitado sube consumo y temperatura; si molesta, usar 400 %.
+> A velocidades distintas del 100 % el audio puede crujir. Se suaviza con `Playback mode` en **Smooth** (`Settings → Audio`). El avance rápido ilimitado sube consumo y temperatura. Si molesta, usar 400 %.
 
 #### Hacks de velocidad
 
@@ -758,8 +758,8 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 |--------|-------|--------|
 | Omitir efectos del búfer | Deshabilitado | Elimina efectos y puede causar parpadeos |
 | Desactivar selección (culling) | Desactivado | Solo si falta geometría o parpadea |
-| Omitir lecturas de GPU | No | Mantiene los efectos; "Skip" puede romperlos |
-| Oclusión por destello de lente | Desactivado | Ahorra CPU; solo afecta a la precisión de los destellos |
+| Omitir lecturas de GPU | No | Mantiene los efectos. "Skip" puede romperlos |
+| Oclusión por destello de lente | Desactivado | Ahorra CPU. Solo afecta a la precisión de los destellos |
 | Almacenamiento en caché de texturas lento | Deshabilitado | Puede romper el texto |
 | Calidad de curvas Spline/Bezier | Alto | Solo lo usan algunos juegos |
 | Resolución más baja para efectos | Deshabilitado | Activar en Safe si aparecen halos o ghosting de bloom a alta resolución |
@@ -771,33 +771,33 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | Renderizar fotogramas duplicados | Deshabilitado | Activar en juegos a 30 Hz que se ven con microtirones |
-| Comando de búfer gráfico | Hasta 2 | Equilibrio latencia/paralelismo; bajar a 1 en juegos de ritmo |
+| Comando de búfer gráfico | Hasta 2 | Equilibrio latencia/paralelismo. Bajar a 1 en juegos de ritmo |
 | Transformación por hardware | Activado | Desactivarlo siempre es más lento |
 | "Skinning" por software | Activado | Combina draw calls y suele rendir mejor |
-| Teselación de hardware | Deshabilitado | Solo útil en juegos con muchas curvas; puede causar artefactos |
+| Teselación de hardware | Deshabilitado | Solo útil en juegos con muchas curvas. Puede causar artefactos |
 
-`Settings → Graphics → Overlay information` muestra los fps. A 5x la 780M mantiene los 60 fps; para localizar el cuello de botella se puede usar `radeontop` en otra terminal.
+`Settings → Graphics → Overlay information` muestra los fps. A 5x la 780M mantiene los 60 fps. Para localizar el cuello de botella se puede usar `radeontop` en otra terminal.
 
 #### Escalado de texturas
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| Escalador de texturas de GPU (rápido) | Spline36 (2x) | Buen equilibrio general para texturas 3D; sin coste de CPU |
+| Escalador de texturas de GPU (rápido) | Spline36 (2x) | Buen equilibrio general para texturas 3D. Sin coste de CPU |
 | Tipo de escalado (lento) | xBRZ | Solo se usa con el escalador de CPU |
 | Nivel de escalado | Deshabilitado | El escalador de GPU ya fija el factor |
 | Deposterizar | Deshabilitado | Solo corrige bandas de color del escalado de CPU |
 
 > En juegos con sprites pixelados (2D), cambiar el escalador de GPU a **Tex2xBRZ** o **MMPX**. Para máxima calidad, **NNEDI3 Multi (2x)**, a cambio de más VRAM y carga inicial.
 
-> **PPSSPP 1.20.4:** elegir `Spline36 (4x)`; es la que guarda el Spline36 de 2x real. La opción `Spline36 (2x)` guarda por error el shader oculto `Smiley (2x)`. Corregido en v1.21.
+> **PPSSPP 1.20.4:** elegir `Spline36 (4x)`. Es la que guarda el Spline36 de 2x real. La opción `Spline36 (2x)` guarda por error el shader oculto `Smiley (2x)`. Corregido en v1.21.
 
 #### Filtrado de texturas
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| Filtrado anisotrópico | x16 | Nitidez en superficies en ángulo; sin coste apreciable |
-| Filtro de texturas | Auto Max Quality | Genera mipmaps extra y suaviza la distancia; bajar a Automático si aparecen artefactos |
-| Filtrado inteligente de texturas 2D | Activado | Mantiene el 2D y el HUD nítidos al escalar; desactivar si un juego 2D se ve demasiado pixelado |
+| Filtrado anisotrópico | x16 | Nitidez en superficies en ángulo. Sin coste apreciable |
+| Filtro de texturas | Auto Max Quality | Genera mipmaps extra y suaviza la distancia. Bajar a Automático si aparecen artefactos |
+| Filtrado inteligente de texturas 2D | Activado | Mantiene el 2D y el HUD nítidos al escalar. Desactivar si un juego 2D se ve demasiado pixelado |
 
 #### Información de pantalla
 
@@ -805,28 +805,8 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 |--------|-------|--------|
 | Mostrar contador de fps | Deshabilitado | Activar solo para medir rendimiento |
 | Mostrar velocidad | Deshabilitado | Diagnóstico: por debajo del 100 % hay caída real de velocidad |
-| Mostrar % de batería | Deshabilitado | Opcional en portátil; útil jugando sin enchufar |
+| Mostrar % de batería | Deshabilitado | Opcional en portátil. Útil jugando sin enchufar |
 | Información de depuración en pantalla | Deshabilitar | Solo para desarrollo |
-
-#### Rutas
-
-| Fichero | Propósito |
-|---------|-----------|
-| `~/.config/ppsspp/PSP/SYSTEM/ppsspp.ini` | Configuración del emulador (API gráfica, resolución, filtros) |
-| `~/.config/ppsspp/PSP/SAVEDATA` | Partidas guardadas y savestates |
-| `~/roms/psp` | ISOs volcadas de las UMD |
-
-#### Problemas típicos
-
-| Síntoma | Solución |
-|---------|----------|
-| Pantalla negra al arrancar | Cambiar la API gráfica a OpenGL y volver a probar Vulkan |
-| Audio con crujidos | Subir el buffer en `Settings → Audio` |
-| Mando no detectado | Asignarlo en `Settings → Controls → Control mapping` |
-
-#### Configuración por juego
-
-Los ajustes anteriores forman el perfil global. PPSSPP permite sobrescribirlos por juego con clic derecho sobre el título en la lista → **Game settings**, o desde el menú durante la partida. Es la vía para bajar la resolución en juegos pesados o cambiar el escalador de texturas en títulos 2D sin tocar el perfil general.
 
 ## Red
 
@@ -896,7 +876,7 @@ destroy table inet filter
 table inet filter {
   # Cadena que procesa los paquetes que entran al equipo
   chain input {
-    # Filtrar paquetes entrantes; por defecto, descartar
+    # Filtrar paquetes entrantes. Por defecto, descartar
     type filter hook input priority filter
     policy drop
 
@@ -912,7 +892,7 @@ table inet filter {
 
     # No responder a ping, como Windows
     # Comenta estas dos líneas si quieres que te puedan hacer ping.
-    # Deben ir ANTES del accept de ICMP; el resto de ICMP sigue permitido.
+    # Deben ir ANTES del accept de ICMP. El resto de ICMP sigue permitido.
     icmp type echo-request drop
     icmpv6 type echo-request drop
 
