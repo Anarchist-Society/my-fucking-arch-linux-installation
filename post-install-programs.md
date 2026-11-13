@@ -706,7 +706,7 @@ sudo pacman --sync ppsspp
 
 #### ISO del juego
 
-PPSSPP no incluye juegos y la PSP no necesita BIOS para la mayoría de títulos. Hay que usar una copia volcada de la propia UMD; la distribución de ISOs de terceros es ilegal y Arch no las proporciona.
+PPSSPP no incluye juegos y la PSP no necesita BIOS para la mayoría de títulos. Hay que usar una copia volcada de la propia UMD, la distribución de ISOs de terceros es ilegal y Arch no las proporciona.
 
 ```bash
 # Crear la carpeta para las ISOs
@@ -788,6 +788,8 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 | Deposterizar | Deshabilitado | Solo corrige bandas de color del escalado de CPU |
 
 > En juegos con sprites pixelados (2D), cambiar el escalador de GPU a **Tex2xBRZ** o **MMPX**. Para máxima calidad, **NNEDI3 Multi (2x)**, a cambio de más VRAM y carga inicial.
+
+> **PPSSPP 1.20.4:** elegir `Spline36 (4x)`; es la que guarda el Spline36 de 2x real. La opción `Spline36 (2x)` guarda por error el shader oculto `Smiley (2x)`. Corregido en v1.21.
 
 #### Filtrado de texturas
 
