@@ -429,30 +429,16 @@ sudo pacman --sync flatpak
 
 ### fuse2
 
-[FUSE 2](https://github.com/libfuse/libfuse) es la interfaz de sistemas de archivos en espacio de usuario de segunda generación. Los **AppImage** (formato tipo 2, el estándar actual) cargan `libfuse.so.2` en tiempo de ejecución con `dlopen()`, pero Arch solo instala `fuse3` por defecto y su biblioteca (`libfuse3.so.4`) no es compatible. Sin `fuse2`, cualquier AppImage falla con:
-
-```
-dlopen(): error loading libfuse.so.2
-
-AppImages require FUSE to run.
-You might still be able to extract the contents of this AppImage
-if you run it with the --appimage-extract option.
-```
+[FUSE 2](https://github.com/libfuse/libfuse) es necesario para ejecutar **AppImage**, que cargan `libfuse.so.2` en tiempo de ejecución. Arch solo instala `fuse3`, cuya biblioteca (`libfuse3.so.4`) no es compatible, así que sin este paquete los AppImage fallan al arrancar.
 
 ```bash
-# Instalar FUSE 2
-# Convive con fuse3: solo entra en conflicto con el antiguo paquete "fuse"
+# Instalar FUSE 2 (convive con fuse3)
 sudo pacman --sync fuse2
-
-# Verificar que la biblioteca queda disponible para el runtime
-ldconfig -p | grep libfuse.so.2
 ```
 
 | Paquete | Propósito |
 |---------|-----------|
 | `fuse2` | Proporciona `libfuse.so.2`, requerida por el runtime de los AppImage |
-
-> En **yazi**, `Enter` sobre un AppImage usa `xdg-open` (definido en [`yazi.toml`](yazi.toml)), y la entrada `{ url = "*.{AppImage,appimage}", run = "archive" }` solo afecta a la vista previa, no a la ejecución.
 
 ### unzip
 
