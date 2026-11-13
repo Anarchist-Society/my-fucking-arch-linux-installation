@@ -46,6 +46,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [openssh](#openssh)
   - [nmap](#nmap)
   - [nftables](#nftables)
+  - [proton-vpn](#proton-vpn)
 
 ---
 
@@ -979,3 +980,26 @@ sudo nft list ruleset
 # Para revertir los cambios (parar y deshabilitar al inicio)
 sudo systemctl disable --now nftables.service
 ```
+
+### proton-vpn
+
+[Proton VPN](https://protonvpn.com/) es un servicio de VPN centrado en la privacidad. La app GTK permite conectarse a servidores de más de 100 países, con kill switch, split tunneling y conexión automática al arrancar.
+
+```bash
+# Instalar la app gráfica de Proton VPN
+sudo pacman --sync proton-vpn-gtk-app
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `proton-vpn-gtk-app` | Aplicación GTK de Proton VPN |
+| `proton-vpn-daemon` | Daemon y servicio de split tunneling (se activa por D-Bus) |
+
+```bash
+# Abrir la aplicación
+protonvpn-app
+```
+
+Inicia sesión con tu cuenta de Proton y selecciona un servidor. La app guarda las credenciales en `gnome-keyring`, que ya está instalado, así que la sesión persiste entre reinicios.
+
+> La app necesita el daemon de WireGuard que trae `proton-vpn-daemon`; no hace falta instalar `wireguard-tools` ni `openvpn` a mano.
