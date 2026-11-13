@@ -46,6 +46,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [openssh](#openssh)
   - [nmap](#nmap)
   - [nftables](#nftables)
+  - [openvpn](#openvpn)
 
 ---
 
@@ -965,3 +966,23 @@ sudo nft list ruleset
 # Para revertir los cambios (parar y deshabilitar al inicio)
 sudo systemctl disable --now nftables.service
 ```
+
+### openvpn
+
+[OpenVPN](https://openvpn.net/) es un cliente VPN que usa ficheros de configuración `.ovpn`/`.conf` proporcionados por el proveedor.
+
+```bash
+# Instalar OpenVPN
+sudo pacman --sync openvpn
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `openvpn` | Cliente OpenVPN |
+
+```bash
+# Conectar con un fichero de configuración
+sudo openvpn --config /etc/openvpn/client/vpn.conf
+```
+
+> Guarda los `.ovpn`/`.conf` del proveedor en `/etc/openvpn/client/`. Para usarlo como servicio: `sudo systemctl start openvpn-client@vpn` (el fichero debe llamarse `vpn.conf`).
