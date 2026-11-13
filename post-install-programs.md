@@ -4,6 +4,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 
 ## Tabla de contenidos
 - [Escritorio](#escritorio)
+  - [hyprland](#hyprland)
   - [sddm](#sddm)
   - [gnome-keyring](#gnome-keyring)
 - [Terminal](#terminal)
@@ -51,6 +52,21 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
 ---
 
 ## Escritorio
+
+### hyprland
+
+[Hyprland](https://wiki.archlinux.org/title/Hyprland) es un compositor Wayland dinámico. Se puede arrancar desde TTY o desde un gestor de pantalla como [SDDM](#sddm).
+
+```bash
+# Instalar Hyprland
+sudo pacman --sync hyprland
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `hyprland` | Compositor Wayland dinámico y personalizable |
+
+> Mi configuración de Hyprland está en [`hyprland.lua`](hyprland.lua) (ver [README](README.md#my-fucking-dotfiles)).
 
 ### sddm
 
