@@ -114,7 +114,7 @@ sudo pacman --sync gnome-keyring
 
 ### kitty
 
-[Kitty](https://sw.kovidgoyal.net/kitty/) es un emulador de terminal con GPU-acelerado, rápido y personalizable. Soporta tabs, splits, imágenes inline y temas.
+[Kitty](https://wiki.archlinux.org/title/Kitty) es un emulador de terminal con GPU-acelerado, rápido y personalizable. Soporta tabs, splits, imágenes inline y temas.
 
 ```bash
 # Instalar kitty
@@ -127,7 +127,7 @@ sudo pacman --sync kitty
 
 ### tmux
 
-[tmux](https://github.com/tmux/tmux) es un multiplexor de terminal que permite mantener sesiones persistentes, organizar el trabajo en ventanas y paneles, y recuperar la sesión aunque se cierre el terminal o se desconecte la conexión SSH.
+[tmux](https://wiki.archlinux.org/title/Tmux) es un multiplexor de terminal que permite mantener sesiones persistentes, organizar el trabajo en ventanas y paneles, y recuperar la sesión aunque se cierre el terminal o se desconecte la conexión SSH.
 
 ```bash
 # Instalar tmux
@@ -177,12 +177,14 @@ fc-cache
 
 ### bashrc
 
-[~/.bashrc](bashrc.sh) es el archivo de configuración del shell Bash. Contiene alias, prompt, modo de edición y variables de entorno. Se copia al home tras la instalación.
+[~/.bashrc](https://wiki.archlinux.org/title/Bash) es el archivo de configuración del shell Bash. Contiene alias, prompt, modo de edición y variables de entorno.
 
 ```bash
 # Copiar configuración de bashrc al home
 cp bashrc.sh ~/.bashrc
 ```
+
+> Mi configuración de bashrc está en [`bashrc`](bashrc.sh) (ver [README](README.md#my-fucking-dotfiles)).
 
 ### yazi
 
