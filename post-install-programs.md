@@ -188,7 +188,7 @@ cp bashrc.sh ~/.bashrc
 
 ### yazi
 
-[yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
+[yazi](https://yazi-rs.github.io/) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
 
 ```bash
 # Instalar yazi
@@ -221,7 +221,7 @@ sudo pacman --sync ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagic
 | `resvg` | Previsualización de SVG |
 | `imagemagick` | Previsualización de imágenes y fuentes (>= 7.1.1) |
 
-> Los iconos ya están cubiertos por `ttf-jetbrains-mono-nerd` (sección [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)) y el portapapeles por `wl-clipboard` (sección [grim + slurp](#grim--slurp)), así que no hace falta añadir `xclip` ni `xsel`.
+> Los iconos ya están cubiertos por `ttf-jetbrains-mono-nerd` (sección [JetBrains Mono Nerd Font](#jetbrains-mono-nerd-font)) y el portapapeles por `wl-clipboard` (sección [grim + slurp](#grim--slurp)).
 
 #### Configuración
 
@@ -229,8 +229,8 @@ La configuración de yazi vive en el repositorio y se enlaza simbólicamente. Ej
 
 ```bash
 # Enlazar configuración de yazi
-mkdir -p ~/.config/yazi
-ln -sf "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
+mkdir --parents ~/.config/yazi
+ln --symbolic --force "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
 ```
 
 | Fichero | Propósito |
@@ -285,7 +285,7 @@ hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp -d)" - | wl-copy'))
 
 ### obs-studio
 
-[OBS Studio](https://obsproject.com/) es un software de grabación y streaming de código abierto. En Hyprland requiere `xdg-desktop-portal-hyprland` para la captura de pantalla y `qt6-wayland` para evitar crashes.
+[OBS Studio](https://wiki.archlinux.org/title/Open_Broadcaster_Software) es un software de grabación y streaming de código abierto. En Hyprland requiere `xdg-desktop-portal-hyprland` para la captura de pantalla y `qt6-wayland` para evitar crashes.
 
 ```bash
 # Instalar OBS Studio
@@ -316,7 +316,7 @@ En esta configuración, **SUPER + R** abre el lanzador. La calculadora y la bús
 
 | Prefijo | Finder | Ejemplo | Resultado |
 |---------|--------|---------|-----------|
-| *(ninguno)* | Aplicaciones | `firefox` | Abre Firefox |
+| *(ninguno)* | Aplicaciones | `brave` | Abre Brave |
 | `=` | Calculadora | `=2+2` | `= 4` |
 | `.` | Unicode | `.arrow` | `→ -> RIGHTWARDS ARROW` |
 | `'` | Fuentes | `'mono` | Fuentes que coinciden |
@@ -325,7 +325,7 @@ En esta configuración, **SUPER + R** abre el lanzador. La calculadora y la bús
 
 ### git
 
-[Git](https://git-scm.com/) es un sistema de control de versiones distribuido, usado para gestionar el código fuente y colaborar en proyectos.
+[Git](https://wiki.archlinux.org/title/Git) es un sistema de control de versiones distribuido, usado para gestionar el código fuente y colaborar en proyectos.
 
 ```bash
 # Instalar git
