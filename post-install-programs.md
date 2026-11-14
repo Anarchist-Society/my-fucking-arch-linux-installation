@@ -140,7 +140,7 @@ sudo pacman --sync tmux
 
 ### JetBrains Mono Nerd Font
 
-[JetBrains Mono](https://www.jetbrains.com/mono/) es una fuente monoespaciada con ligaduras y soporte Nerd Font para iconos. Diseñada para desarrolladores con excelente legibilidad.
+[JetBrains Mono](https://www.jetbrains.com/mono) es una fuente monoespaciada con ligaduras y soporte Nerd Font para iconos. Diseñada para desarrolladores con excelente legibilidad.
 
 ```bash
 # Instalar JetBrains Mono Nerd Font
@@ -188,7 +188,7 @@ cp bashrc.sh ~/.bashrc
 
 ### yazi
 
-[yazi](https://yazi-rs.github.io/) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
+[yazi](https://github.com/sxyazi/yazi) es un gestor de archivos de terminal, rápido y personalizable. Navega directorios, previsualiza archivos y ejecuta acciones con atajos de teclado.
 
 ```bash
 # Instalar yazi
@@ -357,7 +357,7 @@ sudo pacman --sync lazygit
 
 ### jdk-openjdk
 
-[OpenJDK](https://openjdk.org/) es la implementación de referencia de Java. Incluye el JDK (Java Development Kit) para compilar y ejecutar aplicaciones Java.
+[OpenJDK](https://wiki.archlinux.org/title/Java) es la implementación de referencia de Java. Incluye el JDK (Java Development Kit) para compilar y ejecutar aplicaciones Java.
 
 ```bash
 # Instalar OpenJDK
@@ -378,7 +378,7 @@ curl -fsSL https://opencode.ai/install | bash
 
 ### nodejs y npm
 
-[Node.js](https://nodejs.org/) es un entorno de ejecución de JavaScript fuera del navegador. [npm](https://www.npmjs.com/) es el gestor de paquetes oficial de Node.js.
+[Node.js](https://wiki.archlinux.org/title/Node.js) es un entorno de ejecución de JavaScript fuera del navegador. [npm](https://www.npmjs.com/) es el gestor de paquetes oficial de Node.js.
 
 ```bash
 # Instalar nodejs y npm
@@ -435,7 +435,7 @@ sudo pacman --sync dosfstools
 
 ### flatpak
 
-[Flatpak](https://flatpak.org/) es un framework de sandboxing y distribución de aplicaciones Linux. Permite instalar aplicaciones aisladas del sistema con sus dependencias incluidas.
+[Flatpak](https://wiki.archlinux.org/title/Flatpak) es un framework de sandboxing y distribución de aplicaciones Linux. Permite instalar aplicaciones aisladas del sistema con sus dependencias incluidas.
 
 ```bash
 # Instalar flatpak
@@ -448,7 +448,7 @@ sudo pacman --sync flatpak
 
 ### fuse2
 
-[FUSE 2](https://github.com/libfuse/libfuse) es necesario para ejecutar **AppImage**, que cargan `libfuse.so.2` en tiempo de ejecución. Arch solo instala `fuse3`, cuya biblioteca (`libfuse3.so.4`) no es compatible, así que sin este paquete los AppImage fallan al arrancar.
+[FUSE 2](https://github.com/libfuse/libfuse) (Filesystem in Userspace, versión 2) es una interfaz del kernel que permite implementar y montar sistemas de archivos desde el espacio de usuario mediante la biblioteca `libfuse.so.2`. Es necesario para ejecutar **AppImage**, que cargan esa biblioteca en tiempo de ejecución para montar su contenido. Arch solo instala `fuse3`, cuya biblioteca (`libfuse3.so.4`) no es compatible, así que sin este paquete los AppImage fallan al arrancar.
 
 ```bash
 # Instalar FUSE 2 (convive con fuse3)
@@ -457,7 +457,7 @@ sudo pacman --sync fuse2
 
 | Paquete | Propósito |
 |---------|-----------|
-| `fuse2` | Proporciona `libfuse.so.2`, requerida por el runtime de los AppImage |
+| `fuse2` | Interfaz FUSE v2 (`libfuse.so.2`) para montar sistemas de archivos en espacio de usuario, requerida por el runtime de los AppImage |
 
 ### unzip
 
