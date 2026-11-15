@@ -474,7 +474,7 @@ sudo pacman --sync unzip
 
 ### 7zip
 
-[7-Zip](https://www.7-zip.org/) es un archivador de archivos con alta ratio de compresión. Se distribuye bajo la LGPL y soporta formatos como 7z, ZIP, RAR, TAR o GZ.
+[7-Zip](https://www.7-zip.org) es un archivador de archivos con alta ratio de compresión. Se distribuye bajo la LGPL y soporta formatos como 7z, ZIP, RAR, TAR o GZ.
 
 ```bash
 # Instalar 7zip
@@ -487,7 +487,7 @@ sudo pacman --sync 7zip
 
 ### mpv
 
-[mpv](https://mpv.io/) es un reproductor de vídeo minimalista y ligero, altamente configurable. Soporta una amplia variedad de formatos de vídeo y audio.
+[mpv](https://wiki.archlinux.org/title/Mpv) es un reproductor de vídeo minimalista y ligero, altamente configurable. Soporta una amplia variedad de formatos de vídeo y audio.
 
 ```bash
 # Instalar mpv
@@ -546,16 +546,16 @@ sudo mkfs.fat -F 32 /dev/sdX1
 
 ```bash
 # Montar el pendrive
-sudo mount /dev/sdX1 /mnt
+sudo mount /dev/sdX1 /mnt/usb
 
 # Copiar directorios BIOS, EC y EFI a la raíz del pendrive
-sudo cp --recursive BIOS EC EFI /mnt/
+sudo cp --recursive BIOS EC EFI /mnt/usb
 
 # Sincronizar datos pendientes
 sudo sync
 
 # Desmontar el pendrive
-sudo umount /mnt
+sudo umount /mnt/usb
 ```
 
 #### Flashear la BIOS
@@ -620,7 +620,7 @@ sudo reboot
 
 ### VirtualBox
 
-[VirtualBox](https://www.virtualbox.org/) es un hypervisor que permite ejecutar sistemas operativos en un entorno especial, llamado máquina virtual, sobre el sistema operativo existente. Está en constante desarrollo e incluye una interfaz gráfica Qt, así como herramientas de línea de comandos headless y SDL para gestionar y ejecutar máquinas virtuales.
+[VirtualBox](https://wiki.archlinux.org/title/VirtualBox) es un hypervisor que permite ejecutar sistemas operativos en un entorno especial, llamado máquina virtual, sobre el sistema operativo existente. Está en constante desarrollo e incluye una interfaz gráfica Qt, así como herramientas de línea de comandos headless y SDL para gestionar y ejecutar máquinas virtuales.
 
 Para integrar funciones del sistema anfitrión en los invitados (carpetas compartidas, portapapeles, aceleración de vídeo y modo de integración de ventanas), se proporcionan las VirtualBox Guest Additions para algunos sistemas operativos invitados.
 
@@ -855,7 +855,7 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 
 ### openssh
 
-[OpenSSH](https://www.openssh.com/portable.html) es una implementación del protocolo SSH para acceso remoto, ejecución de comandos y transferencia de archivos de forma segura.
+[OpenSSH](https://wiki.archlinux.org/title/OpenSSH) es una implementación del protocolo SSH para acceso remoto, ejecución de comandos y transferencia de archivos de forma segura.
 
 ```bash
 # Instalar openssh
@@ -879,7 +879,7 @@ ssh-add ~/.ssh/id_ed25519
 
 ### nmap
 
-[nmap](https://nmap.org/) es un escáner de red que permite descubrir hosts, puertos y servicios activos, así como detectar versiones y sistemas operativos. Es útil para auditar la seguridad de una red local.
+[nmap](https://wiki.archlinux.org/title/Nmap) es un escáner de red que permite descubrir hosts, puertos y servicios activos, así como detectar versiones y sistemas operativos. Es útil para auditar la seguridad de una red local.
 
 ```bash
 # Instalar nmap
@@ -892,7 +892,7 @@ sudo pacman --sync nmap
 
 ### nftables
 
-[nftables](https://wiki.nftables.org/) es el firewall moderno del kernel Linux. Reemplaza a iptables y a ufw.
+[nftables](https://wiki.archlinux.org/title/Nftables) es el firewall moderno del kernel Linux. Reemplaza a iptables y a ufw.
 
 ```bash
 # Instalar nftables
