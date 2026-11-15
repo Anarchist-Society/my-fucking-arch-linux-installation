@@ -1017,9 +1017,9 @@ En [account.protonvpn.com](https://account.protonvpn.com/downloads) → **Downlo
 | **Servidor** | El recomendado o uno concreto de la lista |
 
 - **Nombre**: será el nombre del fichero y de la interfaz. Debe ser corto (máximo 15 caracteres) y sin guiones.
-- **Plataforma**: **GNU/Linux** es la que corresponde a `wg-quick`
+- **Plataforma**: **GNU/Linux** es la que corresponde a `wg-quick`.
 - **NAT-PMP**: solo abre puertos para hostear servicios o sembrar torrents, y no está disponible en el plan gratuito.
-- **VPN Accelerator**: mejora la velocidad; es opcional.
+- **VPN Accelerator**: mejora la velocidad.
 - **Servidor**: con plan gratuito solo aparecen servidores gratuitos.
 
 Pulsa **Crear**, espera unos segundos y pulsa **Descargar**.
@@ -1028,7 +1028,7 @@ Guárdalo en `/etc/wireguard/` con permisos restringidos. El nombre del fichero 
 
 ```bash
 # Copiar la configuración descargada con permisos de root
-sudo install --mode 600 --owner root --group root ~/Descargas/proton.conf /etc/wireguard/proton.conf
+sudo install --mode 600 --owner root --group root ~/Downloads/proton.conf /etc/wireguard/proton.conf
 ```
 
 > Si el fichero se ha descargado con otro nombre (por ejemplo `EVO.conf`), cámbialo en el comando: el destino debe seguir siendo `proton.conf`, que es el nombre que usan todos los comandos siguientes.
