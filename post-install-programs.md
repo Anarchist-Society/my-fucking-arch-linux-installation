@@ -1008,8 +1008,21 @@ sudo pacman --sync wireguard-tools systemd-resolvconf
 
 En [account.protonvpn.com](https://account.protonvpn.com/downloads) → **Downloads** → **WireGuard configuration**:
 
-1. Elige un nombre para la configuración, plataforma **GNU/Linux** y el servidor.
-2. Pulsa **Create** y descarga el fichero `.conf`.
+| Campo | Valor |
+|-------|-------|
+| **Nombre** | `proton` |
+| **Plataforma** | GNU/Linux |
+| **NAT-PMP (Port Forwarding)** | Desactivado |
+| **VPN Accelerator** | Activado |
+| **Servidor** | El recomendado o uno concreto de la lista |
+
+- **Nombre**: será el nombre del fichero y de la interfaz. Debe ser corto (máximo 15 caracteres) y sin guiones.
+- **Plataforma**: **GNU/Linux** es la que corresponde a `wg-quick`; "Enrutador" es para routers.
+- **NAT-PMP**: solo abre puertos para hostear servicios o sembrar torrents, y no está disponible en el plan gratuito.
+- **VPN Accelerator**: mejora la velocidad; es opcional.
+- **Servidor**: con plan gratuito solo aparecen servidores gratuitos.
+
+Pulsa **Crear**, espera unos segundos y pulsa **Descargar**.
 
 Guárdalo en `/etc/wireguard/` con permisos restringidos. El nombre del fichero será el nombre de la interfaz, así que conviene que sea corto (máximo 15 caracteres) y sin guiones; `proton.conf` vale:
 
@@ -1017,6 +1030,8 @@ Guárdalo en `/etc/wireguard/` con permisos restringidos. El nombre del fichero 
 # Copiar la configuración descargada con permisos de root
 sudo install --mode 600 --owner root --group root ~/Descargas/proton.conf /etc/wireguard/proton.conf
 ```
+
+> Si el fichero se ha descargado con otro nombre (por ejemplo `EVO.conf`), cámbialo en el comando: el destino debe seguir siendo `proton.conf`, que es el nombre que usan todos los comandos siguientes.
 
 > El contenido real lo genera el proveedor. No copies claves privadas reales al repositorio.
 
