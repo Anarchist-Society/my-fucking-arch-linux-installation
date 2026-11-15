@@ -1031,10 +1031,6 @@ Guárdalo en `/etc/wireguard/` con permisos restringidos. El nombre del fichero 
 sudo install --mode 600 --owner root --group root ~/Downloads/proton.conf /etc/wireguard/proton.conf
 ```
 
-> Si el fichero se ha descargado con otro nombre (por ejemplo `EVO.conf`), cámbialo en el comando: el destino debe seguir siendo `proton.conf`, que es el nombre que usan todos los comandos siguientes.
-
-> El contenido real lo genera el proveedor. No copies claves privadas reales al repositorio.
-
 El fichero tiene esta forma:
 
 ```ini
