@@ -1077,9 +1077,3 @@ sudo systemctl enable --now wg-quick@proton.service
 | `wg-quick down proton` | Cierra el túnel y elimina la interfaz |
 | `wg show` | Muestra el estado del túnel y el tráfico |
 | `wg-quick@proton.service` | Levanta el túnel al arrancar |
-
-#### Notas
-
-- **DNS**: `wg-quick` aplica la línea `DNS =` a través de `resolvconf`. Con `systemd-resolved`, `/etc/resolv.conf` debe apuntar al stub (ver [DNS con systemd-resolved](#dns-con-systemd-resolved)).
-- **Túnel completo**: `AllowedIPs = 0.0.0.0/0, ::/0` envía todo el tráfico por la VPN. Para hacer *split tunneling*, deja en `AllowedIPs` solo las redes que deban ir por el túnel y el resto saldrá por tu conexión.
-- **IPv6**: si la red no tiene IPv6, elimina `::/0` de `AllowedIPs` para evitar cortes.
