@@ -47,6 +47,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [openssh](#openssh)
   - [nmap](#nmap)
   - [nftables](#nftables)
+- [VPN](#vpn)
   - [wireguard](#wireguard)
 
 ---
@@ -985,9 +986,13 @@ sudo nft list ruleset
 sudo systemctl disable --now nftables.service
 ```
 
+## VPN
+
+[Proton VPN](https://protonvpn.com/) es el proveedor de VPN que uso. La configuración es manual con **WireGuard**, porque la app oficial de Proton exige NetworkManager y este equipo usa `iwd + systemd-networkd`. OpenVPN queda fuera: Proton lo está retirando y recomienda WireGuard para configuración manual.
+
 ### wireguard
 
-[WireGuard](https://www.wireguard.com/) es un protocolo VPN moderno, rápido y ligero. Se configura con un fichero `.conf` que proporciona el proveedor.
+[WireGuard](https://wiki.archlinux.org/title/WireGuard) es un protocolo VPN moderno, rápido y ligero. Se integra en el kernel y se configura con un fichero `.conf` que proporciona el proveedor.
 
 ```bash
 # Instalar cliente y soporte de DNS para systemd-resolved
@@ -999,12 +1004,23 @@ sudo pacman --sync wireguard-tools systemd-resolvconf
 | `wireguard-tools` | Cliente WireGuard (`wg`, `wg-quick`) |
 | `systemd-resolvconf` | Aplica la línea `DNS =` mediante `systemd-resolved` |
 
-Guarda el fichero del proveedor en `/etc/wireguard/`:
+#### Descargar la configuración
+
+En [account.protonvpn.com](https://account.protonvpn.com/downloads) → **Downloads** → **WireGuard configuration**:
+
+1. Elige un nombre para la configuración, plataforma **GNU/Linux** y el servidor.
+2. Pulsa **Create** y descarga el fichero `.conf`.
+
+Guárdalo en `/etc/wireguard/` con permisos restringidos. El nombre del fichero será el nombre de la interfaz, así que conviene que sea corto (máximo 15 caracteres) y sin guiones; `proton.conf` vale:
 
 ```bash
-sudo install -m 600 /dev/null /etc/wireguard/proton.conf
-sudo vim /etc/wireguard/proton.conf
+# Copiar la configuración descargada con permisos de root
+sudo install --mode 600 --owner root --group root ~/Descargas/proton.conf /etc/wireguard/proton.conf
 ```
+
+> El contenido real lo genera el proveedor. No copies claves privadas reales al repositorio.
+
+El fichero tiene esta forma:
 
 ```ini
 # /etc/wireguard/proton.conf
@@ -1020,19 +1036,39 @@ Endpoint = <IP_O_DOMINIO>:51820
 PersistentKeepalive = 25
 ```
 
+#### Conectar
+
 ```bash
-# Conectar
+# Levantar el túnel
 sudo wg-quick up proton
 
-# Ver estado e IP pública
+# Ver el estado del túnel
 sudo wg show
+
+# Comprobar que el DNS usa Proton
+resolvectl status
+
+# Comprobar la IP pública (debe ser la de Proton)
 curl --silent https://ifconfig.me; echo
-
-# Desconectar
-sudo wg-quick down proton
-
-# Conectar al inicio
-sudo systemctl enable --now wg-quick@proton
 ```
 
-> El contenido real lo genera el proveedor. No copies claves privadas reales al repositorio.
+```bash
+# Cerrar el túnel
+sudo wg-quick down proton
+
+# Levantarlo al arrancar
+sudo systemctl enable --now wg-quick@proton.service
+```
+
+| Comando | Propósito |
+|---------|-----------|
+| `wg-quick up proton` | Crea la interfaz y levanta el túnel |
+| `wg-quick down proton` | Cierra el túnel y elimina la interfaz |
+| `wg show` | Muestra el estado del túnel y el tráfico |
+| `wg-quick@proton.service` | Levanta el túnel al arrancar |
+
+#### Notas
+
+- **DNS**: `wg-quick` aplica la línea `DNS =` a través de `resolvconf`. Con `systemd-resolved`, `/etc/resolv.conf` debe apuntar al stub (ver [DNS con systemd-resolved](#dns-con-systemd-resolved)).
+- **Túnel completo**: `AllowedIPs = 0.0.0.0/0, ::/0` envía todo el tráfico por la VPN. Para hacer *split tunneling*, deja en `AllowedIPs` solo las redes que deban ir por el túnel y el resto saldrá por tu conexión.
+- **IPv6**: si la red no tiene IPv6, elimina `::/0` de `AllowedIPs` para evitar cortes.
