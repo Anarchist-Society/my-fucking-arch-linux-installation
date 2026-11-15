@@ -1017,7 +1017,7 @@ En [account.protonvpn.com](https://account.protonvpn.com/downloads) → **Downlo
 | **Servidor** | El recomendado o uno concreto de la lista |
 
 - **Nombre**: será el nombre del fichero y de la interfaz. Debe ser corto (máximo 15 caracteres) y sin guiones.
-- **Plataforma**: **GNU/Linux** es la que corresponde a `wg-quick`; "Enrutador" es para routers.
+- **Plataforma**: **GNU/Linux** es la que corresponde a `wg-quick`
 - **NAT-PMP**: solo abre puertos para hostear servicios o sembrar torrents, y no está disponible en el plan gratuito.
 - **VPN Accelerator**: mejora la velocidad; es opcional.
 - **Servidor**: con plan gratuito solo aparecen servidores gratuitos.
