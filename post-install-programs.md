@@ -792,7 +792,6 @@ Ajustes recomendados en `Ajustes de juego → Gráficos`.
 | Salto automático de fotogramas | Deshabilitado | Solo para hardware muy limitado |
 | Velocidad alternativa | Ilimitado (0) | Adelanta al máximo mientras se mantiene el atajo de avance rápido |
 | Velocidad alternativa 2 | Deshabilitado | Segunda velocidad opcional. No se usa |
-| Velocidad alternativa analógica | 400 % | Velocidad máxima del atajo analógico. Escala con el recorrido del gatillo |
 
 > A velocidades distintas del 100 % el audio puede crujir. Se suaviza con `Playback mode` en **Smooth** (`Settings → Audio`). El avance rápido ilimitado sube consumo y temperatura. Si molesta, usar 400 %.
 
@@ -819,8 +818,6 @@ Ajustes recomendados en `Ajustes de juego → Gráficos`.
 | Transformación por hardware | Activado | Desactivarlo siempre es más lento |
 | "Skinning" por software | Activado | Combina draw calls y suele rendir mejor |
 | Teselación de hardware | Deshabilitado | Solo útil en juegos con muchas curvas. Puede causar artefactos |
-
-`Settings → Graphics → Overlay information` muestra los fps. A 5x la 780M mantiene los 60 fps. Para localizar el cuello de botella se puede usar `radeontop` en otra terminal.
 
 #### Escalado de texturas
 
