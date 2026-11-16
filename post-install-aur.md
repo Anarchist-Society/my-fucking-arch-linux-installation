@@ -389,24 +389,22 @@ pcsx2-qt --version
 
 ### BIOS
 
-PCSX2 no incluye la BIOS de la PS2 y no existe una BIOS libre que la sustituya. Hay que volcar la de una consola propia con FreeMcBoot/Fortuna y `biosdrain`, o con otro método equivalente. Descargar una BIOS de terceros es ilegal y no está soportado.
+PCSX2 no incluye la BIOS de la PS2. Copia el archivo de BIOS en `~/.config/PCSX2/bios` antes de abrir el emulador.
 
 ```bash
 # Crear la carpeta de BIOS
 mkdir --parents ~/.config/PCSX2/bios
 ```
 
-| Ruta | Propósito |
-|------|-----------|
-| `~/.config/PCSX2/bios` | Carpeta de búsqueda de BIOS por defecto |
-
-Copia allí los ficheros del volcado (`*.rom0`, `*.rom1`, `*.nvm`, etc.), sin subcarpetas. Luego abre `Settings → BIOS`, comprueba que `BIOS Directory` apunta a esa ruta y selecciona la imagen en `BIOS Selection`.
+Copia allí el archivo de BIOS (`.bin` o `.rom0`), sin subcarpetas. Luego abre `Settings → BIOS`, comprueba que `BIOS Directory` apunta a `~/.config/PCSX2/bios` y selecciona la imagen en `BIOS Selection`.
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | `BIOS Directory` | `~/.config/PCSX2/bios` | Ruta por defecto de PCSX2 |
 | `Fast Boot` | Activado | Salta la animación de arranque de la consola |
 | `Fast Forward Boot` | Desactivado | Solo acelera el arranque de la BIOS. No afecta al juego |
+
+> El archivo que se selecciona es el `.bin` o el `.rom0` de 4 MiB. Los `.diff`, `.rom1`, `.rom2`, `.erom` y `.nvm` son complementos.
 
 > Si la BIOS no aparece en la lista, pulsa `Refresh List` o revisa que los ficheros estén directamente en la carpeta. `Fast Boot` es un parche de la BIOS: si un juego necesita el arranque completo, usa `System → Start BIOS` o desactívalo puntualmente.
 
