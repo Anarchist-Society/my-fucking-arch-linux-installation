@@ -389,7 +389,7 @@ pcsx2-qt --version
 
 > El paquete compila PCSX2 y sus dependencias (Qt, ffmpeg, `rapidyaml`, etc.). En el 8845HS tarda entre 10 y 30 minutos. No interrumpas `paru` a mitad de la compilación.
 
-> PCSX2 solo da soporte oficial a sus builds de AppImage y Flatpak; el paquete de AUR es un build de terceros. Si una actualización rompe la compilación, usa el AppImage estable de [pcsx2.net](https://pcsx2.net/downloads/) como alternativa.
+> PCSX2 solo da soporte oficial a sus builds de AppImage y Flatpak. El paquete de AUR es un build de terceros. Si una actualización rompe la compilación, usa el AppImage estable de [pcsx2.net](https://pcsx2.net/downloads/) como alternativa.
 
 > `pcsx2-latest-bin` es una nightly empaquetada como AppImage. Entra en conflicto con `pcsx2`, puede tener regresiones y no se recomienda como instalación principal. No instales los dos a la vez.
 
@@ -414,13 +414,13 @@ Copia allí los ficheros del volcado (`*.rom0`, `*.rom1`, `*.nvm`, etc.), sin su
 |--------|-------|--------|
 | `BIOS Directory` | `~/.config/PCSX2/bios` | Ruta por defecto de PCSX2 |
 | `Fast Boot` | Activado | Salta la animación de arranque de la consola |
-| `Fast Forward Boot` | Desactivado | Solo acelera el arranque de la BIOS; no afecta al juego |
+| `Fast Forward Boot` | Desactivado | Solo acelera el arranque de la BIOS. No afecta al juego |
 
 > Si la BIOS no aparece en la lista, pulsa `Refresh List` o revisa que los ficheros estén directamente en la carpeta. `Fast Boot` es un parche de la BIOS: si un juego necesita el arranque completo, usa `System → Start BIOS` o desactívalo puntualmente.
 
 ### ISO del juego
 
-PCSX2 no incluye juegos. Hay que volcar los discos propios a ISO o BIN/CUE; distribuir ISOs de terceros es ilegal.
+PCSX2 no incluye juegos. Hay que volcar los discos propios a ISO o BIN/CUE. Distribuir ISOs de terceros es ilegal.
 
 ```bash
 # Crear la carpeta para las ISOs
@@ -431,10 +431,10 @@ Añade la carpeta en `Settings → Game List` → `Search Directories` → `Add.
 
 | Formato | Nota |
 |---------|------|
-| ISO | El más directo; una imagen por disco |
+| ISO | El más directo: una imagen por disco |
 | BIN/CUE | Necesario para juegos en CD con varias pistas |
-| CHD | Comprimido; PCSX2 lo lee directamente |
-| CSO/ZSO | Comprimido; útil para juegos pequeños o en CD |
+| CHD | Comprimido. PCSX2 lo lee directamente |
+| CSO/ZSO | Comprimido. Útil para juegos pequeños o en CD |
 
 > Para comprimir a CHD hace falta `chdman` (paquete `mame-tools`): `chdman createdvd -i juego.iso -o juego.chd` para DVDs y `chdman createcd -i juego.iso -o juego.chd` para CDs. Conserva la ISO original hasta comprobar que el CHD arranca.
 
@@ -461,11 +461,11 @@ Ajustes recomendados en `Settings → Graphics`. El orden sigue las pestañas de
 | `Aspect Ratio` | `Auto Standard (4:3 Interlaced / 3:2 Progressive)` | Respeta la relación original y los parches 16:9 |
 | `FMV Aspect Ratio Override` | `Off (Default)` | Mantiene las FMV con la misma relación que el juego |
 | `Deinterlacing` | `Automatic (Default)` | Desentrelaza correctamente la mayoría de títulos |
-| `Bilinear Filtering` | `Bilinear (Smooth)` | Suaviza la imagen ya escalada; `Bilinear (Sharp)` para 2D |
-| `Integer Scaling` | Desactivado | Solo útil en 2D; añade bordes y reduce el tamaño de la imagen |
-| `Apply Widescreen Patches` | Activado | Aprovecha el panel 16:10; desactivar por juego si deforma el HUD o las FMV |
-| `Apply No-Interlacing Patches` | Desactivado | El desentrelazado automático ya funciona; activar por juego si se ve entrelazado |
-| `Anti-Blur` | Activado | Reduce el desenfoque interno; es un hack, pero mejora la nitidez |
+| `Bilinear Filtering` | `Bilinear (Smooth)` | Suaviza la imagen ya escalada. `Bilinear (Sharp)` para 2D |
+| `Integer Scaling` | Desactivado | Solo útil en 2D. Añade bordes y reduce el tamaño de la imagen |
+| `Apply Widescreen Patches` | Activado | Aprovecha el panel 16:10. Desactivar por juego si deforma el HUD o las FMV |
+| `Apply No-Interlacing Patches` | Desactivado | El desentrelazado automático ya funciona. Activar por juego si se ve entrelazado |
+| `Anti-Blur` | Activado | Reduce el desenfoque interno. Es un hack, pero mejora la nitidez |
 
 > `Apply Widescreen Patches` y `Apply No-Interlacing Patches` son parches por juego, no magia universal. Si un título se ve raro, desactívalos en sus propiedades antes de tocar el resto.
 
@@ -475,16 +475,16 @@ Ajustes recomendados en `Settings → Graphics`. El orden sigue las pestañas de
 |--------|-------|--------|
 | `Renderer` | `Vulkan` | Mejor rendimiento y compatibilidad en RDNA3 |
 | `Adapter` | `AMD Radeon 780M` | GPU integrada del 8845HS |
-| `Internal Resolution` | `4x Native (~1440px/QHD)` | En NTSC renderiza 2560×1792, casi nativo para el panel de 2560×1600. Bajar a 3x en juegos pesados; 5x en ligeros |
-| `Texture Filtering` | `Bilinear (PS2)` | Respeta el filtrado original; `Bilinear (Forced)` para un look más limpio |
+| `Internal Resolution` | `4x Native (~1440px/QHD)` | En NTSC renderiza 2560×1792, casi nativo para el panel de 2560×1600. Bajar a 3x en juegos pesados, 5x en ligeros |
+| `Texture Filtering` | `Bilinear (PS2)` | Respeta el filtrado original. `Bilinear (Forced)` para un look más limpio |
 | `Trilinear Filtering` | `Automatic (Default)` | Corrige el blur en superficies inclinadas |
 | `Anisotropic Filtering` | `16x` | Nitidez en superficies en ángulo, sin coste apreciable |
 | `Dithering` | `Unscaled (Default)` | Mantiene el dithering original sin ampliar los puntos al escalar |
-| `Blending Accuracy` | `Basic (Recommended)` | Equilibrio precisión/rendimiento en la 780M; subir solo si hay artefactos |
+| `Blending Accuracy` | `Basic (Recommended)` | Equilibrio precisión/rendimiento en la 780M. Subir solo si hay artefactos |
 | `Mipmapping` | Activado | Algunos juegos lo necesitan para renderizar bien |
-| `Accurate Alpha Test` | Desactivado | Solo si hay transparencias rotas; cuesta rendimiento |
+| `Accurate Alpha Test` | Desactivado | Solo si hay transparencias rotas. Cuesta rendimiento |
 | `AA1` | Desactivado | Antialiasing de PS2 muy caro y útil solo en unos pocos juegos |
-| `Rasterizer Ordered View` | Desactivado | Solo para juegos con feedback loops; no es necesario por defecto |
+| `Rasterizer Ordered View` | Desactivado | Solo para juegos con feedback loops. No es necesario por defecto |
 
 > Si un juego no mantiene los 60 fps, baja `Internal Resolution` a `3x Native (~1080px/FHD)` antes de tocar los hacks. La diferencia en 16 pulgadas es pequeña.
 
@@ -503,17 +503,17 @@ Ajustes recomendados en `Settings → Graphics`. El orden sigue las pestañas de
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | `Normal Speed` | `100%` | Velocidad real de la consola |
-| `Fast-Forward Speed` | `200%` | Avance rápido sin disparar CPU/temperatura; `Unlimited` si lo prefieres |
+| `Fast-Forward Speed` | `200%` | Avance rápido sin disparar CPU/temperatura. `Unlimited` si lo prefieres |
 | `Slow-Motion Speed` | `50%` | Solo se usa con el atajo de cámara lenta |
-| `EE Cycle Rate` | `100% (Normal Speed)` | Sin underclock ni overclock; la 780M no lo necesita |
+| `EE Cycle Rate` | `100% (Normal Speed)` | Sin underclock ni overclock. La 780M no lo necesita |
 | `EE Cycle Skipping` | `Disabled` | Solo ayuda a juegos concretos y suele perjudicar |
-| `Enable Multithreaded VU1 (MTVU)` | Activado | Aprovecha los 16 hilos; unos pocos juegos cuelgan, desactivar por juego |
-| `Enable CDVD Precaching` | Desactivado | Carga la ISO en RAM; no aporta en NVMe y retrasa el arranque |
-| `Enable Thread Pinning` | Desactivado | Solo para CPU con núcleos P/E; el 8845HS es homogéneo |
+| `Enable Multithreaded VU1 (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan, desactivar por juego |
+| `Enable CDVD Precaching` | Desactivado | Carga la ISO en RAM. No aporta en NVMe y retrasa el arranque |
+| `Enable Thread Pinning` | Desactivado | Solo para CPU con núcleos P/E. El 8845HS es homogéneo |
 | `Vertical Sync (VSync)` | Activado | Frame pacing estable a 60 fps en un panel de 120 Hz |
-| `Sync to Host Refresh Rate` | Desactivado | Recomendado para VRR; no fuerces la velocidad del juego |
-| `Use Host VSync Timing` | Desactivado | Solo se usa con `Sync to Host`; añade latencia |
-| `Optimal Frame Pacing` | Desactivado | Reduce latencia a costa de más CPU/GPU; activar solo si sobra potencia |
+| `Sync to Host Refresh Rate` | Desactivado | Recomendado para VRR. No fuerces la velocidad del juego |
+| `Use Host VSync Timing` | Desactivado | Solo se usa con `Sync to Host`. Añade latencia |
+| `Optimal Frame Pacing` | Desactivado | Reduce latencia a costa de más CPU/GPU. Activar solo si sobra potencia |
 | `Maximum Frame Latency` | `2 frames` | Equilibrio latencia/suavidad. Bajar a 1 en juegos de ritmo |
 | `Skip Presenting Duplicate Frames` | Activado | Suaviza juegos de 30 fps |
 
@@ -527,18 +527,18 @@ Ajustes recomendados en `Settings → Graphics`. El orden sigue las pestañas de
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Backend` | `Cubeb` | Menor latencia; `SDL` si hay problemas con el dispositivo |
+| `Backend` | `Cubeb` | Menor latencia. `SDL` si hay problemas con el dispositivo |
 | `Output Device` | Predeterminado del sistema | Evita perder el audio al cambiar de salida |
-| `Expansion` | `Disabled (Stereo)` | Los juegos de PS2 son estéreo; el surround solo para Pro Logic II |
+| `Expansion` | `Disabled (Stereo)` | Los juegos de PS2 son estéreo. El surround solo para Pro Logic II |
 | `Synchronization` | `TimeStretch (Recommended)` | Suaviza el audio al 100% y en avance rápido |
 | `Buffer Size` | `50 ms` | Equilibrio latencia/estabilidad |
 | `Output Latency` | `20 ms` | Latencia hasta la salida |
 
-> Si el audio cruje, sube `Buffer Size` a 75–100 ms. Si usas auriculares y quieres menos latencia, bájalo a 30–40 ms; por debajo puede aparecer crackling.
+> Si el audio cruje, sube `Buffer Size` a 75–100 ms. Si usas auriculares y quieres menos latencia, bájalo a 30–40 ms. Por debajo puede aparecer crackling.
 
 ### Mandos
 
-`Settings → Controllers`. En `Controller Port 1` selecciona `DualShock 2` y asigna los botones, o pulsa `Automatic Mapping` con el mando conectado. Para DualShock 4/DualSense, deja `Enable SDL Input Source` activado en `Global Settings`; SDL gestiona vibración y LED en Bluetooth.
+`Settings → Controllers`. En `Controller Port 1` selecciona `DualShock 2` y asigna los botones, o pulsa `Automatic Mapping` con el mando conectado. Para DualShock 4/DualSense, deja `Enable SDL Input Source` activado en `Global Settings`. SDL gestiona vibración y LED en Bluetooth.
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
@@ -555,13 +555,13 @@ Ajustes recomendados en `Settings → Graphics`. El orden sigue las pestañas de
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Slot 1` | Activado, tarjeta de tipo `Folder` | Guarda en el sistema de archivos; más fácil de respaldar |
+| `Slot 1` | Activado, tarjeta de tipo `Folder` | Guarda en el sistema de archivos. Más fácil de respaldar |
 | `Slot 2` | Desactivado | La mayoría de juegos solo usan el slot 1 |
 | `Folder` | `~/.config/PCSX2/memcards` | Ruta por defecto de las memory cards |
 
 > Algunos juegos no son compatibles con las tarjetas de tipo `Folder`. Si un juego no guarda o no detecta la tarjeta, crea una tarjeta de 8 MB (`8 MB [Most Compatible]`) y úsala en ese juego.
 
-> Los save states (`System → Save State` / `Load State`) no sustituyen al guardado de la memory card. Un save state puede dejar de cargar tras actualizar PCSX2; guarda también desde el juego.
+> Los save states (`System → Save State` / `Load State`) no sustituyen al guardado de la memory card. Un save state puede dejar de cargar tras actualizar PCSX2. Guarda también desde el juego.
 
 > Para una copia de seguridad, cierra PCSX2 y copia `~/.config/PCSX2/memcards/` a otro disco.
 
@@ -571,8 +571,8 @@ PCSX2 incluye parches de widescreen y de no-interlacing para muchos juegos. Se a
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Apply Widescreen Patches` | Activado | Aprovecha el panel 16:10; desactivar si el HUD o las FMV se deforman |
-| `Apply No-Interlacing Patches` | Desactivado | El desentrelazado automático ya da buena imagen; activar por juego si aparece entrelazado |
+| `Apply Widescreen Patches` | Activado | Aprovecha el panel 16:10. Desactivar si el HUD o las FMV se deforman |
+| `Apply No-Interlacing Patches` | Desactivado | El desentrelazado automático ya da buena imagen. Activar por juego si aparece entrelazado |
 
 > Los parches son hacks: si un juego se ve peor, desactívalos en `Game Properties → Patches` antes de cambiar la configuración global. No mezcles parches de versiones distintas del juego.
 

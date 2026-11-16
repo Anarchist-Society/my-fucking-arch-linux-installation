@@ -1024,7 +1024,7 @@ En [account.protonvpn.com](https://account.protonvpn.com/downloads) → **Downlo
 
 Pulsa **Crear**, espera unos segundos y pulsa **Descargar**.
 
-Guárdalo en `/etc/wireguard/` con permisos restringidos. El nombre del fichero será el nombre de la interfaz, así que conviene que sea corto (máximo 15 caracteres) y sin guiones; `proton.conf` vale:
+Guárdalo en `/etc/wireguard/` con permisos restringidos. El nombre del fichero será el nombre de la interfaz, así que conviene que sea corto (máximo 15 caracteres) y sin guiones: `proton.conf` vale:
 
 ```bash
 # Copiar la configuración descargada con permisos de root
