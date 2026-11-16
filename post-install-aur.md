@@ -426,8 +426,6 @@ Añade la carpeta en `Sistema → Ajustes → Lista de juegos` → `Directorios 
 | CHD | Comprimido. PCSX2 lo lee directamente |
 | CSO/ZSO | Comprimido. Útil para juegos pequeños o en CD |
 
-> Para comprimir a CHD hace falta `chdman` (paquete `mame-tools`): `chdman createdvd -i juego.iso -o juego.chd` para DVDs y `chdman createcd -i juego.iso -o juego.chd` para CDs. Conserva la ISO original hasta comprobar que el CHD arranca.
-
 ### Primer arranque
 
 ```bash
