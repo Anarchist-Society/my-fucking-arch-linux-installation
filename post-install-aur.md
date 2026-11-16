@@ -387,14 +387,6 @@ pcsx2-qt --version
 |---------|-----------|
 | `pcsx2` | Emulador de PS2 con frontend Qt, renderizado Vulkan/OpenGL y soporte de parches |
 
-> El paquete compila PCSX2 y sus dependencias (Qt, ffmpeg, `rapidyaml`, etc.). En el 8845HS tarda entre 10 y 30 minutos. No interrumpas `paru` a mitad de la compilación.
-
-> PCSX2 solo da soporte oficial a sus builds de AppImage y Flatpak. El paquete de AUR es un build de terceros. Si una actualización rompe la compilación, usa el AppImage estable de [pcsx2.net](https://pcsx2.net/downloads/) como alternativa.
-
-> `pcsx2-latest-bin` es una nightly empaquetada como AppImage. Entra en conflicto con `pcsx2`, puede tener regresiones y no se recomienda como instalación principal. No instales los dos a la vez.
-
-PCSX2 es solo de 64 bits: no necesita `multilib` ni `lib32`. `mesa` y `vulkan-radeon` ya están instalados en la guía base.
-
 ### BIOS
 
 PCSX2 no incluye la BIOS de la PS2 y no existe una BIOS libre que la sustituya. Hay que volcar la de una consola propia con FreeMcBoot/Fortuna y `biosdrain`, o con otro método equivalente. Descargar una BIOS de terceros es ilegal y no está soportado.
