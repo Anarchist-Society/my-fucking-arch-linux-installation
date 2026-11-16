@@ -371,7 +371,7 @@ op NombreExactoDeUsuario
 
 ## PCSX2
 
-[PCSX2](https://pcsx2.net/) es un emulador de PlayStation 2 con frontend Qt y renderizado por hardware mediante Vulkan u OpenGL. Recompila la Emotion Engine y los VU con JIT, así que necesita una CPU de escritorio y una GPU compatible. No está en los repositorios oficiales de Arch: se instala desde AUR.
+[PCSX2](https://pcsx2.net/) es un emulador de PlayStation 2 con frontend Qt y renderizado por hardware mediante Vulkan u OpenGL. No está en los repositorios oficiales de Arch, se instala desde AUR.
 
 ### Instalar
 
