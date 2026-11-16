@@ -452,14 +452,6 @@ Para comprobar que la BIOS funciona, usa `Sistema → Iniciar BIOS`. Para cargar
 | `Velocidad normal` | `100%` | Velocidad real de la consola |
 | `Velocidad de avance rápido` | `200%` | Avance rápido sin disparar CPU/temperatura. `Ilimitada` si lo prefieres |
 | `Velocidad de cámara lenta` | `50%` | Solo se usa con el atajo de cámara lenta |
-| `Sincronización vertical (VSync)` | Activado | Ritmo estable a 60 fps en un panel de 120 Hz |
-| `Sincronizar con la frecuencia de actualización del anfitrión` | Desactivado | Recomendado para VRR. No fuerces la velocidad del juego |
-| `Usar temporización VSync del anfitrión` | Desactivado | Solo se usa con la sincronización al anfitrión. Añade latencia |
-| `Ritmo de fotogramas óptimo` | Desactivado | Reduce latencia a costa de más CPU/GPU. Activar solo si sobra potencia |
-| `Latencia máxima de fotogramas` | `2 fotogramas` | Equilibrio latencia/suavidad. Bajar a 1 en juegos de ritmo |
-| `Omitir presentación de fotogramas duplicados` | Activado | Suaviza juegos de 30 fps |
-
-> Con VRR en Hyprland, `Sincronizar con la frecuencia de actualización del anfitrión` debe estar desactivado. Si notas parpadeo o tirones, prueba a desactivar también `Sincronización vertical (VSync)` y deja que el panel sincronice.
 
 #### Ajustes del sistema
 
@@ -472,6 +464,19 @@ Para comprobar que la BIOS funciona, usa `Sistema → Iniciar BIOS`. Para cargar
 | `Habilitar precacheado de CDVD` | Desactivado | Carga la ISO en RAM. No aporta en NVMe y retrasa el arranque |
 | `Habilitar prefijado de subprocesos` | Desactivado | Solo para CPU con núcleos P/E. El 8845HS es homogéneo |
 | `Habilitar sistema de archivos del equipo` | Desactivado | Permite acceso al sistema de archivos del anfitrión. No es necesario para jugar |
+
+#### Ritmo de fotogramas/Control de latencia
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| `Latencia máxima de fotogramas` | `2 fotogramas` | Equilibrio latencia/suavidad. Bajar a 1 en juegos de ritmo |
+| `Ritmo de fotogramas óptimo` | Desactivado | Reduce latencia a costa de más CPU/GPU. Activar solo si sobra potencia |
+| `Sincronizar con frec. act. del equipo` | Desactivado | Recomendado para VRR. No fuerces la velocidad del juego |
+| `Sincronización vertical (VSync)` | Activado | Ritmo estable a 60 fps en un panel de 120 Hz |
+| `Usar sincronización del equipo para VSync` | Desactivado | Solo se usa con la sincronización al equipo. Añade latencia |
+| `Omitir fotogramas duplicados` | Desactivado | Puede suavizar juegos de 30 fps. Actívalo si notas tirones |
+
+> Con VRR en Hyprland, `Sincronizar con frec. act. del equipo` debe estar desactivado. Si notas parpadeo o tirones, prueba a desactivar también `Sincronización vertical (VSync)` y deja que el panel sincronice.
 
 > `Activar CDVD rápido` no está disponible globalmente: actívalo solo en los ajustes por juego si sus cargas son muy largas. Puede romper juegos.
 
