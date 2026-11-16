@@ -443,30 +443,36 @@ Para comprobar que la BIOS funciona, usa `System → Start BIOS`. Para cargar un
 
 ### Gráficos
 
-Ajustes recomendados en `Settings → Graphics`. El orden sigue las pestañas del emulador.
+Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las pestañas del emulador.
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| `API de gráficos` | `Vulkan` | Mejor rendimiento y compatibilidad en RDNA3 |
+| `Adaptador` | `AMD Radeon 780M` | GPU integrada del 8845HS |
 
 #### Display
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Fullscreen Mode` | `Borderless Fullscreen` | Hyprland activa VRR (`vrr = 1`) solo en fullscreen |
-| `Aspect Ratio` | `Auto Standard (4:3 Interlaced / 3:2 Progressive)` | Respeta la relación original y los parches 16:9 |
-| `FMV Aspect Ratio Override` | `Off (Default)` | Mantiene las FMV con la misma relación que el juego |
-| `Deinterlacing` | `Automatic (Default)` | Desentrelaza correctamente la mayoría de títulos |
-| `Bilinear Filtering` | `Bilinear (Smooth)` | Suaviza la imagen ya escalada. `Bilinear (Sharp)` para 2D |
-| `Integer Scaling` | Desactivado | Solo útil en 2D. Añade bordes y reduce el tamaño de la imagen |
-| `Apply Widescreen Patches` | Activado | Aprovecha el panel 16:10. Desactivar por juego si deforma el HUD o las FMV |
-| `Apply No-Interlacing Patches` | Desactivado | El desentrelazado automático ya funciona. Activar por juego si se ve entrelazado |
-| `Anti-Blur` | Activado | Reduce el desenfoque interno. Es un hack, pero mejora la nitidez |
+| `Modo a pantalla completa` | `Sin bordes` | Hyprland activa VRR (`vrr = 1`) solo en fullscreen |
+| `Relación de aspecto` | `Estándar automática (4:3/3:2 progresivo)` | Respeta la relación original y usa 16:9 con parches panorámicos |
+| `Relación de aspecto para videos FMV` | `No cambiar (predeterminado)` | Mantiene las FMV con la misma relación que el juego |
+| `Desentrelazado` | `Ajuste automático (predeterminado)` | Desentrelaza correctamente la mayoría de títulos |
+| `Filtrado bilineal` | `Bilinear (Suavizado)` | Suaviza la imagen ya escalada. `Bilinear (Realzado)` para 2D |
+| `Escalado por número enteros` | `Desactivado` | Solo útil en 2D. Añade bordes y reduce el tamaño de la imagen |
+| `Aplicar parches de imagen panorámica` | `Activado` | Aprovecha el panel 16:10. Desactivar por juego si deforma el HUD o las FMV |
+| `Aplicar parches para desactivar el entrelazado` | `Desactivado` | El desentrelazado automático ya funciona. Activar por juego si se ve entrelazado |
+| `Filtro antiborrosidad` | `Activado` | Reduce el desenfoque interno. Es un hack, pero mejora la nitidez |
+| `Compensación de imagen` | `Desactivado` | Solo para juegos con la imagen desplazada |
+| `Deshabilitar compensación de entrelazado` | `Desactivado` | Solo para casos concretos de imagen temblorosa o desplazada |
+| `Mostrar área de sobrebarrido` | `Desactivado` | Muestra bordes que normalmente quedan ocultos |
 
-> `Apply Widescreen Patches` y `Apply No-Interlacing Patches` son parches por juego, no magia universal. Si un título se ve raro, desactívalos en sus propiedades antes de tocar el resto.
+> `Aplicar parches de imagen panorámica` y `Aplicar parches para desactivar el entrelazado` son parches por juego. Si un título se ve raro, desactívalos en sus propiedades antes de tocar el resto.
 
 #### Rendering
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Renderer` | `Vulkan` | Mejor rendimiento y compatibilidad en RDNA3 |
-| `Adapter` | `AMD Radeon 780M` | GPU integrada del 8845HS |
 | `Internal Resolution` | `4x Native (~1440px/QHD)` | En NTSC renderiza 2560×1792, casi nativo para el panel de 2560×1600. Bajar a 3x en juegos pesados, 5x en ligeros |
 | `Texture Filtering` | `Bilinear (PS2)` | Respeta el filtrado original. `Bilinear (Forced)` para un look más limpio |
 | `Trilinear Filtering` | `Automatic (Default)` | Corrige el blur en superficies inclinadas |
