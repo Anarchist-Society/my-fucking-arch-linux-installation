@@ -441,6 +441,31 @@ En el primer arranque, el asistente pide idioma, BIOS y tarjeta de memoria. Si s
 
 Para comprobar que la BIOS funciona, usa `Sistema → Iniciar BIOS`. Para cargar un juego, selecciónalo en la lista o usa `Sistema → Iniciar archivo...`.
 
+### Emulación
+
+`Sistema → Ajustes → Emulación`.
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| `Velocidad normal` | `100%` | Velocidad real de la consola |
+| `Velocidad de avance rápido` | `200%` | Avance rápido sin disparar CPU/temperatura. `Ilimitada` si lo prefieres |
+| `Velocidad de cámara lenta` | `50%` | Solo se usa con el atajo de cámara lenta |
+| `Frecuencia de ciclo de la EE` | `100% (velocidad normal)` | Sin underclock ni overclock. La 780M no lo necesita |
+| `Salto de ciclo de la EE` | `Desactivado` | Solo ayuda a juegos concretos y suele perjudicar |
+| `Activar VU1 multihilo (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan, desactivar por juego |
+| `Activar precarga de CDVD` | Desactivado | Carga la ISO en RAM. No aporta en NVMe y retrasa el arranque |
+| `Activar fijación de hilos` | Desactivado | Solo para CPU con núcleos P/E. El 8845HS es homogéneo |
+| `Sincronización vertical (VSync)` | Activado | Ritmo estable a 60 fps en un panel de 120 Hz |
+| `Sincronizar con la frecuencia de actualización del anfitrión` | Desactivado | Recomendado para VRR. No fuerces la velocidad del juego |
+| `Usar temporización VSync del anfitrión` | Desactivado | Solo se usa con la sincronización al anfitrión. Añade latencia |
+| `Ritmo de fotogramas óptimo` | Desactivado | Reduce latencia a costa de más CPU/GPU. Activar solo si sobra potencia |
+| `Latencia máxima de fotogramas` | `2 fotogramas` | Equilibrio latencia/suavidad. Bajar a 1 en juegos de ritmo |
+| `Omitir presentación de fotogramas duplicados` | Activado | Suaviza juegos de 30 fps |
+
+> Con VRR en Hyprland, `Sincronizar con la frecuencia de actualización del anfitrión` debe estar desactivado. Si notas parpadeo o tirones, prueba a desactivar también `Sincronización vertical (VSync)` y deja que el panel sincronice.
+
+> `Activar CDVD rápido` no está disponible globalmente: actívalo solo en los ajustes por juego si sus cargas son muy largas. Puede romper juegos.
+
 ### Gráficos
 
 Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las pestañas del emulador.
@@ -486,38 +511,12 @@ Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las 
 
 > Si un juego no mantiene los 60 fps, baja `Resolución interna` a `3x nativa (~1080p/FHD)` antes de tocar los hacks. La diferencia en 16 pulgadas es pequeña.
 
-#### Avanzado
+#### Reemplazo de texturas
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Precarga de texturas` | `Completa (caché hash)` | Evita subidas redundantes de texturas |
-
-> `Modo de descarga de hardware` se oculta en los ajustes globales de las builds de release. Si un juego tiene efectos raros, cámbialo en sus ajustes por juego, no globalmente. El valor recomendado es `Preciso (recomendado)`.
-
-### Emulación y rendimiento
-
-`Sistema → Ajustes → Emulación`.
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Velocidad normal` | `100%` | Velocidad real de la consola |
-| `Velocidad de avance rápido` | `200%` | Avance rápido sin disparar CPU/temperatura. `Ilimitada` si lo prefieres |
-| `Velocidad de cámara lenta` | `50%` | Solo se usa con el atajo de cámara lenta |
-| `Frecuencia de ciclo de la EE` | `100% (velocidad normal)` | Sin underclock ni overclock. La 780M no lo necesita |
-| `Salto de ciclo de la EE` | `Desactivado` | Solo ayuda a juegos concretos y suele perjudicar |
-| `Activar VU1 multihilo (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan, desactivar por juego |
-| `Activar precarga de CDVD` | Desactivado | Carga la ISO en RAM. No aporta en NVMe y retrasa el arranque |
-| `Activar fijación de hilos` | Desactivado | Solo para CPU con núcleos P/E. El 8845HS es homogéneo |
-| `Sincronización vertical (VSync)` | Activado | Ritmo estable a 60 fps en un panel de 120 Hz |
-| `Sincronizar con la frecuencia de actualización del anfitrión` | Desactivado | Recomendado para VRR. No fuerces la velocidad del juego |
-| `Usar temporización VSync del anfitrión` | Desactivado | Solo se usa con la sincronización al anfitrión. Añade latencia |
-| `Ritmo de fotogramas óptimo` | Desactivado | Reduce latencia a costa de más CPU/GPU. Activar solo si sobra potencia |
-| `Latencia máxima de fotogramas` | `2 fotogramas` | Equilibrio latencia/suavidad. Bajar a 1 en juegos de ritmo |
-| `Omitir presentación de fotogramas duplicados` | Activado | Suaviza juegos de 30 fps |
-
-> Con VRR en Hyprland, `Sincronizar con la frecuencia de actualización del anfitrión` debe estar desactivado. Si notas parpadeo o tirones, prueba a desactivar también `Sincronización vertical (VSync)` y deja que el panel sincronice.
-
-> `Activar CDVD rápido` no está disponible globalmente: actívalo solo en los ajustes por juego si sus cargas son muy largas. Puede romper juegos.
+| `Cargar texturas` | Desactivado | Solo se activa si tienes un pack de texturas para un juego concreto |
+| `Volcar texturas` | Desactivado | Solo se activa si quieres extraer texturas para crear o revisar un pack |
 
 ### Audio
 
