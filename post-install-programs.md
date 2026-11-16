@@ -313,7 +313,7 @@ sudo pacman --sync hyprlauncher
 |---------|-----------|
 | `hyprlauncher` | Lanzador de aplicaciones oficial de Hyprland |
 
-En esta configuración, **SUPER + R** abre el lanzador. La calculadora y la búsqueda Unicode no se detectan solas: hay que escribir su prefijo como **primer carácter** de la búsqueda.
+En esta configuración, **SUPER + R** abre el lanzador. La calculadora y la búsqueda Unicode no se detectan solas, hay que escribir su prefijo como **primer carácter** de la búsqueda.
 
 | Prefijo | Finder | Ejemplo | Resultado |
 |---------|--------|---------|-----------|
@@ -759,7 +759,7 @@ mkdir --parents ~/Isos/psp
 
 #### Gráficos
 
-Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue la interfaz del emulador.
+Ajustes recomendados en `Ajustes de juego → Gráficos`.
 
 #### Modo de renderizado
 
@@ -771,7 +771,7 @@ Ajustes recomendados en `Settings → Graphics`. El orden de las secciones sigue
 | Antialiasing (MSAA) | Deshabilitar | Con x4–x5 ya hay supersampling. Usar 2x solo si se baja a x2–x3 |
 | Reemplazar texturas | Deshabilitado | Solo tiene sentido con un pack HD de la versión exacta |
 
-> Si no se mantienen los 60 fps, bajar la resolución de renderizado a PSP x4 o x3: en 16 pulgadas la diferencia es mínima.
+> Si no se mantienen los 60 fps, bajar la resolución de renderizado a PSP x4 o x3.
 
 #### Pantalla
 
