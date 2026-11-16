@@ -445,16 +445,13 @@ Para comprobar que la BIOS funciona, usa `Sistema → Iniciar BIOS`. Para cargar
 
 `Sistema → Ajustes → Emulación`.
 
+#### Control de velocidad
+
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | `Velocidad normal` | `100%` | Velocidad real de la consola |
 | `Velocidad de avance rápido` | `200%` | Avance rápido sin disparar CPU/temperatura. `Ilimitada` si lo prefieres |
 | `Velocidad de cámara lenta` | `50%` | Solo se usa con el atajo de cámara lenta |
-| `Frecuencia de ciclo de la EE` | `100% (velocidad normal)` | Sin underclock ni overclock. La 780M no lo necesita |
-| `Salto de ciclo de la EE` | `Desactivado` | Solo ayuda a juegos concretos y suele perjudicar |
-| `Activar VU1 multihilo (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan, desactivar por juego |
-| `Activar precarga de CDVD` | Desactivado | Carga la ISO en RAM. No aporta en NVMe y retrasa el arranque |
-| `Activar fijación de hilos` | Desactivado | Solo para CPU con núcleos P/E. El 8845HS es homogéneo |
 | `Sincronización vertical (VSync)` | Activado | Ritmo estable a 60 fps en un panel de 120 Hz |
 | `Sincronizar con la frecuencia de actualización del anfitrión` | Desactivado | Recomendado para VRR. No fuerces la velocidad del juego |
 | `Usar temporización VSync del anfitrión` | Desactivado | Solo se usa con la sincronización al anfitrión. Añade latencia |
@@ -463,6 +460,18 @@ Para comprobar que la BIOS funciona, usa `Sistema → Iniciar BIOS`. Para cargar
 | `Omitir presentación de fotogramas duplicados` | Activado | Suaviza juegos de 30 fps |
 
 > Con VRR en Hyprland, `Sincronizar con la frecuencia de actualización del anfitrión` debe estar desactivado. Si notas parpadeo o tirones, prueba a desactivar también `Sincronización vertical (VSync)` y deja que el panel sincronice.
+
+#### Ajustes del sistema
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| `Frecuencia de ciclo de la EE` | `100% (velocidad normal)` | Sin underclock ni overclock. La 780M no lo necesita |
+| `Omisión de ciclos del EE` | Desactivado | Solo ayuda a juegos concretos y suele perjudicar |
+| `Habilitar VU1 multihilo (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan, desactivar por juego |
+| `Habilitar trucos` | Desactivado | Solo si vas a usar trucos en un juego concreto |
+| `Habilitar precacheado de CDVD` | Desactivado | Carga la ISO en RAM. No aporta en NVMe y retrasa el arranque |
+| `Habilitar prefijado de subprocesos` | Desactivado | Solo para CPU con núcleos P/E. El 8845HS es homogéneo |
+| `Habilitar sistema de archivos del equipo` | Desactivado | Permite acceso al sistema de archivos del anfitrión. No es necesario para jugar |
 
 > `Activar CDVD rápido` no está disponible globalmente: actívalo solo en los ajustes por juego si sus cargas son muy largas. Puede romper juegos.
 
