@@ -439,6 +439,8 @@ pcsx2-qt
 
 En el primer arranque, el asistente pide idioma, BIOS y tarjeta de memoria. Si se cierra antes de terminar, esos mismos ajustes están en `Settings → BIOS` y `Settings → Memory Cards`.
 
+> En el asistente, desactiva `Enable Automatic Updates`. El paquete de AUR no usa el actualizador interno de PCSX2, que en Linux solo funciona en el AppImage oficial, así que no se conecta a pcsx2.net para buscar versiones. Las actualizaciones de PCSX2 llegan con `paru` al actualizar el sistema.
+
 Para comprobar que la BIOS funciona, usa `System → Start BIOS`. Para cargar un juego, selecciónalo en la lista o usa `System → Start File...`.
 
 ### Gráficos
