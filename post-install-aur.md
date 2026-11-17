@@ -526,7 +526,7 @@ Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las 
 
 ## RPCS3
 
-[RPCS3](https://rpcs3.net/) es un emulador de PlayStation 3 con frontend Qt y renderizado por hardware mediante Vulkan u OpenGL. No está en los repositorios oficiales de Arch, se instala desde AUR.
+[RPCS3](https://wiki.archlinux.org/title/RPCS3) es un emulador de PlayStation 3 con frontend Qt y renderizado por hardware mediante Vulkan u OpenGL. No está en los repositorios oficiales de Arch, se instala desde AUR.
 
 ### Instalar
 
@@ -538,6 +538,8 @@ paru --sync rpcs3-git
 | Paquete | Propósito |
 |---------|-----------|
 | `rpcs3-git` | Emulador de PS3 desde la rama de desarrollo, con frontend Qt y renderizado Vulkan/OpenGL |
+
+> Si `paru` pregunta por `qt6-multimedia-backend`, elige `1) qt6-multimedia-ffmpeg` (opción por omisión) y pulsa Enter. Para evitar el prompt, instala antes `sudo pacman -S --needed qt6-multimedia-ffmpeg`.
 
 ### Firmware
 
