@@ -9,6 +9,7 @@
 - [Minecraft (Java Edition)](#minecraft-java-edition)
 - [Servidor de Minecraft (Java Edition)](#servidor-de-minecraft-java-edition)
 - [PCSX2](#pcsx2)
+- [RPCS3](#rpcs3)
 
 ---
 
@@ -522,3 +523,46 @@ Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las 
 | `Vista ordenada del rasterizador` | Desactivado | Solo para juegos con bucles de retroalimentación. No es necesario por defecto |
 
 > Si un juego no mantiene los 60 fps, baja `Resolución interna` a `3x nativa (~1080p/FHD)` antes de tocar los hacks. La diferencia en 16 pulgadas es pequeña.
+
+## RPCS3
+
+[RPCS3](https://rpcs3.net/) es un emulador de PlayStation 3 con frontend Qt y renderizado por hardware mediante Vulkan u OpenGL. No está en los repositorios oficiales de Arch, se instala desde AUR.
+
+### Instalar
+
+```bash
+# Instalar RPCS3 desde AUR (compila desde fuente)
+paru --sync rpcs3-git
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `rpcs3-git` | Emulador de PS3 desde la rama de desarrollo, con frontend Qt y renderizado Vulkan/OpenGL |
+
+### Firmware
+
+RPCS3 no incluye el firmware de la PS3. Descarga `PS3UPDAT.PUP` desde la [web de Sony](https://www.playstation.com/en-us/support/hardware/ps3/system-software/) e instálalo en `File → Install Firmware`.
+
+Los datos del emulador (firmware descomprimido, partidas y trofeos) se crean en `~/.config/rpcs3`.
+
+> El firmware lo distribuye Sony; no hay que volcarlo de una consola.
+
+### Juegos
+
+RPCS3 no incluye juegos. Usa copias propias: carpetas de disco con `PS3_GAME`, paquetes `.pkg` instalables desde `File → Install .pkg` y licencias `.rap` para contenido de PSN. Añade la carpeta con tus juegos desde la lista de juegos del emulador.
+
+```bash
+# Ejemplo de carpeta para los volcados
+mkdir --parents ~/Juegos/ps3
+```
+
+> Distribuir copias de terceros es ilegal y Arch no las proporciona.
+
+### Primer arranque
+
+```bash
+# Abrir RPCS3
+rpcs3
+```
+
+En el primer arranque, instala el firmware y configura el mando en `Pads → Handlers` con `evdev`.
