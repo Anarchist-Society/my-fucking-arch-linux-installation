@@ -43,6 +43,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [steam](#steam)
   - [sober](#sober)
   - [ppsspp](#ppsspp)
+  - [heronite](#heronite)
 - [Red](#red)
   - [openssh](#openssh)
   - [nmap](#nmap)
@@ -848,6 +849,43 @@ Ajustes recomendados en `Ajustes de juego → Gráficos`.
 | Mostrar velocidad | Deshabilitado | Diagnóstico: por debajo del 100 % hay caída real de velocidad |
 | Mostrar % de batería | Deshabilitado | Opcional en portátil. Útil jugando sin enchufar |
 | Información de depuración en pantalla | Deshabilitar | Solo para desarrollo |
+
+### heronite
+
+[Heronite](https://heronite.app/) es un launcher de juegos para Linux y Windows que reúne en una biblioteca Steam, Epic, GOG, Amazon y tus emuladores. No es un emulador: detecta RPCS3, PCSX2 y PPSSPP ya instalados y lanza los juegos desde ahí. No está en los repositorios oficiales ni en AUR; se instala desde los releases de GitHub.
+
+#### Instalar
+
+```bash
+# Descargar el paquete de Arch (v1.7.0; revisar si hay versión nueva)
+curl --location --output ~/heronite-1.7.0-1-x86_64.pkg.tar.zst \
+  https://github.com/RafaelGoulartB/Heronite/releases/download/v1.7.0/heronite-1.7.0-1-x86_64.pkg.tar.zst
+
+# Comprobar la suma (desde ~, donde están los archivos)
+curl --location --output ~/SHA256SUMS \
+  https://github.com/RafaelGoulartB/Heronite/releases/download/v1.7.0/SHA256SUMS
+(cd ~ && sha256sum --check --ignore-missing SHA256SUMS)
+
+# Instalar con pacman
+sudo pacman --upgrade ~/heronite-1.7.0-1-x86_64.pkg.tar.zst
+```
+
+| Paquete | Propósito |
+|---------|-----------|
+| `heronite` | Launcher que unifica tiendas y emuladores en una sola biblioteca |
+
+> Alternativa portátil, sin instalar en el sistema: descargar `Heronite-x86_64.AppImage` desde los [releases](https://github.com/RafaelGoulartB/Heronite/releases/latest), darle permiso de ejecución y abrirlo desde `~/Applications`.
+
+#### Primer arranque
+
+```bash
+# Abrir Heronite
+heronite-rs
+```
+
+> Necesita un driver Vulkan activo; con Mesa en la Radeon 780M ya funciona. Detecta los emuladores instalados, así que no hay que configurar RPCS3 ni PCSX2 de nuevo.
+
+> Opcionales: `gamescope`, `bubblewrap`, `python3`, `webkit2gtk-4.1`, `umu-launcher`, `Ludusavi` y `gpu-screen-recorder`. Heronite comprueba actualizaciones desde GitHub al arrancar y verifica la firma del paquete.
 
 ## Red
 
