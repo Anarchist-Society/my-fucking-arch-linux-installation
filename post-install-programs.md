@@ -874,6 +874,9 @@ sha256sum --check --ignore-missing SHA256SUMS
 
 # Instalar
 sudo pacman --upgrade heronite-1.7.0-1-x86_64.pkg.tar.zst
+
+# Una vez instalado puedes borrar `~/Downloads/Heronite`: solo contiene el paquete descargado y el `SHA256SUMS`.
+rm -rf ~/Downloads/Heronite
 ```
 
 | Paquete | Propósito |
