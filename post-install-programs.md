@@ -241,8 +241,6 @@ ln --symbolic --force "$(pwd)/theme.toml" ~/.config/yazi/theme.toml
 | `~/.config/yazi/yazi.toml` | Enlace simbólico a la configuración del repo |
 | `~/.config/yazi/theme.toml` | Enlace simbólico al tema (iconos) del repo |
 
-> El tema añade un icono propio para la carpeta `Isos` (`nf-fa-compact_disc`) sin sobrescribir los iconos por defecto de Yazi. Al no definir color, el icono hereda el color de las carpetas.
-
 ### btop
 
 [btop](https://github.com/aristocratos/btop) es un monitor de sistema con interfaz gráfica en terminal. Muestra CPU, RAM, discos, red y procesos en tiempo real.
