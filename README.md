@@ -42,6 +42,7 @@ Las configuraciones viven en este repositorio y se enlazan simbólicamente en el
 | Hyprland | `~/.config/hypr/hyprland.lua` | [`hyprland.lua`](hyprland.lua) |
 | kitty | `~/.config/kitty/kitty.conf` | [`kitty.conf`](kitty.conf) |
 | Yazi | `~/.config/yazi/yazi.toml` | [`yazi.toml`](yazi.toml) |
+| Yazi (iconos) | `~/.config/yazi/theme.toml` | [`theme.toml`](theme.toml) |
 
 Ejecuta los comandos desde la raíz de este repositorio.
 
@@ -66,4 +67,5 @@ ln -sf "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
 # Yazi
 mkdir --parents ~/.config/yazi
 ln -sf "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
+ln -sf "$(pwd)/theme.toml" ~/.config/yazi/theme.toml
 ```
