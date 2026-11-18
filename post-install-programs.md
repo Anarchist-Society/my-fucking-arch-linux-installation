@@ -233,11 +233,15 @@ La configuración de yazi vive en el repositorio y se enlaza simbólicamente. Ej
 # Enlazar configuración de yazi
 mkdir --parents ~/.config/yazi
 ln --symbolic --force "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
+ln --symbolic --force "$(pwd)/theme.toml" ~/.config/yazi/theme.toml
 ```
 
 | Fichero | Propósito |
 |---------|-----------|
 | `~/.config/yazi/yazi.toml` | Enlace simbólico a la configuración del repo |
+| `~/.config/yazi/theme.toml` | Enlace simbólico al tema (iconos) del repo |
+
+> El tema añade un icono propio para la carpeta `Isos` (`nf-fa-compact_disc`) sin sobrescribir los iconos por defecto de Yazi. Al no definir color, el icono hereda el color de las carpetas.
 
 ### btop
 
