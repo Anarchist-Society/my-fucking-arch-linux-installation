@@ -4,7 +4,8 @@
 #:schema https://yazi-rs.github.io/schemas/yazi.json
 
 [icon]
-# `prepend_*` conserva los iconos por defecto y añade solo estas reglas.
 prepend_dirs = [
-	{ name = "Isos", text = "" }, # nf-fa-compact_disc; sin fg → hereda el color de carpeta
+	{ name = "Isos", text = "", fg = "#00bcd4" },
+	{ name = "Applications", text = "", fg = "#00bcd4" },
+	{ name = "VirtualBox", text = "", fg = "#00bcd4" }
 ]
