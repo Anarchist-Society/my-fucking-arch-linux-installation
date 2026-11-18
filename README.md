@@ -48,24 +48,24 @@ Ejecuta los comandos desde la raíz de este repositorio.
 
 ```bash
 # Bash
-ln -sf "$(pwd)/bashrc.sh" ~/.bashrc
+ln --symbolic --force "$(pwd)/bashrc.sh" ~/.bashrc
 ```
 
 ```bash
 # Hyprland
 mkdir --parents ~/.config/hypr
-ln -sf "$(pwd)/hyprland.lua" ~/.config/hypr/hyprland.lua
+ln --symbolic --force "$(pwd)/hyprland.lua" ~/.config/hypr/hyprland.lua
 ```
 
 ```bash
 # kitty
 mkdir --parents ~/.config/kitty
-ln -sf "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
+ln --symbolic --force "$(pwd)/kitty.conf" ~/.config/kitty/kitty.conf
 ```
 
 ```bash
 # Yazi
 mkdir --parents ~/.config/yazi
-ln -sf "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
-ln -sf "$(pwd)/theme.toml" ~/.config/yazi/theme.toml
+ln --symbolic --force "$(pwd)/yazi.toml" ~/.config/yazi/yazi.toml
+ln --symbolic --force "$(pwd)/theme.toml" ~/.config/yazi/theme.toml
 ```
