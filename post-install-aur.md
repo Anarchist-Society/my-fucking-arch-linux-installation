@@ -545,6 +545,8 @@ paru --sync rpcs3-git
 
 RPCS3 no incluye el firmware de la PS3. Descarga `PS3UPDAT.PUP` desde la [web de Sony](https://www.playstation.com/en-us/support/hardware/ps3/system-software/) e instálalo en `File → Install Firmware`.
 
+> Una vez instalado puedes borrar el `PS3UPDAT.PUP` descargado: RPCS3 ya ha guardado el firmware en `~/.config/rpcs3`.
+
 Los datos del emulador (firmware descomprimido, partidas y trofeos) se crean en `~/.config/rpcs3`.
 
 > El firmware lo distribuye Sony, no hay que volcarlo de una consola.
