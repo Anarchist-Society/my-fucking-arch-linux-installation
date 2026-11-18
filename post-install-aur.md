@@ -568,3 +568,5 @@ rpcs3
 ```
 
 En el primer arranque, instala el firmware y configura el mando en `Pads → Handlers` con `evdev`.
+
+> En el asistente de primer arranque, marca **Create application Menu Shortcut** para que RPCS3 aparezca en hyprlauncher (crea el `.desktop` en `~/.local/share/applications`). Puedes dejar sin marcar **Create a desktop shortcut**, innecesario en Hyprland, y **Use Dark Theme**, que se cambia después en `Config → GUI → Theme` si se ve mal con el tema oscuro del sistema.
