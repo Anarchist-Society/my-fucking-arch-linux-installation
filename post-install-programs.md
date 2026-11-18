@@ -856,18 +856,23 @@ Ajustes recomendados en `Ajustes de juego → Gráficos`.
 
 #### Instalar
 
+Trabajamos en una carpeta propia para que la comprobación de la suma encuentre el paquete sin depender del directorio actual.
+
 ```bash
-# Descargar el paquete de Arch (v1.7.0; revisar si hay versión nueva)
-curl --location --output ~/heronite-1.7.0-1-x86_64.pkg.tar.zst \
+mkdir --parents ~/Descargas/Heronite
+cd ~/Descargas/Heronite
+
+# Descargar el paquete de Arch y la lista de sumas (v1.7.0; revisar si hay versión nueva)
+curl --location --output heronite-1.7.0-1-x86_64.pkg.tar.zst \
   https://github.com/RafaelGoulartB/Heronite/releases/download/v1.7.0/heronite-1.7.0-1-x86_64.pkg.tar.zst
-
-# Comprobar la suma (desde ~, donde están los archivos)
-curl --location --output ~/SHA256SUMS \
+curl --location --output SHA256SUMS \
   https://github.com/RafaelGoulartB/Heronite/releases/download/v1.7.0/SHA256SUMS
-(cd ~ && sha256sum --check --ignore-missing SHA256SUMS)
 
-# Instalar con pacman
-sudo pacman --upgrade ~/heronite-1.7.0-1-x86_64.pkg.tar.zst
+# Comprobar la suma: --ignore-missing omite el resto de archivos del release que no hemos descargado
+sha256sum --check --ignore-missing SHA256SUMS
+
+# Instalar
+sudo pacman --upgrade heronite-1.7.0-1-x86_64.pkg.tar.zst
 ```
 
 | Paquete | Propósito |
