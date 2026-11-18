@@ -547,7 +547,7 @@ RPCS3 no incluye el firmware de la PS3. Descarga `PS3UPDAT.PUP` desde la [web de
 
 Los datos del emulador (firmware descomprimido, partidas y trofeos) se crean en `~/.config/rpcs3`.
 
-> El firmware lo distribuye Sony; no hay que volcarlo de una consola.
+> El firmware lo distribuye Sony, no hay que volcarlo de una consola.
 
 ### Juegos
 
