@@ -557,7 +557,7 @@ RPCS3 no incluye juegos. Usa copias propias: carpetas de disco con `PS3_GAME`, p
 
 ```bash
 # Ejemplo de carpeta para los volcados
-mkdir --parents ~/Juegos/ps3
+mkdir --parents ~/Isos/ps3
 ```
 
 > Distribuir copias de terceros es ilegal y Arch no las proporciona.
