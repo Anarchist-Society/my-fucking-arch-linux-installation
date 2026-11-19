@@ -769,10 +769,13 @@ Ajustes recomendados en `Ajustes de juego → Gráficos`. Solo se listan los que
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
 | Backend | Vulkan | En Linux OpenGL es el valor por defecto; con RADV la 780M rinde mejor |
-| Resolución de renderizado | 5x PSP | 2400×1360, casi nativo en tu panel 2560×1600 |
-| Antialiasing (MSAA) | 4x | Mejor AA en Vulkan; si bajan los fps, bajar a 2x |
+| Resolución de renderizado | 4x PSP | 1920×1088: 4 veces la PSP y un 36 % menos de trabajo que 5x |
 
 > Dispositivo: dejarlo en Automático. RADV seleccionará `AMD Radeon 780M Graphics (RADV PHOENIX)`.
+
+> `Antialiasing (MSAA)`: no tocar. Con 4x PSP los bordes ya se ven bien y activarlo 4x calienta sin ganancia visible.
+
+> Si en algún juego vuelve a subir el ventilador, baja solo la resolución a 3x PSP antes de desactivar el escalador o los filtros.
 
 ##### Pantalla
 
