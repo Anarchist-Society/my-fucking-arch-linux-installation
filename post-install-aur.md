@@ -401,13 +401,13 @@ Copia allí el archivo de BIOS (`.bin` o `.rom0`), sin subcarpetas. Luego abre `
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Directorio de BIOS` | `~/.config/PCSX2/bios` | Ruta por defecto de PCSX2 |
-| `Arranque rápido` | Activado | Salta la animación de arranque de la consola |
-| `Avance rápido del arranque` | Desactivado | Solo acelera el arranque de la BIOS. No afecta al juego |
+| `Directorio de BIOS` | `~/.config/PCSX2/bios` | Ruta por defecto de PCSX2; solo compruébala |
 
 > El archivo que se selecciona es el `.bin` o el `.rom0` de 4 MiB. Los `.diff`, `.rom1`, `.rom2`, `.erom` y `.nvm` son complementos.
 
-> Si la BIOS no aparece en la lista, pulsa `Actualizar lista` o revisa que los ficheros estén directamente en la carpeta. `Arranque rápido` es un parche de la BIOS: si un juego necesita el arranque completo, usa `Sistema → Iniciar BIOS` o desactívalo puntualmente.
+> Si la BIOS no aparece en la lista, pulsa `Actualizar lista` o revisa que los ficheros estén directamente en la carpeta.
+
+> `Arranque rápido` se deja activado (predeterminado) y `Avance rápido del arranque` desactivado (predeterminado). Si un juego no arranca, desactiva el arranque rápido solo en las propiedades de ese juego.
 
 ### ISO del juego
 
@@ -446,83 +446,40 @@ Para comprobar que la BIOS funciona, usa `Sistema → Iniciar BIOS`. Para cargar
 
 #### Control de velocidad
 
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Velocidad normal` | `100%` | Velocidad real de la consola |
-| `Velocidad de avance rápido` | `200%` | Avance rápido sin disparar CPU/temperatura. `Ilimitada` si lo prefieres |
-| `Velocidad de cámara lenta` | `50%` | Solo se usa con el atajo de cámara lenta |
+> `Velocidad normal`, `Velocidad de avance rápido` y `Velocidad de cámara lenta` se dejan en `100 %`, `200 %` y `50 %`, que son los valores por defecto.
 
 #### Ajustes del sistema
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Frecuencia de ciclo de la EE` | `100% (velocidad normal)` | Sin underclock ni overclock. La 780M no lo necesita |
-| `Omisión de ciclos del EE` | Desactivado | Solo ayuda a juegos concretos y suele perjudicar |
-| `Habilitar VU1 multihilo (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan, desactivar por juego |
-| `Habilitar trucos` | Desactivado | Solo si vas a usar trucos en un juego concreto |
-| `Habilitar precacheado de CDVD` | Desactivado | Carga la ISO en RAM. No aporta en NVMe y retrasa el arranque |
-| `Habilitar prefijado de subprocesos` | Desactivado | Solo para CPU con núcleos P/E. El 8845HS es homogéneo |
-| `Habilitar sistema de archivos del equipo` | Desactivado | Permite acceso al sistema de archivos del anfitrión. No es necesario para jugar |
+| `Habilitar VU1 multihilo (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan; desactívalo solo en ese juego |
+
+> Los demás ajustes (`Frecuencia de ciclo de la EE`, `Omisión de ciclos`, `Habilitar trucos`, `Precacheado de CDVD`, `Prefijado de subprocesos`, `Sistema de archivos del equipo` y `Activar CDVD rápido`) se dejan en sus valores por defecto. `CDVD rápido` solo se ofrece en ajustes por juego.
 
 #### Ritmo de fotogramas/Control de latencia
 
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Latencia máxima de fotogramas` | `2 fotogramas` | Equilibrio latencia/suavidad. Bajar a 1 en juegos de ritmo |
-| `Ritmo de fotogramas óptimo` | Desactivado | Reduce latencia a costa de más CPU/GPU. Activar solo si sobra potencia |
-| `Sincronizar con frec. act. del equipo` | Desactivado | Recomendado para VRR. No fuerces la velocidad del juego |
-| `Sincronización vertical (VSync)` | Activado | Ritmo estable a 60 fps en un panel de 120 Hz |
-| `Usar sincronización del equipo para VSync` | Desactivado | Solo se usa con la sincronización al equipo. Añade latencia |
-| `Omitir fotogramas duplicados` | Desactivado | Puede suavizar juegos de 30 fps. Actívalo si notas tirones |
-
-> Con VRR en Hyprland, `Sincronizar con frec. act. del equipo` debe estar desactivado. Si notas parpadeo o tirones, prueba a desactivar también `Sincronización vertical (VSync)` y deja que el panel sincronice.
-
-> `Activar CDVD rápido` no está disponible globalmente: actívalo solo en los ajustes por juego si sus cargas son muy largas. Puede romper juegos.
+> Se deja todo por defecto: `Latencia máxima de fotogramas` en `2`, `Ritmo de fotogramas óptimo` desactivado, `Sincronizar con frec. act. del equipo` desactivado, `Sincronización vertical (VSync)` desactivada, `Usar sincronización del equipo para VSync` desactivado y `Omitir fotogramas duplicados` activado. Con `vrr = 1` en Hyprland no hace falta forzar VSync: el panel ya evita el tearing, y el skip de duplicados por defecto ayuda en juegos a 30 fps sin coste extra.
 
 ### Gráficos
 
-Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las pestañas del emulador.
+Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las pestañas del emulador. Solo se listan los que difieren del valor por defecto.
 
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `API de gráficos` | `Vulkan` | Mejor rendimiento y compatibilidad en RDNA3 |
-| `Adaptador` | `AMD Radeon 780M` | GPU integrada del 8845HS |
+> `API de gráficos` y `Adaptador`: dejar en `Automático (predeterminado)`. Con RADV, PCSX2 elige Vulkan y la `AMD Radeon 780M Graphics (RADV PHOENIX)`.
 
 #### Imagen
 
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Modo a pantalla completa` | `Sin bordes` | Hyprland activa VRR (`vrr = 1`) solo en fullscreen |
-| `Relación de aspecto` | `Estándar automática (4:3/3:2 progresivo)` | Respeta la relación original y usa 16:9 con parches panorámicos |
-| `Relación de aspecto para videos FMV` | `No cambiar (predeterminado)` | Mantiene las FMV con la misma relación que el juego |
-| `Desentrelazado` | `Ajuste automático (predeterminado)` | Desentrelaza correctamente la mayoría de títulos |
-| `Filtrado bilineal` | `Bilineal (Suavizado)` | Suaviza la imagen ya escalada. `Bilineal (Realzado)` para 2D |
-| `Escalado por número enteros` | `Desactivado` | Solo útil en 2D. Añade bordes y reduce el tamaño de la imagen |
-| `Aplicar parches de imagen panorámica` | `Activado` | Aprovecha el panel 16:10. Desactivar por juego si deforma el HUD o las FMV |
-| `Aplicar parches para desactivar el entrelazado` | `Desactivado` | El desentrelazado automático ya funciona. Activar por juego si se ve entrelazado |
-| `Filtro antiborrosidad` | `Activado` | Reduce el desenfoque interno. Es un hack, pero mejora la nitidez |
-| `Compensación de imagen` | `Desactivado` | Solo para juegos con la imagen desplazada |
-| `Deshabilitar compensación de entrelazado` | `Desactivado` | Solo para casos concretos de imagen temblorosa o desplazada |
-| `Mostrar área de sobrebarrido` | `Desactivado` | Muestra bordes que normalmente quedan ocultos |
-
-> `Aplicar parches de imagen panorámica` y `Aplicar parches para desactivar el entrelazado` son parches por juego. Si un título se ve raro, desactívalos en sus propiedades antes de tocar el resto.
+> Toda la pestaña `Imagen` se deja por defecto: `Sin bordes`, `Estándar automática (4:3/3:2 progresivo)`, `No cambiar` en FMV, `Automático` al desentrelazar y `Bilineal (Suavizado)`. Siguen por defecto `Escalado por número enteros`, `Aplicar parches de imagen panorámica`, `Aplicar parches para desactivar el entrelazado`, `Compensación de imagen`, `Deshabilitar compensación de entrelazado` y `Mostrar área de sobrebarrido` (desactivados), y `Filtro antiborrosidad` (activado). Si quieres 16:9 en un título concreto, activa su parche panorámico en las propiedades de ese juego, no globalmente.
 
 #### Renderizado
 
 | Ajuste | Valor | Motivo |
 |--------|-------|--------|
-| `Resolución interna` | `4x nativa (~1440p/QHD)` | En NTSC renderiza 2560×1792, casi nativo para el panel de 2560×1600. Bajar a 3x en juegos pesados, 5x en ligeros |
-| `Filtrado de texturas` | `Bilineal (PS2)` | Respeta el filtrado original. `Bilineal (Forzado)` para un look más limpio |
-| `Filtrado trilineal` | `Automático (predeterminado)` | Corrige el desenfoque en superficies inclinadas |
-| `Filtrado anisotrópico` | `16x` | Nitidez en superficies en ángulo, sin coste apreciable |
-| `Tramado` | `Sin escalar (predeterminado)` | Mantiene el tramado original sin ampliar los puntos al escalar |
-| `Precisión de mezcla` | `Básica (recomendada)` | Equilibrio precisión/rendimiento en la 780M. Subir solo si hay artefactos |
-| `Mipmapping` | Activado | Algunos juegos lo necesitan para renderizar bien |
-| `Prueba alfa precisa` | Desactivado | Solo si hay transparencias rotas. Cuesta rendimiento |
-| `AA1` | Desactivado | Antialiasing de PS2 muy caro y útil solo en unos pocos juegos |
-| `Vista ordenada del rasterizador` | Desactivado | Solo para juegos con bucles de retroalimentación. No es necesario por defecto |
+| `Resolución interna` | `3x nativa (~1080p/FHD)` | 1920×1344: más nitidez que 2x con menos carga que 4x en la iGPU |
+| `Filtrado anisotrópico` | `16x` | Nitidez en superficies inclinadas. Si sube el consumo, bájalo a 8x |
 
-> Si un juego no mantiene los 60 fps, baja `Resolución interna` a `3x nativa (~1080p/FHD)` antes de tocar los hacks. La diferencia en 16 pulgadas es pequeña.
+> Los demás ajustes de `Renderizado` se dejan por defecto: `Bilineal (PS2)`, `Automático` en filtrado trilineal, `Sin escalar` en tramado, `Básica (recomendada)` en precisión de mezcla, `Mipmapping` activado, y `Prueba alfa precisa`, `AA1` y `Vista ordenada del rasterizador` desactivados.
+
+> Si en algún juego vuelve a subir el ventilador, baja primero `Resolución interna` a `2x nativa` antes de tocar hacks; después, si hace falta, baja el filtrado anisotrópico a `8x`.
 
 ## RPCS3
 
