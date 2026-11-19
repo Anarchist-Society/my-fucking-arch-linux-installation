@@ -527,3 +527,41 @@ rpcs3
 ```
 
 En el primer arranque, instala el firmware y configura el mando en `Pads → Handlers` con `evdev`.
+
+> Para el sistema de la PS3 en español, en `Configuration → System` pon `Language: Spanish` y `Keyboard Type: Spanish keyboard`. Los nombres de los ajustes están en inglés: el paquete de AUR no incluye traducciones.
+
+### Emulación
+
+`Configuration → CPU`.
+
+> Toda la pestaña `CPU` se deja por defecto: `PPU Decoder` y `SPU Decoder` en `Recompiler (LLVM)`, `Preferred SPU Threads` en `0` (`Auto`), `Thread Scheduler` en `Operating System`, `SPU XFloat Accuracy` en `Approximate` y `SPU Block Size` en `Safe`. En `Configuration → Advanced`, `PPU Thread Count` queda en `2` y `PPU/SPU LLVM Precompilation` activado. No hay que tocar nada: en este portátil los 16 hilos y el LLVM por defecto ya son la configuración equilibrada.
+
+### Gráficos
+
+Ajustes recomendados en `Configuration → GPU`. El orden sigue la pestaña `GPU` del emulador. Solo se lista lo que difiere del valor por defecto.
+
+> `Renderer`: dejar en `Vulkan`, que es el valor por defecto cuando RPCS3 detecta Vulkan. Con un solo GPU, `Graphics Device` también se deja en `Auto`; si ya aparece `AMD Radeon 780M Graphics (RADV PHOENIX)`, no hace falta cambiarlo.
+
+#### Renderizado
+
+| Ajuste | Valor | Motivo |
+|--------|-------|--------|
+| `Anisotropic Filter` | `16x` | Nitidez en superficies inclinadas. Si sube el consumo, bájalo a `8x` |
+
+> `Auto` es el valor por defecto de `Anisotropic Filter` y equivale a `0` en `config.yml`.
+
+> `Framelimit` se deja en `Auto` y `Vsync` en `Disabled`: con `vrr = 1` en Hyprland el panel ya evita el tearing, así que no conviene forzar la sincronización.
+
+> `Default Resolution` se deja en `1280x720` y `Resolution Scale (Disable Strict Mode)` en `100 %`: es el punto equilibrado para la 780M. Si un juego va justo, baja primero el escalado, no la resolución.
+
+> `Shader Mode` se deja en `Async Recompiler with Shader Interpreter` y `Shader Quality` en `High`, ambos por defecto. No cambies el modo de shader para evitar parones de compilación.
+
+> `Anti-Aliasing (MSAA)` se deja en `Auto` y `Output Scaling` en `Bilinear`. `Multithreaded RSX` y `Asynchronous Texture Streaming` se dejan desactivados: en este equipo no compensa activarlos.
+
+### Solución de problemas
+
+- La primera vez que arranca un juego puede quedarse compilando shaders: es normal. Espera a que termine y no cambies `Shader Mode`.
+- Si aparece pantalla negra o RPCS3 se cierra con Vulkan, prueba `Renderer: OpenGL` solo en los ajustes de ese juego y vuelve a `Vulkan` cuando funcione.
+- Si no detecta el firmware, repite `File → Install Firmware` con el `PS3UPDAT.PUP` descargado.
+- Si vuelve a subir el ventilador, baja `Resolution Scale` a `85 %` y, si hace falta, a `75 %`. Después baja `Anisotropic Filter` a `8x`. No toques los hilos PPU/SPU ni los decodificadores.
+- Para un título concreto, consulta la wiki de compatibilidad de RPCS3 y aplica los parches solo a ese juego, no de forma global.
