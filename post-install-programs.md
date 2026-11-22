@@ -34,6 +34,7 @@ Estos son los programas que uso en el sistema, ordenados por categoría.
   - [7zip](#7zip)
   - [mpv](#mpv)
   - [yt-dlp](#yt-dlp)
+  - [exiftool](#exiftool)
 - [Hardware](#hardware)
   - [slimbook-bios-ec](#slimbook-bios-ec)
   - [zsa-moonlander](#zsa-moonlander)
@@ -517,6 +518,38 @@ sudo pacman --sync yt-dlp ffmpeg python-curl_cffi
 | `ffmpeg` | Combina/remuxea el vídeo y el audio descargados |
 | `python-curl_cffi` | Impersonación de navegador para yt-dlp (evita el HTTP 429 al descargar subtítulos) |
 
+### exiftool
+
+[ExifTool](https://exiftool.org/) es una herramienta de línea de comandos para leer, escribir y borrar metadatos (EXIF, GPS, IPTC, XMP...) de imágenes, vídeos y otros formatos. Es útil, por ejemplo, para quitar la ubicación de una foto antes de compartirla.
+
+```bash
+# Instalar exiftool
+sudo pacman --sync exiftool
+```
+
+> `exiftool` es un nombre virtual en los repositorios oficiales: lo proporciona `perl-image-exiftool` (repo `extra`). Por eso `sudo pacman -S exiftool` instala `perl-image-exiftool`; se puede comprobar con `pacman -Qe exiftool`.
+
+| Paquete | Propósito |
+|---------|-----------|
+| `perl-image-exiftool` (provee `exiftool`) | Leer, editar y borrar metadatos de imágenes y otros archivos |
+
+```bash
+# Comprobar la versión instalada
+exiftool -ver
+
+# Ver los metadatos de una imagen
+exiftool foto.jpg
+
+# Ver todos los grupos de etiquetas con su nombre completo
+exiftool -G1 -a -s foto.jpg
+
+# Borrar todos los metadatos (crea una copia `foto.jpg_original`)
+exiftool -all= foto.jpg
+
+# Borrar sin conservar la copia original
+exiftool -overwrite_original -all= foto.jpg
+```
+
 ## Hardware
 
 ### slimbook-bios-ec
@@ -770,8 +803,6 @@ Ajustes recomendados en `Ajustes de juego → Gráficos`. Solo se listan los que
 |--------|-------|--------|
 | Backend | Vulkan | En Linux OpenGL es el valor por defecto; con RADV la 780M rinde mejor |
 | Resolución de renderizado | 4x PSP | 1920×1088: 4 veces la PSP y un 36 % menos de trabajo que 5x |
-
-> Dispositivo: dejarlo en Automático. RADV seleccionará `AMD Radeon 780M Graphics (RADV PHOENIX)`.
 
 > `Antialiasing (MSAA)`: no tocar. Con 4x PSP los bordes ya se ven bien y activarlo 4x calienta sin ganancia visible.
 
