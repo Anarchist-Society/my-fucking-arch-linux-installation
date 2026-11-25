@@ -388,24 +388,6 @@ pcsx2-qt --version
 |---------|-----------|
 | `pcsx2` | Emulador de PS2 con frontend Qt, renderizado Vulkan/OpenGL y soporte de parches |
 
-### ISO del juego
-
-PCSX2 no incluye juegos. Hay que volcar los discos propios a ISO o BIN/CUE. Distribuir ISOs de terceros es ilegal.
-
-```bash
-# Crear la carpeta para las ISOs
-mkdir --parents ~/Isos/ps2
-```
-
-Añade la carpeta en `Sistema → Ajustes → Lista de juegos` → `Directorios de búsqueda` → `Añadir...` y pulsa `Buscar juegos nuevos`. También puedes abrir una ISO suelta con `Sistema → Iniciar archivo...` o arrastrarla a la ventana.
-
-| Formato | Nota |
-|---------|------|
-| ISO | El más directo: una imagen por disco |
-| BIN/CUE | Necesario para juegos en CD con varias pistas |
-| CHD | Comprimido. PCSX2 lo lee directamente |
-| CSO/ZSO | Comprimido. Útil para juegos pequeños o en CD |
-
 ## RPCS3
 
 [RPCS3](https://wiki.archlinux.org/title/RPCS3) es un emulador de PlayStation 3 con frontend Qt y renderizado por hardware mediante Vulkan u OpenGL. No está en los repositorios oficiales de Arch, se instala desde AUR.
@@ -422,14 +404,3 @@ paru --sync rpcs3-git
 | `rpcs3-git` | Emulador de PS3 desde la rama de desarrollo, con frontend Qt y renderizado Vulkan/OpenGL |
 
 > Si `paru` pregunta por `qt6-multimedia-backend`, elige `1) qt6-multimedia-ffmpeg` (opción por omisión) y pulsa Enter. Para evitar el prompt, instala antes `sudo pacman -S --needed qt6-multimedia-ffmpeg`.
-
-### Juegos
-
-RPCS3 no incluye juegos. Usa copias propias: carpetas de disco con `PS3_GAME`, paquetes `.pkg` instalables desde `File → Install .pkg` y licencias `.rap` para contenido de PSN. Añade la carpeta con tus juegos desde la lista de juegos del emulador.
-
-```bash
-# Ejemplo de carpeta para los volcados
-mkdir --parents ~/Isos/ps3
-```
-
-> Distribuir copias de terceros es ilegal y Arch no las proporciona.
