@@ -388,27 +388,6 @@ pcsx2-qt --version
 |---------|-----------|
 | `pcsx2` | Emulador de PS2 con frontend Qt, renderizado Vulkan/OpenGL y soporte de parches |
 
-### BIOS
-
-PCSX2 no incluye la BIOS de la PS2. Copia el archivo de BIOS en `~/.config/PCSX2/bios` antes de abrir el emulador.
-
-```bash
-# Crear la carpeta de BIOS
-mkdir --parents ~/.config/PCSX2/bios
-```
-
-Copia allí el archivo de BIOS (`.bin` o `.rom0`), sin subcarpetas. Luego abre `Sistema → Ajustes → BIOS`, comprueba que `Directorio de BIOS` apunta a `~/.config/PCSX2/bios` y selecciona la imagen en `Selección de BIOS`.
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Directorio de BIOS` | `~/.config/PCSX2/bios` | Ruta por defecto de PCSX2; solo compruébala |
-
-> El archivo que se selecciona es el `.bin` o el `.rom0` de 4 MiB. Los `.diff`, `.rom1`, `.rom2`, `.erom` y `.nvm` son complementos.
-
-> Si la BIOS no aparece en la lista, pulsa `Actualizar lista` o revisa que los ficheros estén directamente en la carpeta.
-
-> `Arranque rápido` se deja activado (predeterminado) y `Avance rápido del arranque` desactivado (predeterminado). Si un juego no arranca, desactiva el arranque rápido solo en las propiedades de ese juego.
-
 ### ISO del juego
 
 PCSX2 no incluye juegos. Hay que volcar los discos propios a ISO o BIN/CUE. Distribuir ISOs de terceros es ilegal.
@@ -427,60 +406,6 @@ Añade la carpeta en `Sistema → Ajustes → Lista de juegos` → `Directorios 
 | CHD | Comprimido. PCSX2 lo lee directamente |
 | CSO/ZSO | Comprimido. Útil para juegos pequeños o en CD |
 
-### Primer arranque
-
-```bash
-# Abrir PCSX2
-pcsx2-qt
-```
-
-En el primer arranque, el asistente pide idioma, BIOS y tarjeta de memoria. Si se cierra antes de terminar, esos mismos ajustes están en `Sistema → Ajustes → BIOS` y `Sistema → Ajustes → Tarjetas de memoria`.
-
-> En el asistente, desactiva `Activar actualizaciones automáticas`. El paquete de AUR no usa el actualizador interno de PCSX2, que en Linux solo funciona en el AppImage oficial, así que no se conecta a pcsx2.net para buscar versiones. Las actualizaciones de PCSX2 llegan con `paru` al actualizar el sistema.
-
-Para comprobar que la BIOS funciona, usa `Sistema → Iniciar BIOS`. Para cargar un juego, selecciónalo en la lista o usa `Sistema → Iniciar archivo...`.
-
-### Emulación
-
-`Sistema → Ajustes → Emulación`.
-
-#### Control de velocidad
-
-> `Velocidad normal`, `Velocidad de avance rápido` y `Velocidad de cámara lenta` se dejan en `100 %`, `200 %` y `50 %`, que son los valores por defecto.
-
-#### Ajustes del sistema
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Habilitar VU1 multihilo (MTVU)` | Activado | Aprovecha los 16 hilos. Unos pocos juegos cuelgan; desactívalo solo en ese juego |
-
-> Los demás ajustes (`Frecuencia de ciclo de la EE`, `Omisión de ciclos`, `Habilitar trucos`, `Precacheado de CDVD`, `Prefijado de subprocesos`, `Sistema de archivos del equipo` y `Activar CDVD rápido`) se dejan en sus valores por defecto. `CDVD rápido` solo se ofrece en ajustes por juego.
-
-#### Ritmo de fotogramas/Control de latencia
-
-> Se deja todo por defecto: `Latencia máxima de fotogramas` en `2`, `Ritmo de fotogramas óptimo` desactivado, `Sincronizar con frec. act. del equipo` desactivado, `Sincronización vertical (VSync)` desactivada, `Usar sincronización del equipo para VSync` desactivado y `Omitir fotogramas duplicados` activado. Con `vrr = 1` en Hyprland no hace falta forzar VSync: el panel ya evita el tearing, y el skip de duplicados por defecto ayuda en juegos a 30 fps sin coste extra.
-
-### Gráficos
-
-Ajustes recomendados en `Sistema → Ajustes → Gráficos`. El orden sigue las pestañas del emulador. Solo se listan los que difieren del valor por defecto.
-
-> `API de gráficos` y `Adaptador`: dejar en `Automático (predeterminado)`. Con RADV, PCSX2 elige Vulkan y la `AMD Radeon 780M Graphics (RADV PHOENIX)`.
-
-#### Imagen
-
-> Toda la pestaña `Imagen` se deja por defecto: `Sin bordes`, `Estándar automática (4:3/3:2 progresivo)`, `No cambiar` en FMV, `Automático` al desentrelazar y `Bilineal (Suavizado)`. Siguen por defecto `Escalado por número enteros`, `Aplicar parches de imagen panorámica`, `Aplicar parches para desactivar el entrelazado`, `Compensación de imagen`, `Deshabilitar compensación de entrelazado` y `Mostrar área de sobrebarrido` (desactivados), y `Filtro antiborrosidad` (activado). Si quieres 16:9 en un título concreto, activa su parche panorámico en las propiedades de ese juego, no globalmente.
-
-#### Renderizado
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Resolución interna` | `3x nativa (~1080p/FHD)` | 1920×1344: más nitidez que 2x con menos carga que 4x en la iGPU |
-| `Filtrado anisotrópico` | `16x` | Nitidez en superficies inclinadas. Si sube el consumo, bájalo a 8x |
-
-> Los demás ajustes de `Renderizado` se dejan por defecto: `Bilineal (PS2)`, `Automático` en filtrado trilineal, `Sin escalar` en tramado, `Básica (recomendada)` en precisión de mezcla, `Mipmapping` activado, y `Prueba alfa precisa`, `AA1` y `Vista ordenada del rasterizador` desactivados.
-
-> Si en algún juego vuelve a subir el ventilador, baja primero `Resolución interna` a `2x nativa` antes de tocar hacks; después, si hace falta, baja el filtrado anisotrópico a `8x`.
-
 ## RPCS3
 
 [RPCS3](https://wiki.archlinux.org/title/RPCS3) es un emulador de PlayStation 3 con frontend Qt y renderizado por hardware mediante Vulkan u OpenGL. No está en los repositorios oficiales de Arch, se instala desde AUR.
@@ -498,16 +423,6 @@ paru --sync rpcs3-git
 
 > Si `paru` pregunta por `qt6-multimedia-backend`, elige `1) qt6-multimedia-ffmpeg` (opción por omisión) y pulsa Enter. Para evitar el prompt, instala antes `sudo pacman -S --needed qt6-multimedia-ffmpeg`.
 
-### Firmware
-
-RPCS3 no incluye el firmware de la PS3. Descarga `PS3UPDAT.PUP` desde la [web de Sony](https://www.playstation.com/en-us/support/hardware/ps3/system-software/) e instálalo en `File → Install Firmware`.
-
-> Una vez instalado puedes borrar el `PS3UPDAT.PUP` descargado: RPCS3 ya ha guardado el firmware en `~/.config/rpcs3`.
-
-Los datos del emulador (firmware descomprimido, partidas y trofeos) se crean en `~/.config/rpcs3`.
-
-> El firmware lo distribuye Sony, no hay que volcarlo de una consola.
-
 ### Juegos
 
 RPCS3 no incluye juegos. Usa copias propias: carpetas de disco con `PS3_GAME`, paquetes `.pkg` instalables desde `File → Install .pkg` y licencias `.rap` para contenido de PSN. Añade la carpeta con tus juegos desde la lista de juegos del emulador.
@@ -518,50 +433,3 @@ mkdir --parents ~/Isos/ps3
 ```
 
 > Distribuir copias de terceros es ilegal y Arch no las proporciona.
-
-### Primer arranque
-
-```bash
-# Abrir RPCS3
-rpcs3
-```
-
-En el primer arranque, instala el firmware y configura el mando en `Pads → Handlers` con `evdev`.
-
-> Para el sistema de la PS3 en español, en `Configuration → System` pon `Language: Spanish` y `Keyboard Type: Spanish keyboard`. Los nombres de los ajustes están en inglés: el paquete de AUR no incluye traducciones.
-
-### Emulación
-
-`Configuration → CPU`.
-
-> Toda la pestaña `CPU` se deja por defecto: `PPU Decoder` y `SPU Decoder` en `Recompiler (LLVM)`, `Preferred SPU Threads` en `0` (`Auto`), `Thread Scheduler` en `Operating System`, `SPU XFloat Accuracy` en `Approximate` y `SPU Block Size` en `Safe`. En `Configuration → Advanced`, `PPU Thread Count` queda en `2` y `PPU/SPU LLVM Precompilation` activado. No hay que tocar nada: en este portátil los 16 hilos y el LLVM por defecto ya son la configuración equilibrada.
-
-### Gráficos
-
-Ajustes recomendados en `Configuration → GPU`. El orden sigue la pestaña `GPU` del emulador. Solo se lista lo que difiere del valor por defecto.
-
-> `Renderer`: dejar en `Vulkan`, que es el valor por defecto cuando RPCS3 detecta Vulkan. Con un solo GPU, `Graphics Device` también se deja en `Auto`; si ya aparece `AMD Radeon 780M Graphics (RADV PHOENIX)`, no hace falta cambiarlo.
-
-#### Renderizado
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| `Anisotropic Filter` | `16x` | Nitidez en superficies inclinadas. Si sube el consumo, bájalo a `8x` |
-
-> `Auto` es el valor por defecto de `Anisotropic Filter` y equivale a `0` en `config.yml`.
-
-> `Framelimit` se deja en `Auto` y `Vsync` en `Disabled`: con `vrr = 1` en Hyprland el panel ya evita el tearing, así que no conviene forzar la sincronización.
-
-> `Default Resolution` se deja en `1280x720` y `Resolution Scale (Disable Strict Mode)` en `100 %`: es el punto equilibrado para la 780M. Si un juego va justo, baja primero el escalado, no la resolución.
-
-> `Shader Mode` se deja en `Async Recompiler with Shader Interpreter` y `Shader Quality` en `High`, ambos por defecto. No cambies el modo de shader para evitar parones de compilación.
-
-> `Anti-Aliasing (MSAA)` se deja en `Auto` y `Output Scaling` en `Bilinear`. `Multithreaded RSX` y `Asynchronous Texture Streaming` se dejan desactivados: en este equipo no compensa activarlos.
-
-### Solución de problemas
-
-- La primera vez que arranca un juego puede quedarse compilando shaders: es normal. Espera a que termine y no cambies `Shader Mode`.
-- Si aparece pantalla negra o RPCS3 se cierra con Vulkan, prueba `Renderer: OpenGL` solo en los ajustes de ese juego y vuelve a `Vulkan` cuando funcione.
-- Si no detecta el firmware, repite `File → Install Firmware` con el `PS3UPDAT.PUP` descargado.
-- Si vuelve a subir el ventilador, baja `Resolution Scale` a `85 %` y, si hace falta, a `75 %`. Después baja `Anisotropic Filter` a `8x`. No toques los hilos PPU/SPU ni los decodificadores.
-- Para un título concreto, consulta la wiki de compatibilidad de RPCS3 y aplica los parches solo a ese juego, no de forma global.
