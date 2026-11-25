@@ -784,15 +784,6 @@ sudo pacman --sync ppsspp
 |---------|-----------|
 | `ppsspp` | Emulador de PSP con soporte para OpenGL y Vulkan |
 
-#### ISO del juego
-
-PPSSPP no incluye juegos y la PSP no necesita BIOS para la mayoría de títulos. Hay que usar una copia volcada de la propia UMD, la distribución de ISOs de terceros es ilegal y Arch no las proporciona.
-
-```bash
-# Crear la carpeta para las ISOs
-mkdir --parents ~/Isos/psp
-```
-
 ### heronite
 
 [Heronite](https://heronite.app/) es un launcher de juegos para Linux y Windows que reúne en una biblioteca Steam, Epic, GOG, Amazon y tus emuladores. No es un emulador: detecta RPCS3, PCSX2 y PPSSPP ya instalados y lanza los juegos desde ahí. No está en los repositorios oficiales ni en AUR; se instala desde los releases de GitHub.
