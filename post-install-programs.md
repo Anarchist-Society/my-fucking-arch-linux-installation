@@ -793,58 +793,6 @@ PPSSPP no incluye juegos y la PSP no necesita BIOS para la mayoría de títulos.
 mkdir --parents ~/Isos/psp
 ```
 
-#### Gráficos
-
-Ajustes recomendados en `Ajustes de juego → Gráficos`. Solo se listan los que difieren del valor por defecto.
-
-##### Modo de renderizado
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| Backend | Vulkan | En Linux OpenGL es el valor por defecto; con RADV la 780M rinde mejor |
-| Resolución de renderizado | 4x PSP | 1920×1088: 4 veces la PSP y un 36 % menos de trabajo que 5x |
-
-> `Antialiasing (MSAA)`: no tocar. Con 4x PSP los bordes ya se ven bien y activarlo 4x calienta sin ganancia visible.
-
-> Si en algún juego vuelve a subir el ventilador, baja solo la resolución a 3x PSP antes de desactivar el escalador o los filtros.
-
-##### Pantalla
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| Pantalla completa | Activado | Aprovecha el panel y el VRR de Hyprland |
-
-> `Sincronización vertical` y `Pantalla de baja latencia` se dejan en sus valores por defecto (activado y desactivado, respectivamente). Con VRR conviene no forzar el modo Mailbox.
-
-##### Escalado de texturas
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| Escalador de texturas de GPU (rápido) | Spline36 | Más nitidez en texturas sin coste de CPU |
-
-> `Nivel de escalado` se deja en su valor por defecto: 2x.
-
-##### Filtrado de texturas
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| Filtro de texturas | Auto Max Quality | Mejor resultado en 3D junto con el anisotrópico |
-| Filtrado 2D inteligente | Activado | Evita que el arte 2D se vea borroso al escalar |
-
-> `Filtrado anisotrópico`: no tocar. En PPSSPP 1.20.4 ya viene en **16x** por defecto.
-
-#### Audio
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| Modo de reproducción | Smooth | Evita crujidos si usas la velocidad alternativa |
-
-#### Sistema
-
-| Ajuste | Valor | Motivo |
-|--------|-------|--------|
-| Buscar nuevas versiones de PPSSPP | Deshabilitado | `pacman` gestiona las actualizaciones del paquete de `extra` |
-
 ### heronite
 
 [Heronite](https://heronite.app/) es un launcher de juegos para Linux y Windows que reúne en una biblioteca Steam, Epic, GOG, Amazon y tus emuladores. No es un emulador: detecta RPCS3, PCSX2 y PPSSPP ya instalados y lanza los juegos desde ahí. No está en los repositorios oficiales ni en AUR; se instala desde los releases de GitHub.
@@ -887,7 +835,7 @@ rm -rf ~/Downloads/Heronite
 heronite-rs
 ```
 
-> Necesita un driver Vulkan activo; con Mesa en la Radeon 780M ya funciona. Detecta los emuladores instalados, así que no hay que configurar RPCS3 ni PCSX2 de nuevo.
+> Necesita un driver Vulkan activo; con Mesa en la Radeon 780M ya funciona. Detecta los emuladores instalados.
 
 > Opcionales: `gamescope`, `bubblewrap`, `python3`, `webkit2gtk-4.1`, `umu-launcher`, `Ludusavi` y `gpu-screen-recorder`. Heronite comprueba actualizaciones desde GitHub al arrancar y verifica la firma del paquete.
 
